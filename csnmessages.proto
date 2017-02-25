@@ -12,16 +12,42 @@ message Stop {
   string stop_id = 3;
 }
 
-message StopAd {
-  uint64 request_id = 1;
-  Stop stop = 2;
-  bytes icon = 3;
-  string title = 4;
-  string background_color = 5;
+message Location {
+  double lat = 1;
+  double lon = 2;
 }
 
-message StopAdResponse {
-  repeated StopAd stop_ads = 1;
+message NativeAd {
+  uint64 request_id = 1;
+  bytes icon = 2;
+  string title = 3;
+  string background_color = 4;
+  string secondary_html = 5;
+  Location location = 6;
+}
+
+message StopAd {
+  Stop stop = 1;
+  uint64 request_id = 2;
+}
+
+message LocationAd {
+  Location loc = 1;
+  uint64 request_id = 2;
+}
+
+message AdRequest {
+  string ad_unit = 1;
+  DeviceID device_id = 2;
+  string timezone = 3;
+  Location location = 4;
+  repeated Stop stops = 5;
+}
+
+message AdResponse {
+  repeated LocationAd location_ads = 1;
+  repeated StopAd stop_ads = 2;
+  HashMap<uint64, NativeAd> ads = 3;
 }
 
 message DeviceID  {
@@ -33,18 +59,21 @@ message DeviceID  {
   string device_id = 2;
 }
 
-message StopAdRequest {
-  string ad_unit = 1;
-  DeviceID device_id = 2;
-  string timezone = 3;
-  repeated Stop stops = 4;
+
+message SimpleStat {
+  double min;
+  double max;
+  double mean;
 }
 
-message AdView {
+message AdVisibility {
   uint64 request_id = 1;
-  uint64 component_id = 2;
-  uint64 duration = 3;
-  double percent_visible = 4;
+  uint64 ad_id = 2;
+  uint64 component_id = 3;
+  uint64 epoch_offset = 4;
+  uint64 duration = 5;
+  SimpleStat component_visibility = 6;
+  SimpleStat screen_visibility = 7;
 }
 
 enum AdInteractionKind {
@@ -53,15 +82,18 @@ enum AdInteractionKind {
 
 message AdInteraction {
   uint64 request_id = 1;
-  uint64 component_id = 2;
-  uint64 duration = 3;
-  AdInteractionKind kind = 4;
+  uint64 ad_id = 2;
+  uint64 component_id = 3;
+  uint64 duration = 4;
+  uint64 epoch_offset = 5;
+  AdInteractionKind kind = 6;
 }
   
 message AdReport {
   string ad_unit = 1;
   DeviceID device_id = 2;
   string timezone = 3;
-  repeated AdView ad_views = 4;
-  repeated AdInteraction ad_interactions = 5;
+  timestamp epoch = 4;
+  repeated AdVisibility ad_visibilty = 5;
+  repeated AdInteraction ad_interactions = 6;
 }

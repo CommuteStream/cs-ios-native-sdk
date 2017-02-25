@@ -66,7 +66,7 @@
 }
 
 // Ensure a 200 response with an invalid body data is a failure
-- (void)testGetStopdAds200InvalidBody {
+- (void) testGetStopdAds200InvalidBody {
     XCTestExpectation *expectation = [self expectationWithDescription:@"failure"];
     CSNHttpClient *client = [[CSNHttpClient alloc] initWithHost:@"api.commutestream.com"];
     [OHHTTPStubs stubRequestsPassingTest:^BOOL(NSURLRequest * request) {
@@ -97,7 +97,7 @@
         return [request.URL.host isEqualToString:@"api.commutestream.com"];
     } withStubResponse:^OHHTTPStubsResponse * (NSURLRequest * request) {
         NSData *data = [[[CSNStopAdResponse alloc] init] data];
-        return [[OHHTTPStubsResponse responseWithData:data statusCode:200 headers:@{@"content-type":@"application/x-protobuf"}] requestTime:1.5 responseTime:0.1];
+        return [[OHHTTPStubsResponse responseWithData:data statusCode:200 headers:@{@"content-type":@"application/x-protobuf"}] requestTime:1.2 responseTime:0.1];
     }];
     CSNStopAdRequest *stopAdRequest = [[CSNStopAdRequest alloc] init];
     [client getStopAds:stopAdRequest success:^(CSNStopAdResponse *response) {
@@ -106,7 +106,7 @@
         XCTAssert(error != NULL);
         [expectation fulfill];
     }];
-    [self waitForExpectationsWithTimeout:1.0 handler:^(NSError * _Nullable error) {
+    [self waitForExpectationsWithTimeout:1.5 handler:^(NSError * _Nullable error) {
         if(error) {
             NSLog(@"Timeout Error: %@", error);
         }
@@ -121,7 +121,7 @@
         return [request.URL.host isEqualToString:@"api.commutestream.com"];
     } withStubResponse:^OHHTTPStubsResponse * (NSURLRequest * request) {
         NSData *data = [[[CSNStopAdResponse alloc] init] data];
-        return [[OHHTTPStubsResponse responseWithData:data statusCode:200 headers:@{@"content-type":@"application/x-protobuf"}] requestTime:0.1 responseTime:1.5];
+        return [[OHHTTPStubsResponse responseWithData:data statusCode:200 headers:@{@"content-type":@"application/x-protobuf"}] requestTime:0.1 responseTime:1.2];
     }];
     CSNStopAdRequest *stopAdRequest = [[CSNStopAdRequest alloc] init];
     [client getStopAds:stopAdRequest success:^(CSNStopAdResponse *response) {
@@ -130,7 +130,7 @@
         XCTAssert(error != NULL);
         [expectation fulfill];
     }];
-    [self waitForExpectationsWithTimeout:1.0 handler:^(NSError * _Nullable error) {
+    [self waitForExpectationsWithTimeout:1.5 handler:^(NSError * _Nullable error) {
         if(error) {
             NSLog(@"Timeout Error: %@", error);
         }
@@ -165,7 +165,9 @@
 - (void)testSendAdReport {
     // This is an example of a functional test case.
     // Use XCTAssert and related functions to verify your tests produce the correct results.
+    /*
     CSNHttpClient *client = [[CSNHttpClient alloc] initWithHost:@"api.commutestream.com"];
+     */
     
 }
 
