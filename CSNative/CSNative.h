@@ -10,3 +10,5 @@ FOUNDATION_EXPORT const unsigned char CSNativeVersionString[];
 #import <CSNative/CSNClient.h>
 #import <CSNative/CSNHttpClient.h>
 #import <CSNative/CSNIconView.h>
+#import <CSNative/CSNAdView.h>
+#import <CSNative/CSNAdBuilder.h>

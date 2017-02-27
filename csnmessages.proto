@@ -2,7 +2,7 @@
 
 syntax = "proto3";
 package google.protobuf;
-option objc_class_prefix = "CSN";
+option objc_class_prefix = "CSNP";
 option java_package = "com.commutestream.sdk.protobuf";
 
 
@@ -47,7 +47,7 @@ message AdRequest {
 message AdResponse {
   repeated LocationAd location_ads = 1;
   repeated StopAd stop_ads = 2;
-  HashMap<uint64, NativeAd> ads = 3;
+  map<uint64, NativeAd> ads = 3;
 }
 
 message DeviceID  {
@@ -61,9 +61,9 @@ message DeviceID  {
 
 
 message SimpleStat {
-  double min;
-  double max;
-  double mean;
+  double min = 1;
+  double max = 2;
+  double mean = 3;
 }
 
 message AdVisibility {
@@ -93,7 +93,7 @@ message AdReport {
   string ad_unit = 1;
   DeviceID device_id = 2;
   string timezone = 3;
-  timestamp epoch = 4;
+  uint64 epoch = 4;
   repeated AdVisibility ad_visibilty = 5;
   repeated AdInteraction ad_interactions = 6;
 }

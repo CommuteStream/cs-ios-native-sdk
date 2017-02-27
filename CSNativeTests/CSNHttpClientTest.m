@@ -27,8 +27,8 @@
         NSData *data = [[NSData alloc] init];
         return [OHHTTPStubsResponse responseWithData:data statusCode:400 headers:NULL];
     }];
-    CSNStopAdRequest *stopAdRequest = [[CSNStopAdRequest alloc] init];
-    [client getStopAds:stopAdRequest success:^(CSNStopAdResponse *response) {
+    CSNPAdRequest *adRequest = [[CSNPAdRequest alloc] init];
+    [client getAds:adRequest success:^(CSNPAdResponse *adResponse) {
         XCTAssert(false);
     } failure:^(NSError *error) {
         XCTAssert(error != NULL);
@@ -51,8 +51,8 @@
         NSData *data = [@"bogus" dataUsingEncoding:NSUTF8StringEncoding];
         return [OHHTTPStubsResponse responseWithData:data statusCode:200 headers:@{@"content-type":@"text/plain"}];
     }];
-    CSNStopAdRequest *stopAdRequest = [[CSNStopAdRequest alloc] init];
-    [client getStopAds:stopAdRequest success:^(CSNStopAdResponse *response) {
+    CSNPAdRequest *adRequest = [[CSNPAdRequest alloc] init];
+    [client getAds:adRequest success:^(CSNPAdResponse *adResponse) {
         XCTAssert(false);
     } failure:^(NSError *error) {
         XCTAssert(error != NULL);
@@ -75,8 +75,8 @@
         NSData *data = [@"bogus" dataUsingEncoding:NSUTF8StringEncoding];
         return [OHHTTPStubsResponse responseWithData:data statusCode:200 headers:@{@"content-type":@"application/x-protobuf"}];
     }];
-    CSNStopAdRequest *stopAdRequest = [[CSNStopAdRequest alloc] init];
-    [client getStopAds:stopAdRequest success:^(CSNStopAdResponse *response) {
+    CSNPAdRequest *adRequest = [[CSNPAdRequest alloc] init];
+    [client getAds:adRequest success:^(CSNPAdResponse *adResponse) {
         XCTAssert(false);
     } failure:^(NSError *error) {
         XCTAssert(error != NULL);
@@ -96,11 +96,11 @@
     [OHHTTPStubs stubRequestsPassingTest:^BOOL(NSURLRequest * request) {
         return [request.URL.host isEqualToString:@"api.commutestream.com"];
     } withStubResponse:^OHHTTPStubsResponse * (NSURLRequest * request) {
-        NSData *data = [[[CSNStopAdResponse alloc] init] data];
+        NSData *data = [[[CSNPAdResponse alloc] init] data];
         return [[OHHTTPStubsResponse responseWithData:data statusCode:200 headers:@{@"content-type":@"application/x-protobuf"}] requestTime:1.2 responseTime:0.1];
     }];
-    CSNStopAdRequest *stopAdRequest = [[CSNStopAdRequest alloc] init];
-    [client getStopAds:stopAdRequest success:^(CSNStopAdResponse *response) {
+    CSNPAdRequest *adRequest = [[CSNPAdRequest alloc] init];
+    [client getAds:adRequest success:^(CSNPAdResponse *adResponse) {
         XCTAssert(false);
     } failure:^(NSError *error) {
         XCTAssert(error != NULL);
@@ -120,11 +120,11 @@
     [OHHTTPStubs stubRequestsPassingTest:^BOOL(NSURLRequest * request) {
         return [request.URL.host isEqualToString:@"api.commutestream.com"];
     } withStubResponse:^OHHTTPStubsResponse * (NSURLRequest * request) {
-        NSData *data = [[[CSNStopAdResponse alloc] init] data];
+        NSData *data = [[[CSNPAdResponse alloc] init] data];
         return [[OHHTTPStubsResponse responseWithData:data statusCode:200 headers:@{@"content-type":@"application/x-protobuf"}] requestTime:0.1 responseTime:1.2];
     }];
-    CSNStopAdRequest *stopAdRequest = [[CSNStopAdRequest alloc] init];
-    [client getStopAds:stopAdRequest success:^(CSNStopAdResponse *response) {
+    CSNPAdRequest *adRequest = [[CSNPAdRequest alloc] init];
+    [client getAds:adRequest success:^(CSNPAdResponse *adResponse) {
         XCTAssert(false);
     } failure:^(NSError *error) {
         XCTAssert(error != NULL);
@@ -139,7 +139,7 @@
 
 // Ensure 200s with valid body data is in fact a success
 - (void) testGetStopAdsSuccess {
-    NSData *responseData = [[[CSNStopAdResponse alloc] init] data];
+    NSData *responseData = [[[CSNPAdResponse alloc] init] data];
     XCTestExpectation *expectation = [self expectationWithDescription:@"success"];
     CSNHttpClient *client = [[CSNHttpClient alloc] initWithHost:@"api.commutestream.com"];
     [OHHTTPStubs stubRequestsPassingTest:^BOOL(NSURLRequest * request) {
@@ -147,8 +147,8 @@
     } withStubResponse:^OHHTTPStubsResponse * (NSURLRequest * request) {
         return [OHHTTPStubsResponse responseWithData:responseData statusCode:200 headers:@{@"content-type":@"application/x-protobuf"}];
     }];
-    CSNStopAdRequest *stopAdRequest = [[CSNStopAdRequest alloc] init];
-    [client getStopAds:stopAdRequest success:^(CSNStopAdResponse *response) {
+    CSNPAdRequest *adRequest = [[CSNPAdRequest alloc] init];
+    [client getAds:adRequest success:^(CSNPAdResponse *response) {
         XCTAssert(response != NULL);
         [expectation fulfill];
     } failure:^(NSError *error) {

@@ -15,7 +15,7 @@
     return self;
 }
 
-- (void) getStopAds:(CSNStopAdRequest *)stopAdRequest success:(void (^)(CSNStopAdResponse *))success failure:(void (^)(NSError *))failure {
+- (void) getAds:(CSNPAdRequest *)stopAdRequest success:(void (^)(CSNPAdResponse *))success failure:(void (^)(NSError *))failure {
     NSURL *url = [[NSURL alloc] initWithString:[NSString stringWithFormat:@"https://%@/v2/stop_ads", _host]];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
     [request setHTTPBody:[stopAdRequest data]];
@@ -35,7 +35,7 @@
             return failure(error);
         }
         NSError *protobufError;
-        CSNStopAdResponse *stopAdResponse = [CSNStopAdResponse parseFromData:data error:&protobufError];
+        CSNPAdResponse *stopAdResponse = [CSNPAdResponse parseFromData:data error:&protobufError];
         if(protobufError) {
             return failure(protobufError);
         }
@@ -44,7 +44,7 @@
     [task resume];
 }
 
-- (void) sendAdReport:(CSNAdReport *)adReport success:(void (^)())success failure:(void (^)(NSError *))failure {
+- (void) sendAdReport:(CSNPAdReport *)adReport success:(void (^)())success failure:(void (^)(NSError *))failure {
     NSError *error = [[NSError alloc] initWithDomain:@"com.commutestream.native" code:0 userInfo:NULL];
     failure(error);
 }

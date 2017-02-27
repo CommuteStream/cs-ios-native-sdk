@@ -20,6 +20,12 @@
 		1B555FF91E61134500FE1C08 /* CSNIconView.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B555FF71E61134500FE1C08 /* CSNIconView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1B555FFA1E61134500FE1C08 /* CSNIconView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B555FF81E61134500FE1C08 /* CSNIconView.m */; };
 		1B5560491E61F2FB00FE1C08 /* cs.png in Resources */ = {isa = PBXBuildFile; fileRef = 1B5560481E61F2FB00FE1C08 /* cs.png */; };
+		1B5560521E64879100FE1C08 /* CSNAdView.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B5560501E64879000FE1C08 /* CSNAdView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1B5560531E64879100FE1C08 /* CSNAdView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B5560511E64879000FE1C08 /* CSNAdView.m */; };
+		1B5560561E648AC200FE1C08 /* CSNAdBuilder.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B5560541E648AC200FE1C08 /* CSNAdBuilder.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1B5560571E648AC200FE1C08 /* CSNAdBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B5560551E648AC200FE1C08 /* CSNAdBuilder.m */; };
+		1B5560591E64989B00FE1C08 /* CSNAdBuilderTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B5560581E64989B00FE1C08 /* CSNAdBuilderTest.m */; };
+		1B55605C1E64995B00FE1C08 /* CSNMockClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B55605B1E64995B00FE1C08 /* CSNMockClient.m */; };
 		450CEE9BA1525442C8718883 /* Pods_CSNativeTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE17F149E54E79C0A0DD74A1 /* Pods_CSNativeTests.framework */; };
 		BFD4D671F72DB355E089E1E2 /* Pods_CSNative.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D23200ADBD9A081E804130FF /* Pods_CSNative.framework */; };
 /* End PBXBuildFile section */
@@ -51,6 +57,13 @@
 		1B555FF71E61134500FE1C08 /* CSNIconView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSNIconView.h; sourceTree = "<group>"; };
 		1B555FF81E61134500FE1C08 /* CSNIconView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSNIconView.m; sourceTree = "<group>"; };
 		1B5560481E61F2FB00FE1C08 /* cs.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cs.png; sourceTree = "<group>"; };
+		1B5560501E64879000FE1C08 /* CSNAdView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSNAdView.h; sourceTree = "<group>"; };
+		1B5560511E64879000FE1C08 /* CSNAdView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSNAdView.m; sourceTree = "<group>"; };
+		1B5560541E648AC200FE1C08 /* CSNAdBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSNAdBuilder.h; sourceTree = "<group>"; };
+		1B5560551E648AC200FE1C08 /* CSNAdBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSNAdBuilder.m; sourceTree = "<group>"; };
+		1B5560581E64989B00FE1C08 /* CSNAdBuilderTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSNAdBuilderTest.m; sourceTree = "<group>"; };
+		1B55605A1E64995B00FE1C08 /* CSNMockClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSNMockClient.h; sourceTree = "<group>"; };
+		1B55605B1E64995B00FE1C08 /* CSNMockClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSNMockClient.m; sourceTree = "<group>"; };
 		5501E0D3CBC17B50D64846B3 /* Pods-CSNativeTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CSNativeTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-CSNativeTests/Pods-CSNativeTests.release.xcconfig"; sourceTree = "<group>"; };
 		5F7B3C7CA7AA5D2380F846BD /* Pods-CSNative.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CSNative.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CSNative/Pods-CSNative.debug.xcconfig"; sourceTree = "<group>"; };
 		8850AC2CB18382AAF0651534 /* Pods-CSNativeTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CSNativeTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CSNativeTests/Pods-CSNativeTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -114,6 +127,10 @@
 				1B555FF51E61123900FE1C08 /* CSNIconView.xib */,
 				1B555FF71E61134500FE1C08 /* CSNIconView.h */,
 				1B555FF81E61134500FE1C08 /* CSNIconView.m */,
+				1B5560501E64879000FE1C08 /* CSNAdView.h */,
+				1B5560511E64879000FE1C08 /* CSNAdView.m */,
+				1B5560541E648AC200FE1C08 /* CSNAdBuilder.h */,
+				1B5560551E648AC200FE1C08 /* CSNAdBuilder.m */,
 			);
 			path = CSNative;
 			sourceTree = "<group>";
@@ -124,6 +141,9 @@
 				1B555FEF1E60B0B500FE1C08 /* CSNHttpClientTest.m */,
 				1B555FD31E60A3F800FE1C08 /* CSNativeTests.m */,
 				1B555FD51E60A3F800FE1C08 /* Info.plist */,
+				1B5560581E64989B00FE1C08 /* CSNAdBuilderTest.m */,
+				1B55605A1E64995B00FE1C08 /* CSNMockClient.h */,
+				1B55605B1E64995B00FE1C08 /* CSNMockClient.m */,
 			);
 			path = CSNativeTests;
 			sourceTree = "<group>";
@@ -158,6 +178,8 @@
 				1B555FF91E61134500FE1C08 /* CSNIconView.h in Headers */,
 				1B555FED1E60AD7A00FE1C08 /* Csnmessages.pbobjc.h in Headers */,
 				1B555FE51E60A6B500FE1C08 /* CSNHttpClient.h in Headers */,
+				1B5560521E64879100FE1C08 /* CSNAdView.h in Headers */,
+				1B5560561E648AC200FE1C08 /* CSNAdBuilder.h in Headers */,
 				1B555FE11E60A60E00FE1C08 /* CSNClient.h in Headers */,
 				1B555FD61E60A3F800FE1C08 /* CSNative.h in Headers */,
 			);
@@ -348,6 +370,8 @@
 			files = (
 				1B555FFA1E61134500FE1C08 /* CSNIconView.m in Sources */,
 				1B555FE61E60A6B500FE1C08 /* CSNHttpClient.m in Sources */,
+				1B5560531E64879100FE1C08 /* CSNAdView.m in Sources */,
+				1B5560571E648AC200FE1C08 /* CSNAdBuilder.m in Sources */,
 				1B555FEE1E60AD7A00FE1C08 /* Csnmessages.pbobjc.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -357,7 +381,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				1B555FD41E60A3F800FE1C08 /* CSNativeTests.m in Sources */,
+				1B5560591E64989B00FE1C08 /* CSNAdBuilderTest.m in Sources */,
 				1B555FF01E60B0B500FE1C08 /* CSNHttpClientTest.m in Sources */,
+				1B55605C1E64995B00FE1C08 /* CSNMockClient.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
