@@ -20,9 +20,7 @@
 
 - (instancetype) initWithClient:(id<CSNClient>)client;
 
-- (NSArray<CSNIconView *> *) iconViews:(UIView *)parent;
-
-- (NSArray<CSNTitleView *> *) titleViews:(UIView *)parent;
+- (NSArray<UIView *> *) componentViews:(UIView *)parent;
 
 - (NSArray<UIView *> *) findViews:(UIView *)parent matcher:(bool (^)(UIView *))matcher;
 

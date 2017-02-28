@@ -67,15 +67,9 @@
     }];
 }
 
-- (NSArray *) iconViews:(UIView *)parent {
+- (NSArray *) componentViews:(UIView *)parent {
     return [self findViews:parent matcher:^bool(UIView *view) {
-        return [view isKindOfClass:[CSNIconView class]];
-    }];
-}
-
-- (NSArray *) titleViews:(UIView *)parent {
-    return [self findViews:parent matcher:^bool(UIView *view) {
-        return [view isKindOfClass:[CSNTitleView class]];
+        return [view conformsToProtocol:@protocol(CSNComponentView)];
     }];
 }
 
@@ -103,9 +97,11 @@
         UIView *view = [_stopViews objectForKey:stopTuple];
         if(view != nil) {
             // Build Ad and AdView from Ad Message
-            //CSNPNativeAd *nativeAd = [[response ads] objectForKey:[stop adId]];
-            //CSNAd *ad = [[CSNAd alloc] init];
-            //[self fillViewWithAd:view ad:ad]
+            CSNPNativeAd *message = [[response ads] objectForKey:[stop adId]];
+            CSNAd *ad = [[CSNAd alloc] initWithMessage:message];
+            for(id<CSNComponentView> componentView in [self componentViews:view]) {
+                id<CSNComponentView> _view __unused = [componentView initWithAd:ad];
+            }
         }
     }
 }

@@ -33,33 +33,20 @@
     XCTAssert(![subviews containsObject:subview1]);
 }
 
-- (void)testIconViews {
+- (void)testComponentViews {
     UIView *view  = [[UIView alloc] init];
     UIView *subview0 = [[UIView alloc] init];
     CSNIconView *iconview0 = [[CSNIconView alloc] init];
     CSNIconView *iconview1 = [[CSNIconView alloc] init];
+    CSNTitleView *titleview0 = [[CSNTitleView alloc] init];
     [view addSubview:subview0];
     [view addSubview:iconview0];
+    [view addSubview:titleview0];
     [subview0 addSubview:iconview1];
     CSNAdController *controller = [[CSNAdController alloc] init];
-    NSArray<UIView *> *subviews = [controller iconViews:view];
+    NSArray<UIView *> *subviews = [controller componentViews:view];
     XCTAssert([subviews containsObject:iconview0]);
     XCTAssert([subviews containsObject:iconview1]);
-    XCTAssert(![subviews containsObject:subview0]);
-}
-
-- (void)testTitleViews {
-    UIView *view  = [[UIView alloc] init];
-    UIView *subview0 = [[UIView alloc] init];
-    CSNTitleView *titleview0 = [[CSNTitleView alloc] init];
-    CSNTitleView *titleview1 = [[CSNTitleView alloc] init];
-    [view addSubview:subview0];
-    [view addSubview:titleview0];
-    [subview0 addSubview:titleview1];
-    CSNAdController *controller = [[CSNAdController alloc] init];
-    NSArray<UIView *> *subviews = [controller titleViews:view];
-    XCTAssert([subviews containsObject:titleview0]);
-    XCTAssert([subviews containsObject:titleview1]);
     XCTAssert(![subviews containsObject:subview0]);
 }
 
