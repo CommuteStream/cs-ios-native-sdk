@@ -17,5 +17,10 @@
     return self;
 }
 
+- (void) setImage:(UIImage *)image {
+    [[self imageView] setImage:image];
+    [[self imageView] sizeToFit];
+}
+
 
 @end

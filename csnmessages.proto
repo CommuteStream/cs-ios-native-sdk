@@ -12,18 +12,73 @@ message Stop {
   string stop_id = 3;
 }
 
+message StopComponent {
+  string component_id = 1;
+  Stop stop_tuple = 2;
+  string agencyName = 3;
+  string routeName = 4;
+  string stopName = 5;
+}
+
 message Location {
-  double lat = 1;
-  double lon = 2;
+  double lat = 2;
+  double lon = 3;
+}
+
+message LocationComponent {
+  uint64 component_id = 1;
+  Location location = 2;
+  string name = 3;
+  string address = 4;
+}
+
+
+enum HeroKind {
+  Image = 0;
+  HTML = 1;
+}
+
+message HeroComponent {
+  uint64 component_id = 1;
+  HeroKind kind = 2;
+  bytes blob = 3;
+}
+
+enum ActionKind {
+  Url = 0; 
+} 
+
+message ActionComponent {
+  uint64 component_id = 1;
+  ActionKind kind = 2;
+  string url = 3;
+}
+
+message IconComponent {
+  uint64 component_id = 1;
+  bytes image = 2;
+}
+
+message TitleComponent {
+  uint64 component_id = 1;
+  string title = 2;
+}
+
+message Colors {
+  string background = 1;
+  string foreground = 2;
 }
 
 message NativeAd {
   uint64 request_id = 1;
-  bytes icon = 2;
-  string title = 3;
-  string background_color = 4;
-  string secondary_html = 5;
-  Location location = 6;
+  uint64 ad_id = 2;
+  Colors colors = 3;
+  IconComponent icon = 4;
+  TitleComponent title = 5;
+  LocationComponent location = 6;
+  StopComponent stop = 7;
+  HeroComponent hero = 8;
+  repeated ActionComponent actions = 9;
 }
 
 message StopAd {

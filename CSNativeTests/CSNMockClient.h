@@ -2,6 +2,6 @@
 @import CSNative;
 
 @interface CSNMockClient : NSObject <CSNClient>
-@property (nonatomic, copy, nullable) void (^getAdBlock)(CSNPAdRequest *adRequest, (^()(CSNPAdResponse *adResponse)) success, (^()(NSError *error)) failure);
+//@property (nonatomic, copy, nullable) void (^getAdBlock)(CSNPAdRequest *adRequest, (void ^(CSNPAdResponse *adResponse)) success, (void ^(NSError *error)) failure);
 
 @end

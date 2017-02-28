@@ -1,4 +1,4 @@
-#import <Foundation/Foundation.h>
+@import Foundation;
 #import <CSNative/Csnmessages.pbobjc.h>
 
 @protocol CSNClient

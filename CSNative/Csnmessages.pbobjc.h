@@ -27,17 +27,65 @@
 
 CF_EXTERN_C_BEGIN
 
+@class CSNPActionComponent;
 @class CSNPAdInteraction;
 @class CSNPAdVisibility;
+@class CSNPColors;
 @class CSNPDeviceID;
+@class CSNPHeroComponent;
+@class CSNPIconComponent;
 @class CSNPLocation;
 @class CSNPLocationAd;
+@class CSNPLocationComponent;
 @class CSNPNativeAd;
 @class CSNPSimpleStat;
 @class CSNPStop;
 @class CSNPStopAd;
+@class CSNPStopComponent;
+@class CSNPTitleComponent;
 
 NS_ASSUME_NONNULL_BEGIN
+
+#pragma mark - Enum CSNPHeroKind
+
+typedef GPB_ENUM(CSNPHeroKind) {
+  /**
+   * Value used if any message's field encounters a value that is not defined
+   * by this enum. The message will also have C functions to get/set the rawValue
+   * of the field.
+   **/
+  CSNPHeroKind_GPBUnrecognizedEnumeratorValue = kGPBUnrecognizedEnumeratorValue,
+  CSNPHeroKind_Image = 0,
+  CSNPHeroKind_Html = 1,
+};
+
+GPBEnumDescriptor *CSNPHeroKind_EnumDescriptor(void);
+
+/**
+ * Checks to see if the given value is defined by the enum or was not known at
+ * the time this source was generated.
+ **/
+BOOL CSNPHeroKind_IsValidValue(int32_t value);
+
+#pragma mark - Enum CSNPActionKind
+
+typedef GPB_ENUM(CSNPActionKind) {
+  /**
+   * Value used if any message's field encounters a value that is not defined
+   * by this enum. The message will also have C functions to get/set the rawValue
+   * of the field.
+   **/
+  CSNPActionKind_GPBUnrecognizedEnumeratorValue = kGPBUnrecognizedEnumeratorValue,
+  CSNPActionKind_URL = 0,
+};
+
+GPBEnumDescriptor *CSNPActionKind_EnumDescriptor(void);
+
+/**
+ * Checks to see if the given value is defined by the enum or was not known at
+ * the time this source was generated.
+ **/
+BOOL CSNPActionKind_IsValidValue(int32_t value);
 
 #pragma mark - Enum CSNPAdInteractionKind
 
@@ -113,11 +161,37 @@ typedef GPB_ENUM(CSNPStop_FieldNumber) {
 
 @end
 
+#pragma mark - CSNPStopComponent
+
+typedef GPB_ENUM(CSNPStopComponent_FieldNumber) {
+  CSNPStopComponent_FieldNumber_ComponentId = 1,
+  CSNPStopComponent_FieldNumber_StopTuple = 2,
+  CSNPStopComponent_FieldNumber_AgencyName = 3,
+  CSNPStopComponent_FieldNumber_RouteName = 4,
+  CSNPStopComponent_FieldNumber_StopName = 5,
+};
+
+@interface CSNPStopComponent : GPBMessage
+
+@property(nonatomic, readwrite, copy, null_resettable) NSString *componentId;
+
+@property(nonatomic, readwrite, strong, null_resettable) CSNPStop *stopTuple;
+/** Test to see if @c stopTuple has been set. */
+@property(nonatomic, readwrite) BOOL hasStopTuple;
+
+@property(nonatomic, readwrite, copy, null_resettable) NSString *agencyName;
+
+@property(nonatomic, readwrite, copy, null_resettable) NSString *routeName;
+
+@property(nonatomic, readwrite, copy, null_resettable) NSString *stopName;
+
+@end
+
 #pragma mark - CSNPLocation
 
 typedef GPB_ENUM(CSNPLocation_FieldNumber) {
-  CSNPLocation_FieldNumber_Lat = 1,
-  CSNPLocation_FieldNumber_Lon = 2,
+  CSNPLocation_FieldNumber_Lat = 2,
+  CSNPLocation_FieldNumber_Lon = 3,
 };
 
 @interface CSNPLocation : GPBMessage
@@ -128,32 +202,181 @@ typedef GPB_ENUM(CSNPLocation_FieldNumber) {
 
 @end
 
+#pragma mark - CSNPLocationComponent
+
+typedef GPB_ENUM(CSNPLocationComponent_FieldNumber) {
+  CSNPLocationComponent_FieldNumber_ComponentId = 1,
+  CSNPLocationComponent_FieldNumber_Location = 2,
+  CSNPLocationComponent_FieldNumber_Name = 3,
+  CSNPLocationComponent_FieldNumber_Address = 4,
+};
+
+@interface CSNPLocationComponent : GPBMessage
+
+@property(nonatomic, readwrite) uint64_t componentId;
+
+@property(nonatomic, readwrite, strong, null_resettable) CSNPLocation *location;
+/** Test to see if @c location has been set. */
+@property(nonatomic, readwrite) BOOL hasLocation;
+
+@property(nonatomic, readwrite, copy, null_resettable) NSString *name;
+
+@property(nonatomic, readwrite, copy, null_resettable) NSString *address;
+
+@end
+
+#pragma mark - CSNPHeroComponent
+
+typedef GPB_ENUM(CSNPHeroComponent_FieldNumber) {
+  CSNPHeroComponent_FieldNumber_ComponentId = 1,
+  CSNPHeroComponent_FieldNumber_Kind = 2,
+  CSNPHeroComponent_FieldNumber_Blob = 3,
+};
+
+@interface CSNPHeroComponent : GPBMessage
+
+@property(nonatomic, readwrite) uint64_t componentId;
+
+@property(nonatomic, readwrite) CSNPHeroKind kind;
+
+@property(nonatomic, readwrite, copy, null_resettable) NSData *blob;
+
+@end
+
+/**
+ * Fetches the raw value of a @c CSNPHeroComponent's @c kind property, even
+ * if the value was not defined by the enum at the time the code was generated.
+ **/
+int32_t CSNPHeroComponent_Kind_RawValue(CSNPHeroComponent *message);
+/**
+ * Sets the raw value of an @c CSNPHeroComponent's @c kind property, allowing
+ * it to be set to a value that was not defined by the enum at the time the code
+ * was generated.
+ **/
+void SetCSNPHeroComponent_Kind_RawValue(CSNPHeroComponent *message, int32_t value);
+
+#pragma mark - CSNPActionComponent
+
+typedef GPB_ENUM(CSNPActionComponent_FieldNumber) {
+  CSNPActionComponent_FieldNumber_ComponentId = 1,
+  CSNPActionComponent_FieldNumber_Kind = 2,
+  CSNPActionComponent_FieldNumber_URL = 3,
+};
+
+@interface CSNPActionComponent : GPBMessage
+
+@property(nonatomic, readwrite) uint64_t componentId;
+
+@property(nonatomic, readwrite) CSNPActionKind kind;
+
+@property(nonatomic, readwrite, copy, null_resettable) NSString *URL;
+
+@end
+
+/**
+ * Fetches the raw value of a @c CSNPActionComponent's @c kind property, even
+ * if the value was not defined by the enum at the time the code was generated.
+ **/
+int32_t CSNPActionComponent_Kind_RawValue(CSNPActionComponent *message);
+/**
+ * Sets the raw value of an @c CSNPActionComponent's @c kind property, allowing
+ * it to be set to a value that was not defined by the enum at the time the code
+ * was generated.
+ **/
+void SetCSNPActionComponent_Kind_RawValue(CSNPActionComponent *message, int32_t value);
+
+#pragma mark - CSNPIconComponent
+
+typedef GPB_ENUM(CSNPIconComponent_FieldNumber) {
+  CSNPIconComponent_FieldNumber_ComponentId = 1,
+  CSNPIconComponent_FieldNumber_Image = 2,
+};
+
+@interface CSNPIconComponent : GPBMessage
+
+@property(nonatomic, readwrite) uint64_t componentId;
+
+@property(nonatomic, readwrite, copy, null_resettable) NSData *image;
+
+@end
+
+#pragma mark - CSNPTitleComponent
+
+typedef GPB_ENUM(CSNPTitleComponent_FieldNumber) {
+  CSNPTitleComponent_FieldNumber_ComponentId = 1,
+  CSNPTitleComponent_FieldNumber_Title = 2,
+};
+
+@interface CSNPTitleComponent : GPBMessage
+
+@property(nonatomic, readwrite) uint64_t componentId;
+
+@property(nonatomic, readwrite, copy, null_resettable) NSString *title;
+
+@end
+
+#pragma mark - CSNPColors
+
+typedef GPB_ENUM(CSNPColors_FieldNumber) {
+  CSNPColors_FieldNumber_Background = 1,
+  CSNPColors_FieldNumber_Foreground = 2,
+};
+
+@interface CSNPColors : GPBMessage
+
+@property(nonatomic, readwrite, copy, null_resettable) NSString *background;
+
+@property(nonatomic, readwrite, copy, null_resettable) NSString *foreground;
+
+@end
+
 #pragma mark - CSNPNativeAd
 
 typedef GPB_ENUM(CSNPNativeAd_FieldNumber) {
   CSNPNativeAd_FieldNumber_RequestId = 1,
-  CSNPNativeAd_FieldNumber_Icon = 2,
-  CSNPNativeAd_FieldNumber_Title = 3,
-  CSNPNativeAd_FieldNumber_BackgroundColor = 4,
-  CSNPNativeAd_FieldNumber_SecondaryHtml = 5,
+  CSNPNativeAd_FieldNumber_AdId = 2,
+  CSNPNativeAd_FieldNumber_Colors = 3,
+  CSNPNativeAd_FieldNumber_Icon = 4,
+  CSNPNativeAd_FieldNumber_Title = 5,
   CSNPNativeAd_FieldNumber_Location = 6,
+  CSNPNativeAd_FieldNumber_Stop = 7,
+  CSNPNativeAd_FieldNumber_Hero = 8,
+  CSNPNativeAd_FieldNumber_ActionsArray = 9,
 };
 
 @interface CSNPNativeAd : GPBMessage
 
 @property(nonatomic, readwrite) uint64_t requestId;
 
-@property(nonatomic, readwrite, copy, null_resettable) NSData *icon;
+@property(nonatomic, readwrite) uint64_t adId;
 
-@property(nonatomic, readwrite, copy, null_resettable) NSString *title;
+@property(nonatomic, readwrite, strong, null_resettable) CSNPColors *colors;
+/** Test to see if @c colors has been set. */
+@property(nonatomic, readwrite) BOOL hasColors;
 
-@property(nonatomic, readwrite, copy, null_resettable) NSString *backgroundColor;
+@property(nonatomic, readwrite, strong, null_resettable) CSNPIconComponent *icon;
+/** Test to see if @c icon has been set. */
+@property(nonatomic, readwrite) BOOL hasIcon;
 
-@property(nonatomic, readwrite, copy, null_resettable) NSString *secondaryHtml;
+@property(nonatomic, readwrite, strong, null_resettable) CSNPTitleComponent *title;
+/** Test to see if @c title has been set. */
+@property(nonatomic, readwrite) BOOL hasTitle;
 
-@property(nonatomic, readwrite, strong, null_resettable) CSNPLocation *location;
+@property(nonatomic, readwrite, strong, null_resettable) CSNPLocationComponent *location;
 /** Test to see if @c location has been set. */
 @property(nonatomic, readwrite) BOOL hasLocation;
+
+@property(nonatomic, readwrite, strong, null_resettable) CSNPStopComponent *stop;
+/** Test to see if @c stop has been set. */
+@property(nonatomic, readwrite) BOOL hasStop;
+
+@property(nonatomic, readwrite, strong, null_resettable) CSNPHeroComponent *hero;
+/** Test to see if @c hero has been set. */
+@property(nonatomic, readwrite) BOOL hasHero;
+
+@property(nonatomic, readwrite, strong, null_resettable) NSMutableArray<CSNPActionComponent*> *actionsArray;
+/** The number of items in @c actionsArray without causing the array to be created. */
+@property(nonatomic, readonly) NSUInteger actionsArray_Count;
 
 @end
 
