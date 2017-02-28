@@ -1,16 +1,16 @@
-@import Foundation;
+@import UIKit;
 #import "CSNClient.h"
-#import "CSNAdView.h"
 
 #ifdef DEBUG
 #import "CSNIconView.h"
+#import "CSNTitleView.h"
 #endif
 
 @interface CSNAdController : NSObject
 
 - (instancetype) init;
 
-- (void) addStopAd:(CSNAdView *)view agencyID:(NSString *)agencyID routeID:(NSString *)routeID stopID:(NSString *)stopID;
+- (void) addStopAd:(UIView *)view agencyID:(NSString *)agencyID routeID:(NSString *)routeID stopID:(NSString *)stopID;
 - (void) removeStopAd:(NSString *)agencyID routeID:(NSString *)routeID stopID:(NSString *)stopID;
 
 - (void) refreshAds;
@@ -21,6 +21,8 @@
 - (instancetype) initWithClient:(id<CSNClient>)client;
 
 - (NSArray<CSNIconView *> *) iconViews:(UIView *)parent;
+
+- (NSArray<CSNTitleView *> *) titleViews:(UIView *)parent;
 
 - (NSArray<UIView *> *) findViews:(UIView *)parent matcher:(bool (^)(UIView *))matcher;
 

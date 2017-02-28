@@ -1,5 +1,4 @@
 #import "CSNAdController.h"
-#import "CSNAdView.h"
 #import "CSNClient.h"
 #import "CSNHttpClient.h"
 #import "CSNIconView.h"
@@ -42,7 +41,7 @@
     return self;
 }
 
-- (void) addStopAd:(CSNAdView *)view agencyID:(NSString *)agencyID routeID:(NSString *)routeID stopID:(NSString *)stopID {
+- (void) addStopAd:(UIView *)view agencyID:(NSString *)agencyID routeID:(NSString *)routeID stopID:(NSString *)stopID {
     CSNStopTuple *stopTuple = [[CSNStopTuple alloc] initWithIDs:agencyID routeID:routeID stopID:stopID];
     [_stopViews setObject:view forKey:stopTuple];
 }
@@ -74,6 +73,12 @@
     }];
 }
 
+- (NSArray *) titleViews:(UIView *)parent {
+    return [self findViews:parent matcher:^bool(UIView *view) {
+        return [view isKindOfClass:[CSNTitleView class]];
+    }];
+}
+
 - (NSArray *) findViews:(UIView *)parent matcher:(bool (^)(UIView *))matcher {
     NSMutableArray *views = [[NSMutableArray alloc] init];
     [self findViews:parent views:views matcher:matcher];
@@ -92,16 +97,15 @@
     }
 }
 
-
 - (void) buildViews:(CSNPAdResponse *)response {
     for(id stop in response.stopAdsArray) {
         CSNStopTuple *stopTuple = [[CSNStopTuple alloc] initWithIDs:[stop agencyId] routeID:[stop routeId] stopID:[stop stopId]];
-        CSNAdView *adView = [_stopViews objectForKey:stopTuple];
-        if(adView != nil) {
+        UIView *view = [_stopViews objectForKey:stopTuple];
+        if(view != nil) {
             // Build Ad and AdView from Ad Message
             //CSNPNativeAd *nativeAd = [[response ads] objectForKey:[stop adId]];
-            CSNAd *ad = [[CSNAd alloc] init];
-            adView = [adView initWithAd:ad];
+            //CSNAd *ad = [[CSNAd alloc] init];
+            //[self fillViewWithAd:view ad:ad]
         }
     }
 }

@@ -1,9 +1,10 @@
 @import UIKit;
+#import "CSNComponentView.h"
+#import "CSNAd.h"
 
 IB_DESIGNABLE
-@interface CSNIconView : UIView
-@property uint64_t requestID;
-@property uint64_t adID;
-@property uint64_t componentID;
-- (void) setImage:(UIImage *)image;
+@interface CSNIconView : UIView <CSNComponentView>
+@property (readonly, nonnull) CSNAd *ad;
+@property (readonly) uint64_t componentID;
+- (_Nonnull instancetype) initWithAd:(CSNAd * _Nonnull)ad;
 @end
