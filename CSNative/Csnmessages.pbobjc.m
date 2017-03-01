@@ -891,12 +891,12 @@ typedef struct CSNPNativeAd__storage_ {
 @implementation CSNPStopAd
 
 @dynamic hasStop, stop;
-@dynamic requestId;
+@dynamic adId;
 
 typedef struct CSNPStopAd__storage_ {
   uint32_t _has_storage_[1];
   CSNPStop *stop;
-  uint64_t requestId;
+  uint64_t adId;
 } CSNPStopAd__storage_;
 
 // This method is threadsafe because it is initially called
@@ -915,11 +915,11 @@ typedef struct CSNPStopAd__storage_ {
         .dataType = GPBDataTypeMessage,
       },
       {
-        .name = "requestId",
+        .name = "adId",
         .dataTypeSpecific.className = NULL,
-        .number = CSNPStopAd_FieldNumber_RequestId,
+        .number = CSNPStopAd_FieldNumber_AdId,
         .hasIndex = 1,
-        .offset = (uint32_t)offsetof(CSNPStopAd__storage_, requestId),
+        .offset = (uint32_t)offsetof(CSNPStopAd__storage_, adId),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeUInt64,
       },
@@ -945,12 +945,12 @@ typedef struct CSNPStopAd__storage_ {
 @implementation CSNPLocationAd
 
 @dynamic hasLoc, loc;
-@dynamic requestId;
+@dynamic adId;
 
 typedef struct CSNPLocationAd__storage_ {
   uint32_t _has_storage_[1];
   CSNPLocation *loc;
-  uint64_t requestId;
+  uint64_t adId;
 } CSNPLocationAd__storage_;
 
 // This method is threadsafe because it is initially called
@@ -969,11 +969,11 @@ typedef struct CSNPLocationAd__storage_ {
         .dataType = GPBDataTypeMessage,
       },
       {
-        .name = "requestId",
+        .name = "adId",
         .dataTypeSpecific.className = NULL,
-        .number = CSNPLocationAd_FieldNumber_RequestId,
+        .number = CSNPLocationAd_FieldNumber_AdId,
         .hasIndex = 1,
-        .offset = (uint32_t)offsetof(CSNPLocationAd__storage_, requestId),
+        .offset = (uint32_t)offsetof(CSNPLocationAd__storage_, adId),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeUInt64,
       },

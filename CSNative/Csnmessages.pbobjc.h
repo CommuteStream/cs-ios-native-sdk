@@ -384,7 +384,7 @@ typedef GPB_ENUM(CSNPNativeAd_FieldNumber) {
 
 typedef GPB_ENUM(CSNPStopAd_FieldNumber) {
   CSNPStopAd_FieldNumber_Stop = 1,
-  CSNPStopAd_FieldNumber_RequestId = 2,
+  CSNPStopAd_FieldNumber_AdId = 2,
 };
 
 @interface CSNPStopAd : GPBMessage
@@ -393,7 +393,7 @@ typedef GPB_ENUM(CSNPStopAd_FieldNumber) {
 /** Test to see if @c stop has been set. */
 @property(nonatomic, readwrite) BOOL hasStop;
 
-@property(nonatomic, readwrite) uint64_t requestId;
+@property(nonatomic, readwrite) uint64_t adId;
 
 @end
 
@@ -401,7 +401,7 @@ typedef GPB_ENUM(CSNPStopAd_FieldNumber) {
 
 typedef GPB_ENUM(CSNPLocationAd_FieldNumber) {
   CSNPLocationAd_FieldNumber_Loc = 1,
-  CSNPLocationAd_FieldNumber_RequestId = 2,
+  CSNPLocationAd_FieldNumber_AdId = 2,
 };
 
 @interface CSNPLocationAd : GPBMessage
@@ -410,7 +410,7 @@ typedef GPB_ENUM(CSNPLocationAd_FieldNumber) {
 /** Test to see if @c loc has been set. */
 @property(nonatomic, readwrite) BOOL hasLoc;
 
-@property(nonatomic, readwrite) uint64_t requestId;
+@property(nonatomic, readwrite) uint64_t adId;
 
 @end
 

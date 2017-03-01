@@ -83,12 +83,12 @@ message NativeAd {
 
 message StopAd {
   Stop stop = 1;
-  uint64 request_id = 2;
+  uint64 ad_id = 2;
 }
 
 message LocationAd {
   Location loc = 1;
-  uint64 request_id = 2;
+  uint64 ad_id = 2;
 }
 
 message AdRequest {

@@ -50,4 +50,17 @@
     XCTAssert(![subviews containsObject:subview0]);
 }
 
+- (void)testWithClient {
+    CSNAdController *controller = [[CSNAdController alloc] initMocked];
+    UIView *view = [[UIView alloc] init];
+    CSNIconView *iconView = [[CSNIconView alloc] init];
+    CSNTitleView *titleView = [[CSNTitleView alloc] init];
+    [view addSubview:iconView];
+    [view addSubview:titleView];
+    [controller addStopAd:view agencyID:@"test_agency" routeID:@"test_route" stopID:@"test_stop"];
+    [controller refreshAds];
+    XCTAssert([iconView ad] != nil);
+    XCTAssert([titleView ad] != nil);
+}
+
 @end

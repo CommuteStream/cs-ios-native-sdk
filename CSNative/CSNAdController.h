@@ -10,6 +10,7 @@
 
 - (instancetype) init;
 
+
 - (void) addStopAd:(UIView *)view agencyID:(NSString *)agencyID routeID:(NSString *)routeID stopID:(NSString *)stopID;
 - (void) removeStopAd:(NSString *)agencyID routeID:(NSString *)routeID stopID:(NSString *)stopID;
 
@@ -17,6 +18,8 @@
 
 
 #ifdef DEBUG
+
+- (instancetype) initMocked;
 
 - (instancetype) initWithClient:(id<CSNClient>)client;
 

@@ -23,13 +23,13 @@
 		1B5560561E648AC200FE1C08 /* CSNAdController.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B5560541E648AC200FE1C08 /* CSNAdController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1B5560571E648AC200FE1C08 /* CSNAdController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B5560551E648AC200FE1C08 /* CSNAdController.m */; };
 		1B5560591E64989B00FE1C08 /* CSNAdControllerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B5560581E64989B00FE1C08 /* CSNAdControllerTest.m */; };
-		1B55605C1E64995B00FE1C08 /* CSNMockClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B55605B1E64995B00FE1C08 /* CSNMockClient.m */; };
 		1B55605F1E65037B00FE1C08 /* CSNAd.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B55605D1E65037B00FE1C08 /* CSNAd.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1B5560601E65037B00FE1C08 /* CSNAd.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B55605E1E65037B00FE1C08 /* CSNAd.m */; };
 		1B5560631E65FD2A00FE1C08 /* CSNComponentView.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B5560621E65FD2A00FE1C08 /* CSNComponentView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1B5560661E66053100FE1C08 /* CSNTitleView.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B5560641E66053100FE1C08 /* CSNTitleView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1B5560671E66053100FE1C08 /* CSNTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B5560651E66053100FE1C08 /* CSNTitleView.m */; };
 		1B5560691E6611DD00FE1C08 /* CSNAdTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B5560681E6611DD00FE1C08 /* CSNAdTest.m */; };
+		1B55606C1E6633F600FE1C08 /* CSNMockClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B55605B1E64995B00FE1C08 /* CSNMockClient.m */; };
 		450CEE9BA1525442C8718883 /* Pods_CSNativeTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE17F149E54E79C0A0DD74A1 /* Pods_CSNativeTests.framework */; };
 		BFD4D671F72DB355E089E1E2 /* Pods_CSNative.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D23200ADBD9A081E804130FF /* Pods_CSNative.framework */; };
 /* End PBXBuildFile section */
@@ -64,8 +64,8 @@
 		1B5560541E648AC200FE1C08 /* CSNAdController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSNAdController.h; sourceTree = "<group>"; };
 		1B5560551E648AC200FE1C08 /* CSNAdController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSNAdController.m; sourceTree = "<group>"; };
 		1B5560581E64989B00FE1C08 /* CSNAdControllerTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSNAdControllerTest.m; sourceTree = "<group>"; };
-		1B55605A1E64995B00FE1C08 /* CSNMockClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSNMockClient.h; sourceTree = "<group>"; };
-		1B55605B1E64995B00FE1C08 /* CSNMockClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSNMockClient.m; sourceTree = "<group>"; };
+		1B55605A1E64995B00FE1C08 /* CSNMockClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CSNMockClient.h; path = CSNativeTests/CSNMockClient.h; sourceTree = SOURCE_ROOT; };
+		1B55605B1E64995B00FE1C08 /* CSNMockClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CSNMockClient.m; path = CSNativeTests/CSNMockClient.m; sourceTree = SOURCE_ROOT; };
 		1B55605D1E65037B00FE1C08 /* CSNAd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSNAd.h; sourceTree = "<group>"; };
 		1B55605E1E65037B00FE1C08 /* CSNAd.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSNAd.m; sourceTree = "<group>"; };
 		1B5560621E65FD2A00FE1C08 /* CSNComponentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSNComponentView.h; sourceTree = "<group>"; };
@@ -149,12 +149,12 @@
 		1B555FD21E60A3F800FE1C08 /* CSNativeTests */ = {
 			isa = PBXGroup;
 			children = (
+				1B55605A1E64995B00FE1C08 /* CSNMockClient.h */,
+				1B55605B1E64995B00FE1C08 /* CSNMockClient.m */,
 				1B555FEF1E60B0B500FE1C08 /* CSNHttpClientTest.m */,
 				1B555FD31E60A3F800FE1C08 /* CSNativeTests.m */,
 				1B555FD51E60A3F800FE1C08 /* Info.plist */,
 				1B5560581E64989B00FE1C08 /* CSNAdControllerTest.m */,
-				1B55605A1E64995B00FE1C08 /* CSNMockClient.h */,
-				1B55605B1E64995B00FE1C08 /* CSNMockClient.m */,
 				1B5560681E6611DD00FE1C08 /* CSNAdTest.m */,
 			);
 			path = CSNativeTests;
@@ -396,10 +396,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				1B555FD41E60A3F800FE1C08 /* CSNativeTests.m in Sources */,
+				1B55606C1E6633F600FE1C08 /* CSNMockClient.m in Sources */,
 				1B5560591E64989B00FE1C08 /* CSNAdControllerTest.m in Sources */,
 				1B5560691E6611DD00FE1C08 /* CSNAdTest.m in Sources */,
 				1B555FF01E60B0B500FE1C08 /* CSNHttpClientTest.m in Sources */,
-				1B55605C1E64995B00FE1C08 /* CSNMockClient.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

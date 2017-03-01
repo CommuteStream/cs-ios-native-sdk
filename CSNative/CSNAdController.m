@@ -2,6 +2,7 @@
 #import "CSNClient.h"
 #import "CSNHttpClient.h"
 #import "CSNIconView.h"
+#import "Csnmessages.pbobjc.h"
 
 @interface CSNStopTuple : NSObject <NSCopying>
 @property NSString *agencyID;
@@ -25,6 +26,40 @@
 }
 @end
 
+@interface CSNTestClient : NSObject <CSNClient>
+- (void) getAds:(CSNPAdRequest *)adRequest success:(void (^)(CSNPAdResponse *))success failure:(void (^)(NSError *))failure;
+
+@end
+@implementation CSNTestClient
+- (void) getAds:(CSNPAdRequest *)adRequest success:(void (^)(CSNPAdResponse *))success failure:(void (^)(NSError *))failure
+{
+    CSNPAdResponse *response = [[CSNPAdResponse alloc] init];
+    CSNPNativeAd *testAd = [[CSNPNativeAd alloc] init];
+    [testAd setAdId:0];
+    [testAd setRequestId:0];
+    CSNPTitleComponent *title = [[CSNPTitleComponent alloc] init];
+    [title setComponentId:0];
+    [title setTitle:@"Test Ad Title"];
+    CSNPIconComponent *icon = [[CSNPIconComponent alloc] init];
+    [icon setComponentId:1];
+    [icon setImage:[NSData dataWithContentsOfFile:@"cs.png"]];
+    [testAd setTitle:title];
+    [testAd setIcon:icon];
+    for(id stop in [adRequest stopsArray]) {
+        CSNPStopAd *stopAd = [[CSNPStopAd alloc] init];
+        [stopAd setStop:stop];
+        [stopAd setAdId:[testAd adId]];
+        [[response stopAdsArray] addObject:stopAd];
+    }
+    success(response);
+}
+
+- (void) sendAdReport:(CSNPAdReport *)adReport success:(void (^)())success failure:(void (^)(NSError *))failure {
+    success();
+}
+
+@end
+
 
 @implementation CSNAdController {
     id<CSNClient> _client;
@@ -33,6 +68,11 @@
 
 - (instancetype) init {
     _client = [[CSNHttpClient alloc] initWithHost:@"api.commutestream.com"];
+    return self;
+}
+
+- (instancetype) initMocked {
+    _client = [[CSNTestClient alloc] init];
     return self;
 }
 
@@ -99,10 +139,14 @@
             // Build Ad and AdView from Ad Message
             CSNPNativeAd *message = [[response ads] objectForKey:[stop adId]];
             CSNAd *ad = [[CSNAd alloc] initWithMessage:message];
-            for(id<CSNComponentView> componentView in [self componentViews:view]) {
-                id<CSNComponentView> _view __unused = [componentView initWithAd:ad];
-            }
+            [self initComponentViews:view ad:ad];
         }
+    }
+}
+
+- (void) initComponentViews:(UIView *)parent ad:(CSNAd *)ad {
+    for(id<CSNComponentView> componentView in [self componentViews:parent]) {
+        id<CSNComponentView> _view __unused = [componentView initWithAd:ad];
     }
 }
 
