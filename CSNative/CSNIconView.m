@@ -18,6 +18,8 @@
 }
 
 - (instancetype) initWithAd:(CSNAd *)ad {
+    _ad = ad;
+    _componentID = [[ad icon] componentID];
     return self;
 }
 

@@ -1,65 +1,11 @@
 #import "CSNAdController.h"
 #import "CSNClient.h"
 #import "CSNHttpClient.h"
+#import "CSNMockClient.h"
 #import "CSNIconView.h"
+#import "CSNStopTuple.h"
+
 #import "Csnmessages.pbobjc.h"
-
-@interface CSNStopTuple : NSObject <NSCopying>
-@property NSString *agencyID;
-@property NSString *routeID;
-@property NSString *stopID;
-@end
-
-@implementation CSNStopTuple
-- (instancetype) initWithIDs:(NSString *)agencyID routeID:(NSString *)routeID stopID:(NSString *)stopID {
-    [self setAgencyID:agencyID];
-    [self setRouteID:routeID];
-    [self setStopID:stopID];
-    return self;
-}
-- (id)copyWithZone:(NSZone *)zone {
-    CSNStopTuple *copy = [[CSNStopTuple alloc] init];
-    [copy setAgencyID:[self agencyID]];
-    [copy setRouteID:[self routeID]];
-    [copy setStopID:[self stopID]];
-    return copy;
-}
-@end
-
-@interface CSNTestClient : NSObject <CSNClient>
-- (void) getAds:(CSNPAdRequest *)adRequest success:(void (^)(CSNPAdResponse *))success failure:(void (^)(NSError *))failure;
-
-@end
-@implementation CSNTestClient
-- (void) getAds:(CSNPAdRequest *)adRequest success:(void (^)(CSNPAdResponse *))success failure:(void (^)(NSError *))failure
-{
-    CSNPAdResponse *response = [[CSNPAdResponse alloc] init];
-    CSNPNativeAd *testAd = [[CSNPNativeAd alloc] init];
-    [testAd setAdId:0];
-    [testAd setRequestId:0];
-    CSNPTitleComponent *title = [[CSNPTitleComponent alloc] init];
-    [title setComponentId:0];
-    [title setTitle:@"Test Ad Title"];
-    CSNPIconComponent *icon = [[CSNPIconComponent alloc] init];
-    [icon setComponentId:1];
-    [icon setImage:[NSData dataWithContentsOfFile:@"cs.png"]];
-    [testAd setTitle:title];
-    [testAd setIcon:icon];
-    for(id stop in [adRequest stopsArray]) {
-        CSNPStopAd *stopAd = [[CSNPStopAd alloc] init];
-        [stopAd setStop:stop];
-        [stopAd setAdId:[testAd adId]];
-        [[response stopAdsArray] addObject:stopAd];
-    }
-    success(response);
-}
-
-- (void) sendAdReport:(CSNPAdReport *)adReport success:(void (^)())success failure:(void (^)(NSError *))failure {
-    success();
-}
-
-@end
-
 
 @implementation CSNAdController {
     id<CSNClient> _client;
@@ -68,16 +14,19 @@
 
 - (instancetype) init {
     _client = [[CSNHttpClient alloc] initWithHost:@"api.commutestream.com"];
+    _stopViews = [[NSMutableDictionary alloc] init];
     return self;
 }
 
 - (instancetype) initMocked {
-    _client = [[CSNTestClient alloc] init];
+    _client = [[CSNMockClient alloc] init];
+    _stopViews = [[NSMutableDictionary alloc] init];
     return self;
 }
 
 - (instancetype) initWithClient:(id<CSNClient>)client {
     _client = client;
+    _stopViews = [[NSMutableDictionary alloc] init];
     return self;
 }
 
@@ -132,14 +81,17 @@
 }
 
 - (void) buildViews:(CSNPAdResponse *)response {
-    for(id stop in response.stopAdsArray) {
-        CSNStopTuple *stopTuple = [[CSNStopTuple alloc] initWithIDs:[stop agencyId] routeID:[stop routeId] stopID:[stop stopId]];
+    for(id stopAd in [response stopAdsArray]) {
+        CSNPStop *stop = [stopAd stopTuple];
+        CSNStopTuple *stopTuple = [[CSNStopTuple alloc] initWithMessage:stop];
         UIView *view = [_stopViews objectForKey:stopTuple];
         if(view != nil) {
             // Build Ad and AdView from Ad Message
-            CSNPNativeAd *message = [[response ads] objectForKey:[stop adId]];
+            CSNPNativeAd *message = [[response ads] objectForKey:[stopAd adId]];
             CSNAd *ad = [[CSNAd alloc] initWithMessage:message];
             [self initComponentViews:view ad:ad];
+        } else {
+            NSLog(@"CSNAdController No view found for returned stop tuple");
         }
     }
 }

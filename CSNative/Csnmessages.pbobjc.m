@@ -890,12 +890,12 @@ typedef struct CSNPNativeAd__storage_ {
 
 @implementation CSNPStopAd
 
-@dynamic hasStop, stop;
+@dynamic hasStopTuple, stopTuple;
 @dynamic adId;
 
 typedef struct CSNPStopAd__storage_ {
   uint32_t _has_storage_[1];
-  CSNPStop *stop;
+  CSNPStop *stopTuple;
   uint64_t adId;
 } CSNPStopAd__storage_;
 
@@ -906,11 +906,11 @@ typedef struct CSNPStopAd__storage_ {
   if (!descriptor) {
     static GPBMessageFieldDescription fields[] = {
       {
-        .name = "stop",
+        .name = "stopTuple",
         .dataTypeSpecific.className = GPBStringifySymbol(CSNPStop),
-        .number = CSNPStopAd_FieldNumber_Stop,
+        .number = CSNPStopAd_FieldNumber_StopTuple,
         .hasIndex = 0,
-        .offset = (uint32_t)offsetof(CSNPStopAd__storage_, stop),
+        .offset = (uint32_t)offsetof(CSNPStopAd__storage_, stopTuple),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeMessage,
       },

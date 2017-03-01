@@ -383,15 +383,15 @@ typedef GPB_ENUM(CSNPNativeAd_FieldNumber) {
 #pragma mark - CSNPStopAd
 
 typedef GPB_ENUM(CSNPStopAd_FieldNumber) {
-  CSNPStopAd_FieldNumber_Stop = 1,
+  CSNPStopAd_FieldNumber_StopTuple = 1,
   CSNPStopAd_FieldNumber_AdId = 2,
 };
 
 @interface CSNPStopAd : GPBMessage
 
-@property(nonatomic, readwrite, strong, null_resettable) CSNPStop *stop;
-/** Test to see if @c stop has been set. */
-@property(nonatomic, readwrite) BOOL hasStop;
+@property(nonatomic, readwrite, strong, null_resettable) CSNPStop *stopTuple;
+/** Test to see if @c stopTuple has been set. */
+@property(nonatomic, readwrite) BOOL hasStopTuple;
 
 @property(nonatomic, readwrite) uint64_t adId;
 

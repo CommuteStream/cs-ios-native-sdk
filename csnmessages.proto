@@ -82,7 +82,7 @@ message NativeAd {
 }
 
 message StopAd {
-  Stop stop = 1;
+  Stop stop_tuple = 1;
   uint64 ad_id = 2;
 }
 
