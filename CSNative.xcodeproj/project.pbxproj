@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		1B555FCF1E60A3F800FE1C08 /* CSNative.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B555FC51E60A3F800FE1C08 /* CSNative.framework */; };
-		1B555FD41E60A3F800FE1C08 /* CSNativeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B555FD31E60A3F800FE1C08 /* CSNativeTests.m */; };
 		1B555FD61E60A3F800FE1C08 /* CSNative.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B555FC81E60A3F800FE1C08 /* CSNative.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1B555FE11E60A60E00FE1C08 /* CSNClient.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B555FDF1E60A60E00FE1C08 /* CSNClient.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1B555FE51E60A6B500FE1C08 /* CSNHttpClient.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B555FE31E60A6B500FE1C08 /* CSNHttpClient.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -53,7 +52,6 @@
 		1B555FC81E60A3F800FE1C08 /* CSNative.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CSNative.h; sourceTree = "<group>"; };
 		1B555FC91E60A3F800FE1C08 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1B555FCE1E60A3F800FE1C08 /* CSNativeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CSNativeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		1B555FD31E60A3F800FE1C08 /* CSNativeTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CSNativeTests.m; sourceTree = "<group>"; };
 		1B555FD51E60A3F800FE1C08 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1B555FDF1E60A60E00FE1C08 /* CSNClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSNClient.h; sourceTree = "<group>"; };
 		1B555FE31E60A6B500FE1C08 /* CSNHttpClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSNHttpClient.h; sourceTree = "<group>"; };
@@ -161,7 +159,6 @@
 			isa = PBXGroup;
 			children = (
 				1B555FEF1E60B0B500FE1C08 /* CSNHttpClientTest.m */,
-				1B555FD31E60A3F800FE1C08 /* CSNativeTests.m */,
 				1B555FD51E60A3F800FE1C08 /* Info.plist */,
 				1B5560581E64989B00FE1C08 /* CSNAdControllerTest.m */,
 				1B5560681E6611DD00FE1C08 /* CSNAdTest.m */,
@@ -409,7 +406,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1B555FD41E60A3F800FE1C08 /* CSNativeTests.m in Sources */,
 				1B5560591E64989B00FE1C08 /* CSNAdControllerTest.m in Sources */,
 				1B5560691E6611DD00FE1C08 /* CSNAdTest.m in Sources */,
 				1B555FF01E60B0B500FE1C08 /* CSNHttpClientTest.m in Sources */,
