@@ -6,5 +6,5 @@ IB_DESIGNABLE
 @interface CSNTitleView : UIView <CSNComponentView>
 @property (readonly, nonnull) CSNAd *ad;
 @property (readonly) uint64_t componentID;
-- (_Nonnull instancetype) initWithAd:(CSNAd * _Nonnull)ad;
+- (void) setAd:(CSNAd * _Nonnull)ad;
 @end

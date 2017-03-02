@@ -98,7 +98,7 @@
 
 - (void) initComponentViews:(UIView *)parent ad:(CSNAd *)ad {
     for(id<CSNComponentView> componentView in [self componentViews:parent]) {
-        id<CSNComponentView> _view __unused = [componentView initWithAd:ad];
+        [componentView setAd:ad];
     }
 }
 
