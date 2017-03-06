@@ -34,6 +34,8 @@
 		1B5560761E6742E700FE1C08 /* CSNMockClient.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B5560741E6742E700FE1C08 /* CSNMockClient.h */; };
 		1B5560771E6742E700FE1C08 /* CSNMockClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B5560751E6742E700FE1C08 /* CSNMockClient.m */; };
 		1B5560791E67497100FE1C08 /* CSNIconViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B5560781E67497100FE1C08 /* CSNIconViewTests.m */; };
+		1B55607C1E69F54400FE1C08 /* CSNTitleView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1B55607B1E69F54400FE1C08 /* CSNTitleView.xib */; };
+		1B55607E1E6E06D600FE1C08 /* CSNTitleViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B55607D1E6E06D600FE1C08 /* CSNTitleViewTests.m */; };
 		450CEE9BA1525442C8718883 /* Pods_CSNativeTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE17F149E54E79C0A0DD74A1 /* Pods_CSNativeTests.framework */; };
 		BFD4D671F72DB355E089E1E2 /* Pods_CSNative.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D23200ADBD9A081E804130FF /* Pods_CSNative.framework */; };
 /* End PBXBuildFile section */
@@ -79,6 +81,8 @@
 		1B5560741E6742E700FE1C08 /* CSNMockClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSNMockClient.h; sourceTree = "<group>"; };
 		1B5560751E6742E700FE1C08 /* CSNMockClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSNMockClient.m; sourceTree = "<group>"; };
 		1B5560781E67497100FE1C08 /* CSNIconViewTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSNIconViewTests.m; sourceTree = "<group>"; };
+		1B55607B1E69F54400FE1C08 /* CSNTitleView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CSNTitleView.xib; sourceTree = "<group>"; };
+		1B55607D1E6E06D600FE1C08 /* CSNTitleViewTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSNTitleViewTests.m; sourceTree = "<group>"; };
 		5501E0D3CBC17B50D64846B3 /* Pods-CSNativeTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CSNativeTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-CSNativeTests/Pods-CSNativeTests.release.xcconfig"; sourceTree = "<group>"; };
 		5F7B3C7CA7AA5D2380F846BD /* Pods-CSNative.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CSNative.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CSNative/Pods-CSNative.debug.xcconfig"; sourceTree = "<group>"; };
 		8850AC2CB18382AAF0651534 /* Pods-CSNativeTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CSNativeTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CSNativeTests/Pods-CSNativeTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -153,6 +157,7 @@
 				1B55606F1E67423F00FE1C08 /* CSNStopTuple.m */,
 				1B5560741E6742E700FE1C08 /* CSNMockClient.h */,
 				1B5560751E6742E700FE1C08 /* CSNMockClient.m */,
+				1B55607B1E69F54400FE1C08 /* CSNTitleView.xib */,
 			);
 			path = CSNative;
 			sourceTree = "<group>";
@@ -166,6 +171,7 @@
 				1B5560681E6611DD00FE1C08 /* CSNAdTest.m */,
 				1B5560721E67424F00FE1C08 /* CSNStopTupleTests.m */,
 				1B5560781E67497100FE1C08 /* CSNIconViewTests.m */,
+				1B55607D1E6E06D600FE1C08 /* CSNTitleViewTests.m */,
 			);
 			path = CSNativeTests;
 			sourceTree = "<group>";
@@ -299,6 +305,7 @@
 			files = (
 				1B5560491E61F2FB00FE1C08 /* cs.png in Resources */,
 				1B555FF61E61123900FE1C08 /* CSNIconView.xib in Resources */,
+				1B55607C1E69F54400FE1C08 /* CSNTitleView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -413,6 +420,7 @@
 				1B5560691E6611DD00FE1C08 /* CSNAdTest.m in Sources */,
 				1B555FF01E60B0B500FE1C08 /* CSNHttpClientTest.m in Sources */,
 				1B5560791E67497100FE1C08 /* CSNIconViewTests.m in Sources */,
+				1B55607E1E6E06D600FE1C08 /* CSNTitleViewTests.m in Sources */,
 				1B5560731E67424F00FE1C08 /* CSNStopTupleTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
