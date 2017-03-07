@@ -2,8 +2,8 @@
 #import "CSNTitleView.h"
 
 @interface CSNTitleView ()
+@property (weak, nonatomic) IBOutlet UILabel *titleView;
 @property (strong, nonatomic) UIView *containerView;
-@property (strong, nonatomic) IBOutlet UILabel *labelView;
 @end
 
 
@@ -13,7 +13,7 @@
 -(instancetype)initWithCoder:(NSCoder *)decoder {
     NSLog(@"init with coder");
     self = [super initWithCoder:decoder];
-    if(self) {
+    if(self && self.subviews.count == 0) {
         [self commonInit];
     }
     return self;
@@ -21,7 +21,7 @@
 
 -(instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
-    if(self) {
+    if(self && self.subviews.count == 0) {
         [self commonInit];
     }
     return self;
@@ -31,25 +31,22 @@
 - (void) setAd:(CSNAd *)ad {
     _ad = ad;
     _componentID = [[ad title] componentID];
+    NSLog(@"setting text on title view %@", _titleView);
+    [_titleView setText:[[ad title] title]];
 }
 
 - (void) commonInit {
     if(_containerView != nil) {
         return;
     }
+    NSLog(@"common");
     
-    UIView *view = nil;
     NSBundle *bundle = [NSBundle bundleForClass:[CSNTitleView class]];
-    NSArray *objects = [bundle loadNibNamed:@"CSNTitleView" owner:self options:nil];
-    for (id object in objects) {
-        if ([object isKindOfClass:[UIView class]]) {
-            view = object;
-            break;
-        }
-    }
+    CSNTitleView *view = [bundle loadNibNamed:@"CSNTitleView" owner:self options:nil].firstObject;
     
     if(view != nil) {
         _containerView = view;
+        _titleView = [view viewWithTag:1];
         view.translatesAutoresizingMaskIntoConstraints = NO;
         [self addSubview:view];
         [self setNeedsUpdateConstraints];

@@ -267,6 +267,9 @@
 		1B555FBC1E60A3F800FE1C08 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				KnownAssetTags = (
+					1,
+				);
 				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = CommuteStream;
 				TargetAttributes = {

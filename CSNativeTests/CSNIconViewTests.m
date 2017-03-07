@@ -1,6 +1,10 @@
 @import XCTest;
 @import CSNative;
 
+@interface CSNIconView (Testing)
+@property (weak, nonatomic) IBOutlet UIImageView *iconView;
+@end
+
 @interface CSNIconViewTests : XCTestCase
 
 @end
@@ -28,6 +32,7 @@
     [view setAd:ad];
     XCTAssert([view ad] == ad);
     XCTAssert([view componentID] == [[ad icon] componentID]);
+    XCTAssert([[view iconView] image] == [[ad icon] image]);
 }
 
 @end

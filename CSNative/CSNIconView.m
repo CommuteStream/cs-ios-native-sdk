@@ -1,8 +1,8 @@
 #import "CSNIconView.h"
 
 @interface CSNIconView ()
+@property (weak, nonatomic) IBOutlet UIImageView *iconView;
 @property (strong, nonatomic) UIView *containerView;
-@property (strong, nonatomic) IBOutlet UIImageView *imageView;
 @end
 
 @implementation CSNIconView
@@ -10,7 +10,7 @@
 -(instancetype)initWithCoder:(NSCoder *)decoder {
     NSLog(@"init with coder");
     self = [super initWithCoder:decoder];
-    if(self) {
+    if(self && self.subviews.count == 0) {
         [self commonInit];
     }
     return self;
@@ -18,7 +18,7 @@
 
 -(instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
-    if(self) {
+    if(self && self.subviews.count == 0) {
         [self commonInit];
     }
     return self;
@@ -31,32 +31,28 @@
 }
 
 - (void) commonInit {
+    NSLog(@"Common Init");
     if(_containerView != nil) {
         return;
     }
     
-    UIView *view = nil;
     NSBundle *bundle = [NSBundle bundleForClass:[CSNIconView class]];
-    NSArray *objects = [bundle loadNibNamed:@"CSNIconView" owner:self options:nil];
-    for (id object in objects) {
-        if ([object isKindOfClass:[UIView class]]) {
-            view = object;
-            break;
-        }
-    }
+    CSNIconView *view = [bundle loadNibNamed:@"CSNIconView" owner:self options:nil].firstObject;
     
     if(view != nil) {
         _containerView = view;
+        _iconView = [view viewWithTag:1];
         view.translatesAutoresizingMaskIntoConstraints = NO;
         [self addSubview:view];
         [self setNeedsUpdateConstraints];
     }
+    NSLog(@"common init done");
 
 }
 
 - (void) setImage:(UIImage *)image {
-    [[self imageView] setImage:image];
-    [[self imageView] sizeToFit];
+    [_iconView setImage:image];
+    [_iconView sizeToFit];
     [self setNeedsUpdateConstraints];
 }
 
