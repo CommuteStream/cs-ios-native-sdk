@@ -2,7 +2,7 @@
 @import CSNative;
 
 @interface CSNTitleView (Testing)
-@property (weak, nonatomic) IBOutlet UILabel *titleView;
+@property (weak, nonatomic) IBOutlet UILabel *labelView;
 @end
 
 @interface CSNTitleViewTests : XCTestCase
@@ -32,8 +32,8 @@
     [view setAd:ad];
     XCTAssert([view ad] == ad);
     XCTAssert([view componentID] == [[ad title] componentID]);
-    NSLog(@"%@", [[view titleView] text]);
-    XCTAssert([[[view titleView] text] isEqualToString:[[ad title] title]]);
+    NSLog(@"%@", [[view labelView] text]);
+    XCTAssert([[[view labelView] text] isEqualToString:[[ad title] title]]);
 }
 
 @end

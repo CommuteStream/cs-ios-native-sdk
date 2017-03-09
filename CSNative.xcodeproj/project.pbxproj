@@ -269,6 +269,7 @@
 			attributes = {
 				KnownAssetTags = (
 					1,
+					2,
 				);
 				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = CommuteStream;

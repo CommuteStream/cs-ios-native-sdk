@@ -31,23 +31,15 @@
 }
 
 - (void) commonInit {
-    NSLog(@"Common Init");
-    if(_containerView != nil) {
-        return;
-    }
-    
     NSBundle *bundle = [NSBundle bundleForClass:[CSNIconView class]];
     CSNIconView *view = [bundle loadNibNamed:@"CSNIconView" owner:self options:nil].firstObject;
-    
     if(view != nil) {
         _containerView = view;
-        _iconView = [view viewWithTag:1];
+        _iconView = [view iconView];
         view.translatesAutoresizingMaskIntoConstraints = NO;
         [self addSubview:view];
         [self setNeedsUpdateConstraints];
     }
-    NSLog(@"common init done");
-
 }
 
 - (void) setImage:(UIImage *)image {

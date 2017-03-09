@@ -2,7 +2,7 @@
 #import "CSNTitleView.h"
 
 @interface CSNTitleView ()
-@property (weak, nonatomic) IBOutlet UILabel *titleView;
+@property (strong, nonatomic) IBOutlet UILabel *labelView;
 @property (strong, nonatomic) UIView *containerView;
 @end
 
@@ -31,27 +31,22 @@
 - (void) setAd:(CSNAd *)ad {
     _ad = ad;
     _componentID = [[ad title] componentID];
-    NSLog(@"setting text on title view %@", _titleView);
-    [_titleView setText:[[ad title] title]];
+    NSLog(@"setting text on title view %@", _labelView);
+    [_labelView setText:[[ad title] title]];
 }
 
 - (void) commonInit {
-    if(_containerView != nil) {
-        return;
-    }
-    NSLog(@"common");
-    
     NSBundle *bundle = [NSBundle bundleForClass:[CSNTitleView class]];
     CSNTitleView *view = [bundle loadNibNamed:@"CSNTitleView" owner:self options:nil].firstObject;
-    
     if(view != nil) {
+        NSLog(@"Setting up subviews");
         _containerView = view;
-        _titleView = [view viewWithTag:1];
+        _labelView = [view labelView];
+        NSLog(@"label view %@", _labelView);
         view.translatesAutoresizingMaskIntoConstraints = NO;
         [self addSubview:view];
         [self setNeedsUpdateConstraints];
     }
-    
 }
 
 
