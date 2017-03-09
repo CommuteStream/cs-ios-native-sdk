@@ -1,4 +1,4 @@
-#import "CSNAdController.h"
+#import "CSNAdsController.h"
 #import "CSNClient.h"
 #import "CSNHttpClient.h"
 #import "CSNMockClient.h"
@@ -7,7 +7,7 @@
 
 #import "Csnmessages.pbobjc.h"
 
-@implementation CSNAdController {
+@implementation CSNAdsController {
     id<CSNClient> _client;
     NSMutableDictionary *_stopViews;
 }

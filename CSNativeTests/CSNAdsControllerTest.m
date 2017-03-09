@@ -3,11 +3,11 @@
 @import CSNative;
 
 
-@interface CSNAdControllerTest : XCTestCase
+@interface CSNAdsControllerTest : XCTestCase
 
 @end
 
-@implementation CSNAdControllerTest
+@implementation CSNAdsControllerTest
 
 - (void)setUp {
     [super setUp];
@@ -25,7 +25,7 @@
     UIView *subview1 = [[UIView alloc] init];
     [view addSubview:subview0];
     [view addSubview:subview1];
-    CSNAdController *controller = [[CSNAdController alloc] init];
+    CSNAdsController *controller = [[CSNAdsController alloc] init];
     NSArray<UIView *> *subviews = [controller findViews:view matcher:^bool(UIView *subview) {
         return subview == subview0;
     }];
@@ -43,7 +43,7 @@
     [view addSubview:iconview0];
     [view addSubview:titleview0];
     [subview0 addSubview:iconview1];
-    CSNAdController *controller = [[CSNAdController alloc] init];
+    CSNAdsController *controller = [[CSNAdsController alloc] init];
     NSArray<UIView *> *subviews = [controller componentViews:view];
     XCTAssert([subviews containsObject:iconview0]);
     XCTAssert([subviews containsObject:iconview1]);
@@ -51,7 +51,7 @@
 }
 
 - (void)testWithClient {
-    CSNAdController *controller = [[CSNAdController alloc] initMocked];
+    CSNAdsController *controller = [[CSNAdsController alloc] initMocked];
     UIView *view = [[UIView alloc] init];
     CSNIconView *iconView = [[CSNIconView alloc] init];
     CSNTitleView *titleView = [[CSNTitleView alloc] init];

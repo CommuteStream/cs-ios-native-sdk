@@ -8,7 +8,6 @@
 @implementation CSNIconView
 
 -(instancetype)initWithCoder:(NSCoder *)decoder {
-    NSLog(@"init with coder");
     self = [super initWithCoder:decoder];
     if(self && self.subviews.count == 0) {
         [self commonInit];

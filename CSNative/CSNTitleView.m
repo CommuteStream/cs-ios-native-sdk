@@ -11,7 +11,6 @@
 @implementation CSNTitleView
 
 -(instancetype)initWithCoder:(NSCoder *)decoder {
-    NSLog(@"init with coder");
     self = [super initWithCoder:decoder];
     if(self && self.subviews.count == 0) {
         [self commonInit];
@@ -31,7 +30,6 @@
 - (void) setAd:(CSNAd *)ad {
     _ad = ad;
     _componentID = [[ad title] componentID];
-    NSLog(@"setting text on title view %@", _labelView);
     [_labelView setText:[[ad title] title]];
 }
 
@@ -39,10 +37,8 @@
     NSBundle *bundle = [NSBundle bundleForClass:[CSNTitleView class]];
     CSNTitleView *view = [bundle loadNibNamed:@"CSNTitleView" owner:self options:nil].firstObject;
     if(view != nil) {
-        NSLog(@"Setting up subviews");
         _containerView = view;
         _labelView = [view labelView];
-        NSLog(@"label view %@", _labelView);
         view.translatesAutoresizingMaskIntoConstraints = NO;
         [self addSubview:view];
         [self setNeedsUpdateConstraints];

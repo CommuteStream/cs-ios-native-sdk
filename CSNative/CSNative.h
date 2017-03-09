@@ -13,6 +13,6 @@ FOUNDATION_EXPORT const unsigned char CSNativeVersionString[];
 #import <CSNative/CSNIconView.h>
 #import <CSNative/CSNTitleView.h>
 #import <CSNative/CSNAd.h>
-#import <CSNative/CSNAdController.h>
+#import <CSNative/CSNAdsController.h>
 #import <CSNative/CSNStopTuple.h>
 

@@ -32,7 +32,6 @@
     [view setAd:ad];
     XCTAssert([view ad] == ad);
     XCTAssert([view componentID] == [[ad title] componentID]);
-    NSLog(@"%@", [[view labelView] text]);
     XCTAssert([[[view labelView] text] isEqualToString:[[ad title] title]]);
 }
 

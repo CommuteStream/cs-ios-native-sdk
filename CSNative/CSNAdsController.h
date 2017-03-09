@@ -6,7 +6,7 @@
 #import "CSNTitleView.h"
 #endif
 
-@interface CSNAdController : NSObject
+@interface CSNAdsController : NSObject
 
 - (instancetype) init;
 
