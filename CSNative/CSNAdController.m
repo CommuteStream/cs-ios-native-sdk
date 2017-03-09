@@ -35,10 +35,6 @@
     [_stopViews setObject:view forKey:stopTuple];
 }
 
-- (void) removeStopAd:(NSString *)agencyID routeID:(NSString *)routeID stopID:(NSString *)stopID {
-    
-}
-
 - (void) refreshAds {
     CSNPAdRequest *adRequest = [[CSNPAdRequest alloc] init];
     for(id key in _stopViews) {
