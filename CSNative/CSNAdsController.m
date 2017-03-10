@@ -4,29 +4,26 @@
 #import "CSNMockClient.h"
 #import "CSNIconView.h"
 #import "CSNStopTuple.h"
-
 #import "Csnmessages.pbobjc.h"
 
-@implementation CSNAdsController {
-    id<CSNClient> _client;
-    NSMutableDictionary *_stopViews;
-}
+@interface CSNAdsController ()
+@property id<CSNClient> client;
+@property NSMapTable *stopViews;
+@end
+
+@implementation CSNAdsController
 
 - (instancetype) init {
-    _client = [[CSNHttpClient alloc] initWithHost:@"api.commutestream.com"];
-    _stopViews = [[NSMutableDictionary alloc] init];
-    return self;
+    return [self initWithClient:[[CSNHttpClient alloc] initWithHost:@"api.commutestream.com"]];
 }
 
 - (instancetype) initMocked {
-    _client = [[CSNMockClient alloc] init];
-    _stopViews = [[NSMutableDictionary alloc] init];
-    return self;
+    return [self initWithClient:[[CSNMockClient alloc] init]];
 }
 
 - (instancetype) initWithClient:(id<CSNClient>)client {
     _client = client;
-    _stopViews = [[NSMutableDictionary alloc] init];
+    _stopViews = [NSMapTable mapTableWithKeyOptions:NSMapTableStrongMemory valueOptions:NSMapTableWeakMemory];
     return self;
 }
 
@@ -94,7 +91,10 @@
 
 - (void) initComponentViews:(UIView *)parent ad:(CSNAd *)ad {
     for(id<CSNComponentView> componentView in [self componentViews:parent]) {
+        // periodically poll view for visibility
         [componentView setAd:ad];
+        //[_visibilityMonitor addView:componentView ad:ad];
+        //[_interactionMonitor addView:componentView ad:ad];
     }
 }
 
