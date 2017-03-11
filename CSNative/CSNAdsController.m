@@ -4,11 +4,13 @@
 #import "CSNMockClient.h"
 #import "CSNIconView.h"
 #import "CSNStopTuple.h"
+#import "CSNVisibilityMonitor.h"
 #import "Csnmessages.pbobjc.h"
 
 @interface CSNAdsController ()
 @property id<CSNClient> client;
 @property NSMapTable *stopViews;
+@property CSNVisibilityMonitor *visMonitor;
 @end
 
 @implementation CSNAdsController
@@ -24,6 +26,7 @@
 - (instancetype) initWithClient:(id<CSNClient>)client {
     _client = client;
     _stopViews = [NSMapTable mapTableWithKeyOptions:NSMapTableStrongMemory valueOptions:NSMapTableWeakMemory];
+    _visMonitor = [[CSNVisibilityMonitor alloc] init];
     return self;
 }
 
@@ -93,6 +96,7 @@
     for(id<CSNComponentView> componentView in [self componentViews:parent]) {
         // periodically poll view for visibility
         [componentView setAd:ad];
+        [_visMonitor addView:componentView];
         //[_visibilityMonitor addView:componentView ad:ad];
         //[_interactionMonitor addView:componentView ad:ad];
     }

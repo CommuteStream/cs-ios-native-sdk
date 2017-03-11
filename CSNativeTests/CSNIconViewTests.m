@@ -32,7 +32,7 @@
     [view setAd:ad];
     XCTAssert([view ad] == ad);
     XCTAssert([view componentID] == [[ad icon] componentID]);
-    XCTAssert([[view iconView] image] == [[ad icon] image]);
+    XCTAssert([view image] == [[ad icon] image]);
 }
 
 @end

@@ -22,7 +22,7 @@
     CSNIconView *view = [[CSNIconView alloc] init];
     CSNVisibilityMonitor *monitor = [[CSNVisibilityMonitor alloc] init];
     [monitor addView:view];
-    dispatch_time_t when = dispatch_time(DISPATCH_TIME_NOW, 1000000000);
+    dispatch_time_t when = dispatch_time(DISPATCH_TIME_NOW, 100000000);
     dispatch_after(when, dispatch_get_main_queue(), ^{
         //CSNReport *report = [monitor report];
         //CSNVisibilityReport *visReport = [report visibilityFor:view];
@@ -30,7 +30,7 @@
         [expectation fulfill];
     });
 
-    [self waitForExpectationsWithTimeout:1.0 handler:^(NSError * _Nullable error) {
+    [self waitForExpectationsWithTimeout:0.2 handler:^(NSError * _Nullable error) {
         if(error) {
             NSLog(@"Timeout Error: %@", error);
         }

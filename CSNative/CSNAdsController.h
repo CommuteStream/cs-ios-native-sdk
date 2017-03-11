@@ -14,11 +14,11 @@
 
 - (void) refreshAds;
 
-#ifdef DEBUG
-
 - (instancetype) initMocked;
 
 - (instancetype) initWithClient:(id<CSNClient>)client;
+
+#ifdef DEBUG
 
 - (NSArray<UIView *> *) componentViews:(UIView *)parent;
 

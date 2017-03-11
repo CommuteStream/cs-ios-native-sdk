@@ -14,6 +14,7 @@
 
 - (instancetype) initWithMessage:(CSNPIconComponent *)message {
     _componentID = [message componentId];
+    NSLog(@"setting image %@", [message image]);
     _image = [UIImage imageWithData:[message image]];
     return self;
 }

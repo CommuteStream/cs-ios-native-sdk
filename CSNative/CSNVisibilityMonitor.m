@@ -29,7 +29,7 @@
 }
 
 - (void) checkViews {
-    NSLog(@"checking views");
+    NSLog(@"checking views %lu", (unsigned long)[_componentViews count]);
     for(id componentView in _componentViews) {
         UIView *view = (UIView *)componentView;
         CGRect viewFrame = view.frame;

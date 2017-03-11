@@ -15,7 +15,6 @@
 		1B555FED1E60AD7A00FE1C08 /* Csnmessages.pbobjc.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B555FEB1E60AD7A00FE1C08 /* Csnmessages.pbobjc.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1B555FEE1E60AD7A00FE1C08 /* Csnmessages.pbobjc.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B555FEC1E60AD7A00FE1C08 /* Csnmessages.pbobjc.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		1B555FF01E60B0B500FE1C08 /* CSNHttpClientTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B555FEF1E60B0B500FE1C08 /* CSNHttpClientTest.m */; };
-		1B555FF61E61123900FE1C08 /* CSNIconView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1B555FF51E61123900FE1C08 /* CSNIconView.xib */; };
 		1B555FF91E61134500FE1C08 /* CSNIconView.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B555FF71E61134500FE1C08 /* CSNIconView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1B555FFA1E61134500FE1C08 /* CSNIconView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B555FF81E61134500FE1C08 /* CSNIconView.m */; };
 		1B5560491E61F2FB00FE1C08 /* cs.png in Resources */ = {isa = PBXBuildFile; fileRef = 1B5560481E61F2FB00FE1C08 /* cs.png */; };
@@ -31,10 +30,9 @@
 		1B5560701E67423F00FE1C08 /* CSNStopTuple.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B55606E1E67423F00FE1C08 /* CSNStopTuple.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1B5560711E67423F00FE1C08 /* CSNStopTuple.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B55606F1E67423F00FE1C08 /* CSNStopTuple.m */; };
 		1B5560731E67424F00FE1C08 /* CSNStopTupleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B5560721E67424F00FE1C08 /* CSNStopTupleTests.m */; };
-		1B5560761E6742E700FE1C08 /* CSNMockClient.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B5560741E6742E700FE1C08 /* CSNMockClient.h */; };
+		1B5560761E6742E700FE1C08 /* CSNMockClient.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B5560741E6742E700FE1C08 /* CSNMockClient.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1B5560771E6742E700FE1C08 /* CSNMockClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B5560751E6742E700FE1C08 /* CSNMockClient.m */; };
 		1B5560791E67497100FE1C08 /* CSNIconViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B5560781E67497100FE1C08 /* CSNIconViewTests.m */; };
-		1B55607C1E69F54400FE1C08 /* CSNTitleView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1B55607B1E69F54400FE1C08 /* CSNTitleView.xib */; };
 		1B55607E1E6E06D600FE1C08 /* CSNTitleViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B55607D1E6E06D600FE1C08 /* CSNTitleViewTests.m */; };
 		1BC79FB41E71EE92008D146A /* CSNVisibilityMonitor.h in Headers */ = {isa = PBXBuildFile; fileRef = 1BC79FB21E71EE92008D146A /* CSNVisibilityMonitor.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1BC79FB51E71EE92008D146A /* CSNVisibilityMonitor.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BC79FB31E71EE92008D146A /* CSNVisibilityMonitor.m */; };
@@ -65,7 +63,6 @@
 		1B555FEB1E60AD7A00FE1C08 /* Csnmessages.pbobjc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Csnmessages.pbobjc.h; sourceTree = "<group>"; };
 		1B555FEC1E60AD7A00FE1C08 /* Csnmessages.pbobjc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Csnmessages.pbobjc.m; sourceTree = "<group>"; };
 		1B555FEF1E60B0B500FE1C08 /* CSNHttpClientTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSNHttpClientTest.m; sourceTree = "<group>"; };
-		1B555FF51E61123900FE1C08 /* CSNIconView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CSNIconView.xib; sourceTree = "<group>"; };
 		1B555FF71E61134500FE1C08 /* CSNIconView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSNIconView.h; sourceTree = "<group>"; };
 		1B555FF81E61134500FE1C08 /* CSNIconView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSNIconView.m; sourceTree = "<group>"; };
 		1B5560481E61F2FB00FE1C08 /* cs.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cs.png; sourceTree = "<group>"; };
@@ -84,7 +81,6 @@
 		1B5560741E6742E700FE1C08 /* CSNMockClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSNMockClient.h; sourceTree = "<group>"; };
 		1B5560751E6742E700FE1C08 /* CSNMockClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSNMockClient.m; sourceTree = "<group>"; };
 		1B5560781E67497100FE1C08 /* CSNIconViewTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSNIconViewTests.m; sourceTree = "<group>"; };
-		1B55607B1E69F54400FE1C08 /* CSNTitleView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CSNTitleView.xib; sourceTree = "<group>"; };
 		1B55607D1E6E06D600FE1C08 /* CSNTitleViewTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSNTitleViewTests.m; sourceTree = "<group>"; };
 		1BC79FB21E71EE92008D146A /* CSNVisibilityMonitor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSNVisibilityMonitor.h; sourceTree = "<group>"; };
 		1BC79FB31E71EE92008D146A /* CSNVisibilityMonitor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSNVisibilityMonitor.m; sourceTree = "<group>"; };
@@ -149,7 +145,6 @@
 				1B555FC81E60A3F800FE1C08 /* CSNative.h */,
 				1B555FC91E60A3F800FE1C08 /* Info.plist */,
 				1B555FDF1E60A60E00FE1C08 /* CSNClient.h */,
-				1B555FF51E61123900FE1C08 /* CSNIconView.xib */,
 				1B555FF71E61134500FE1C08 /* CSNIconView.h */,
 				1B555FF81E61134500FE1C08 /* CSNIconView.m */,
 				1B5560541E648AC200FE1C08 /* CSNAdsController.h */,
@@ -163,7 +158,6 @@
 				1B55606F1E67423F00FE1C08 /* CSNStopTuple.m */,
 				1B5560741E6742E700FE1C08 /* CSNMockClient.h */,
 				1B5560751E6742E700FE1C08 /* CSNMockClient.m */,
-				1B55607B1E69F54400FE1C08 /* CSNTitleView.xib */,
 				1BC79FB21E71EE92008D146A /* CSNVisibilityMonitor.h */,
 				1BC79FB31E71EE92008D146A /* CSNVisibilityMonitor.m */,
 			);
@@ -318,8 +312,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				1B5560491E61F2FB00FE1C08 /* cs.png in Resources */,
-				1B555FF61E61123900FE1C08 /* CSNIconView.xib in Resources */,
-				1B55607C1E69F54400FE1C08 /* CSNTitleView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
