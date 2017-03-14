@@ -39,8 +39,8 @@
         int64_t windowArea = windowFrame.size.width * windowFrame.size.height;
         int64_t viewArea = viewFrame.size.width * viewFrame.size.height;
         if(viewArea > 0 && windowArea > 0) {
-            double viewVisible = intersectedArea / viewArea;
-            double deviceVisible = intersectedArea / windowArea;
+            double viewVisible = (double)intersectedArea / (double)viewArea;
+            double deviceVisible = (double)intersectedArea / (double)windowArea;
             NSLog(@"view pct %f, window pct %f", viewVisible, deviceVisible);
         }
         //CGPoint originalPoint = CGPointMake(view.frame.origin.x, view.frame.origin.y);
