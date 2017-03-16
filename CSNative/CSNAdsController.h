@@ -1,5 +1,6 @@
 @import UIKit;
 #import "CSNClient.h"
+#import "CSNAdRequest.h"
 
 #ifdef DEBUG
 #import "CSNIconView.h"
@@ -10,9 +11,9 @@
 
 - (instancetype) init;
 
-- (void) addStopAd:(UIView  *)view agencyID:(NSString *)agencyID routeID:(NSString *)routeID stopID:(NSString *)stopID;
+- (void) fetchAds:(CSNAdRequest *)request completed:(void (^)(void))completed;
 
-- (void) refreshAds;
+- (void) buildStopAd:(UIView  *)view agencyID:(NSString *)agencyID routeID:(NSString *)routeID stopID:(NSString *)stopID;
 
 - (instancetype) initMocked;
 
@@ -26,7 +27,7 @@
 
 - (void) findViews:(UIView *)parent views:(NSMutableArray<UIView *> *)views matcher:(bool (^)(UIView *))matcher;
 
-- (void) buildViews:(CSNPAdResponse *)response;
+- (void) cacheAds:(CSNPAdResponse *)response;
 
 #endif
 

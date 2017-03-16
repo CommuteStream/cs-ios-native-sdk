@@ -57,10 +57,19 @@
     CSNTitleView *titleView = [[CSNTitleView alloc] init];
     [view addSubview:iconView];
     [view addSubview:titleView];
-    [controller addStopAd:view agencyID:@"test_agency" routeID:@"test_route" stopID:@"test_stop"];
-    [controller refreshAds];
-    XCTAssert([iconView ad] != nil);
-    XCTAssert([titleView ad] != nil);
+    [controller buildStopAd:view agencyID:@"test_agency" routeID:@"test_route" stopID:@"test_stop"];
+    XCTAssert([iconView ad] == nil);
+    XCTAssert([titleView ad] == nil);
+    CSNAdRequest *adRequest = [[CSNAdRequest alloc] init];
+    [adRequest addStop:@"test_agency" routeID:@"test_route" stopID:@"test_stop"];
+    [controller fetchAds:adRequest completed:^{
+        [controller buildStopAd:view agencyID:@"test_agency" routeID:@"test_route" stopID:@"test_stop"];
+        XCTAssert([iconView ad] != nil);
+        XCTAssert([titleView ad] != nil);
+    }];
+
+
+
 }
 
 @end

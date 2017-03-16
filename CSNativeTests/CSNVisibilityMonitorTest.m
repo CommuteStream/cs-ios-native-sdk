@@ -1,6 +1,11 @@
 @import XCTest;
 @import CSNative;
 
+@interface CSNVisibilityMonitor (Testing)
+@property NSHashTable<id<CSNComponentView>> *componentViews;
+@property NSTimer *timer;
+@end
+
 @interface CSNVisibilityMonitorTest : XCTestCase
 
 @end
@@ -22,6 +27,8 @@
     CSNIconView *view = [[CSNIconView alloc] init];
     CSNVisibilityMonitor *monitor = [[CSNVisibilityMonitor alloc] init];
     [monitor addView:view];
+    XCTAssert([[monitor componentViews] containsObject:view]);
+    XCTAssert([[monitor timer] isValid]);
     dispatch_time_t when = dispatch_time(DISPATCH_TIME_NOW, 100000000);
     dispatch_after(when, dispatch_get_main_queue(), ^{
         //CSNReport *report = [monitor report];

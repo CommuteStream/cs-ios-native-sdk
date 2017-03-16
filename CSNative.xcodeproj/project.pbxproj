@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1B2CCB131E79E0C800B6FBC2 /* CSNAdRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B2CCB111E79E0C800B6FBC2 /* CSNAdRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1B2CCB141E79E0C800B6FBC2 /* CSNAdRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B2CCB121E79E0C800B6FBC2 /* CSNAdRequest.m */; };
 		1B555FCF1E60A3F800FE1C08 /* CSNative.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B555FC51E60A3F800FE1C08 /* CSNative.framework */; };
 		1B555FD61E60A3F800FE1C08 /* CSNative.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B555FC81E60A3F800FE1C08 /* CSNative.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1B555FE11E60A60E00FE1C08 /* CSNClient.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B555FDF1E60A60E00FE1C08 /* CSNClient.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -52,6 +54,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1B2CCB111E79E0C800B6FBC2 /* CSNAdRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSNAdRequest.h; sourceTree = "<group>"; };
+		1B2CCB121E79E0C800B6FBC2 /* CSNAdRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSNAdRequest.m; sourceTree = "<group>"; };
 		1B555FC51E60A3F800FE1C08 /* CSNative.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CSNative.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1B555FC81E60A3F800FE1C08 /* CSNative.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CSNative.h; sourceTree = "<group>"; };
 		1B555FC91E60A3F800FE1C08 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -160,6 +164,8 @@
 				1B5560751E6742E700FE1C08 /* CSNMockClient.m */,
 				1BC79FB21E71EE92008D146A /* CSNVisibilityMonitor.h */,
 				1BC79FB31E71EE92008D146A /* CSNVisibilityMonitor.m */,
+				1B2CCB111E79E0C800B6FBC2 /* CSNAdRequest.h */,
+				1B2CCB121E79E0C800B6FBC2 /* CSNAdRequest.m */,
 			);
 			path = CSNative;
 			sourceTree = "<group>";
@@ -210,6 +216,7 @@
 				1B5560761E6742E700FE1C08 /* CSNMockClient.h in Headers */,
 				1B555FF91E61134500FE1C08 /* CSNIconView.h in Headers */,
 				1B5560661E66053100FE1C08 /* CSNTitleView.h in Headers */,
+				1B2CCB131E79E0C800B6FBC2 /* CSNAdRequest.h in Headers */,
 				1BC79FB41E71EE92008D146A /* CSNVisibilityMonitor.h in Headers */,
 				1B555FED1E60AD7A00FE1C08 /* Csnmessages.pbobjc.h in Headers */,
 				1B555FE51E60A6B500FE1C08 /* CSNHttpClient.h in Headers */,
@@ -416,6 +423,7 @@
 				1B555FEE1E60AD7A00FE1C08 /* Csnmessages.pbobjc.m in Sources */,
 				1B5560771E6742E700FE1C08 /* CSNMockClient.m in Sources */,
 				1BC79FB51E71EE92008D146A /* CSNVisibilityMonitor.m in Sources */,
+				1B2CCB141E79E0C800B6FBC2 /* CSNAdRequest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

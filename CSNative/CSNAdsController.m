@@ -9,8 +9,9 @@
 
 @interface CSNAdsController ()
 @property id<CSNClient> client;
-@property NSMapTable *stopViews;
 @property CSNVisibilityMonitor *visMonitor;
+@property NSMutableDictionary *stopAds;
+@property NSMutableDictionary *ads;
 @end
 
 @implementation CSNAdsController
@@ -25,19 +26,22 @@
 
 - (instancetype) initWithClient:(id<CSNClient>)client {
     _client = client;
-    _stopViews = [NSMapTable mapTableWithKeyOptions:NSMapTableStrongMemory valueOptions:NSMapTableWeakMemory];
+    _stopAds = [[NSMutableDictionary alloc] init];
+    _ads = [[NSMutableDictionary alloc] init];
     _visMonitor = [[CSNVisibilityMonitor alloc] init];
     return self;
 }
 
-- (void) addStopAd:(UIView *)view agencyID:(NSString *)agencyID routeID:(NSString *)routeID stopID:(NSString *)stopID {
-    CSNStopTuple *stopTuple = [[CSNStopTuple alloc] initWithIDs:agencyID routeID:routeID stopID:stopID];
-    [_stopViews setObject:view forKey:stopTuple];
-}
-
-- (void) refreshAds {
+- (void) fetchAds:(CSNAdRequest *)request completed:(void (^)(void))completed {
+    // build CSNPAdRequest with stops we don't yet have
+    NSMutableSet *keysInRequest = [NSMutableSet setWithSet:[request stops]];
+    NSSet *keysInCache = [NSMutableSet setWithArray:[_stopAds allKeys]];
+    [keysInRequest minusSet:keysInCache];
+    if([keysInRequest count] == 0) {
+        return completed();
+    }
     CSNPAdRequest *adRequest = [[CSNPAdRequest alloc] init];
-    for(id key in _stopViews) {
+    for(id key in keysInRequest) {
         CSNPStop *stop = [[CSNPStop alloc] init];
         [stop setAgencyId:[key agencyID]];
         [stop setRouteId:[key routeID]];
@@ -45,11 +49,23 @@
         [[adRequest stopsArray] addObject:stop];
     }
     [_client getAds:adRequest success:^(CSNPAdResponse *response) {
-        [self buildViews:response];
+        [self cacheAds:response];
     } failure:^(NSError *error) {
         // on failure, log
-        NSLog(@"CSNAdController refresh failed, cause %@", error);
+        NSLog(@"CSNAdsController fetch ads failed, cause %@", error);
     }];
+}
+
+- (void) buildStopAd:(UIView *)view agencyID:(NSString *)agencyID routeID:(NSString *)routeID stopID:(NSString *)stopID {
+    CSNStopTuple *stopTuple = [[CSNStopTuple alloc] initWithIDs:agencyID routeID:routeID stopID:stopID];
+    NSNumber *adID = [_stopAds objectForKey:stopTuple];
+    if(adID == nil) {
+        return;
+    }
+    CSNAd *ad = [_ads objectForKey:adID];
+    if(ad != nil) {
+        [self setupComponentViews:view ad:ad];
+    }
 }
 
 - (NSArray *) componentViews:(UIView *)parent {
@@ -76,23 +92,21 @@
     }
 }
 
-- (void) buildViews:(CSNPAdResponse *)response {
+- (void) cacheAds:(CSNPAdResponse *)response {
     for(id stopAd in [response stopAdsArray]) {
         CSNPStop *stop = [stopAd stopTuple];
         CSNStopTuple *stopTuple = [[CSNStopTuple alloc] initWithMessage:stop];
-        UIView *view = [_stopViews objectForKey:stopTuple];
-        if(view != nil) {
-            // Build Ad and AdView from Ad Message
-            CSNPNativeAd *message = [[response ads] objectForKey:[stopAd adId]];
-            CSNAd *ad = [[CSNAd alloc] initWithMessage:message];
-            [self initComponentViews:view ad:ad];
-        } else {
-            NSLog(@"CSNAdController No view found for returned stop tuple");
+        CSNPNativeAd *message = [[response ads] objectForKey:[stopAd adId]];
+        CSNAd *ad = [[CSNAd alloc] initWithMessage:message];
+        if(ad != nil) {
+            NSNumber *adID = [NSNumber numberWithUnsignedLongLong:[ad adID]];
+            [_stopAds setObject:adID forKey:stopTuple];
+            [_ads setObject:ad forKey:adID];
         }
     }
 }
 
-- (void) initComponentViews:(UIView *)parent ad:(CSNAd *)ad {
+- (void) setupComponentViews:(UIView *)parent ad:(CSNAd *)ad {
     for(id<CSNComponentView> componentView in [self componentViews:parent]) {
         // periodically poll view for visibility
         [componentView setAd:ad];

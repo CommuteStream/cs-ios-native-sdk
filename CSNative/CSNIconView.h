@@ -2,7 +2,7 @@
 #import "CSNComponentView.h"
 #import "CSNAd.h"
 
-IB_DESIGNABLE
+//IB_DESIGNABLE
 @interface CSNIconView : UIImageView <CSNComponentView>
 @property (readonly, nonnull) CSNAd *ad;
 @property (readonly) uint64_t componentID;

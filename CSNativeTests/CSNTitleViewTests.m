@@ -2,7 +2,6 @@
 @import CSNative;
 
 @interface CSNTitleView (Testing)
-@property (weak, nonatomic) IBOutlet UILabel *labelView;
 @end
 
 @interface CSNTitleViewTests : XCTestCase
