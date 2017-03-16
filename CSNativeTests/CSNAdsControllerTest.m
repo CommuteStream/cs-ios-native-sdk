@@ -51,6 +51,7 @@
 }
 
 - (void)testWithClient {
+    XCTestExpectation *expectation = [self expectationWithDescription:@"failure"];
     CSNAdsController *controller = [[CSNAdsController alloc] initMocked];
     UIView *view = [[UIView alloc] init];
     CSNIconView *iconView = [[CSNIconView alloc] init];
@@ -66,10 +67,13 @@
         [controller buildStopAd:view agencyID:@"test_agency" routeID:@"test_route" stopID:@"test_stop"];
         XCTAssert([iconView ad] != nil);
         XCTAssert([titleView ad] != nil);
+        [expectation fulfill];
     }];
-
-
-
+    [self waitForExpectationsWithTimeout:1.0 handler:^(NSError * _Nullable error) {
+        if(error) {
+            NSLog(@"Timeout Error: %@", error);
+        }
+    }];
 }
 
 @end

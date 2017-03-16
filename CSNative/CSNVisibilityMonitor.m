@@ -29,7 +29,7 @@
 }
 
 - (void) checkViews {
-    NSLog(@"checking views %lu", (unsigned long)[_componentViews count]);
+    NSLog(@"checking %lu views for visibility", (unsigned long)[_componentViews count]);
     for(id componentView in _componentViews) {
         UIView *view = (UIView *)componentView;
         CGRect viewFrame = view.frame;
@@ -41,7 +41,7 @@
         if(viewArea > 0 && windowArea > 0) {
             double viewVisible = (double)intersectedArea / (double)viewArea;
             double deviceVisible = (double)intersectedArea / (double)windowArea;
-            NSLog(@"component view %@ for component %lld  view visible pct %f, window visible pct %f", view, [componentView componentID], viewVisible, deviceVisible);
+            //NSLog(@"component view %@ for component %lld  view visible pct %f, window visible pct %f", view, [componentView componentID], viewVisible, deviceVisible);
         }
         //CGPoint originalPoint = CGPointMake(view.frame.origin.x, view.frame.origin.y);
         // can I just look at the window of the view rather than the superview?

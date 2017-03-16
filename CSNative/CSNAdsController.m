@@ -50,6 +50,7 @@
     }
     [_client getAds:adRequest success:^(CSNPAdResponse *response) {
         [self cacheAds:response];
+        completed();
     } failure:^(NSError *error) {
         // on failure, log
         NSLog(@"CSNAdsController fetch ads failed, cause %@", error);
