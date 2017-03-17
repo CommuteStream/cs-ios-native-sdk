@@ -157,6 +157,7 @@
 		1B555FC71E60A3F800FE1C08 /* CSNative */ = {
 			isa = PBXGroup;
 			children = (
+				7F4AFC3A1E7C4E970023BF47 /* Example Creative */,
 				1B5560481E61F2FB00FE1C08 /* cs.png */,
 				1B555FEB1E60AD7A00FE1C08 /* Csnmessages.pbobjc.h */,
 				1B555FEC1E60AD7A00FE1C08 /* Csnmessages.pbobjc.m */,
@@ -219,6 +220,13 @@
 				EE17F149E54E79C0A0DD74A1 /* Pods_CSNativeTests.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		7F4AFC3A1E7C4E970023BF47 /* Example Creative */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "Example Creative";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -664,6 +672,7 @@
 				1B2CCB2C1E7B01A000B6FBC2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		1B555FBF1E60A3F800FE1C08 /* Build configuration list for PBXProject "CSNative" */ = {
 			isa = XCConfigurationList;
