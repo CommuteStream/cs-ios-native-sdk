@@ -28,7 +28,6 @@
     [stop setRouteId:@"test"];
     [stop setStopId:@"test"];
     [self addStopAd:testAd stop:stop];
-
     return self;
 }
 
@@ -36,8 +35,15 @@
 {
     CSNPAdResponse *response = [[CSNPAdResponse alloc] init];
     for(id stop in [adRequest stopsArray]) {
-        NSNumber *adId = [_stopAds objectForKey:stop];
+        CSNStopTuple *stopTuple = [[CSNStopTuple alloc] initWithMessage:stop];
+        NSNumber *adId = [_stopAds objectForKey:stopTuple];
+        if(adId == nil) {
+            continue;
+        }
         CSNPNativeAd *ad = [_ads objectForKey:adId];
+        if(ad == nil) {
+            continue;
+        }
         CSNPStopAd *stopAd = [[CSNPStopAd alloc] init];
         [stopAd setStopTuple:stop];
         [stopAd setAdId:[ad adId]];
@@ -48,8 +54,10 @@
 }
 
 - (void) addStopAd:(CSNPNativeAd *)ad stop:(CSNPStop *)stop {
+    CSNStopTuple *stopTuple = [[CSNStopTuple alloc] initWithMessage:stop];
+    NSLog(@"adding %@ key %lld and stop %@ to internal dict", ad, [ad adId], stopTuple);
     NSNumber *adID = [NSNumber numberWithUnsignedLongLong:[ad adId]];
-    [_stopAds setObject:adID forKey:stop];
+    [_stopAds setObject:adID forKey:stopTuple];
     [_ads setObject:ad forKey:adID];
 }
 

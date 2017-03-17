@@ -62,9 +62,9 @@
     XCTAssert([iconView ad] == nil);
     XCTAssert([titleView ad] == nil);
     CSNAdRequest *adRequest = [[CSNAdRequest alloc] init];
-    [adRequest addStop:@"test_agency" routeID:@"test_route" stopID:@"test_stop"];
+    [adRequest addStop:@"commutestream" routeID:@"test" stopID:@"test"];
     [controller fetchAds:adRequest completed:^{
-        [controller buildStopAd:view agencyID:@"test_agency" routeID:@"test_route" stopID:@"test_stop"];
+        [controller buildStopAd:view agencyID:@"commutestream" routeID:@"test" stopID:@"test"];
         XCTAssert([iconView ad] != nil);
         XCTAssert([titleView ad] != nil);
         [expectation fulfill];
