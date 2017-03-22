@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "75677E61CF986B816A2374A607C4EA82DA3B4227",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "75677E61CF986B816A2374A607C4EA82DA3B4227" : 9223372036854775807,
+    "EB5CE883E8875679C395E6660DC663D8B3FF2D29" : 9223372036854775807
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "BDD417D2-1340-43C3-A1DB-895A7FC1D5B5",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "75677E61CF986B816A2374A607C4EA82DA3B4227" : "cs-ios-native-sdk\/",
+    "EB5CE883E8875679C395E6660DC663D8B3FF2D29" : "..\/iOS%20Dev\/Swift\/Swift%20CS%20Showcase"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "CSNative",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "CSNative.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/CommuteStream\/cs-ios-native-sdk.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "75677E61CF986B816A2374A607C4EA82DA3B4227"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/CommuteStream\/ios-showcase.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "EB5CE883E8875679C395E6660DC663D8B3FF2D29"
+    }
+  ]
+}

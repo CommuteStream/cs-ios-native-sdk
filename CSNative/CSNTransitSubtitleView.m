@@ -1,6 +1,7 @@
-#import "CSNIconView.h"
+@import UIKit;
+#import "CSNTransitSubtitleView.h"
 
-@implementation CSNIconView
+@implementation CSNTransitSubtitleView
 @synthesize blockAction;
 
 -(instancetype)initWithCoder:(NSCoder *)decoder {
@@ -13,10 +14,11 @@
     return self;
 }
 
-- (void)setAd:(CSNAd *)ad {
+
+- (void) setAd:(CSNAd *)ad {
     _ad = ad;
-    _componentID = [[ad icon] componentID];
-    [self setImage:[[ad icon] image]];
+    _componentID = [[ad transitTitle] componentID];
+    [self setText:[[ad transitSubtitle] subtitle]];
     [self setNeedsDisplay];
 }
 
@@ -33,9 +35,9 @@
 }
 
 -(void) tapViewAction:(UIGestureRecognizer *)sender{
-
+    
     [self invokeBlock:sender];
-    NSLog(@"tapped it yo");
+    
     
 }
 

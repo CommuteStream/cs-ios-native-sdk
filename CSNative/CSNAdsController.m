@@ -16,6 +16,8 @@
 
 @implementation CSNAdsController
 
+CSNModalWindow *modalWindowView;
+
 - (instancetype) init {
     return [self initWithClient:[[CSNHttpClient alloc] initWithHost:@"api.commutestream.com"]];
 }
@@ -111,6 +113,15 @@
     for(id<CSNComponentView> componentView in [self componentViews:parent]) {
         // periodically poll view for visibility
         [componentView setAd:ad];
+        [componentView addTapHandler:^{
+            NSLog(@"%@", [ad adDescription]);
+            CGRect bounds = [[UIScreen mainScreen] bounds];
+            CSNModalWindow *modalWindow = [[CSNModalWindow alloc] initWithFrame:bounds forAd:ad];
+            modalWindow.windowLevel = UIWindowLevelAlert;
+            modalWindowView = modalWindow;
+            [modalWindow makeKeyAndVisible];
+            
+        }];
         [_visMonitor addView:componentView];
         //[_visibilityMonitor addView:componentView ad:ad];
         //[_interactionMonitor addView:componentView ad:ad];

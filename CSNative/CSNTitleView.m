@@ -2,6 +2,7 @@
 #import "CSNTitleView.h"
 
 @implementation CSNTitleView
+@synthesize blockAction;
 
 -(instancetype)initWithCoder:(NSCoder *)decoder {
     self = [super initWithCoder:decoder];
@@ -19,6 +20,29 @@
     _componentID = [[ad title] componentID];
     [self setText:[[ad title] title]];
     [self setNeedsDisplay];
+}
+
+- (void)addTapHandler:(nullable void(^)(void))callback {
+    
+    UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapViewAction:)];
+    
+    tapRecognizer.delegate = self;
+    [self addGestureRecognizer:tapRecognizer];
+    [self setUserInteractionEnabled:YES];
+    
+    [self setBlockAction:callback];
+    
+}
+
+-(void) tapViewAction:(UIGestureRecognizer *)sender{
+    
+    [self invokeBlock:sender];
+    
+    
+}
+
+- (void) invokeBlock:(id)sender {
+    [self blockAction]();
 }
 
 @end

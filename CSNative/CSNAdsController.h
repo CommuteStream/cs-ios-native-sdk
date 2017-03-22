@@ -1,6 +1,7 @@
 @import UIKit;
 #import "CSNClient.h"
 #import "CSNAdRequest.h"
+#import "CSNModalWindow.h"
 
 #ifdef DEBUG
 #import "CSNIconView.h"

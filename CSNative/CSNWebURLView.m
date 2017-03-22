@@ -1,6 +1,7 @@
-#import "CSNIconView.h"
+@import UIKit;
+#import "CSNWebURLView.h"
 
-@implementation CSNIconView
+@implementation CSNWebURLView
 @synthesize blockAction;
 
 -(instancetype)initWithCoder:(NSCoder *)decoder {
@@ -13,10 +14,11 @@
     return self;
 }
 
-- (void)setAd:(CSNAd *)ad {
+
+- (void) setAd:(CSNAd *)ad {
     _ad = ad;
-    _componentID = [[ad icon] componentID];
-    [self setImage:[[ad icon] image]];
+    _componentID = [[ad websiteURL] componentID];
+    [self setText:[[ad websiteURL] websiteURL]];
     [self setNeedsDisplay];
 }
 
@@ -33,9 +35,9 @@
 }
 
 -(void) tapViewAction:(UIGestureRecognizer *)sender{
-
+    
     [self invokeBlock:sender];
-    NSLog(@"tapped it yo");
+    
     
 }
 

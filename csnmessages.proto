@@ -54,6 +54,17 @@ message ActionComponent {
   string url = 3;
 }
 
+
+message TransitTitleComponent {
+  uint64 component_id = 1;
+  string title = 2;
+}
+
+message TransitSubtitleComponent {
+  uint64 component_id = 1;
+  string subtitle = 2;
+}
+
 message IconComponent {
   uint64 component_id = 1;
   bytes image = 2;
@@ -62,6 +73,16 @@ message IconComponent {
 message TitleComponent {
   uint64 component_id = 1;
   string title = 2;
+}
+
+message DescriptionComponent {
+  uint64 component_id = 1;
+  string ad_description = 2;
+}
+
+message WebUrlComponent {
+  uint64 component_id = 1;
+  string website_url = 2;
 }
 
 message Colors {
@@ -73,12 +94,16 @@ message NativeAd {
   uint64 request_id = 1;
   uint64 ad_id = 2;
   Colors colors = 3;
-  IconComponent icon = 4;
-  TitleComponent title = 5;
-  LocationComponent location = 6;
-  StopComponent stop = 7;
-  HeroComponent hero = 8;
-  repeated ActionComponent actions = 9;
+  TransitTitleComponent transit_title = 4;
+  TransitSubtitleComponent transit_subtitle = 5;
+  IconComponent icon = 6;
+  TitleComponent title = 7;
+  DescriptionComponent ad_description = 8;
+  WebUrlComponent website_url = 9;
+  LocationComponent location = 10;
+  StopComponent stop = 11;
+  HeroComponent hero = 12;
+  repeated ActionComponent actions = 13;
 }
 
 message StopAd {

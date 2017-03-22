@@ -593,6 +593,114 @@ void SetCSNPActionComponent_Kind_RawValue(CSNPActionComponent *message, int32_t 
   GPBSetInt32IvarWithFieldInternal(message, field, value, descriptor.file.syntax);
 }
 
+#pragma mark - CSNPTransitTitleComponent
+
+@implementation CSNPTransitTitleComponent
+
+@dynamic componentId;
+@dynamic title;
+
+typedef struct CSNPTransitTitleComponent__storage_ {
+  uint32_t _has_storage_[1];
+  NSString *title;
+  uint64_t componentId;
+} CSNPTransitTitleComponent__storage_;
+
+// This method is threadsafe because it is initially called
+// in +initialize for each subclass.
++ (GPBDescriptor *)descriptor {
+  static GPBDescriptor *descriptor = nil;
+  if (!descriptor) {
+    static GPBMessageFieldDescription fields[] = {
+      {
+        .name = "componentId",
+        .dataTypeSpecific.className = NULL,
+        .number = CSNPTransitTitleComponent_FieldNumber_ComponentId,
+        .hasIndex = 0,
+        .offset = (uint32_t)offsetof(CSNPTransitTitleComponent__storage_, componentId),
+        .flags = GPBFieldOptional,
+        .dataType = GPBDataTypeUInt64,
+      },
+      {
+        .name = "title",
+        .dataTypeSpecific.className = NULL,
+        .number = CSNPTransitTitleComponent_FieldNumber_Title,
+        .hasIndex = 1,
+        .offset = (uint32_t)offsetof(CSNPTransitTitleComponent__storage_, title),
+        .flags = GPBFieldOptional,
+        .dataType = GPBDataTypeString,
+      },
+    };
+    GPBDescriptor *localDescriptor =
+        [GPBDescriptor allocDescriptorForClass:[CSNPTransitTitleComponent class]
+                                     rootClass:[CSNPCsnmessagesRoot class]
+                                          file:CSNPCsnmessagesRoot_FileDescriptor()
+                                        fields:fields
+                                    fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
+                                   storageSize:sizeof(CSNPTransitTitleComponent__storage_)
+                                         flags:GPBDescriptorInitializationFlag_None];
+    NSAssert(descriptor == nil, @"Startup recursed!");
+    descriptor = localDescriptor;
+  }
+  return descriptor;
+}
+
+@end
+
+#pragma mark - CSNPTransitSubtitleComponent
+
+@implementation CSNPTransitSubtitleComponent
+
+@dynamic componentId;
+@dynamic subtitle;
+
+typedef struct CSNPTransitSubtitleComponent__storage_ {
+  uint32_t _has_storage_[1];
+  NSString *subtitle;
+  uint64_t componentId;
+} CSNPTransitSubtitleComponent__storage_;
+
+// This method is threadsafe because it is initially called
+// in +initialize for each subclass.
++ (GPBDescriptor *)descriptor {
+  static GPBDescriptor *descriptor = nil;
+  if (!descriptor) {
+    static GPBMessageFieldDescription fields[] = {
+      {
+        .name = "componentId",
+        .dataTypeSpecific.className = NULL,
+        .number = CSNPTransitSubtitleComponent_FieldNumber_ComponentId,
+        .hasIndex = 0,
+        .offset = (uint32_t)offsetof(CSNPTransitSubtitleComponent__storage_, componentId),
+        .flags = GPBFieldOptional,
+        .dataType = GPBDataTypeUInt64,
+      },
+      {
+        .name = "subtitle",
+        .dataTypeSpecific.className = NULL,
+        .number = CSNPTransitSubtitleComponent_FieldNumber_Subtitle,
+        .hasIndex = 1,
+        .offset = (uint32_t)offsetof(CSNPTransitSubtitleComponent__storage_, subtitle),
+        .flags = GPBFieldOptional,
+        .dataType = GPBDataTypeString,
+      },
+    };
+    GPBDescriptor *localDescriptor =
+        [GPBDescriptor allocDescriptorForClass:[CSNPTransitSubtitleComponent class]
+                                     rootClass:[CSNPCsnmessagesRoot class]
+                                          file:CSNPCsnmessagesRoot_FileDescriptor()
+                                        fields:fields
+                                    fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
+                                   storageSize:sizeof(CSNPTransitSubtitleComponent__storage_)
+                                         flags:GPBDescriptorInitializationFlag_None];
+    NSAssert(descriptor == nil, @"Startup recursed!");
+    descriptor = localDescriptor;
+  }
+  return descriptor;
+}
+
+@end
+
 #pragma mark - CSNPIconComponent
 
 @implementation CSNPIconComponent
@@ -701,6 +809,119 @@ typedef struct CSNPTitleComponent__storage_ {
 
 @end
 
+#pragma mark - CSNPDescriptionComponent
+
+@implementation CSNPDescriptionComponent
+
+@dynamic componentId;
+@dynamic adDescription;
+
+typedef struct CSNPDescriptionComponent__storage_ {
+  uint32_t _has_storage_[1];
+  NSString *adDescription;
+  uint64_t componentId;
+} CSNPDescriptionComponent__storage_;
+
+// This method is threadsafe because it is initially called
+// in +initialize for each subclass.
++ (GPBDescriptor *)descriptor {
+  static GPBDescriptor *descriptor = nil;
+  if (!descriptor) {
+    static GPBMessageFieldDescription fields[] = {
+      {
+        .name = "componentId",
+        .dataTypeSpecific.className = NULL,
+        .number = CSNPDescriptionComponent_FieldNumber_ComponentId,
+        .hasIndex = 0,
+        .offset = (uint32_t)offsetof(CSNPDescriptionComponent__storage_, componentId),
+        .flags = GPBFieldOptional,
+        .dataType = GPBDataTypeUInt64,
+      },
+      {
+        .name = "adDescription",
+        .dataTypeSpecific.className = NULL,
+        .number = CSNPDescriptionComponent_FieldNumber_AdDescription,
+        .hasIndex = 1,
+        .offset = (uint32_t)offsetof(CSNPDescriptionComponent__storage_, adDescription),
+        .flags = GPBFieldOptional,
+        .dataType = GPBDataTypeString,
+      },
+    };
+    GPBDescriptor *localDescriptor =
+        [GPBDescriptor allocDescriptorForClass:[CSNPDescriptionComponent class]
+                                     rootClass:[CSNPCsnmessagesRoot class]
+                                          file:CSNPCsnmessagesRoot_FileDescriptor()
+                                        fields:fields
+                                    fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
+                                   storageSize:sizeof(CSNPDescriptionComponent__storage_)
+                                         flags:GPBDescriptorInitializationFlag_None];
+    NSAssert(descriptor == nil, @"Startup recursed!");
+    descriptor = localDescriptor;
+  }
+  return descriptor;
+}
+
+@end
+
+#pragma mark - CSNPWebUrlComponent
+
+@implementation CSNPWebUrlComponent
+
+@dynamic componentId;
+@dynamic websiteURL;
+
+typedef struct CSNPWebUrlComponent__storage_ {
+  uint32_t _has_storage_[1];
+  NSString *websiteURL;
+  uint64_t componentId;
+} CSNPWebUrlComponent__storage_;
+
+// This method is threadsafe because it is initially called
+// in +initialize for each subclass.
++ (GPBDescriptor *)descriptor {
+  static GPBDescriptor *descriptor = nil;
+  if (!descriptor) {
+    static GPBMessageFieldDescription fields[] = {
+      {
+        .name = "componentId",
+        .dataTypeSpecific.className = NULL,
+        .number = CSNPWebUrlComponent_FieldNumber_ComponentId,
+        .hasIndex = 0,
+        .offset = (uint32_t)offsetof(CSNPWebUrlComponent__storage_, componentId),
+        .flags = GPBFieldOptional,
+        .dataType = GPBDataTypeUInt64,
+      },
+      {
+        .name = "websiteURL",
+        .dataTypeSpecific.className = NULL,
+        .number = CSNPWebUrlComponent_FieldNumber_WebsiteURL,
+        .hasIndex = 1,
+        .offset = (uint32_t)offsetof(CSNPWebUrlComponent__storage_, websiteURL),
+        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldTextFormatNameCustom),
+        .dataType = GPBDataTypeString,
+      },
+    };
+    GPBDescriptor *localDescriptor =
+        [GPBDescriptor allocDescriptorForClass:[CSNPWebUrlComponent class]
+                                     rootClass:[CSNPCsnmessagesRoot class]
+                                          file:CSNPCsnmessagesRoot_FileDescriptor()
+                                        fields:fields
+                                    fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
+                                   storageSize:sizeof(CSNPWebUrlComponent__storage_)
+                                         flags:GPBDescriptorInitializationFlag_None];
+#if !GPBOBJC_SKIP_MESSAGE_TEXTFORMAT_EXTRAS
+    static const char *extraTextFormatInfo =
+        "\001\002\007\241!!\000";
+    [localDescriptor setupExtraTextInfo:extraTextFormatInfo];
+#endif  // !GPBOBJC_SKIP_MESSAGE_TEXTFORMAT_EXTRAS
+    NSAssert(descriptor == nil, @"Startup recursed!");
+    descriptor = localDescriptor;
+  }
+  return descriptor;
+}
+
+@end
+
 #pragma mark - CSNPColors
 
 @implementation CSNPColors
@@ -762,8 +983,12 @@ typedef struct CSNPColors__storage_ {
 @dynamic requestId;
 @dynamic adId;
 @dynamic hasColors, colors;
+@dynamic hasTransitTitle, transitTitle;
+@dynamic hasTransitSubtitle, transitSubtitle;
 @dynamic hasIcon, icon;
 @dynamic hasTitle, title;
+@dynamic hasAdDescription, adDescription;
+@dynamic hasWebsiteURL, websiteURL;
 @dynamic hasLocation, location;
 @dynamic hasStop, stop;
 @dynamic hasHero, hero;
@@ -772,8 +997,12 @@ typedef struct CSNPColors__storage_ {
 typedef struct CSNPNativeAd__storage_ {
   uint32_t _has_storage_[1];
   CSNPColors *colors;
+  CSNPTransitTitleComponent *transitTitle;
+  CSNPTransitSubtitleComponent *transitSubtitle;
   CSNPIconComponent *icon;
   CSNPTitleComponent *title;
+  CSNPDescriptionComponent *adDescription;
+  CSNPWebUrlComponent *websiteURL;
   CSNPLocationComponent *location;
   CSNPStopComponent *stop;
   CSNPHeroComponent *hero;
@@ -816,10 +1045,28 @@ typedef struct CSNPNativeAd__storage_ {
         .dataType = GPBDataTypeMessage,
       },
       {
+        .name = "transitTitle",
+        .dataTypeSpecific.className = GPBStringifySymbol(CSNPTransitTitleComponent),
+        .number = CSNPNativeAd_FieldNumber_TransitTitle,
+        .hasIndex = 3,
+        .offset = (uint32_t)offsetof(CSNPNativeAd__storage_, transitTitle),
+        .flags = GPBFieldOptional,
+        .dataType = GPBDataTypeMessage,
+      },
+      {
+        .name = "transitSubtitle",
+        .dataTypeSpecific.className = GPBStringifySymbol(CSNPTransitSubtitleComponent),
+        .number = CSNPNativeAd_FieldNumber_TransitSubtitle,
+        .hasIndex = 4,
+        .offset = (uint32_t)offsetof(CSNPNativeAd__storage_, transitSubtitle),
+        .flags = GPBFieldOptional,
+        .dataType = GPBDataTypeMessage,
+      },
+      {
         .name = "icon",
         .dataTypeSpecific.className = GPBStringifySymbol(CSNPIconComponent),
         .number = CSNPNativeAd_FieldNumber_Icon,
-        .hasIndex = 3,
+        .hasIndex = 5,
         .offset = (uint32_t)offsetof(CSNPNativeAd__storage_, icon),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeMessage,
@@ -828,16 +1075,34 @@ typedef struct CSNPNativeAd__storage_ {
         .name = "title",
         .dataTypeSpecific.className = GPBStringifySymbol(CSNPTitleComponent),
         .number = CSNPNativeAd_FieldNumber_Title,
-        .hasIndex = 4,
+        .hasIndex = 6,
         .offset = (uint32_t)offsetof(CSNPNativeAd__storage_, title),
         .flags = GPBFieldOptional,
+        .dataType = GPBDataTypeMessage,
+      },
+      {
+        .name = "adDescription",
+        .dataTypeSpecific.className = GPBStringifySymbol(CSNPDescriptionComponent),
+        .number = CSNPNativeAd_FieldNumber_AdDescription,
+        .hasIndex = 7,
+        .offset = (uint32_t)offsetof(CSNPNativeAd__storage_, adDescription),
+        .flags = GPBFieldOptional,
+        .dataType = GPBDataTypeMessage,
+      },
+      {
+        .name = "websiteURL",
+        .dataTypeSpecific.className = GPBStringifySymbol(CSNPWebUrlComponent),
+        .number = CSNPNativeAd_FieldNumber_WebsiteURL,
+        .hasIndex = 8,
+        .offset = (uint32_t)offsetof(CSNPNativeAd__storage_, websiteURL),
+        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldTextFormatNameCustom),
         .dataType = GPBDataTypeMessage,
       },
       {
         .name = "location",
         .dataTypeSpecific.className = GPBStringifySymbol(CSNPLocationComponent),
         .number = CSNPNativeAd_FieldNumber_Location,
-        .hasIndex = 5,
+        .hasIndex = 9,
         .offset = (uint32_t)offsetof(CSNPNativeAd__storage_, location),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeMessage,
@@ -846,7 +1111,7 @@ typedef struct CSNPNativeAd__storage_ {
         .name = "stop",
         .dataTypeSpecific.className = GPBStringifySymbol(CSNPStopComponent),
         .number = CSNPNativeAd_FieldNumber_Stop,
-        .hasIndex = 6,
+        .hasIndex = 10,
         .offset = (uint32_t)offsetof(CSNPNativeAd__storage_, stop),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeMessage,
@@ -855,7 +1120,7 @@ typedef struct CSNPNativeAd__storage_ {
         .name = "hero",
         .dataTypeSpecific.className = GPBStringifySymbol(CSNPHeroComponent),
         .number = CSNPNativeAd_FieldNumber_Hero,
-        .hasIndex = 7,
+        .hasIndex = 11,
         .offset = (uint32_t)offsetof(CSNPNativeAd__storage_, hero),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeMessage,
@@ -878,6 +1143,11 @@ typedef struct CSNPNativeAd__storage_ {
                                     fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
                                    storageSize:sizeof(CSNPNativeAd__storage_)
                                          flags:GPBDescriptorInitializationFlag_None];
+#if !GPBOBJC_SKIP_MESSAGE_TEXTFORMAT_EXTRAS
+    static const char *extraTextFormatInfo =
+        "\001\t\007\241!!\000";
+    [localDescriptor setupExtraTextInfo:extraTextFormatInfo];
+#endif  // !GPBOBJC_SKIP_MESSAGE_TEXTFORMAT_EXTRAS
     NSAssert(descriptor == nil, @"Startup recursed!");
     descriptor = localDescriptor;
   }

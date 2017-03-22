@@ -10,24 +10,24 @@
 - (instancetype) init {
     _ads = [[NSMutableDictionary alloc] init];
     _stopAds = [[NSMutableDictionary alloc] init];
-    CSNPTitleComponent *title = [[CSNPTitleComponent alloc] init];
-    [title setComponentId:0];
-    [title setTitle:@"Test Ad Title"];
-    CSNPIconComponent *icon = [[CSNPIconComponent alloc] init];
-    [icon setComponentId:1];
-    NSString *imagePath = [[NSBundle bundleForClass:[CSNMockClient class]] pathForResource:@"cs" ofType:@"png"];
-    NSData *imageData = [NSData dataWithContentsOfFile:imagePath];
-    [icon setImage:imageData];
-    CSNPNativeAd *testAd = [[CSNPNativeAd alloc] init];
-    [testAd setAdId:99999999];
-    [testAd setRequestId:0];
-    [testAd setIcon:icon];
-    [testAd setTitle:title];
-    CSNPStop *stop = [[CSNPStop alloc] init];
-    [stop setAgencyId:@"commutestream"];
-    [stop setRouteId:@"test"];
-    [stop setStopId:@"test"];
-    [self addStopAd:testAd stop:stop];
+    //CSNPTitleComponent *title = [[CSNPTitleComponent alloc] init];
+    //[title setComponentId:0];
+    //[title setTitle:@"Test Ad Title"];
+    //CSNPIconComponent *icon = [[CSNPIconComponent alloc] init];
+    //[icon setComponentId:1];
+    //NSString *imagePath = [[NSBundle bundleForClass:[CSNMockClient class]] pathForResource:@"cs" ofType:@"png"];
+    //NSData *imageData = [NSData dataWithContentsOfFile:imagePath];
+    //[icon setImage:imageData];
+    //CSNPNativeAd *testAd = [[CSNPNativeAd alloc] init];
+    //[testAd setAdId:99999999];
+    //[testAd setRequestId:0];
+    //[testAd setIcon:icon];
+    //[testAd setTitle:title];
+    //CSNPStop *stop = [[CSNPStop alloc] init];
+    //[stop setAgencyId:@"commutestream"];
+    //[stop setRouteId:@"test"];
+    //[stop setStopId:@"test"];
+    //[self addStopAd:testAd stop:stop];
     return self;
 }
 
@@ -55,7 +55,7 @@
 
 - (void) addStopAd:(CSNPNativeAd *)ad stop:(CSNPStop *)stop {
     CSNStopTuple *stopTuple = [[CSNStopTuple alloc] initWithMessage:stop];
-    NSLog(@"adding %@ key %lld and stop %@ to internal dict", ad, [ad adId], stopTuple);
+    //NSLog(@"adding %@ key %lld and stop %@ to internal dict", ad, [ad adId], stopTuple);
     NSNumber *adID = [NSNumber numberWithUnsignedLongLong:[ad adId]];
     [_stopAds setObject:adID forKey:stopTuple];
     [_ads setObject:ad forKey:adID];
