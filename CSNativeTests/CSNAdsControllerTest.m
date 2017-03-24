@@ -36,17 +36,17 @@
 - (void)testComponentViews {
     UIView *view  = [[UIView alloc] init];
     UIView *subview0 = [[UIView alloc] init];
-    CSNIconView *iconview0 = [[CSNIconView alloc] init];
-    CSNIconView *iconview1 = [[CSNIconView alloc] init];
-    CSNTitleView *titleview0 = [[CSNTitleView alloc] init];
+    CSNLogoView *logoview0 = [[CSNLogoView alloc] init];
+    CSNLogoView *logoview1 = [[CSNLogoView alloc] init];
+    CSNHeadlineView *headlineview0 = [[CSNHeadlineView alloc] init];
     [view addSubview:subview0];
-    [view addSubview:iconview0];
-    [view addSubview:titleview0];
-    [subview0 addSubview:iconview1];
+    [view addSubview:logoview0];
+    [view addSubview:headlineview0];
+    [subview0 addSubview:logoview1];
     CSNAdsController *controller = [[CSNAdsController alloc] init];
     NSArray<UIView *> *subviews = [controller componentViews:view];
-    XCTAssert([subviews containsObject:iconview0]);
-    XCTAssert([subviews containsObject:iconview1]);
+    XCTAssert([subviews containsObject:logoview0]);
+    XCTAssert([subviews containsObject:logoview1]);
     XCTAssert(![subviews containsObject:subview0]);
 }
 
@@ -54,19 +54,19 @@
     XCTestExpectation *expectation = [self expectationWithDescription:@"failure"];
     CSNAdsController *controller = [[CSNAdsController alloc] initMocked];
     UIView *view = [[UIView alloc] init];
-    CSNIconView *iconView = [[CSNIconView alloc] init];
-    CSNTitleView *titleView = [[CSNTitleView alloc] init];
-    [view addSubview:iconView];
-    [view addSubview:titleView];
+    CSNLogoView *logoView = [[CSNLogoView alloc] init];
+    CSNHeadlineView *headlineView = [[CSNHeadlineView alloc] init];
+    [view addSubview:logoView];
+    [view addSubview:headlineView];
     [controller buildStopAd:view agencyID:@"test_agency" routeID:@"test_route" stopID:@"test_stop"];
-    XCTAssert([iconView ad] == nil);
-    XCTAssert([titleView ad] == nil);
+    XCTAssert([logoView ad] == nil);
+    XCTAssert([headlineView ad] == nil);
     CSNAdRequest *adRequest = [[CSNAdRequest alloc] init];
     [adRequest addStop:@"commutestream" routeID:@"test" stopID:@"test"];
     [controller fetchAds:adRequest completed:^{
         [controller buildStopAd:view agencyID:@"commutestream" routeID:@"test" stopID:@"test"];
-        XCTAssert([iconView ad] != nil);
-        XCTAssert([titleView ad] != nil);
+        XCTAssert([logoView ad] != nil);
+        XCTAssert([headlineView ad] != nil);
         [expectation fulfill];
     }];
     [self waitForExpectationsWithTimeout:1.0 handler:^(NSError * _Nullable error) {

@@ -3,7 +3,7 @@
 #import "CSNComponentView.h"
 
 //IB_DESIGNABLE
-@interface CSNWebURLView : UILabel <CSNComponentView, UIGestureRecognizerDelegate>
+@interface CSNHeadlineView : UILabel <CSNComponentView, UIGestureRecognizerDelegate>
 @property (readonly, nonnull) CSNAd *ad;
 @property (readonly) uint64_t componentID;
 @property BOOL interactable;

@@ -46,12 +46,14 @@ message HeroComponent {
 
 enum ActionKind {
   Url = 0; 
-} 
+}
 
 message ActionComponent {
   uint64 component_id = 1;
   ActionKind kind = 2;
   string url = 3;
+  string title = 4;
+  bytes color = 5;
 }
 
 
@@ -65,24 +67,24 @@ message TransitSubtitleComponent {
   string subtitle = 2;
 }
 
-message IconComponent {
+message LogoComponent {
   uint64 component_id = 1;
   bytes image = 2;
 }
 
-message TitleComponent {
+message HeadlineComponent {
   uint64 component_id = 1;
-  string title = 2;
+  string headline = 2;
 }
 
-message DescriptionComponent {
+message BodyComponent {
   uint64 component_id = 1;
-  string ad_description = 2;
+  string body = 2;
 }
 
-message WebUrlComponent {
+message AdvertiserComponent {
   uint64 component_id = 1;
-  string website_url = 2;
+  string advertiser = 2;
 }
 
 message Colors {
@@ -96,10 +98,10 @@ message NativeAd {
   Colors colors = 3;
   TransitTitleComponent transit_title = 4;
   TransitSubtitleComponent transit_subtitle = 5;
-  IconComponent icon = 6;
-  TitleComponent title = 7;
-  DescriptionComponent ad_description = 8;
-  WebUrlComponent website_url = 9;
+  LogoComponent logo = 6;
+  HeadlineComponent headline = 7;
+  BodyComponent body = 8;
+  AdvertiserComponent advertiser = 9;
   LocationComponent location = 10;
   StopComponent stop = 11;
   HeroComponent hero = 12;

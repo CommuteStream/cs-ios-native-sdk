@@ -17,22 +17,22 @@
     [super tearDown];
 }
 
-- (void)testTitleInitWithMessage {
-    CSNPTitleComponent *message = [[CSNPTitleComponent alloc] init];
+- (void)testHeadlineInitWithMessage {
+    CSNPHeadlineComponent *message = [[CSNPHeadlineComponent alloc] init];
     [message setComponentId:1];
-    [message setTitle:@"test title"];
-    CSNTitleComponent *component = [[CSNTitleComponent alloc] initWithMessage:message];
+    [message setHeadline:@"test headline"];
+    CSNPHeadlineComponent *component = [[CSNPHeadlineComponent alloc] initWithMessage:message];
     XCTAssert([component componentID] == [message componentId]);
-    XCTAssert([component title] == [message title]);
+    XCTAssert([component headline] == [message headline]);
 }
 
-- (void)testIconInitWithMessage {
+- (void)testLogoInitWithMessage {
     UIImage *image = [UIImage imageWithContentsOfFile:@"cs.png"];
     NSData *imageData = UIImagePNGRepresentation(image);
-    CSNPIconComponent *message = [[CSNPIconComponent alloc] init];
+    CSNPLogoComponent *message = [[CSNPLogoComponent alloc] init];
     [message setComponentId:1];
     [message setImage:imageData];
-    CSNIconComponent *component = [[CSNIconComponent alloc] initWithMessage:message];
+    CSNLogoComponent *component = [[CSNLogoComponent alloc] initWithMessage:message];
     XCTAssert([component componentID] == [message componentId]);
         XCTAssert([[component image] size].width == [image size].width);
     XCTAssert([[component image] size].height == [image size].height);

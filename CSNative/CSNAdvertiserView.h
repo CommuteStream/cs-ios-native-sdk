@@ -1,9 +1,9 @@
 @import UIKit;
-#import "CSNComponentView.h"
 #import "CSNAd.h"
+#import "CSNComponentView.h"
 
 //IB_DESIGNABLE
-@interface CSNIconView : UIImageView <CSNComponentView, UIGestureRecognizerDelegate>
+@interface CSNAdvertiserView : UILabel <CSNComponentView, UIGestureRecognizerDelegate>
 @property (readonly, nonnull) CSNAd *ad;
 @property (readonly) uint64_t componentID;
 @property BOOL interactable;

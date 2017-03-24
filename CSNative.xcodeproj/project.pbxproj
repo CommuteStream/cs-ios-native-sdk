@@ -31,8 +31,8 @@
 		1B555FED1E60AD7A00FE1C08 /* Csnmessages.pbobjc.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B555FEB1E60AD7A00FE1C08 /* Csnmessages.pbobjc.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1B555FEE1E60AD7A00FE1C08 /* Csnmessages.pbobjc.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B555FEC1E60AD7A00FE1C08 /* Csnmessages.pbobjc.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		1B555FF01E60B0B500FE1C08 /* CSNHttpClientTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B555FEF1E60B0B500FE1C08 /* CSNHttpClientTest.m */; };
-		1B555FF91E61134500FE1C08 /* CSNIconView.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B555FF71E61134500FE1C08 /* CSNIconView.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		1B555FFA1E61134500FE1C08 /* CSNIconView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B555FF81E61134500FE1C08 /* CSNIconView.m */; };
+		1B555FF91E61134500FE1C08 /* CSNLogoView.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B555FF71E61134500FE1C08 /* CSNLogoView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1B555FFA1E61134500FE1C08 /* CSNLogoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B555FF81E61134500FE1C08 /* CSNLogoView.m */; };
 		1B5560491E61F2FB00FE1C08 /* cs.png in Resources */ = {isa = PBXBuildFile; fileRef = 1B5560481E61F2FB00FE1C08 /* cs.png */; };
 		1B5560561E648AC200FE1C08 /* CSNAdsController.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B5560541E648AC200FE1C08 /* CSNAdsController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1B5560571E648AC200FE1C08 /* CSNAdsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B5560551E648AC200FE1C08 /* CSNAdsController.m */; };
@@ -40,20 +40,22 @@
 		1B55605F1E65037B00FE1C08 /* CSNAd.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B55605D1E65037B00FE1C08 /* CSNAd.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1B5560601E65037B00FE1C08 /* CSNAd.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B55605E1E65037B00FE1C08 /* CSNAd.m */; };
 		1B5560631E65FD2A00FE1C08 /* CSNComponentView.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B5560621E65FD2A00FE1C08 /* CSNComponentView.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		1B5560661E66053100FE1C08 /* CSNTitleView.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B5560641E66053100FE1C08 /* CSNTitleView.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		1B5560671E66053100FE1C08 /* CSNTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B5560651E66053100FE1C08 /* CSNTitleView.m */; };
+		1B5560661E66053100FE1C08 /* CSNHeadlineView.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B5560641E66053100FE1C08 /* CSNHeadlineView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1B5560671E66053100FE1C08 /* CSNHeadlineView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B5560651E66053100FE1C08 /* CSNHeadlineView.m */; };
 		1B5560691E6611DD00FE1C08 /* CSNAdTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B5560681E6611DD00FE1C08 /* CSNAdTest.m */; };
 		1B5560701E67423F00FE1C08 /* CSNStopTuple.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B55606E1E67423F00FE1C08 /* CSNStopTuple.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1B5560711E67423F00FE1C08 /* CSNStopTuple.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B55606F1E67423F00FE1C08 /* CSNStopTuple.m */; };
 		1B5560731E67424F00FE1C08 /* CSNStopTupleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B5560721E67424F00FE1C08 /* CSNStopTupleTests.m */; };
 		1B5560761E6742E700FE1C08 /* CSNMockClient.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B5560741E6742E700FE1C08 /* CSNMockClient.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1B5560771E6742E700FE1C08 /* CSNMockClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B5560751E6742E700FE1C08 /* CSNMockClient.m */; };
-		1B5560791E67497100FE1C08 /* CSNIconViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B5560781E67497100FE1C08 /* CSNIconViewTests.m */; };
+		1B5560791E67497100FE1C08 /* CSNLogoViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B5560781E67497100FE1C08 /* CSNLogoViewTests.m */; };
 		1B55607E1E6E06D600FE1C08 /* CSNTitleViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B55607D1E6E06D600FE1C08 /* CSNTitleViewTests.m */; };
 		1BC79FB41E71EE92008D146A /* CSNVisibilityMonitor.h in Headers */ = {isa = PBXBuildFile; fileRef = 1BC79FB21E71EE92008D146A /* CSNVisibilityMonitor.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1BC79FB51E71EE92008D146A /* CSNVisibilityMonitor.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BC79FB31E71EE92008D146A /* CSNVisibilityMonitor.m */; };
 		1BC79FB71E73332C008D146A /* CSNVisibilityMonitorTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BC79FB61E73332C008D146A /* CSNVisibilityMonitorTest.m */; };
 		450CEE9BA1525442C8718883 /* Pods_CSNativeTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE17F149E54E79C0A0DD74A1 /* Pods_CSNativeTests.framework */; };
+		7F21139D1E843DF30096DA45 /* CSNActionView.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F21139B1E843DF30096DA45 /* CSNActionView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7F21139E1E843DF30096DA45 /* CSNActionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F21139C1E843DF30096DA45 /* CSNActionView.m */; };
 		7F26303E1E819A38001F36D6 /* CSNModalWindow.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F26303C1E819A38001F36D6 /* CSNModalWindow.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7F26303F1E819A38001F36D6 /* CSNModalWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F26303D1E819A38001F36D6 /* CSNModalWindow.m */; };
 		7F2630411E819B75001F36D6 /* close_interstitial_card.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F2630401E819B75001F36D6 /* close_interstitial_card.png */; };
@@ -62,10 +64,10 @@
 		7F26306B1E81CC01001F36D6 /* CSNHeroViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F26306A1E81CC01001F36D6 /* CSNHeroViewTests.m */; };
 		7F2630741E82DA92001F36D6 /* CSNModalCardView.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F2630721E82DA92001F36D6 /* CSNModalCardView.h */; };
 		7F2630751E82DA92001F36D6 /* CSNModalCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F2630731E82DA92001F36D6 /* CSNModalCardView.m */; };
-		7F26309C1E82F667001F36D6 /* CSNDescriptionView.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F26309A1E82F667001F36D6 /* CSNDescriptionView.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7F26309D1E82F667001F36D6 /* CSNDescriptionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F26309B1E82F667001F36D6 /* CSNDescriptionView.m */; };
-		7F2630AF1E83045A001F36D6 /* CSNWebURLView.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F2630AD1E83045A001F36D6 /* CSNWebURLView.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7F2630B01E83045A001F36D6 /* CSNWebURLView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F2630AE1E83045A001F36D6 /* CSNWebURLView.m */; };
+		7F26309C1E82F667001F36D6 /* CSNBodyView.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F26309A1E82F667001F36D6 /* CSNBodyView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7F26309D1E82F667001F36D6 /* CSNBodyView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F26309B1E82F667001F36D6 /* CSNBodyView.m */; };
+		7F2630AF1E83045A001F36D6 /* CSNAdvertiserView.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F2630AD1E83045A001F36D6 /* CSNAdvertiserView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7F2630B01E83045A001F36D6 /* CSNAdvertiserView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F2630AE1E83045A001F36D6 /* CSNAdvertiserView.m */; };
 		7F2630BF1E8317D8001F36D6 /* CSNTransitTitleView.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F2630BD1E8317D8001F36D6 /* CSNTransitTitleView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7F2630C01E8317D8001F36D6 /* CSNTransitTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F2630BE1E8317D8001F36D6 /* CSNTransitTitleView.m */; };
 		7F2630C91E831B95001F36D6 /* CSNTransitSubtitleView.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F2630C71E831B95001F36D6 /* CSNTransitSubtitleView.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -98,8 +100,8 @@
 		1B555FEB1E60AD7A00FE1C08 /* Csnmessages.pbobjc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Csnmessages.pbobjc.h; sourceTree = "<group>"; };
 		1B555FEC1E60AD7A00FE1C08 /* Csnmessages.pbobjc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Csnmessages.pbobjc.m; sourceTree = "<group>"; };
 		1B555FEF1E60B0B500FE1C08 /* CSNHttpClientTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSNHttpClientTest.m; sourceTree = "<group>"; };
-		1B555FF71E61134500FE1C08 /* CSNIconView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSNIconView.h; sourceTree = "<group>"; };
-		1B555FF81E61134500FE1C08 /* CSNIconView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSNIconView.m; sourceTree = "<group>"; };
+		1B555FF71E61134500FE1C08 /* CSNLogoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSNLogoView.h; sourceTree = "<group>"; };
+		1B555FF81E61134500FE1C08 /* CSNLogoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSNLogoView.m; sourceTree = "<group>"; };
 		1B5560481E61F2FB00FE1C08 /* cs.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cs.png; sourceTree = "<group>"; };
 		1B5560541E648AC200FE1C08 /* CSNAdsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSNAdsController.h; sourceTree = "<group>"; };
 		1B5560551E648AC200FE1C08 /* CSNAdsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSNAdsController.m; sourceTree = "<group>"; };
@@ -107,21 +109,23 @@
 		1B55605D1E65037B00FE1C08 /* CSNAd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSNAd.h; sourceTree = "<group>"; };
 		1B55605E1E65037B00FE1C08 /* CSNAd.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSNAd.m; sourceTree = "<group>"; };
 		1B5560621E65FD2A00FE1C08 /* CSNComponentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSNComponentView.h; sourceTree = "<group>"; };
-		1B5560641E66053100FE1C08 /* CSNTitleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSNTitleView.h; sourceTree = "<group>"; };
-		1B5560651E66053100FE1C08 /* CSNTitleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSNTitleView.m; sourceTree = "<group>"; };
+		1B5560641E66053100FE1C08 /* CSNHeadlineView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSNHeadlineView.h; sourceTree = "<group>"; };
+		1B5560651E66053100FE1C08 /* CSNHeadlineView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSNHeadlineView.m; sourceTree = "<group>"; };
 		1B5560681E6611DD00FE1C08 /* CSNAdTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSNAdTest.m; sourceTree = "<group>"; };
 		1B55606E1E67423F00FE1C08 /* CSNStopTuple.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSNStopTuple.h; sourceTree = "<group>"; };
 		1B55606F1E67423F00FE1C08 /* CSNStopTuple.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSNStopTuple.m; sourceTree = "<group>"; };
 		1B5560721E67424F00FE1C08 /* CSNStopTupleTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSNStopTupleTests.m; sourceTree = "<group>"; };
 		1B5560741E6742E700FE1C08 /* CSNMockClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSNMockClient.h; sourceTree = "<group>"; };
 		1B5560751E6742E700FE1C08 /* CSNMockClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSNMockClient.m; sourceTree = "<group>"; };
-		1B5560781E67497100FE1C08 /* CSNIconViewTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSNIconViewTests.m; sourceTree = "<group>"; };
+		1B5560781E67497100FE1C08 /* CSNLogoViewTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSNLogoViewTests.m; sourceTree = "<group>"; };
 		1B55607D1E6E06D600FE1C08 /* CSNTitleViewTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSNTitleViewTests.m; sourceTree = "<group>"; };
 		1BC79FB21E71EE92008D146A /* CSNVisibilityMonitor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSNVisibilityMonitor.h; sourceTree = "<group>"; };
 		1BC79FB31E71EE92008D146A /* CSNVisibilityMonitor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSNVisibilityMonitor.m; sourceTree = "<group>"; };
 		1BC79FB61E73332C008D146A /* CSNVisibilityMonitorTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSNVisibilityMonitorTest.m; sourceTree = "<group>"; };
 		5501E0D3CBC17B50D64846B3 /* Pods-CSNativeTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CSNativeTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-CSNativeTests/Pods-CSNativeTests.release.xcconfig"; sourceTree = "<group>"; };
 		5F7B3C7CA7AA5D2380F846BD /* Pods-CSNative.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CSNative.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CSNative/Pods-CSNative.debug.xcconfig"; sourceTree = "<group>"; };
+		7F21139B1E843DF30096DA45 /* CSNActionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSNActionView.h; sourceTree = "<group>"; };
+		7F21139C1E843DF30096DA45 /* CSNActionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSNActionView.m; sourceTree = "<group>"; };
 		7F26303C1E819A38001F36D6 /* CSNModalWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSNModalWindow.h; sourceTree = "<group>"; };
 		7F26303D1E819A38001F36D6 /* CSNModalWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSNModalWindow.m; sourceTree = "<group>"; };
 		7F2630401E819B75001F36D6 /* close_interstitial_card.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = close_interstitial_card.png; sourceTree = "<group>"; };
@@ -130,10 +134,10 @@
 		7F26306A1E81CC01001F36D6 /* CSNHeroViewTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSNHeroViewTests.m; sourceTree = "<group>"; };
 		7F2630721E82DA92001F36D6 /* CSNModalCardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSNModalCardView.h; sourceTree = "<group>"; };
 		7F2630731E82DA92001F36D6 /* CSNModalCardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSNModalCardView.m; sourceTree = "<group>"; };
-		7F26309A1E82F667001F36D6 /* CSNDescriptionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSNDescriptionView.h; sourceTree = "<group>"; };
-		7F26309B1E82F667001F36D6 /* CSNDescriptionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSNDescriptionView.m; sourceTree = "<group>"; };
-		7F2630AD1E83045A001F36D6 /* CSNWebURLView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSNWebURLView.h; sourceTree = "<group>"; };
-		7F2630AE1E83045A001F36D6 /* CSNWebURLView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSNWebURLView.m; sourceTree = "<group>"; };
+		7F26309A1E82F667001F36D6 /* CSNBodyView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSNBodyView.h; sourceTree = "<group>"; };
+		7F26309B1E82F667001F36D6 /* CSNBodyView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSNBodyView.m; sourceTree = "<group>"; };
+		7F2630AD1E83045A001F36D6 /* CSNAdvertiserView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSNAdvertiserView.h; sourceTree = "<group>"; };
+		7F2630AE1E83045A001F36D6 /* CSNAdvertiserView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSNAdvertiserView.m; sourceTree = "<group>"; };
 		7F2630BD1E8317D8001F36D6 /* CSNTransitTitleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSNTransitTitleView.h; sourceTree = "<group>"; };
 		7F2630BE1E8317D8001F36D6 /* CSNTransitTitleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSNTransitTitleView.m; sourceTree = "<group>"; };
 		7F2630C71E831B95001F36D6 /* CSNTransitSubtitleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSNTransitSubtitleView.h; sourceTree = "<group>"; };
@@ -198,8 +202,8 @@
 				1B555FC81E60A3F800FE1C08 /* CSNative.h */,
 				1B555FC91E60A3F800FE1C08 /* Info.plist */,
 				1B555FDF1E60A60E00FE1C08 /* CSNClient.h */,
-				1B555FF71E61134500FE1C08 /* CSNIconView.h */,
-				1B555FF81E61134500FE1C08 /* CSNIconView.m */,
+				1B555FF71E61134500FE1C08 /* CSNLogoView.h */,
+				1B555FF81E61134500FE1C08 /* CSNLogoView.m */,
 				1B5560541E648AC200FE1C08 /* CSNAdsController.h */,
 				1B5560551E648AC200FE1C08 /* CSNAdsController.m */,
 				1B55605D1E65037B00FE1C08 /* CSNAd.h */,
@@ -209,12 +213,12 @@
 				7F2630BE1E8317D8001F36D6 /* CSNTransitTitleView.m */,
 				7F2630C71E831B95001F36D6 /* CSNTransitSubtitleView.h */,
 				7F2630C81E831B95001F36D6 /* CSNTransitSubtitleView.m */,
-				1B5560641E66053100FE1C08 /* CSNTitleView.h */,
-				1B5560651E66053100FE1C08 /* CSNTitleView.m */,
-				7F26309A1E82F667001F36D6 /* CSNDescriptionView.h */,
-				7F26309B1E82F667001F36D6 /* CSNDescriptionView.m */,
-				7F2630AD1E83045A001F36D6 /* CSNWebURLView.h */,
-				7F2630AE1E83045A001F36D6 /* CSNWebURLView.m */,
+				1B5560641E66053100FE1C08 /* CSNHeadlineView.h */,
+				1B5560651E66053100FE1C08 /* CSNHeadlineView.m */,
+				7F26309A1E82F667001F36D6 /* CSNBodyView.h */,
+				7F26309B1E82F667001F36D6 /* CSNBodyView.m */,
+				7F2630AD1E83045A001F36D6 /* CSNAdvertiserView.h */,
+				7F2630AE1E83045A001F36D6 /* CSNAdvertiserView.m */,
 				1B55606E1E67423F00FE1C08 /* CSNStopTuple.h */,
 				1B55606F1E67423F00FE1C08 /* CSNStopTuple.m */,
 				1B5560741E6742E700FE1C08 /* CSNMockClient.h */,
@@ -229,6 +233,8 @@
 				7F2630491E81B2A6001F36D6 /* CSNHeroView.m */,
 				7F2630721E82DA92001F36D6 /* CSNModalCardView.h */,
 				7F2630731E82DA92001F36D6 /* CSNModalCardView.m */,
+				7F21139B1E843DF30096DA45 /* CSNActionView.h */,
+				7F21139C1E843DF30096DA45 /* CSNActionView.m */,
 			);
 			path = CSNative;
 			sourceTree = "<group>";
@@ -241,7 +247,7 @@
 				1B5560581E64989B00FE1C08 /* CSNAdsControllerTest.m */,
 				1B5560681E6611DD00FE1C08 /* CSNAdTest.m */,
 				1B5560721E67424F00FE1C08 /* CSNStopTupleTests.m */,
-				1B5560781E67497100FE1C08 /* CSNIconViewTests.m */,
+				1B5560781E67497100FE1C08 /* CSNLogoViewTests.m */,
 				1B55607D1E6E06D600FE1C08 /* CSNTitleViewTests.m */,
 				1BC79FB61E73332C008D146A /* CSNVisibilityMonitorTest.m */,
 				7F26306A1E81CC01001F36D6 /* CSNHeroViewTests.m */,
@@ -277,13 +283,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				1B5560701E67423F00FE1C08 /* CSNStopTuple.h in Headers */,
-				7F2630AF1E83045A001F36D6 /* CSNWebURLView.h in Headers */,
+				7F2630AF1E83045A001F36D6 /* CSNAdvertiserView.h in Headers */,
 				7F2630C91E831B95001F36D6 /* CSNTransitSubtitleView.h in Headers */,
 				7F2630BF1E8317D8001F36D6 /* CSNTransitTitleView.h in Headers */,
 				1B5560761E6742E700FE1C08 /* CSNMockClient.h in Headers */,
-				1B555FF91E61134500FE1C08 /* CSNIconView.h in Headers */,
+				1B555FF91E61134500FE1C08 /* CSNLogoView.h in Headers */,
 				7F26304A1E81B2A6001F36D6 /* CSNHeroView.h in Headers */,
-				1B5560661E66053100FE1C08 /* CSNTitleView.h in Headers */,
+				1B5560661E66053100FE1C08 /* CSNHeadlineView.h in Headers */,
+				7F21139D1E843DF30096DA45 /* CSNActionView.h in Headers */,
 				1B2CCB131E79E0C800B6FBC2 /* CSNAdRequest.h in Headers */,
 				1BC79FB41E71EE92008D146A /* CSNVisibilityMonitor.h in Headers */,
 				1B555FED1E60AD7A00FE1C08 /* Csnmessages.pbobjc.h in Headers */,
@@ -291,7 +298,7 @@
 				1B5560561E648AC200FE1C08 /* CSNAdsController.h in Headers */,
 				1B5560631E65FD2A00FE1C08 /* CSNComponentView.h in Headers */,
 				1B555FE11E60A60E00FE1C08 /* CSNClient.h in Headers */,
-				7F26309C1E82F667001F36D6 /* CSNDescriptionView.h in Headers */,
+				7F26309C1E82F667001F36D6 /* CSNBodyView.h in Headers */,
 				7F26303E1E819A38001F36D6 /* CSNModalWindow.h in Headers */,
 				1B55605F1E65037B00FE1C08 /* CSNAd.h in Headers */,
 				7F2630741E82DA92001F36D6 /* CSNModalCardView.h in Headers */,
@@ -505,12 +512,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				7F2630CA1E831B95001F36D6 /* CSNTransitSubtitleView.m in Sources */,
-				1B555FFA1E61134500FE1C08 /* CSNIconView.m in Sources */,
+				1B555FFA1E61134500FE1C08 /* CSNLogoView.m in Sources */,
 				7F26304B1E81B2A6001F36D6 /* CSNHeroView.m in Sources */,
 				1B555FE61E60A6B500FE1C08 /* CSNHttpClient.m in Sources */,
-				1B5560671E66053100FE1C08 /* CSNTitleView.m in Sources */,
-				7F2630B01E83045A001F36D6 /* CSNWebURLView.m in Sources */,
-				7F26309D1E82F667001F36D6 /* CSNDescriptionView.m in Sources */,
+				1B5560671E66053100FE1C08 /* CSNHeadlineView.m in Sources */,
+				7F21139E1E843DF30096DA45 /* CSNActionView.m in Sources */,
+				7F2630B01E83045A001F36D6 /* CSNAdvertiserView.m in Sources */,
+				7F26309D1E82F667001F36D6 /* CSNBodyView.m in Sources */,
 				7F2630C01E8317D8001F36D6 /* CSNTransitTitleView.m in Sources */,
 				1B5560601E65037B00FE1C08 /* CSNAd.m in Sources */,
 				7F2630751E82DA92001F36D6 /* CSNModalCardView.m in Sources */,
@@ -532,7 +540,7 @@
 				1B5560691E6611DD00FE1C08 /* CSNAdTest.m in Sources */,
 				1BC79FB71E73332C008D146A /* CSNVisibilityMonitorTest.m in Sources */,
 				1B555FF01E60B0B500FE1C08 /* CSNHttpClientTest.m in Sources */,
-				1B5560791E67497100FE1C08 /* CSNIconViewTests.m in Sources */,
+				1B5560791E67497100FE1C08 /* CSNLogoViewTests.m in Sources */,
 				7F26306B1E81CC01001F36D6 /* CSNHeroViewTests.m in Sources */,
 				1B55607E1E6E06D600FE1C08 /* CSNTitleViewTests.m in Sources */,
 				1B5560731E67424F00FE1C08 /* CSNStopTupleTests.m in Sources */,

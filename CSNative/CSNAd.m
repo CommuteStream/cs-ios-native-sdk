@@ -1,10 +1,10 @@
 #import "CSNAd.h"
 
-@implementation CSNTitleComponent
+@implementation CSNHeadlineComponent
 
-- (instancetype) initWithMessage:(CSNPTitleComponent *)message {
+- (instancetype) initWithMessage:(CSNPHeadlineComponent *)message {
     _componentID = [message componentId];
-    _title = [message title];
+    _headline = [message headline];
     return self;
 }
 
@@ -32,29 +32,29 @@
 @end
 
 
-@implementation CSNDescriptionComponent
+@implementation CSNBodyComponent
 
-- (instancetype) initWithMessage:(CSNPDescriptionComponent *)message {
+- (instancetype) initWithMessage:(CSNPBodyComponent *)message {
     _componentID = [message componentId];
-    _adDescription = [message adDescription];
+    _body = [message body];
     return self;
 }
 
 @end
 
-@implementation CSNWebUrlComponent
+@implementation CSNAdvertiserComponent
 
-- (instancetype) initWithMessage:(CSNPWebUrlComponent *)message {
+- (instancetype) initWithMessage:(CSNPAdvertiserComponent *)message {
     _componentID = [message componentId];
-    _websiteURL = [message websiteURL];
+    _advertiser = [message advertiser];
     return self;
 }
 
 @end
 
-@implementation CSNIconComponent
+@implementation CSNLogoComponent
 
-- (instancetype) initWithMessage:(CSNPIconComponent *)message {
+- (instancetype) initWithMessage:(CSNPLogoComponent *)message {
     _componentID = [message componentId];
     _image = [UIImage imageWithData:[message image]];
     return self;
@@ -81,18 +81,42 @@
 @end
 
 
+@implementation CSNActionComponent
+
+- (instancetype) initWithMessage:(CSNPActionComponent *)message {
+    _componentID = [message componentId];
+    _kind = [message kind];
+    _title = [message title];
+    _url = [message URL];
+    _color = [NSKeyedUnarchiver unarchiveObjectWithData:[message color]];
+    
+    
+    return self;
+}
+
+@end
+
+
 @implementation CSNAd
 
 - (instancetype) initWithMessage:(CSNPNativeAd *)message {
     _adID = [message adId];
     _requestID = [message requestId];
-    _title = [[CSNTitleComponent alloc] initWithMessage:[message title]];
+    _headline = [[CSNHeadlineComponent alloc] initWithMessage:[message headline]];
     _transitTitle = [[CSNTransitTitleComponent alloc] initWithMessage:[message transitTitle]];
     _transitSubtitle = [[CSNTransitSubtitleComponent alloc] initWithMessage:[message transitSubtitle]];
-    _adDescription = [[CSNDescriptionComponent alloc] initWithMessage:[message adDescription]];
-    _websiteURL = [[CSNWebUrlComponent alloc] initWithMessage:[message websiteURL]];
-    _icon = [[CSNIconComponent alloc] initWithMessage:[message icon]];
+    _body = [[CSNBodyComponent alloc] initWithMessage:[message body]];
+    _advertiser = [[CSNAdvertiserComponent alloc] initWithMessage:[message advertiser]];
+    _logo = [[CSNLogoComponent alloc] initWithMessage:[message logo]];
     _hero = [[CSNHeroComponent alloc] initWithMessage:[message hero]];
+    
+    NSMutableArray *actions = [[NSMutableArray alloc] initWithCapacity:[message actionsArray_Count]];
+    for (id action in [message actionsArray]){
+        CSNActionComponent *actionComp = [[CSNActionComponent alloc] initWithMessage:action];
+        [actions addObject:actionComp];
+        
+    }
+    _actions = actions;
     return self;
 }
 

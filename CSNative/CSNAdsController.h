@@ -4,8 +4,8 @@
 #import "CSNModalWindow.h"
 
 #ifdef DEBUG
-#import "CSNIconView.h"
-#import "CSNTitleView.h"
+#import "CSNLogoView.h"
+#import "CSNHeadlineView.h"
 #endif
 
 @interface CSNAdsController : NSObject

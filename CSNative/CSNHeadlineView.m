@@ -1,7 +1,7 @@
 @import UIKit;
-#import "CSNDescriptionView.h"
+#import "CSNHeadlineView.h"
 
-@implementation CSNDescriptionView
+@implementation CSNHeadlineView
 @synthesize blockAction;
 
 -(instancetype)initWithCoder:(NSCoder *)decoder {
@@ -17,8 +17,8 @@
 
 - (void) setAd:(CSNAd *)ad {
     _ad = ad;
-    _componentID = [[ad adDescription] componentID];
-    [self setText:[[ad adDescription] adDescription]];
+    _componentID = [[ad headline] componentID];
+    [self setText:[[ad headline] headline]];
     [self setNeedsDisplay];
 }
 

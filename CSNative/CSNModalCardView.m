@@ -13,10 +13,10 @@
     CSNTransitTitleView *transitHeaderLabel;
     CSNTransitSubtitleView *transitSubheaderLabel;
 
-    CSNTitleView *adTitleLabel;
-    CSNDescriptionView *adDescriptionLabel;
-    CSNWebURLView *adUrlLabel;
-    CSNIconView *adIconImage;
+    CSNHeadlineView *headlineLabel;
+    CSNBodyView *bodyLabel;
+    CSNAdvertiserView *advertiserLabel;
+    CSNLogoView *adLogoImage;
     UIView *adInfoView;
 
 }
@@ -83,27 +83,27 @@
         
         [adInfoView setBackgroundColor:[UIColor whiteColor]];
         
-        adIconImage = [[CSNIconView alloc] initWithFrame:CGRectMake(7.0, 7.0, 30.0, 30.0)];
-        [adIconImage setContentMode:UIViewContentModeScaleAspectFit];
-        [adIconImage setAd:nativeAd];
+        adLogoImage = [[CSNLogoView alloc] initWithFrame:CGRectMake(7.0, 7.0, 30.0, 30.0)];
+        [adLogoImage setContentMode:UIViewContentModeScaleAspectFit];
+        [adLogoImage setAd:nativeAd];
         
         
         
-        adTitleLabel = [[CSNTitleView alloc] initWithFrame:CGRectMake(44.0, 7.0, adInfoView.frame.size.width - 50.0, 14.0)];
-        [adTitleLabel setFont:[UIFont boldSystemFontOfSize:12.0]];
-        [adTitleLabel setAd:nativeAd];
+        headlineLabel = [[CSNHeadlineView alloc] initWithFrame:CGRectMake(44.0, 7.0, adInfoView.frame.size.width - 50.0, 14.0)];
+        [headlineLabel setFont:[UIFont boldSystemFontOfSize:12.0]];
+        [headlineLabel setAd:nativeAd];
         
         
-        adDescriptionLabel = [[CSNDescriptionView alloc] initWithFrame:CGRectMake(44.0, 21.0, self.frame.size.width - 50.0, 14.0)];
-        [adDescriptionLabel setFont:[UIFont systemFontOfSize:10.0]];
-        [adDescriptionLabel setTextColor:[UIColor darkGrayColor]];
-        [adDescriptionLabel setAd:nativeAd];
+        bodyLabel = [[CSNBodyView alloc] initWithFrame:CGRectMake(44.0, 21.0, self.frame.size.width - 50.0, 14.0)];
+        [bodyLabel setFont:[UIFont systemFontOfSize:10.0]];
+        [bodyLabel setTextColor:[UIColor darkGrayColor]];
+        [bodyLabel setAd:nativeAd];
         
         
-        adUrlLabel = [[CSNWebURLView alloc] initWithFrame:CGRectMake(44.0, 33.0, self.frame.size.width - 50.0, 14.0)];
-        [adUrlLabel setFont:[UIFont systemFontOfSize:8.0]];
-        [adUrlLabel setTextColor:[UIColor lightGrayColor]];
-        [adUrlLabel setAd:nativeAd];
+        advertiserLabel = [[CSNAdvertiserView alloc] initWithFrame:CGRectMake(44.0, 33.0, self.frame.size.width - 50.0, 14.0)];
+        [advertiserLabel setFont:[UIFont systemFontOfSize:8.0]];
+        [advertiserLabel setTextColor:[UIColor lightGrayColor]];
+        [advertiserLabel setAd:nativeAd];
         
         
         
@@ -112,20 +112,70 @@
         [self addSubview:transitSubheaderLabel];
         [self addSubview:heroImageView];
         
-        [adInfoView addSubview:adIconImage];
-        [adInfoView addSubview:adTitleLabel];
-        [adInfoView addSubview:adDescriptionLabel];
-        [adInfoView addSubview:adUrlLabel];
+        [adInfoView addSubview:adLogoImage];
+        [adInfoView addSubview:headlineLabel];
+        [adInfoView addSubview:bodyLabel];
+        [adInfoView addSubview:advertiserLabel];
         [self addSubview:adInfoView];
         
-        //NSMutableArray *actionArray = [stopObject objectForKey:@"actions"];
+        NSMutableArray *actionArray = [[NSMutableArray alloc] initWithArray:[nativeAd actions]];
         
         //CGFloat actionButtonsYPos = adInfoView.frame.origin.y + adInfoView.frame.size.height;
         
         CGFloat frameHeight = 0.0;
+        NSUInteger actionIndex = 0;
+        for(NSDictionary *item in actionArray){
+            NSLog(@"Item in Array = %@", item);
+            
+            CGFloat actionButtonsYPos = (adInfoView.frame.origin.y + adInfoView.frame.size.height) + (actionIndex * 50) + (actionIndex * 5);
+            
+            CSNActionView *actionButton = [[CSNActionView alloc] initWithFrame:CGRectMake(5.0, actionButtonsYPos + 5.0, self.frame.size.width - 10.0, 50.0)];
+            
+            [actionButton setAd:nativeAd atActionIndex:actionIndex];
+            
+            //UILabel *buttonTitle = [[UILabel alloc] initWithFrame:CGRectMake(5.0, 6.0, actionButton.frame.size.width - 10.0, 26)];
+            //[buttonTitle setTextAlignment:NSTextAlignmentCenter];
+            //buttonTitle.text = [item objectForKey:@"title"];
+            //[buttonTitle setTextColor:[UIColor whiteColor]];
+            //buttonTitle.font = [UIFont systemFontOfSize:23];
+            //[actionButton addSubview:buttonTitle];
+            
+            //UILabel *buttonSubtitle = [[UILabel alloc] initWithFrame:CGRectMake(5.0, 28.0, actionButton.frame.size.width - 10.0, 20)];
+            //[buttonSubtitle setTextAlignment:NSTextAlignmentCenter];
+            //buttonSubtitle.text = [item objectForKey:@"subtitle"];
+            //[buttonSubtitle setTextColor:[UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:0.6]];
+            //buttonSubtitle.font = [UIFont systemFontOfSize:9];
+            //[actionButton addSubview:buttonSubtitle];
+            
+            [actionButton setBackgroundColor: [[[nativeAd actions] objectAtIndex:actionIndex] color]];
+            [actionButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+            [[actionButton titleLabel] setFont: [UIFont systemFontOfSize:22.0]];
+            [actionButton addTapHandler:^{
+                
+                NSString *urlString = [[[nativeAd actions] objectAtIndex:actionIndex] url];
+                NSURL *url = [NSURL URLWithString:urlString];
+                //NSLog(@"tapped it %@", [[[nativeAd actions] objectAtIndex:actionIndex] url]);
+                
+                if ([[UIApplication sharedApplication] respondsToSelector:@selector(openURL:options:completionHandler:)]) {
+                    [[UIApplication sharedApplication] openURL:url options:@{} completionHandler:NULL];
+                }else{
+                    // Fallback on earlier versions
+                    [[UIApplication sharedApplication] openURL:url];
+                }
+
+                
+                
+                
+            }];
+            
+            [self addSubview:actionButton];
+            
+            frameHeight = actionButton.frame.origin.y + actionButton.frame.size.height + 5;
+            actionIndex++;
+        }
         
 
-        frameHeight = adInfoView.frame.origin.y + adInfoView.frame.size.height + 5;
+        //frameHeight = adInfoView.frame.origin.y + adInfoView.frame.size.height + 5;
             
 
         self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, self.frame.size.width, frameHeight);

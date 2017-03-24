@@ -1,6 +1,6 @@
-#import "CSNIconView.h"
+#import "CSNLogoView.h"
 
-@implementation CSNIconView
+@implementation CSNLogoView
 @synthesize blockAction;
 
 -(instancetype)initWithCoder:(NSCoder *)decoder {
@@ -15,8 +15,8 @@
 
 - (void)setAd:(CSNAd *)ad {
     _ad = ad;
-    _componentID = [[ad icon] componentID];
-    [self setImage:[[ad icon] image]];
+    _componentID = [[ad logo] componentID];
+    [self setImage:[[ad logo] image]];
     [self setNeedsDisplay];
 }
 

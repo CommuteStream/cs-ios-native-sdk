@@ -2,7 +2,7 @@
 #import "CSNClient.h"
 #import "CSNHttpClient.h"
 #import "CSNMockClient.h"
-#import "CSNIconView.h"
+#import "CSNLogoView.h"
 #import "CSNStopTuple.h"
 #import "CSNVisibilityMonitor.h"
 #import "Csnmessages.pbobjc.h"
@@ -114,7 +114,7 @@ CSNModalWindow *modalWindowView;
         // periodically poll view for visibility
         [componentView setAd:ad];
         [componentView addTapHandler:^{
-            NSLog(@"%@", [ad adDescription]);
+            NSLog(@"%@", [ad body]);
             CGRect bounds = [[UIScreen mainScreen] bounds];
             CSNModalWindow *modalWindow = [[CSNModalWindow alloc] initWithFrame:bounds forAd:ad];
             modalWindow.windowLevel = UIWindowLevelAlert;

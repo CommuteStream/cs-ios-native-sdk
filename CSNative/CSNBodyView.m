@@ -1,7 +1,7 @@
 @import UIKit;
-#import "CSNWebURLView.h"
+#import "CSNBodyView.h"
 
-@implementation CSNWebURLView
+@implementation CSNBodyView
 @synthesize blockAction;
 
 -(instancetype)initWithCoder:(NSCoder *)decoder {
@@ -17,8 +17,8 @@
 
 - (void) setAd:(CSNAd *)ad {
     _ad = ad;
-    _componentID = [[ad websiteURL] componentID];
-    [self setText:[[ad websiteURL] websiteURL]];
+    _componentID = [[ad body] componentID];
+    [self setText:[[ad body] body]];
     [self setNeedsDisplay];
 }
 

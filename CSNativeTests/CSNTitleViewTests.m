@@ -1,14 +1,14 @@
 @import XCTest;
 @import CSNative;
 
-@interface CSNTitleView (Testing)
+@interface CSNHeadlineView (Testing)
 @end
 
-@interface CSNTitleViewTests : XCTestCase
+@interface CSNHeadlineViewTests : XCTestCase
 
 @end
 
-@implementation CSNTitleViewTests
+@implementation CSNHeadlineViewTests
 
 - (void)setUp {
     [super setUp];
@@ -21,18 +21,18 @@
 }
 
 - (void)testSetAd {
-    CSNPTitleComponent *titleMessage = [[CSNPTitleComponent alloc] init];
-    [titleMessage setComponentId:123];
-    [titleMessage setTitle:@"test title"];
+    CSNPHeadlineComponent *headlineMessage = [[CSNPHeadlineComponent alloc] init];
+    [headlineMessage setComponentId:123];
+    [headlineMessage setHeadline:@"test headline"];
     CSNPNativeAd *message = [[CSNPNativeAd alloc] init];
-    [message setTitle:titleMessage];
+    [message setHeadline:headlineMessage];
     CSNAd *ad = [[CSNAd alloc] initWithMessage:message];
-    CSNTitleView *view = [[CSNTitleView alloc] init];
+    CSNHeadlineView *view = [[CSNHeadlineView alloc] init];
     [view setAd:ad];
     XCTAssert([view ad] == ad);
-    XCTAssert([view componentID] == [[ad title] componentID]);
+    XCTAssert([view componentID] == [[ad headline] componentID]);
     NSLog(@"%@", [view text]);
-    XCTAssert([[view text] isEqualToString:[[ad title] title]]);
+    XCTAssert([[view text] isEqualToString:[[ad headline] headline]]);
 }
 
 @end

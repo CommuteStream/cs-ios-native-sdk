@@ -1,14 +1,7 @@
-//
-//  CSNHeroView.m
-//  CSNative
-//
-//  Created by David Rogers on 3/21/17.
-//  Copyright © 2017 CommuteStream. All rights reserved.
-//
+@import UIKit;
+#import "CSNAdvertiserView.h"
 
-#import "CSNHeroView.h"
-
-@implementation CSNHeroView
+@implementation CSNAdvertiserView
 @synthesize blockAction;
 
 -(instancetype)initWithCoder:(NSCoder *)decoder {
@@ -21,12 +14,11 @@
     return self;
 }
 
-- (void)setAd:(CSNAd *)ad {
+
+- (void) setAd:(CSNAd *)ad {
     _ad = ad;
-    _componentID = [[ad hero] componentID];
-    UIImageView *heroImageView = [[UIImageView alloc] initWithImage:[[ad hero] image]];
-    [heroImageView setFrame: self.bounds];
-    [self addSubview:heroImageView];
+    _componentID = [[ad advertiser] componentID];
+    [self setText:[[ad advertiser] advertiser]];
     [self setNeedsDisplay];
 }
 
@@ -45,20 +37,12 @@
 -(void) tapViewAction:(UIGestureRecognizer *)sender{
     
     [self invokeBlock:sender];
-    NSLog(@"tapped it yo");
+    
     
 }
 
 - (void) invokeBlock:(id)sender {
     [self blockAction]();
 }
-
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
-}
-*/
 
 @end

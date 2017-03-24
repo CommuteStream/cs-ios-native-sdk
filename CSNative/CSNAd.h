@@ -6,11 +6,11 @@
 @property (readonly) uint64_t componentID;
 @end
 
-@interface CSNTitleComponent : NSObject <CSNAdComponent>
+@interface CSNHeadlineComponent : NSObject <CSNAdComponent>
 @property (readonly) uint64_t componentID;
-@property (copy, readonly, nonnull) NSString *title;
+@property (copy, readonly, nonnull) NSString *headline;
 
-- (instancetype _Nonnull) initWithMessage:(CSNPTitleComponent * _Nonnull)message;
+- (instancetype _Nonnull) initWithMessage:(CSNPHeadlineComponent * _Nonnull)message;
 @end;
 
 
@@ -31,18 +31,18 @@
 
 
 
-@interface CSNDescriptionComponent : NSObject <CSNAdComponent>
+@interface CSNBodyComponent : NSObject <CSNAdComponent>
 @property (readonly) uint64_t componentID;
-@property (copy, readonly, nonnull) NSString *adDescription;
+@property (copy, readonly, nonnull) NSString *body;
 
-- (instancetype _Nonnull) initWithMessage:(CSNPDescriptionComponent * _Nonnull)message;
+- (instancetype _Nonnull) initWithMessage:(CSNPBodyComponent * _Nonnull)message;
 @end;
 
-@interface CSNWebUrlComponent : NSObject <CSNAdComponent>
+@interface CSNAdvertiserComponent : NSObject <CSNAdComponent>
 @property (readonly) uint64_t componentID;
-@property (copy, readonly, nonnull) NSString *websiteURL;
+@property (copy, readonly, nonnull) NSString *advertiser;
 
-- (instancetype _Nonnull) initWithMessage:(CSNPWebUrlComponent * _Nonnull)message;
+- (instancetype _Nonnull) initWithMessage:(CSNPAdvertiserComponent * _Nonnull)message;
 @end;
 
 @interface CSNLocationComponent : NSObject <CSNAdComponent>
@@ -55,17 +55,20 @@
 - (instancetype _Nonnull) initWithMessage:(CSNPLocationComponent * _Nonnull)message;
 @end
 
-@interface CSNIconComponent : NSObject <CSNAdComponent>
+@interface CSNLogoComponent : NSObject <CSNAdComponent>
 @property (readonly) uint64_t componentID;
 @property (copy, readonly, nonnull) UIImage *image;
 
-- (instancetype _Nonnull) initWithMessage:(CSNPIconComponent * _Nonnull)message;
+- (instancetype _Nonnull) initWithMessage:(CSNPLogoComponent * _Nonnull)message;
 @end
 
 @interface CSNActionComponent : NSObject <CSNAdComponent>
 @property (readonly) uint64_t componentID;
-@property (copy, readonly, nonnull) NSString *kind;
+@property (readonly) CSNPActionKind kind;
 @property (copy, readonly, nonnull) NSString *url;
+@property (copy, readonly, nonnull) NSString *title;
+@property (copy, readonly, nonnull) UIColor *color;
+
 
 - (instancetype _Nonnull) initWithMessage:(CSNPActionComponent * _Nonnull)message;
 @end
@@ -82,12 +85,12 @@
 @interface CSNAd : NSObject
 @property (readonly) uint64_t requestID;
 @property ( readonly) uint64_t adID;
-@property (copy, readonly, nonnull) CSNTitleComponent *title;
+@property (copy, readonly, nonnull) CSNHeadlineComponent *headline;
 @property (copy, readonly, nonnull) CSNTransitTitleComponent *transitTitle;
 @property (copy, readonly, nonnull) CSNTransitSubtitleComponent *transitSubtitle;
-@property (copy, readonly, nonnull) CSNDescriptionComponent *adDescription;
-@property (copy, readonly, nonnull) CSNWebUrlComponent *websiteURL;
-@property (copy, readonly, nonnull) CSNIconComponent *icon;
+@property (copy, readonly, nonnull) CSNBodyComponent *body;
+@property (copy, readonly, nonnull) CSNAdvertiserComponent *advertiser;
+@property (copy, readonly, nonnull) CSNLogoComponent *logo;
 @property (copy, readonly, nullable) CSNLocationComponent *location;
 @property (copy, readonly, nonnull) CSNHeroComponent *hero;
 @property (copy, readonly, nonnull) NSArray<CSNActionComponent *> *actions;
