@@ -41,6 +41,7 @@ CF_EXTERN_C_BEGIN
 @class CSNPLocationComponent;
 @class CSNPLogoComponent;
 @class CSNPNativeAd;
+@class CSNPSecondaryActionComponent;
 @class CSNPSimpleStat;
 @class CSNPStop;
 @class CSNPStopAd;
@@ -400,22 +401,35 @@ typedef GPB_ENUM(CSNPColors_FieldNumber) {
 
 @end
 
+#pragma mark - CSNPSecondaryActionComponent
+
+typedef GPB_ENUM(CSNPSecondaryActionComponent_FieldNumber) {
+  CSNPSecondaryActionComponent_FieldNumber_ComponentId = 1,
+};
+
+@interface CSNPSecondaryActionComponent : GPBMessage
+
+@property(nonatomic, readwrite) uint64_t componentId;
+
+@end
+
 #pragma mark - CSNPNativeAd
 
 typedef GPB_ENUM(CSNPNativeAd_FieldNumber) {
   CSNPNativeAd_FieldNumber_RequestId = 1,
   CSNPNativeAd_FieldNumber_AdId = 2,
   CSNPNativeAd_FieldNumber_Colors = 3,
-  CSNPNativeAd_FieldNumber_TransitTitle = 4,
-  CSNPNativeAd_FieldNumber_TransitSubtitle = 5,
-  CSNPNativeAd_FieldNumber_Logo = 6,
-  CSNPNativeAd_FieldNumber_Headline = 7,
-  CSNPNativeAd_FieldNumber_Body = 8,
-  CSNPNativeAd_FieldNumber_Advertiser = 9,
-  CSNPNativeAd_FieldNumber_Location = 10,
-  CSNPNativeAd_FieldNumber_Stop = 11,
-  CSNPNativeAd_FieldNumber_Hero = 12,
-  CSNPNativeAd_FieldNumber_ActionsArray = 13,
+  CSNPNativeAd_FieldNumber_SecondaryActionScreen = 4,
+  CSNPNativeAd_FieldNumber_TransitTitle = 5,
+  CSNPNativeAd_FieldNumber_TransitSubtitle = 6,
+  CSNPNativeAd_FieldNumber_Logo = 7,
+  CSNPNativeAd_FieldNumber_Headline = 8,
+  CSNPNativeAd_FieldNumber_Body = 9,
+  CSNPNativeAd_FieldNumber_Advertiser = 10,
+  CSNPNativeAd_FieldNumber_Location = 11,
+  CSNPNativeAd_FieldNumber_Stop = 12,
+  CSNPNativeAd_FieldNumber_Hero = 13,
+  CSNPNativeAd_FieldNumber_ActionsArray = 14,
 };
 
 @interface CSNPNativeAd : GPBMessage
@@ -427,6 +441,10 @@ typedef GPB_ENUM(CSNPNativeAd_FieldNumber) {
 @property(nonatomic, readwrite, strong, null_resettable) CSNPColors *colors;
 /** Test to see if @c colors has been set. */
 @property(nonatomic, readwrite) BOOL hasColors;
+
+@property(nonatomic, readwrite, strong, null_resettable) CSNPSecondaryActionComponent *secondaryActionScreen;
+/** Test to see if @c secondaryActionScreen has been set. */
+@property(nonatomic, readwrite) BOOL hasSecondaryActionScreen;
 
 @property(nonatomic, readwrite, strong, null_resettable) CSNPTransitTitleComponent *transitTitle;
 /** Test to see if @c transitTitle has been set. */

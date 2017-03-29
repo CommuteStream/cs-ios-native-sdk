@@ -9,11 +9,11 @@
 #import "CSNModalWindow.h"
 #import "CSNStopTuple.h"
 #import "CSNHeroView.h"
-#import "CSNModalCardView.h"
+#import "CSNSecondaryActionView.h"
 
 @implementation CSNModalWindow {
     UIView *modalWindowBkg;
-    CSNModalCardView *cardView;
+    CSNSecondaryActionView *cardView;
     UIButton *closeModalWindow;
 }
 
@@ -35,7 +35,7 @@
         
         modalWindowBkg = [[UIView alloc] initWithFrame:self.bounds];
         CGRect cardViewRect = CGRectMake(self.bounds.size.width/2.0, 500.0, self.bounds.size.width - 50.0, 325.0);
-        cardView = [[CSNModalCardView alloc] initWithFrame:cardViewRect forAd:nativeAd];
+        cardView = [[CSNSecondaryActionView alloc] initWithFrame:cardViewRect forAd:nativeAd];
         
         [modalWindowBkg setBackgroundColor:[UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.6]];
         [modalWindowBkg setAlpha:0.0];
@@ -77,6 +77,10 @@
         
     }
     return self;
+}
+
+- (id<CSNComponentView>)getSecondaryActionView {
+    return cardView;
 }
 
 -(void) tapViewAction:(UIGestureRecognizer *)sender{

@@ -92,20 +92,25 @@ message Colors {
   string foreground = 2;
 }
 
+message SecondaryActionComponent {
+  uint64 component_id = 1;
+}
+
 message NativeAd {
   uint64 request_id = 1;
   uint64 ad_id = 2;
   Colors colors = 3;
-  TransitTitleComponent transit_title = 4;
-  TransitSubtitleComponent transit_subtitle = 5;
-  LogoComponent logo = 6;
-  HeadlineComponent headline = 7;
-  BodyComponent body = 8;
-  AdvertiserComponent advertiser = 9;
-  LocationComponent location = 10;
-  StopComponent stop = 11;
-  HeroComponent hero = 12;
-  repeated ActionComponent actions = 13;
+  SecondaryActionComponent secondary_action_screen = 4;
+  TransitTitleComponent transit_title = 5;
+  TransitSubtitleComponent transit_subtitle = 6;
+  LogoComponent logo = 7;
+  HeadlineComponent headline = 8;
+  BodyComponent body = 9;
+  AdvertiserComponent advertiser = 10;
+  LocationComponent location = 11;
+  StopComponent stop = 12;
+  HeroComponent hero = 13;
+  repeated ActionComponent actions = 14;
 }
 
 message StopAd {

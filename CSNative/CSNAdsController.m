@@ -118,6 +118,7 @@ CSNModalWindow *modalWindowView;
             CGRect bounds = [[UIScreen mainScreen] bounds];
             CSNModalWindow *modalWindow = [[CSNModalWindow alloc] initWithFrame:bounds forAd:ad];
             modalWindow.windowLevel = UIWindowLevelAlert;
+            [_visMonitor addView:[modalWindow getSecondaryActionView]];
             modalWindowView = modalWindow;
             [modalWindow makeKeyAndVisible];
             

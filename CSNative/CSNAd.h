@@ -45,6 +45,14 @@
 - (instancetype _Nonnull) initWithMessage:(CSNPAdvertiserComponent * _Nonnull)message;
 @end;
 
+
+@interface CSNSecondaryActionComponent : NSObject <CSNAdComponent>
+@property (readonly) uint64_t componentID;
+
+- (instancetype _Nonnull) initWithMessage:(CSNPSecondaryActionComponent * _Nonnull)message;
+@end;
+
+
 @interface CSNLocationComponent : NSObject <CSNAdComponent>
 @property (readonly) uint64_t componentID;
 @property (readonly) double latitude;

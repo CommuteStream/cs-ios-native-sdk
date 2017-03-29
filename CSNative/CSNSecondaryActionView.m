@@ -1,25 +1,26 @@
 //
-//  CSNModalCardView.m
+//  CSNSecondaryActionView.m
 //  CSNative
 //
-//  Created by David Rogers on 3/22/17.
+//  Created by David Rogers on 3/27/17.
 //  Copyright © 2017 CommuteStream. All rights reserved.
 //
 
-#import "CSNModalCardView.h"
+#import "CSNSecondaryActionView.h"
 
-@implementation CSNModalCardView{
+@implementation CSNSecondaryActionView{
     CSNHeroView *heroImageView;
     CSNTransitTitleView *transitHeaderLabel;
     CSNTransitSubtitleView *transitSubheaderLabel;
-
+    
     CSNHeadlineView *headlineLabel;
     CSNBodyView *bodyLabel;
     CSNAdvertiserView *advertiserLabel;
     CSNLogoView *adLogoImage;
     UIView *adInfoView;
-
+    
 }
+@synthesize blockAction;
 
 -(id)init
 {
@@ -162,7 +163,7 @@
                     // Fallback on earlier versions
                     [[UIApplication sharedApplication] openURL:url];
                 }
-
+                
                 
                 
                 
@@ -174,18 +175,47 @@
             actionIndex++;
         }
         
-
+        
         //frameHeight = adInfoView.frame.origin.y + adInfoView.frame.size.height + 5;
-            
-
+        
+        
         self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, self.frame.size.width, frameHeight);
         
         
     }
     
+    
     return self;
-
+    
 }
+
+- (void) setAd:(CSNAd *)ad {
+    _ad = ad;
+    _componentID = [[ad transitTitle] componentID];
+}
+
+- (void)addTapHandler:(nullable void(^)(void))callback {
+    
+    UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapViewAction:)];
+    
+    tapRecognizer.delegate = self;
+    [self setUserInteractionEnabled:YES];
+    
+    [self setBlockAction:callback];
+    
+}
+
+-(void) tapViewAction:(UIGestureRecognizer *)sender{
+    
+    //[self invokeBlock:sender];
+    
+    
+}
+
+- (void) invokeBlock:(id)sender {
+    //[self blockAction]();
+}
+
 
 /*
 // Only override drawRect: if you perform custom drawing.

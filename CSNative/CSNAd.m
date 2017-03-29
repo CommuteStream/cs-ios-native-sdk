@@ -52,6 +52,15 @@
 
 @end
 
+@implementation CSNSecondaryActionComponent
+
+- (instancetype) initWithMessage:(CSNPSecondaryActionComponent *)message {
+    _componentID = [message componentId];
+    return self;
+}
+
+@end
+
 @implementation CSNLogoComponent
 
 - (instancetype) initWithMessage:(CSNPLogoComponent *)message {
