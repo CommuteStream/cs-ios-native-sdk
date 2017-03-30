@@ -60,27 +60,38 @@
         tempFrame.origin.x = (self.frame.origin.x - self.frame.size.width/2);
         [self setFrame:tempFrame];
         
-        transitHeaderLabel = [[CSNTransitTitleView alloc] initWithFrame:CGRectMake(9.0, 12.0, self.frame.size.width - 50.0, 16.0)];
-        [transitHeaderLabel setFont:[UIFont boldSystemFontOfSize:14.0]];
-        [transitHeaderLabel setAd:nativeAd];
+        CGFloat yPosition = 5.0;
         
-        transitSubheaderLabel = [[CSNTransitSubtitleView alloc] initWithFrame:CGRectMake(9.0, 30.0, self.frame.size.width - 50.0, 14.0)];
-        [transitSubheaderLabel setFont:[UIFont systemFontOfSize:12.0]];
-        [transitSubheaderLabel setTextColor:[UIColor darkGrayColor]];
-        [transitSubheaderLabel setAd:nativeAd];
+        if(![[[nativeAd transitTitle] title] isEqualToString:@""]){
+            NSLog(@"Reached");
+            NSLog(@"%@", [[nativeAd transitTitle] title]);
+            transitHeaderLabel = [[CSNTransitTitleView alloc] initWithFrame:CGRectMake(9.0, yPosition + 5.0, self.frame.size.width - 50.0, 16.0)];
+            [transitHeaderLabel setFont:[UIFont boldSystemFontOfSize:14.0]];
+            [transitHeaderLabel setAd:nativeAd];
+            yPosition = transitHeaderLabel.frame.origin.y + transitHeaderLabel.frame.size.height;
+        }
         
-        CGFloat heroImageYPos = transitSubheaderLabel.frame.origin.y + transitSubheaderLabel.frame.size.height + 8.0;
+        if(![[[nativeAd transitSubtitle] subtitle] isEqualToString:@""]){
+            transitSubheaderLabel = [[CSNTransitSubtitleView alloc] initWithFrame:CGRectMake(9.0, yPosition + 5.0, self.frame.size.width - 50.0, 14.0)];
+            [transitSubheaderLabel setFont:[UIFont systemFontOfSize:12.0]];
+            [transitSubheaderLabel setTextColor:[UIColor darkGrayColor]];
+            [transitSubheaderLabel setAd:nativeAd];
+            
+            yPosition = transitSubheaderLabel.frame.origin.y + transitSubheaderLabel.frame.size.height;
+
+        }
+        
         CGFloat heroWidth = self.frame.size.width - 10;
         CGFloat heroHeight = heroWidth * 0.5225;
         
-        heroImageView = [[CSNHeroView alloc] initWithFrame: CGRectMake(5.0,heroImageYPos, heroWidth , heroHeight)];
+        heroImageView = [[CSNHeroView alloc] initWithFrame: CGRectMake(5.0, yPosition + 5.0, heroWidth , heroHeight)];
         [heroImageView setContentMode:UIViewContentModeScaleAspectFit];
         [heroImageView setBackgroundColor:[UIColor blackColor]];
         [heroImageView setAd:nativeAd];
         
-        CGFloat adInfoYPos = heroImageView.frame.origin.y + heroImageView.frame.size.height;
+        yPosition = heroImageView.frame.origin.y + heroImageView.frame.size.height;
         
-        adInfoView = [[UIView alloc] initWithFrame:CGRectMake(5.0, adInfoYPos, self.frame.size.width - 10.0, 50.0)];
+        adInfoView = [[UIView alloc] initWithFrame:CGRectMake(5.0, yPosition, self.frame.size.width - 10.0, 50.0)];
         
         [adInfoView setBackgroundColor:[UIColor whiteColor]];
         
@@ -125,32 +136,42 @@
         
         CGFloat frameHeight = 0.0;
         NSUInteger actionIndex = 0;
+        
+        CGFloat buttonFontSize = 22.0;
+        
+        switch (actionArray.count) {
+            case 1:
+                buttonFontSize = 22.0;
+                break;
+                
+            case 2:
+                buttonFontSize = 19.0;
+                break;
+                
+            case 3:
+                buttonFontSize = 16.0;
+                break;
+                
+            default:
+                break;
+        }
+        
+        
         for(NSDictionary *item in actionArray){
             NSLog(@"Item in Array = %@", item);
             
-            CGFloat actionButtonsYPos = (adInfoView.frame.origin.y + adInfoView.frame.size.height) + (actionIndex * 50) + (actionIndex * 5);
+            //CGFloat actionButtonsYPos = (adInfoView.frame.origin.y + adInfoView.frame.size.height) + (actionIndex * 50) + (actionIndex * 5);
+            CGFloat actionButtonsYPos = (adInfoView.frame.origin.y + adInfoView.frame.size.height) + 5.0;
             
-            CSNActionView *actionButton = [[CSNActionView alloc] initWithFrame:CGRectMake(5.0, actionButtonsYPos + 5.0, self.frame.size.width - 10.0, 50.0)];
+            CGFloat actionButtonsWidth = (self.frame.size.width/actionArray.count);
+            
+            CSNActionView *actionButton = [[CSNActionView alloc] initWithFrame:CGRectMake(5.0 + (actionIndex * (actionButtonsWidth - (5.0/actionArray.count))), actionButtonsYPos, actionButtonsWidth - (5.0 + (5.0/actionArray.count)), 50.0)];
             
             [actionButton setAd:nativeAd atActionIndex:actionIndex];
             
-            //UILabel *buttonTitle = [[UILabel alloc] initWithFrame:CGRectMake(5.0, 6.0, actionButton.frame.size.width - 10.0, 26)];
-            //[buttonTitle setTextAlignment:NSTextAlignmentCenter];
-            //buttonTitle.text = [item objectForKey:@"title"];
-            //[buttonTitle setTextColor:[UIColor whiteColor]];
-            //buttonTitle.font = [UIFont systemFontOfSize:23];
-            //[actionButton addSubview:buttonTitle];
-            
-            //UILabel *buttonSubtitle = [[UILabel alloc] initWithFrame:CGRectMake(5.0, 28.0, actionButton.frame.size.width - 10.0, 20)];
-            //[buttonSubtitle setTextAlignment:NSTextAlignmentCenter];
-            //buttonSubtitle.text = [item objectForKey:@"subtitle"];
-            //[buttonSubtitle setTextColor:[UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:0.6]];
-            //buttonSubtitle.font = [UIFont systemFontOfSize:9];
-            //[actionButton addSubview:buttonSubtitle];
-            
             [actionButton setBackgroundColor: [[[nativeAd actions] objectAtIndex:actionIndex] color]];
             [actionButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-            [[actionButton titleLabel] setFont: [UIFont systemFontOfSize:22.0]];
+            [[actionButton titleLabel] setFont: [UIFont systemFontOfSize:buttonFontSize]];
             [actionButton addTapHandler:^{
                 
                 NSString *urlString = [[[nativeAd actions] objectAtIndex:actionIndex] url];
