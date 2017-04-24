@@ -12,16 +12,16 @@ PODS:
   - OHHTTPStubs/NSURLSession (5.2.3):
     - OHHTTPStubs/Core
   - OHHTTPStubs/OHPathHelpers (5.2.3)
-  - Protobuf (3.2.0)
+  - Protobuf (3.2.1)
 
 DEPENDENCIES:
   - OHHTTPStubs (~> 5.2)
-  - Protobuf (~> 3.2.0)
+  - Protobuf (~> 3.2.1)
 
 SPEC CHECKSUMS:
   OHHTTPStubs: e238cd5b66d8efa51c861db45895de8fe079f4a7
-  Protobuf: 745f59e122e5de98d4d7ef291e264a0eef80f58e
+  Protobuf: 2ccbaf193f6c65adc67745453ca0c13234c32796
 
-PODFILE CHECKSUM: 0f7a3b3eec79284dc7915ad2f2dadd397d7e0254
+PODFILE CHECKSUM: 240be22bbeaf0126ed05bd7511218c8611e18f44
 
-COCOAPODS: 1.2.0
+COCOAPODS: 1.2.1

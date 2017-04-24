@@ -1,11 +1,3 @@
-//
-//  CSNHeroView.m
-//  CSNative
-//
-//  Created by David Rogers on 3/21/17.
-//  Copyright © 2017 CommuteStream. All rights reserved.
-//
-
 #import "CSNHeroView.h"
 
 @implementation CSNHeroView

@@ -21,6 +21,9 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		1B0E3D9C1EB0DD3B00C95354 /* CSNOptionalAd.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B0E3D9A1EB0DD3B00C95354 /* CSNOptionalAd.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1B0E3D9D1EB0DD3B00C95354 /* CSNOptionalAd.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B0E3D9B1EB0DD3B00C95354 /* CSNOptionalAd.m */; };
+		1B0E3D9F1EB11CD500C95354 /* CSNTransitRouteTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B0E3D9E1EB11CD400C95354 /* CSNTransitRouteTests.m */; };
 		1B2CCB131E79E0C800B6FBC2 /* CSNAdRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B2CCB111E79E0C800B6FBC2 /* CSNAdRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1B2CCB141E79E0C800B6FBC2 /* CSNAdRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B2CCB121E79E0C800B6FBC2 /* CSNAdRequest.m */; };
 		1B555FCF1E60A3F800FE1C08 /* CSNative.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B555FC51E60A3F800FE1C08 /* CSNative.framework */; };
@@ -43,9 +46,9 @@
 		1B5560661E66053100FE1C08 /* CSNHeadlineView.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B5560641E66053100FE1C08 /* CSNHeadlineView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1B5560671E66053100FE1C08 /* CSNHeadlineView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B5560651E66053100FE1C08 /* CSNHeadlineView.m */; };
 		1B5560691E6611DD00FE1C08 /* CSNAdTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B5560681E6611DD00FE1C08 /* CSNAdTest.m */; };
-		1B5560701E67423F00FE1C08 /* CSNStopTuple.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B55606E1E67423F00FE1C08 /* CSNStopTuple.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		1B5560711E67423F00FE1C08 /* CSNStopTuple.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B55606F1E67423F00FE1C08 /* CSNStopTuple.m */; };
-		1B5560731E67424F00FE1C08 /* CSNStopTupleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B5560721E67424F00FE1C08 /* CSNStopTupleTests.m */; };
+		1B5560701E67423F00FE1C08 /* CSNTransit.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B55606E1E67423F00FE1C08 /* CSNTransit.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1B5560711E67423F00FE1C08 /* CSNTransit.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B55606F1E67423F00FE1C08 /* CSNTransit.m */; };
+		1B5560731E67424F00FE1C08 /* CSNTransitStopTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B5560721E67424F00FE1C08 /* CSNTransitStopTests.m */; };
 		1B5560761E6742E700FE1C08 /* CSNMockClient.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B5560741E6742E700FE1C08 /* CSNMockClient.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1B5560771E6742E700FE1C08 /* CSNMockClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B5560751E6742E700FE1C08 /* CSNMockClient.m */; };
 		1B5560791E67497100FE1C08 /* CSNLogoViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B5560781E67497100FE1C08 /* CSNLogoViewTests.m */; };
@@ -86,6 +89,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1B0E3D9A1EB0DD3B00C95354 /* CSNOptionalAd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSNOptionalAd.h; sourceTree = "<group>"; };
+		1B0E3D9B1EB0DD3B00C95354 /* CSNOptionalAd.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSNOptionalAd.m; sourceTree = "<group>"; };
+		1B0E3D9E1EB11CD400C95354 /* CSNTransitRouteTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSNTransitRouteTests.m; sourceTree = "<group>"; };
 		1B2CCB111E79E0C800B6FBC2 /* CSNAdRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSNAdRequest.h; sourceTree = "<group>"; };
 		1B2CCB121E79E0C800B6FBC2 /* CSNAdRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSNAdRequest.m; sourceTree = "<group>"; };
 		1B2CCB2E1E7B020B00B6FBC2 /* universal.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = universal.sh; sourceTree = "<group>"; };
@@ -112,9 +118,9 @@
 		1B5560641E66053100FE1C08 /* CSNHeadlineView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSNHeadlineView.h; sourceTree = "<group>"; };
 		1B5560651E66053100FE1C08 /* CSNHeadlineView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSNHeadlineView.m; sourceTree = "<group>"; };
 		1B5560681E6611DD00FE1C08 /* CSNAdTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSNAdTest.m; sourceTree = "<group>"; };
-		1B55606E1E67423F00FE1C08 /* CSNStopTuple.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSNStopTuple.h; sourceTree = "<group>"; };
-		1B55606F1E67423F00FE1C08 /* CSNStopTuple.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSNStopTuple.m; sourceTree = "<group>"; };
-		1B5560721E67424F00FE1C08 /* CSNStopTupleTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSNStopTupleTests.m; sourceTree = "<group>"; };
+		1B55606E1E67423F00FE1C08 /* CSNTransit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSNTransit.h; sourceTree = "<group>"; };
+		1B55606F1E67423F00FE1C08 /* CSNTransit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSNTransit.m; sourceTree = "<group>"; };
+		1B5560721E67424F00FE1C08 /* CSNTransitStopTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSNTransitStopTests.m; sourceTree = "<group>"; };
 		1B5560741E6742E700FE1C08 /* CSNMockClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSNMockClient.h; sourceTree = "<group>"; };
 		1B5560751E6742E700FE1C08 /* CSNMockClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSNMockClient.m; sourceTree = "<group>"; };
 		1B5560781E67497100FE1C08 /* CSNLogoViewTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSNLogoViewTests.m; sourceTree = "<group>"; };
@@ -219,8 +225,8 @@
 				7F26309B1E82F667001F36D6 /* CSNBodyView.m */,
 				7F2630AD1E83045A001F36D6 /* CSNAdvertiserView.h */,
 				7F2630AE1E83045A001F36D6 /* CSNAdvertiserView.m */,
-				1B55606E1E67423F00FE1C08 /* CSNStopTuple.h */,
-				1B55606F1E67423F00FE1C08 /* CSNStopTuple.m */,
+				1B55606E1E67423F00FE1C08 /* CSNTransit.h */,
+				1B55606F1E67423F00FE1C08 /* CSNTransit.m */,
 				1B5560741E6742E700FE1C08 /* CSNMockClient.h */,
 				1B5560751E6742E700FE1C08 /* CSNMockClient.m */,
 				1BC79FB21E71EE92008D146A /* CSNVisibilityMonitor.h */,
@@ -235,6 +241,8 @@
 				7F21139C1E843DF30096DA45 /* CSNActionView.m */,
 				7F1E0B211E89B25F00498B76 /* CSNSecondaryActionView.h */,
 				7F1E0B221E89B25F00498B76 /* CSNSecondaryActionView.m */,
+				1B0E3D9A1EB0DD3B00C95354 /* CSNOptionalAd.h */,
+				1B0E3D9B1EB0DD3B00C95354 /* CSNOptionalAd.m */,
 			);
 			path = CSNative;
 			sourceTree = "<group>";
@@ -246,11 +254,12 @@
 				1B555FD51E60A3F800FE1C08 /* Info.plist */,
 				1B5560581E64989B00FE1C08 /* CSNAdsControllerTest.m */,
 				1B5560681E6611DD00FE1C08 /* CSNAdTest.m */,
-				1B5560721E67424F00FE1C08 /* CSNStopTupleTests.m */,
+				1B5560721E67424F00FE1C08 /* CSNTransitStopTests.m */,
 				1B5560781E67497100FE1C08 /* CSNLogoViewTests.m */,
 				1B55607D1E6E06D600FE1C08 /* CSNTitleViewTests.m */,
 				1BC79FB61E73332C008D146A /* CSNVisibilityMonitorTest.m */,
 				7F26306A1E81CC01001F36D6 /* CSNHeroViewTests.m */,
+				1B0E3D9E1EB11CD400C95354 /* CSNTransitRouteTests.m */,
 			);
 			path = CSNativeTests;
 			sourceTree = "<group>";
@@ -282,13 +291,14 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1B5560701E67423F00FE1C08 /* CSNStopTuple.h in Headers */,
+				1B5560701E67423F00FE1C08 /* CSNTransit.h in Headers */,
 				7F2630AF1E83045A001F36D6 /* CSNAdvertiserView.h in Headers */,
 				7F2630C91E831B95001F36D6 /* CSNTransitSubtitleView.h in Headers */,
 				7F2630BF1E8317D8001F36D6 /* CSNTransitTitleView.h in Headers */,
 				1B5560761E6742E700FE1C08 /* CSNMockClient.h in Headers */,
 				7F1E0B231E89B25F00498B76 /* CSNSecondaryActionView.h in Headers */,
 				1B555FF91E61134500FE1C08 /* CSNLogoView.h in Headers */,
+				1B0E3D9C1EB0DD3B00C95354 /* CSNOptionalAd.h in Headers */,
 				7F26304A1E81B2A6001F36D6 /* CSNHeroView.h in Headers */,
 				1B5560661E66053100FE1C08 /* CSNHeadlineView.h in Headers */,
 				7F21139D1E843DF30096DA45 /* CSNActionView.h in Headers */,
@@ -471,7 +481,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		C935A7410876734CFBFAB21B /* [CP] Check Pods Manifest.lock */ = {
@@ -486,7 +496,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		E71B2CFFCFAFD967DB733F2C /* [CP] Copy Pods Resources */ = {
@@ -522,8 +532,9 @@
 				7F26309D1E82F667001F36D6 /* CSNBodyView.m in Sources */,
 				7F2630C01E8317D8001F36D6 /* CSNTransitTitleView.m in Sources */,
 				1B5560601E65037B00FE1C08 /* CSNAd.m in Sources */,
-				1B5560711E67423F00FE1C08 /* CSNStopTuple.m in Sources */,
+				1B5560711E67423F00FE1C08 /* CSNTransit.m in Sources */,
 				1B5560571E648AC200FE1C08 /* CSNAdsController.m in Sources */,
+				1B0E3D9D1EB0DD3B00C95354 /* CSNOptionalAd.m in Sources */,
 				1B555FEE1E60AD7A00FE1C08 /* Csnmessages.pbobjc.m in Sources */,
 				1B5560771E6742E700FE1C08 /* CSNMockClient.m in Sources */,
 				1BC79FB51E71EE92008D146A /* CSNVisibilityMonitor.m in Sources */,
@@ -542,8 +553,9 @@
 				1B555FF01E60B0B500FE1C08 /* CSNHttpClientTest.m in Sources */,
 				1B5560791E67497100FE1C08 /* CSNLogoViewTests.m in Sources */,
 				7F26306B1E81CC01001F36D6 /* CSNHeroViewTests.m in Sources */,
+				1B0E3D9F1EB11CD500C95354 /* CSNTransitRouteTests.m in Sources */,
 				1B55607E1E6E06D600FE1C08 /* CSNTitleViewTests.m in Sources */,
-				1B5560731E67424F00FE1C08 /* CSNStopTupleTests.m in Sources */,
+				1B5560731E67424F00FE1C08 /* CSNTransitStopTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

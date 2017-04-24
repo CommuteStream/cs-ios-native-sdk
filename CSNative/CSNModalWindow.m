@@ -1,13 +1,5 @@
-//
-//  CSNModalWindow.m
-//  CSNative
-//
-//  Created by David Rogers on 3/21/17.
-//  Copyright © 2017 CommuteStream. All rights reserved.
-//
-
 #import "CSNModalWindow.h"
-#import "CSNStopTuple.h"
+#import "CSNTransit.h"
 #import "CSNHeroView.h"
 #import "CSNSecondaryActionView.h"
 

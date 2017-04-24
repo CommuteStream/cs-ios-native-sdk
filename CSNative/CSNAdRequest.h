@@ -1,8 +1,14 @@
 @import Foundation;
 @import CoreLocation;
+#import "CSNTransit.h"
 
 @interface CSNAdRequest : NSObject
-@property (readonly) NSMutableSet* stops;
+@property (readonly) NSOrderedSet* agencies;
+@property (readonly) NSOrderedSet* routes;
+@property (readonly) NSOrderedSet* stops;
 - (instancetype) init;
-- (void) addStop:(NSString *)agencyID routeID:(NSString *)routeID stopID:(NSString *)stopID;
+- (NSData *) sha256;
+- (void) addAgency:(CSNTransitAgency *)agency;
+- (void) addRoute:(CSNTransitRoute *)route;
+- (void) addStop:(CSNTransitStop *)stop;
 @end

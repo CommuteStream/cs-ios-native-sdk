@@ -1,11 +1,3 @@
-//
-//  CSNActionView.h
-//  CSNative
-//
-//  Created by David Rogers on 3/23/17.
-//  Copyright © 2017 CommuteStream. All rights reserved.
-//
-
 @import UIKit;
 #import "CSNComponentView.h"
 #import "CSNAd.h"

@@ -27,8 +27,8 @@
         NSData *data = [[NSData alloc] init];
         return [OHHTTPStubsResponse responseWithData:data statusCode:400 headers:NULL];
     }];
-    CSNPAdRequest *adRequest = [[CSNPAdRequest alloc] init];
-    [client getAds:adRequest success:^(CSNPAdResponse *adResponse) {
+    CSNPAdRequests *adRequests = [[CSNPAdRequests alloc] init];
+    [client getAds:adRequests success:^(CSNPAdResponses *adResponses) {
         XCTAssert(false);
     } failure:^(NSError *error) {
         XCTAssert(error != NULL);
@@ -51,8 +51,8 @@
         NSData *data = [@"bogus" dataUsingEncoding:NSUTF8StringEncoding];
         return [OHHTTPStubsResponse responseWithData:data statusCode:200 headers:@{@"content-type":@"text/plain"}];
     }];
-    CSNPAdRequest *adRequest = [[CSNPAdRequest alloc] init];
-    [client getAds:adRequest success:^(CSNPAdResponse *adResponse) {
+    CSNPAdRequests *adRequests = [[CSNPAdRequests alloc] init];
+    [client getAds:adRequests success:^(CSNPAdResponses *adResponses) {
         XCTAssert(false);
     } failure:^(NSError *error) {
         XCTAssert(error != NULL);
@@ -75,8 +75,8 @@
         NSData *data = [@"bogus" dataUsingEncoding:NSUTF8StringEncoding];
         return [OHHTTPStubsResponse responseWithData:data statusCode:200 headers:@{@"content-type":@"application/x-protobuf"}];
     }];
-    CSNPAdRequest *adRequest = [[CSNPAdRequest alloc] init];
-    [client getAds:adRequest success:^(CSNPAdResponse *adResponse) {
+    CSNPAdRequests *adRequests = [[CSNPAdRequests alloc] init];
+    [client getAds:adRequests success:^(CSNPAdResponses *adResponses) {
         XCTAssert(false);
     } failure:^(NSError *error) {
         XCTAssert(error != NULL);
@@ -99,8 +99,8 @@
         NSData *data = [[[CSNPAdResponse alloc] init] data];
         return [[OHHTTPStubsResponse responseWithData:data statusCode:200 headers:@{@"content-type":@"application/x-protobuf"}] requestTime:1.2 responseTime:0.1];
     }];
-    CSNPAdRequest *adRequest = [[CSNPAdRequest alloc] init];
-    [client getAds:adRequest success:^(CSNPAdResponse *adResponse) {
+    CSNPAdRequests *adRequests = [[CSNPAdRequests alloc] init];
+    [client getAds:adRequests success:^(CSNPAdResponses *adResponses) {
         XCTAssert(false);
     } failure:^(NSError *error) {
         XCTAssert(error != NULL);
@@ -123,8 +123,8 @@
         NSData *data = [[[CSNPAdResponse alloc] init] data];
         return [[OHHTTPStubsResponse responseWithData:data statusCode:200 headers:@{@"content-type":@"application/x-protobuf"}] requestTime:0.1 responseTime:1.2];
     }];
-    CSNPAdRequest *adRequest = [[CSNPAdRequest alloc] init];
-    [client getAds:adRequest success:^(CSNPAdResponse *adResponse) {
+    CSNPAdRequests *adRequests = [[CSNPAdRequests alloc] init];
+    [client getAds:adRequests success:^(CSNPAdResponses *adResponses) {
         XCTAssert(false);
     } failure:^(NSError *error) {
         XCTAssert(error != NULL);
@@ -147,9 +147,9 @@
     } withStubResponse:^OHHTTPStubsResponse * (NSURLRequest * request) {
         return [OHHTTPStubsResponse responseWithData:responseData statusCode:200 headers:@{@"content-type":@"application/x-protobuf"}];
     }];
-    CSNPAdRequest *adRequest = [[CSNPAdRequest alloc] init];
-    [client getAds:adRequest success:^(CSNPAdResponse *response) {
-        XCTAssert(response != NULL);
+    CSNPAdRequests *adRequests = [[CSNPAdRequests alloc] init];
+    [client getAds:adRequests success:^(CSNPAdResponses *responses) {
+        XCTAssert(responses != NULL);
         [expectation fulfill];
     } failure:^(NSError *error) {
         NSLog(@"Unexpected Error: %@", error);

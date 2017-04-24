@@ -5,19 +5,19 @@ package google.protobuf;
 option objc_class_prefix = "CSNP";
 option java_package = "com.commutestream.sdk.protobuf";
 
+message TransitAgency {
+  string agency_id = 1;
+}
 
-message Stop {
+message TransitRoute {
+  string agency_id = 1;
+  string route_id = 2;
+}
+
+message TransitStop {
   string agency_id = 1;
   string route_id = 2;
   string stop_id = 3;
-}
-
-message StopComponent {
-  string component_id = 1;
-  Stop stop_tuple = 2;
-  string agencyName = 3;
-  string routeName = 4;
-  string stopName = 5;
 }
 
 message Location {
@@ -108,13 +108,12 @@ message NativeAd {
   BodyComponent body = 9;
   AdvertiserComponent advertiser = 10;
   LocationComponent location = 11;
-  StopComponent stop = 12;
-  HeroComponent hero = 13;
-  repeated ActionComponent actions = 14;
+  HeroComponent hero = 12;
+  repeated ActionComponent actions = 13;
 }
 
 message StopAd {
-  Stop stop_tuple = 1;
+  TransitStop stop_tuple = 1;
   uint64 ad_id = 2;
 }
 
@@ -123,18 +122,34 @@ message LocationAd {
   uint64 ad_id = 2;
 }
 
+// AdRequest contains a hash_id which is the hash everything but the num_of_ads 
 message AdRequest {
+  bytes hash_id = 1;
+  uint32 num_of_ads = 2;
+  repeated Location locations = 3;
+  repeated TransitAgency agencies = 4;
+  repeated TransitRoute routes = 5;
+  repeated TransitStop stops = 6;
+}
+
+// AdRequests contains relevant information needed to attempt filling ad requests
+message AdRequests {
   string ad_unit = 1;
   DeviceID device_id = 2;
   string timezone = 3;
-  Location location = 4;
-  repeated Stop stops = 5;
+  repeated AdRequest ad_requests = 4;
 }
 
+// AdResponse is a mapping between an AdRequest hash_id and the set of ads
 message AdResponse {
-  repeated LocationAd location_ads = 1;
-  repeated StopAd stop_ads = 2;
-  map<uint64, NativeAd> ads = 3;
+  bytes hash_id = 1;
+  repeated NativeAd ads = 2;
+}
+
+// AdResponses returns a mapping of ad context hashes to a set of ads.
+message AdResponses {
+  string server_id = 1;
+  repeated AdResponse ad_responses = 2;
 }
 
 message DeviceID  {

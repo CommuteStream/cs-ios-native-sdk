@@ -147,20 +147,16 @@ BOOL CSNPAdInteractionKind_IsValidValue(int32_t value__) {
   }
 }
 
-#pragma mark - CSNPStop
+#pragma mark - CSNPTransitAgency
 
-@implementation CSNPStop
+@implementation CSNPTransitAgency
 
 @dynamic agencyId;
-@dynamic routeId;
-@dynamic stopId;
 
-typedef struct CSNPStop__storage_ {
+typedef struct CSNPTransitAgency__storage_ {
   uint32_t _has_storage_[1];
   NSString *agencyId;
-  NSString *routeId;
-  NSString *stopId;
-} CSNPStop__storage_;
+} CSNPTransitAgency__storage_;
 
 // This method is threadsafe because it is initially called
 // in +initialize for each subclass.
@@ -171,38 +167,20 @@ typedef struct CSNPStop__storage_ {
       {
         .name = "agencyId",
         .dataTypeSpecific.className = NULL,
-        .number = CSNPStop_FieldNumber_AgencyId,
+        .number = CSNPTransitAgency_FieldNumber_AgencyId,
         .hasIndex = 0,
-        .offset = (uint32_t)offsetof(CSNPStop__storage_, agencyId),
-        .flags = GPBFieldOptional,
-        .dataType = GPBDataTypeString,
-      },
-      {
-        .name = "routeId",
-        .dataTypeSpecific.className = NULL,
-        .number = CSNPStop_FieldNumber_RouteId,
-        .hasIndex = 1,
-        .offset = (uint32_t)offsetof(CSNPStop__storage_, routeId),
-        .flags = GPBFieldOptional,
-        .dataType = GPBDataTypeString,
-      },
-      {
-        .name = "stopId",
-        .dataTypeSpecific.className = NULL,
-        .number = CSNPStop_FieldNumber_StopId,
-        .hasIndex = 2,
-        .offset = (uint32_t)offsetof(CSNPStop__storage_, stopId),
+        .offset = (uint32_t)offsetof(CSNPTransitAgency__storage_, agencyId),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeString,
       },
     };
     GPBDescriptor *localDescriptor =
-        [GPBDescriptor allocDescriptorForClass:[CSNPStop class]
+        [GPBDescriptor allocDescriptorForClass:[CSNPTransitAgency class]
                                      rootClass:[CSNPCsnmessagesRoot class]
                                           file:CSNPCsnmessagesRoot_FileDescriptor()
                                         fields:fields
                                     fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
-                                   storageSize:sizeof(CSNPStop__storage_)
+                                   storageSize:sizeof(CSNPTransitAgency__storage_)
                                          flags:GPBDescriptorInitializationFlag_None];
     NSAssert(descriptor == nil, @"Startup recursed!");
     descriptor = localDescriptor;
@@ -212,24 +190,18 @@ typedef struct CSNPStop__storage_ {
 
 @end
 
-#pragma mark - CSNPStopComponent
+#pragma mark - CSNPTransitRoute
 
-@implementation CSNPStopComponent
+@implementation CSNPTransitRoute
 
-@dynamic componentId;
-@dynamic hasStopTuple, stopTuple;
-@dynamic agencyName;
-@dynamic routeName;
-@dynamic stopName;
+@dynamic agencyId;
+@dynamic routeId;
 
-typedef struct CSNPStopComponent__storage_ {
+typedef struct CSNPTransitRoute__storage_ {
   uint32_t _has_storage_[1];
-  NSString *componentId;
-  CSNPStop *stopTuple;
-  NSString *agencyName;
-  NSString *routeName;
-  NSString *stopName;
-} CSNPStopComponent__storage_;
+  NSString *agencyId;
+  NSString *routeId;
+} CSNPTransitRoute__storage_;
 
 // This method is threadsafe because it is initially called
 // in +initialize for each subclass.
@@ -238,64 +210,97 @@ typedef struct CSNPStopComponent__storage_ {
   if (!descriptor) {
     static GPBMessageFieldDescription fields[] = {
       {
-        .name = "componentId",
+        .name = "agencyId",
         .dataTypeSpecific.className = NULL,
-        .number = CSNPStopComponent_FieldNumber_ComponentId,
+        .number = CSNPTransitRoute_FieldNumber_AgencyId,
         .hasIndex = 0,
-        .offset = (uint32_t)offsetof(CSNPStopComponent__storage_, componentId),
+        .offset = (uint32_t)offsetof(CSNPTransitRoute__storage_, agencyId),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeString,
       },
       {
-        .name = "stopTuple",
-        .dataTypeSpecific.className = GPBStringifySymbol(CSNPStop),
-        .number = CSNPStopComponent_FieldNumber_StopTuple,
+        .name = "routeId",
+        .dataTypeSpecific.className = NULL,
+        .number = CSNPTransitRoute_FieldNumber_RouteId,
         .hasIndex = 1,
-        .offset = (uint32_t)offsetof(CSNPStopComponent__storage_, stopTuple),
+        .offset = (uint32_t)offsetof(CSNPTransitRoute__storage_, routeId),
         .flags = GPBFieldOptional,
-        .dataType = GPBDataTypeMessage,
-      },
-      {
-        .name = "agencyName",
-        .dataTypeSpecific.className = NULL,
-        .number = CSNPStopComponent_FieldNumber_AgencyName,
-        .hasIndex = 2,
-        .offset = (uint32_t)offsetof(CSNPStopComponent__storage_, agencyName),
-        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldTextFormatNameCustom),
-        .dataType = GPBDataTypeString,
-      },
-      {
-        .name = "routeName",
-        .dataTypeSpecific.className = NULL,
-        .number = CSNPStopComponent_FieldNumber_RouteName,
-        .hasIndex = 3,
-        .offset = (uint32_t)offsetof(CSNPStopComponent__storage_, routeName),
-        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldTextFormatNameCustom),
-        .dataType = GPBDataTypeString,
-      },
-      {
-        .name = "stopName",
-        .dataTypeSpecific.className = NULL,
-        .number = CSNPStopComponent_FieldNumber_StopName,
-        .hasIndex = 4,
-        .offset = (uint32_t)offsetof(CSNPStopComponent__storage_, stopName),
-        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldTextFormatNameCustom),
         .dataType = GPBDataTypeString,
       },
     };
     GPBDescriptor *localDescriptor =
-        [GPBDescriptor allocDescriptorForClass:[CSNPStopComponent class]
+        [GPBDescriptor allocDescriptorForClass:[CSNPTransitRoute class]
                                      rootClass:[CSNPCsnmessagesRoot class]
                                           file:CSNPCsnmessagesRoot_FileDescriptor()
                                         fields:fields
                                     fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
-                                   storageSize:sizeof(CSNPStopComponent__storage_)
+                                   storageSize:sizeof(CSNPTransitRoute__storage_)
                                          flags:GPBDescriptorInitializationFlag_None];
-#if !GPBOBJC_SKIP_MESSAGE_TEXTFORMAT_EXTRAS
-    static const char *extraTextFormatInfo =
-        "\003\003\n\000\004\t\000\005\010\000";
-    [localDescriptor setupExtraTextInfo:extraTextFormatInfo];
-#endif  // !GPBOBJC_SKIP_MESSAGE_TEXTFORMAT_EXTRAS
+    NSAssert(descriptor == nil, @"Startup recursed!");
+    descriptor = localDescriptor;
+  }
+  return descriptor;
+}
+
+@end
+
+#pragma mark - CSNPTransitStop
+
+@implementation CSNPTransitStop
+
+@dynamic agencyId;
+@dynamic routeId;
+@dynamic stopId;
+
+typedef struct CSNPTransitStop__storage_ {
+  uint32_t _has_storage_[1];
+  NSString *agencyId;
+  NSString *routeId;
+  NSString *stopId;
+} CSNPTransitStop__storage_;
+
+// This method is threadsafe because it is initially called
+// in +initialize for each subclass.
++ (GPBDescriptor *)descriptor {
+  static GPBDescriptor *descriptor = nil;
+  if (!descriptor) {
+    static GPBMessageFieldDescription fields[] = {
+      {
+        .name = "agencyId",
+        .dataTypeSpecific.className = NULL,
+        .number = CSNPTransitStop_FieldNumber_AgencyId,
+        .hasIndex = 0,
+        .offset = (uint32_t)offsetof(CSNPTransitStop__storage_, agencyId),
+        .flags = GPBFieldOptional,
+        .dataType = GPBDataTypeString,
+      },
+      {
+        .name = "routeId",
+        .dataTypeSpecific.className = NULL,
+        .number = CSNPTransitStop_FieldNumber_RouteId,
+        .hasIndex = 1,
+        .offset = (uint32_t)offsetof(CSNPTransitStop__storage_, routeId),
+        .flags = GPBFieldOptional,
+        .dataType = GPBDataTypeString,
+      },
+      {
+        .name = "stopId",
+        .dataTypeSpecific.className = NULL,
+        .number = CSNPTransitStop_FieldNumber_StopId,
+        .hasIndex = 2,
+        .offset = (uint32_t)offsetof(CSNPTransitStop__storage_, stopId),
+        .flags = GPBFieldOptional,
+        .dataType = GPBDataTypeString,
+      },
+    };
+    GPBDescriptor *localDescriptor =
+        [GPBDescriptor allocDescriptorForClass:[CSNPTransitStop class]
+                                     rootClass:[CSNPCsnmessagesRoot class]
+                                          file:CSNPCsnmessagesRoot_FileDescriptor()
+                                        fields:fields
+                                    fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
+                                   storageSize:sizeof(CSNPTransitStop__storage_)
+                                         flags:GPBDescriptorInitializationFlag_None];
     NSAssert(descriptor == nil, @"Startup recursed!");
     descriptor = localDescriptor;
   }
@@ -1051,7 +1056,6 @@ typedef struct CSNPSecondaryActionComponent__storage_ {
 @dynamic hasBody, body;
 @dynamic hasAdvertiser, advertiser;
 @dynamic hasLocation, location;
-@dynamic hasStop, stop;
 @dynamic hasHero, hero;
 @dynamic actionsArray, actionsArray_Count;
 
@@ -1066,7 +1070,6 @@ typedef struct CSNPNativeAd__storage_ {
   CSNPBodyComponent *body;
   CSNPAdvertiserComponent *advertiser;
   CSNPLocationComponent *location;
-  CSNPStopComponent *stop;
   CSNPHeroComponent *hero;
   NSMutableArray *actionsArray;
   uint64_t requestId;
@@ -1179,19 +1182,10 @@ typedef struct CSNPNativeAd__storage_ {
         .dataType = GPBDataTypeMessage,
       },
       {
-        .name = "stop",
-        .dataTypeSpecific.className = GPBStringifySymbol(CSNPStopComponent),
-        .number = CSNPNativeAd_FieldNumber_Stop,
-        .hasIndex = 11,
-        .offset = (uint32_t)offsetof(CSNPNativeAd__storage_, stop),
-        .flags = GPBFieldOptional,
-        .dataType = GPBDataTypeMessage,
-      },
-      {
         .name = "hero",
         .dataTypeSpecific.className = GPBStringifySymbol(CSNPHeroComponent),
         .number = CSNPNativeAd_FieldNumber_Hero,
-        .hasIndex = 12,
+        .hasIndex = 11,
         .offset = (uint32_t)offsetof(CSNPNativeAd__storage_, hero),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeMessage,
@@ -1231,7 +1225,7 @@ typedef struct CSNPNativeAd__storage_ {
 
 typedef struct CSNPStopAd__storage_ {
   uint32_t _has_storage_[1];
-  CSNPStop *stopTuple;
+  CSNPTransitStop *stopTuple;
   uint64_t adId;
 } CSNPStopAd__storage_;
 
@@ -1243,7 +1237,7 @@ typedef struct CSNPStopAd__storage_ {
     static GPBMessageFieldDescription fields[] = {
       {
         .name = "stopTuple",
-        .dataTypeSpecific.className = GPBStringifySymbol(CSNPStop),
+        .dataTypeSpecific.className = GPBStringifySymbol(CSNPTransitStop),
         .number = CSNPStopAd_FieldNumber_StopTuple,
         .hasIndex = 0,
         .offset = (uint32_t)offsetof(CSNPStopAd__storage_, stopTuple),
@@ -1334,18 +1328,20 @@ typedef struct CSNPLocationAd__storage_ {
 
 @implementation CSNPAdRequest
 
-@dynamic adUnit;
-@dynamic hasDeviceId, deviceId;
-@dynamic timezone;
-@dynamic hasLocation, location;
+@dynamic hashId;
+@dynamic numOfAds;
+@dynamic locationsArray, locationsArray_Count;
+@dynamic agenciesArray, agenciesArray_Count;
+@dynamic routesArray, routesArray_Count;
 @dynamic stopsArray, stopsArray_Count;
 
 typedef struct CSNPAdRequest__storage_ {
   uint32_t _has_storage_[1];
-  NSString *adUnit;
-  CSNPDeviceID *deviceId;
-  NSString *timezone;
-  CSNPLocation *location;
+  uint32_t numOfAds;
+  NSData *hashId;
+  NSMutableArray *locationsArray;
+  NSMutableArray *agenciesArray;
+  NSMutableArray *routesArray;
   NSMutableArray *stopsArray;
 } CSNPAdRequest__storage_;
 
@@ -1356,44 +1352,53 @@ typedef struct CSNPAdRequest__storage_ {
   if (!descriptor) {
     static GPBMessageFieldDescription fields[] = {
       {
-        .name = "adUnit",
+        .name = "hashId",
         .dataTypeSpecific.className = NULL,
-        .number = CSNPAdRequest_FieldNumber_AdUnit,
+        .number = CSNPAdRequest_FieldNumber_HashId,
         .hasIndex = 0,
-        .offset = (uint32_t)offsetof(CSNPAdRequest__storage_, adUnit),
+        .offset = (uint32_t)offsetof(CSNPAdRequest__storage_, hashId),
         .flags = GPBFieldOptional,
-        .dataType = GPBDataTypeString,
+        .dataType = GPBDataTypeBytes,
       },
       {
-        .name = "deviceId",
-        .dataTypeSpecific.className = GPBStringifySymbol(CSNPDeviceID),
-        .number = CSNPAdRequest_FieldNumber_DeviceId,
+        .name = "numOfAds",
+        .dataTypeSpecific.className = NULL,
+        .number = CSNPAdRequest_FieldNumber_NumOfAds,
         .hasIndex = 1,
-        .offset = (uint32_t)offsetof(CSNPAdRequest__storage_, deviceId),
+        .offset = (uint32_t)offsetof(CSNPAdRequest__storage_, numOfAds),
         .flags = GPBFieldOptional,
+        .dataType = GPBDataTypeUInt32,
+      },
+      {
+        .name = "locationsArray",
+        .dataTypeSpecific.className = GPBStringifySymbol(CSNPLocation),
+        .number = CSNPAdRequest_FieldNumber_LocationsArray,
+        .hasIndex = GPBNoHasBit,
+        .offset = (uint32_t)offsetof(CSNPAdRequest__storage_, locationsArray),
+        .flags = GPBFieldRepeated,
         .dataType = GPBDataTypeMessage,
       },
       {
-        .name = "timezone",
-        .dataTypeSpecific.className = NULL,
-        .number = CSNPAdRequest_FieldNumber_Timezone,
-        .hasIndex = 2,
-        .offset = (uint32_t)offsetof(CSNPAdRequest__storage_, timezone),
-        .flags = GPBFieldOptional,
-        .dataType = GPBDataTypeString,
+        .name = "agenciesArray",
+        .dataTypeSpecific.className = GPBStringifySymbol(CSNPTransitAgency),
+        .number = CSNPAdRequest_FieldNumber_AgenciesArray,
+        .hasIndex = GPBNoHasBit,
+        .offset = (uint32_t)offsetof(CSNPAdRequest__storage_, agenciesArray),
+        .flags = GPBFieldRepeated,
+        .dataType = GPBDataTypeMessage,
       },
       {
-        .name = "location",
-        .dataTypeSpecific.className = GPBStringifySymbol(CSNPLocation),
-        .number = CSNPAdRequest_FieldNumber_Location,
-        .hasIndex = 3,
-        .offset = (uint32_t)offsetof(CSNPAdRequest__storage_, location),
-        .flags = GPBFieldOptional,
+        .name = "routesArray",
+        .dataTypeSpecific.className = GPBStringifySymbol(CSNPTransitRoute),
+        .number = CSNPAdRequest_FieldNumber_RoutesArray,
+        .hasIndex = GPBNoHasBit,
+        .offset = (uint32_t)offsetof(CSNPAdRequest__storage_, routesArray),
+        .flags = GPBFieldRepeated,
         .dataType = GPBDataTypeMessage,
       },
       {
         .name = "stopsArray",
-        .dataTypeSpecific.className = GPBStringifySymbol(CSNPStop),
+        .dataTypeSpecific.className = GPBStringifySymbol(CSNPTransitStop),
         .number = CSNPAdRequest_FieldNumber_StopsArray,
         .hasIndex = GPBNoHasBit,
         .offset = (uint32_t)offsetof(CSNPAdRequest__storage_, stopsArray),
@@ -1417,19 +1422,93 @@ typedef struct CSNPAdRequest__storage_ {
 
 @end
 
+#pragma mark - CSNPAdRequests
+
+@implementation CSNPAdRequests
+
+@dynamic adUnit;
+@dynamic hasDeviceId, deviceId;
+@dynamic timezone;
+@dynamic adRequestsArray, adRequestsArray_Count;
+
+typedef struct CSNPAdRequests__storage_ {
+  uint32_t _has_storage_[1];
+  NSString *adUnit;
+  CSNPDeviceID *deviceId;
+  NSString *timezone;
+  NSMutableArray *adRequestsArray;
+} CSNPAdRequests__storage_;
+
+// This method is threadsafe because it is initially called
+// in +initialize for each subclass.
++ (GPBDescriptor *)descriptor {
+  static GPBDescriptor *descriptor = nil;
+  if (!descriptor) {
+    static GPBMessageFieldDescription fields[] = {
+      {
+        .name = "adUnit",
+        .dataTypeSpecific.className = NULL,
+        .number = CSNPAdRequests_FieldNumber_AdUnit,
+        .hasIndex = 0,
+        .offset = (uint32_t)offsetof(CSNPAdRequests__storage_, adUnit),
+        .flags = GPBFieldOptional,
+        .dataType = GPBDataTypeString,
+      },
+      {
+        .name = "deviceId",
+        .dataTypeSpecific.className = GPBStringifySymbol(CSNPDeviceID),
+        .number = CSNPAdRequests_FieldNumber_DeviceId,
+        .hasIndex = 1,
+        .offset = (uint32_t)offsetof(CSNPAdRequests__storage_, deviceId),
+        .flags = GPBFieldOptional,
+        .dataType = GPBDataTypeMessage,
+      },
+      {
+        .name = "timezone",
+        .dataTypeSpecific.className = NULL,
+        .number = CSNPAdRequests_FieldNumber_Timezone,
+        .hasIndex = 2,
+        .offset = (uint32_t)offsetof(CSNPAdRequests__storage_, timezone),
+        .flags = GPBFieldOptional,
+        .dataType = GPBDataTypeString,
+      },
+      {
+        .name = "adRequestsArray",
+        .dataTypeSpecific.className = GPBStringifySymbol(CSNPAdRequest),
+        .number = CSNPAdRequests_FieldNumber_AdRequestsArray,
+        .hasIndex = GPBNoHasBit,
+        .offset = (uint32_t)offsetof(CSNPAdRequests__storage_, adRequestsArray),
+        .flags = GPBFieldRepeated,
+        .dataType = GPBDataTypeMessage,
+      },
+    };
+    GPBDescriptor *localDescriptor =
+        [GPBDescriptor allocDescriptorForClass:[CSNPAdRequests class]
+                                     rootClass:[CSNPCsnmessagesRoot class]
+                                          file:CSNPCsnmessagesRoot_FileDescriptor()
+                                        fields:fields
+                                    fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
+                                   storageSize:sizeof(CSNPAdRequests__storage_)
+                                         flags:GPBDescriptorInitializationFlag_None];
+    NSAssert(descriptor == nil, @"Startup recursed!");
+    descriptor = localDescriptor;
+  }
+  return descriptor;
+}
+
+@end
+
 #pragma mark - CSNPAdResponse
 
 @implementation CSNPAdResponse
 
-@dynamic locationAdsArray, locationAdsArray_Count;
-@dynamic stopAdsArray, stopAdsArray_Count;
-@dynamic ads, ads_Count;
+@dynamic hashId;
+@dynamic adsArray, adsArray_Count;
 
 typedef struct CSNPAdResponse__storage_ {
   uint32_t _has_storage_[1];
-  NSMutableArray *locationAdsArray;
-  NSMutableArray *stopAdsArray;
-  GPBUInt64ObjectDictionary *ads;
+  NSData *hashId;
+  NSMutableArray *adsArray;
 } CSNPAdResponse__storage_;
 
 // This method is threadsafe because it is initially called
@@ -1439,30 +1518,21 @@ typedef struct CSNPAdResponse__storage_ {
   if (!descriptor) {
     static GPBMessageFieldDescription fields[] = {
       {
-        .name = "locationAdsArray",
-        .dataTypeSpecific.className = GPBStringifySymbol(CSNPLocationAd),
-        .number = CSNPAdResponse_FieldNumber_LocationAdsArray,
-        .hasIndex = GPBNoHasBit,
-        .offset = (uint32_t)offsetof(CSNPAdResponse__storage_, locationAdsArray),
-        .flags = GPBFieldRepeated,
-        .dataType = GPBDataTypeMessage,
+        .name = "hashId",
+        .dataTypeSpecific.className = NULL,
+        .number = CSNPAdResponse_FieldNumber_HashId,
+        .hasIndex = 0,
+        .offset = (uint32_t)offsetof(CSNPAdResponse__storage_, hashId),
+        .flags = GPBFieldOptional,
+        .dataType = GPBDataTypeBytes,
       },
       {
-        .name = "stopAdsArray",
-        .dataTypeSpecific.className = GPBStringifySymbol(CSNPStopAd),
-        .number = CSNPAdResponse_FieldNumber_StopAdsArray,
-        .hasIndex = GPBNoHasBit,
-        .offset = (uint32_t)offsetof(CSNPAdResponse__storage_, stopAdsArray),
-        .flags = GPBFieldRepeated,
-        .dataType = GPBDataTypeMessage,
-      },
-      {
-        .name = "ads",
+        .name = "adsArray",
         .dataTypeSpecific.className = GPBStringifySymbol(CSNPNativeAd),
-        .number = CSNPAdResponse_FieldNumber_Ads,
+        .number = CSNPAdResponse_FieldNumber_AdsArray,
         .hasIndex = GPBNoHasBit,
-        .offset = (uint32_t)offsetof(CSNPAdResponse__storage_, ads),
-        .flags = GPBFieldMapKeyUInt64,
+        .offset = (uint32_t)offsetof(CSNPAdResponse__storage_, adsArray),
+        .flags = GPBFieldRepeated,
         .dataType = GPBDataTypeMessage,
       },
     };
@@ -1473,6 +1543,60 @@ typedef struct CSNPAdResponse__storage_ {
                                         fields:fields
                                     fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
                                    storageSize:sizeof(CSNPAdResponse__storage_)
+                                         flags:GPBDescriptorInitializationFlag_None];
+    NSAssert(descriptor == nil, @"Startup recursed!");
+    descriptor = localDescriptor;
+  }
+  return descriptor;
+}
+
+@end
+
+#pragma mark - CSNPAdResponses
+
+@implementation CSNPAdResponses
+
+@dynamic serverId;
+@dynamic adResponsesArray, adResponsesArray_Count;
+
+typedef struct CSNPAdResponses__storage_ {
+  uint32_t _has_storage_[1];
+  NSString *serverId;
+  NSMutableArray *adResponsesArray;
+} CSNPAdResponses__storage_;
+
+// This method is threadsafe because it is initially called
+// in +initialize for each subclass.
++ (GPBDescriptor *)descriptor {
+  static GPBDescriptor *descriptor = nil;
+  if (!descriptor) {
+    static GPBMessageFieldDescription fields[] = {
+      {
+        .name = "serverId",
+        .dataTypeSpecific.className = NULL,
+        .number = CSNPAdResponses_FieldNumber_ServerId,
+        .hasIndex = 0,
+        .offset = (uint32_t)offsetof(CSNPAdResponses__storage_, serverId),
+        .flags = GPBFieldOptional,
+        .dataType = GPBDataTypeString,
+      },
+      {
+        .name = "adResponsesArray",
+        .dataTypeSpecific.className = GPBStringifySymbol(CSNPAdResponse),
+        .number = CSNPAdResponses_FieldNumber_AdResponsesArray,
+        .hasIndex = GPBNoHasBit,
+        .offset = (uint32_t)offsetof(CSNPAdResponses__storage_, adResponsesArray),
+        .flags = GPBFieldRepeated,
+        .dataType = GPBDataTypeMessage,
+      },
+    };
+    GPBDescriptor *localDescriptor =
+        [GPBDescriptor allocDescriptorForClass:[CSNPAdResponses class]
+                                     rootClass:[CSNPCsnmessagesRoot class]
+                                          file:CSNPCsnmessagesRoot_FileDescriptor()
+                                        fields:fields
+                                    fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
+                                   storageSize:sizeof(CSNPAdResponses__storage_)
                                          flags:GPBDescriptorInitializationFlag_None];
     NSAssert(descriptor == nil, @"Startup recursed!");
     descriptor = localDescriptor;

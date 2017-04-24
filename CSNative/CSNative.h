@@ -21,8 +21,9 @@ FOUNDATION_EXPORT const unsigned char CSNativeVersionString[];
 #import <CSNative/CSNAdvertiserView.h>
 #import <CSNative/CSNActionView.h>
 #import <CSNative/CSNAd.h>
+#import <CSNative/CSNOptionalAd.h>
 #import <CSNative/CSNAdsController.h>
-#import <CSNative/CSNStopTuple.h>
+#import <CSNative/CSNTransit.h>
 #import <CSNative/CSNAdRequest.h>
 #import <CSNative/CSNVisibilityMonitor.h>
 

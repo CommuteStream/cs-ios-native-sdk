@@ -29,6 +29,8 @@ CF_EXTERN_C_BEGIN
 
 @class CSNPActionComponent;
 @class CSNPAdInteraction;
+@class CSNPAdRequest;
+@class CSNPAdResponse;
 @class CSNPAdVisibility;
 @class CSNPAdvertiserComponent;
 @class CSNPBodyComponent;
@@ -37,15 +39,14 @@ CF_EXTERN_C_BEGIN
 @class CSNPHeadlineComponent;
 @class CSNPHeroComponent;
 @class CSNPLocation;
-@class CSNPLocationAd;
 @class CSNPLocationComponent;
 @class CSNPLogoComponent;
 @class CSNPNativeAd;
 @class CSNPSecondaryActionComponent;
 @class CSNPSimpleStat;
-@class CSNPStop;
-@class CSNPStopAd;
-@class CSNPStopComponent;
+@class CSNPTransitAgency;
+@class CSNPTransitRoute;
+@class CSNPTransitStop;
 @class CSNPTransitSubtitleComponent;
 @class CSNPTransitTitleComponent;
 
@@ -148,47 +149,48 @@ BOOL CSNPDeviceID_Type_IsValidValue(int32_t value);
 @interface CSNPCsnmessagesRoot : GPBRootObject
 @end
 
-#pragma mark - CSNPStop
+#pragma mark - CSNPTransitAgency
 
-typedef GPB_ENUM(CSNPStop_FieldNumber) {
-  CSNPStop_FieldNumber_AgencyId = 1,
-  CSNPStop_FieldNumber_RouteId = 2,
-  CSNPStop_FieldNumber_StopId = 3,
+typedef GPB_ENUM(CSNPTransitAgency_FieldNumber) {
+  CSNPTransitAgency_FieldNumber_AgencyId = 1,
 };
 
-@interface CSNPStop : GPBMessage
+@interface CSNPTransitAgency : GPBMessage
+
+@property(nonatomic, readwrite, copy, null_resettable) NSString *agencyId;
+
+@end
+
+#pragma mark - CSNPTransitRoute
+
+typedef GPB_ENUM(CSNPTransitRoute_FieldNumber) {
+  CSNPTransitRoute_FieldNumber_AgencyId = 1,
+  CSNPTransitRoute_FieldNumber_RouteId = 2,
+};
+
+@interface CSNPTransitRoute : GPBMessage
+
+@property(nonatomic, readwrite, copy, null_resettable) NSString *agencyId;
+
+@property(nonatomic, readwrite, copy, null_resettable) NSString *routeId;
+
+@end
+
+#pragma mark - CSNPTransitStop
+
+typedef GPB_ENUM(CSNPTransitStop_FieldNumber) {
+  CSNPTransitStop_FieldNumber_AgencyId = 1,
+  CSNPTransitStop_FieldNumber_RouteId = 2,
+  CSNPTransitStop_FieldNumber_StopId = 3,
+};
+
+@interface CSNPTransitStop : GPBMessage
 
 @property(nonatomic, readwrite, copy, null_resettable) NSString *agencyId;
 
 @property(nonatomic, readwrite, copy, null_resettable) NSString *routeId;
 
 @property(nonatomic, readwrite, copy, null_resettable) NSString *stopId;
-
-@end
-
-#pragma mark - CSNPStopComponent
-
-typedef GPB_ENUM(CSNPStopComponent_FieldNumber) {
-  CSNPStopComponent_FieldNumber_ComponentId = 1,
-  CSNPStopComponent_FieldNumber_StopTuple = 2,
-  CSNPStopComponent_FieldNumber_AgencyName = 3,
-  CSNPStopComponent_FieldNumber_RouteName = 4,
-  CSNPStopComponent_FieldNumber_StopName = 5,
-};
-
-@interface CSNPStopComponent : GPBMessage
-
-@property(nonatomic, readwrite, copy, null_resettable) NSString *componentId;
-
-@property(nonatomic, readwrite, strong, null_resettable) CSNPStop *stopTuple;
-/** Test to see if @c stopTuple has been set. */
-@property(nonatomic, readwrite) BOOL hasStopTuple;
-
-@property(nonatomic, readwrite, copy, null_resettable) NSString *agencyName;
-
-@property(nonatomic, readwrite, copy, null_resettable) NSString *routeName;
-
-@property(nonatomic, readwrite, copy, null_resettable) NSString *stopName;
 
 @end
 
@@ -427,9 +429,8 @@ typedef GPB_ENUM(CSNPNativeAd_FieldNumber) {
   CSNPNativeAd_FieldNumber_Body = 9,
   CSNPNativeAd_FieldNumber_Advertiser = 10,
   CSNPNativeAd_FieldNumber_Location = 11,
-  CSNPNativeAd_FieldNumber_Stop = 12,
-  CSNPNativeAd_FieldNumber_Hero = 13,
-  CSNPNativeAd_FieldNumber_ActionsArray = 14,
+  CSNPNativeAd_FieldNumber_Hero = 12,
+  CSNPNativeAd_FieldNumber_ActionsArray = 13,
 };
 
 @interface CSNPNativeAd : GPBMessage
@@ -474,10 +475,6 @@ typedef GPB_ENUM(CSNPNativeAd_FieldNumber) {
 /** Test to see if @c location has been set. */
 @property(nonatomic, readwrite) BOOL hasLocation;
 
-@property(nonatomic, readwrite, strong, null_resettable) CSNPStopComponent *stop;
-/** Test to see if @c stop has been set. */
-@property(nonatomic, readwrite) BOOL hasStop;
-
 @property(nonatomic, readwrite, strong, null_resettable) CSNPHeroComponent *hero;
 /** Test to see if @c hero has been set. */
 @property(nonatomic, readwrite) BOOL hasHero;
@@ -497,7 +494,7 @@ typedef GPB_ENUM(CSNPStopAd_FieldNumber) {
 
 @interface CSNPStopAd : GPBMessage
 
-@property(nonatomic, readwrite, strong, null_resettable) CSNPStop *stopTuple;
+@property(nonatomic, readwrite, strong, null_resettable) CSNPTransitStop *stopTuple;
 /** Test to see if @c stopTuple has been set. */
 @property(nonatomic, readwrite) BOOL hasStopTuple;
 
@@ -525,14 +522,54 @@ typedef GPB_ENUM(CSNPLocationAd_FieldNumber) {
 #pragma mark - CSNPAdRequest
 
 typedef GPB_ENUM(CSNPAdRequest_FieldNumber) {
-  CSNPAdRequest_FieldNumber_AdUnit = 1,
-  CSNPAdRequest_FieldNumber_DeviceId = 2,
-  CSNPAdRequest_FieldNumber_Timezone = 3,
-  CSNPAdRequest_FieldNumber_Location = 4,
-  CSNPAdRequest_FieldNumber_StopsArray = 5,
+  CSNPAdRequest_FieldNumber_HashId = 1,
+  CSNPAdRequest_FieldNumber_NumOfAds = 2,
+  CSNPAdRequest_FieldNumber_LocationsArray = 3,
+  CSNPAdRequest_FieldNumber_AgenciesArray = 4,
+  CSNPAdRequest_FieldNumber_RoutesArray = 5,
+  CSNPAdRequest_FieldNumber_StopsArray = 6,
 };
 
+/**
+ * AdRequest contains a hash_id which is the hash everything but the num_of_ads
+ **/
 @interface CSNPAdRequest : GPBMessage
+
+@property(nonatomic, readwrite, copy, null_resettable) NSData *hashId;
+
+@property(nonatomic, readwrite) uint32_t numOfAds;
+
+@property(nonatomic, readwrite, strong, null_resettable) NSMutableArray<CSNPLocation*> *locationsArray;
+/** The number of items in @c locationsArray without causing the array to be created. */
+@property(nonatomic, readonly) NSUInteger locationsArray_Count;
+
+@property(nonatomic, readwrite, strong, null_resettable) NSMutableArray<CSNPTransitAgency*> *agenciesArray;
+/** The number of items in @c agenciesArray without causing the array to be created. */
+@property(nonatomic, readonly) NSUInteger agenciesArray_Count;
+
+@property(nonatomic, readwrite, strong, null_resettable) NSMutableArray<CSNPTransitRoute*> *routesArray;
+/** The number of items in @c routesArray without causing the array to be created. */
+@property(nonatomic, readonly) NSUInteger routesArray_Count;
+
+@property(nonatomic, readwrite, strong, null_resettable) NSMutableArray<CSNPTransitStop*> *stopsArray;
+/** The number of items in @c stopsArray without causing the array to be created. */
+@property(nonatomic, readonly) NSUInteger stopsArray_Count;
+
+@end
+
+#pragma mark - CSNPAdRequests
+
+typedef GPB_ENUM(CSNPAdRequests_FieldNumber) {
+  CSNPAdRequests_FieldNumber_AdUnit = 1,
+  CSNPAdRequests_FieldNumber_DeviceId = 2,
+  CSNPAdRequests_FieldNumber_Timezone = 3,
+  CSNPAdRequests_FieldNumber_AdRequestsArray = 4,
+};
+
+/**
+ * AdRequests contains relevant information needed to attempt filling ad requests
+ **/
+@interface CSNPAdRequests : GPBMessage
 
 @property(nonatomic, readwrite, copy, null_resettable) NSString *adUnit;
 
@@ -542,37 +579,49 @@ typedef GPB_ENUM(CSNPAdRequest_FieldNumber) {
 
 @property(nonatomic, readwrite, copy, null_resettable) NSString *timezone;
 
-@property(nonatomic, readwrite, strong, null_resettable) CSNPLocation *location;
-/** Test to see if @c location has been set. */
-@property(nonatomic, readwrite) BOOL hasLocation;
-
-@property(nonatomic, readwrite, strong, null_resettable) NSMutableArray<CSNPStop*> *stopsArray;
-/** The number of items in @c stopsArray without causing the array to be created. */
-@property(nonatomic, readonly) NSUInteger stopsArray_Count;
+@property(nonatomic, readwrite, strong, null_resettable) NSMutableArray<CSNPAdRequest*> *adRequestsArray;
+/** The number of items in @c adRequestsArray without causing the array to be created. */
+@property(nonatomic, readonly) NSUInteger adRequestsArray_Count;
 
 @end
 
 #pragma mark - CSNPAdResponse
 
 typedef GPB_ENUM(CSNPAdResponse_FieldNumber) {
-  CSNPAdResponse_FieldNumber_LocationAdsArray = 1,
-  CSNPAdResponse_FieldNumber_StopAdsArray = 2,
-  CSNPAdResponse_FieldNumber_Ads = 3,
+  CSNPAdResponse_FieldNumber_HashId = 1,
+  CSNPAdResponse_FieldNumber_AdsArray = 2,
 };
 
+/**
+ * AdResponse is a mapping between an AdRequest hash_id and the set of ads
+ **/
 @interface CSNPAdResponse : GPBMessage
 
-@property(nonatomic, readwrite, strong, null_resettable) NSMutableArray<CSNPLocationAd*> *locationAdsArray;
-/** The number of items in @c locationAdsArray without causing the array to be created. */
-@property(nonatomic, readonly) NSUInteger locationAdsArray_Count;
+@property(nonatomic, readwrite, copy, null_resettable) NSData *hashId;
 
-@property(nonatomic, readwrite, strong, null_resettable) NSMutableArray<CSNPStopAd*> *stopAdsArray;
-/** The number of items in @c stopAdsArray without causing the array to be created. */
-@property(nonatomic, readonly) NSUInteger stopAdsArray_Count;
+@property(nonatomic, readwrite, strong, null_resettable) NSMutableArray<CSNPNativeAd*> *adsArray;
+/** The number of items in @c adsArray without causing the array to be created. */
+@property(nonatomic, readonly) NSUInteger adsArray_Count;
 
-@property(nonatomic, readwrite, strong, null_resettable) GPBUInt64ObjectDictionary<CSNPNativeAd*> *ads;
-/** The number of items in @c ads without causing the array to be created. */
-@property(nonatomic, readonly) NSUInteger ads_Count;
+@end
+
+#pragma mark - CSNPAdResponses
+
+typedef GPB_ENUM(CSNPAdResponses_FieldNumber) {
+  CSNPAdResponses_FieldNumber_ServerId = 1,
+  CSNPAdResponses_FieldNumber_AdResponsesArray = 2,
+};
+
+/**
+ * AdResponses returns a mapping of ad context hashes to a set of ads.
+ **/
+@interface CSNPAdResponses : GPBMessage
+
+@property(nonatomic, readwrite, copy, null_resettable) NSString *serverId;
+
+@property(nonatomic, readwrite, strong, null_resettable) NSMutableArray<CSNPAdResponse*> *adResponsesArray;
+/** The number of items in @c adResponsesArray without causing the array to be created. */
+@property(nonatomic, readonly) NSUInteger adResponsesArray_Count;
 
 @end
 

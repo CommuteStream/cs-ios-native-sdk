@@ -3,6 +3,11 @@
 @import CSNative;
 
 
+@interface CSNAdsController (Test)
+- (NSArray<UIView *> *) componentViews:(UIView *)view;
+- (NSArray<UIView *> *) findViews:(UIView *)view matcher:(bool (^)(UIView *))matcher;
+@end
+
 @interface CSNAdsControllerTest : XCTestCase
 
 @end
@@ -58,13 +63,18 @@
     CSNHeadlineView *headlineView = [[CSNHeadlineView alloc] init];
     [view addSubview:logoView];
     [view addSubview:headlineView];
-    [controller buildStopAd:view agencyID:@"test_agency" routeID:@"test_route" stopID:@"test_stop"];
     XCTAssert([logoView ad] == nil);
     XCTAssert([headlineView ad] == nil);
     CSNAdRequest *adRequest = [[CSNAdRequest alloc] init];
-    [adRequest addStop:@"commutestream" routeID:@"test" stopID:@"test"];
-    [controller fetchAds:adRequest completed:^{
-        [controller buildStopAd:view agencyID:@"commutestream" routeID:@"test" stopID:@"test"];
+    CSNTransitStop *testStop = [[CSNTransitStop alloc] initWithIDs:@"commutestream" routeID:@"test" stopID:@"test"];
+    [adRequest addStop:testStop];
+    NSArray<CSNAdRequest*> *adRequests = @[adRequest];
+    [controller fetchAds:adRequests completed:^(NSArray<CSNOptionalAd *> *ads) {
+        CSNOptionalAd *optAd = [ads firstObject];
+        XCTAssert(optAd != nil);
+        CSNAd *ad = [optAd ad];
+        XCTAssert(ad != nil);
+        [controller buildView:view ad:ad];
         XCTAssert([logoView ad] != nil);
         XCTAssert([headlineView ad] != nil);
         [expectation fulfill];

@@ -21,7 +21,7 @@
     CSNPHeadlineComponent *message = [[CSNPHeadlineComponent alloc] init];
     [message setComponentId:1];
     [message setHeadline:@"test headline"];
-    CSNPHeadlineComponent *component = [[CSNPHeadlineComponent alloc] initWithMessage:message];
+    CSNHeadlineComponent *component = [[CSNHeadlineComponent alloc] initWithMessage:message];
     XCTAssert([component componentID] == [message componentId]);
     XCTAssert([component headline] == [message headline]);
 }
