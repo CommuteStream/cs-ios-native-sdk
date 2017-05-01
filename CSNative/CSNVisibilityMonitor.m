@@ -38,18 +38,21 @@
         int64_t intersectedArea = intersected.size.width*intersected.size.height;
         int64_t windowArea = windowFrame.size.width * windowFrame.size.height;
         int64_t viewArea = viewFrame.size.width * viewFrame.size.height;
+        double viewVisible = 0;
+        double deviceVisible = 0;
         if(viewArea > 0 && windowArea > 0) {
-            double viewVisible = (double)intersectedArea / (double)viewArea;
-            double deviceVisible = (double)intersectedArea / (double)windowArea;
+            viewVisible = (double)intersectedArea / (double)viewArea;
+            deviceVisible = (double)intersectedArea / (double)windowArea;
             //NSLog(@"component view %@ for component %lld  view visible pct %f, window visible pct %f", view, [componentView componentID], viewVisible, deviceVisible);
         }
-        //CGPoint originalPoint = CGPointMake(view.frame.origin.x, view.frame.origin.y);
-        // can I just look at the window of the view rather than the superview?
-        //CGPoint pointInAppFrame = [view convertPoint:originalPoint toView:view.superview.window];
-        //BOOL visible = CGRectIntersectsRect(CGRectMake(pointInAppFrame.x, pointInAppFrame.y, view.frame.size.width, view.frame.size.height), view.superview.window.frame);
-        //double pct_of_screen =
-        //double pct_visible =
+        uint64_t componentID = [componentView componentID];
+        uint64_t adID = [componentView adID];
+        [self recordVisibility:adID componentID:componentID viewVisibility:viewVisible deviceVisibility:deviceVisible];
     }
+}
+
+- (void) recordVisibility:(uint64_t)adID componentID:(uint64_t)componentID viewVisibility:(double)viewVisibility deviceVisibility:(double)deviceVisibility {
+    
 }
 
 @end

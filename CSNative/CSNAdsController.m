@@ -140,6 +140,7 @@ CSNModalWindow *modalWindowView;
 }
 
 - (void) setupComponentViews:(UIView *)parent ad:(CSNAd *)ad {
+    
     for(id<CSNComponentView> componentView in [self componentViews:parent]) {
         // periodically poll view for visibility
         [componentView setAd:ad];
@@ -154,8 +155,6 @@ CSNModalWindow *modalWindowView;
             
         }];
         [_visMonitor addView:componentView];
-        //[_visibilityMonitor addView:componentView ad:ad];
-        //[_interactionMonitor addView:componentView ad:ad];
     }
 }
 
