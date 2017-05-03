@@ -22,23 +22,16 @@
 }
 
 - (void) recordInteraction:(uint64_t)requestID adID:(uint64_t)adID componentID:(uint64_t)componentID interactionKind:(int32_t)interactionKind {
-    bool added = false;
-    for (id adReport in [_adReports adReportsArray]) {
-        if([adReport adId] == adID && [adReport requestId] == requestID) {
-            [self addComponentInteraction:adReport componentID:componentID interactionKind:interactionKind];
-            added = true;
-            break;
-        }
-    }
-    if(!added) {
-        CSNPAdReport *adReport = [self createAdReport:requestID adID:adID];
-        [self addComponentInteraction:adReport componentID:componentID interactionKind:interactionKind];
-        [[_adReports adReportsArray] addObject:adReport];
-    }
+    CSNPAdReport *adReport = [self getAdReport:_adReports requestID:requestID adID:adID];
+    CSNPComponentReport *compReport = [self getComponentReport:adReport componentID:componentID];
+    [self addComponentInteraction:compReport interactionKind:interactionKind];
+
 }
 
 - (void) recordVisibility:(uint64_t)requestID adID:(uint64_t)adID componentID:(uint64_t)componentID viewVisibility:(double)viewVisiblity deviceVisibility:(double)deviceVisibility {
-    
+    CSNPAdReport *adReport = [self getAdReport:_adReports requestID:requestID adID:adID];
+    CSNPComponentReport *compReport = [self getComponentReport:adReport componentID:componentID];
+    [self addComponentVisibility:compReport viewVisibility:viewVisiblity deviceVisibility:deviceVisibility];
 }
 
 - (CSNPAdReports *) buildReport {
@@ -66,6 +59,56 @@
     return adReports;
 }
 
+- (void) addComponentInteraction:(CSNPComponentReport *)compReport interactionKind:(int32_t)interactionKind {
+    CSNPComponentInteraction *compInteraction = [[CSNPComponentInteraction alloc] init];
+    [compInteraction setKind:interactionKind];
+    [compInteraction setDeviceTime:[self currentTime]];
+    [[compReport interactionsArray] addObject:compInteraction];
+}
+
+- (CSNPAdReport *) findAdReport:(CSNPAdReports *)adReports requestID:(uint64_t)requestID adID:(uint64_t)adID {
+    for (id adReport in [_adReports adReportsArray]) {
+        if([adReport adId] == adID && [adReport requestId] == requestID) {
+            return adReport;
+        }
+    }
+    return nil;
+}
+
+- (CSNPAdReport *) getAdReport:(CSNPAdReports *)adReports requestID:(uint64_t)requestID adID:(uint64_t)adID {
+    CSNPAdReport *adReport = [self findAdReport:adReports requestID:requestID adID:adID];
+    if(adReport){
+        return adReport;
+    } else {
+        adReport = [self createAdReport:requestID adID:adID];
+        [[adReports adReportsArray] addObject:adReport];
+        return adReport;
+    }
+}
+
+- (CSNPComponentReport *) findComponentReport:(CSNPAdReport *)adReport componentID:(uint64_t)componentID {
+    for(id compReport in [adReport componentsArray]) {
+        if([compReport componentId] == componentID) {
+            return compReport;
+        }
+    }
+    return nil;
+}
+
+- (CSNPComponentReport *) getComponentReport:(CSNPAdReport *)adReport componentID:(uint64_t)componentID {
+    CSNPComponentReport *compReport = [self findComponentReport:adReport componentID:componentID];
+    if(compReport){
+        return compReport;
+    } else {
+        compReport = [self createComponentReport:componentID];
+        [[adReport componentsArray] addObject:compReport];
+        return compReport;
+    }
+}
+
+- (void) addComponentVisibility:(CSNPComponentReport *)compReport viewVisibility:(double)viewVisibility deviceVisibility:(double)deviceVisibility {
+}
+
 - (CSNPAdReport *) createAdReport:(uint64_t)requestID adID:(uint64_t)adID {
     CSNPAdReport *adReport = [[CSNPAdReport alloc] init];
     [adReport setAdId:adID];
@@ -73,28 +116,9 @@
     return adReport;
 }
 
-- (void) addComponentInteraction:(CSNPAdReport *)adReport componentID:(uint64_t)componentID interactionKind:(int32_t)interactionKind {
-    bool added = false;
-    CSNPComponentInteraction *compInteraction = [[CSNPComponentInteraction alloc] init];
-    [compInteraction setKind:interactionKind];
-    [compInteraction setDeviceTime:[self currentTime]];
-    for(id compReport in [adReport componentsArray]) {
-        if([compReport componentId] == componentID) {
-            [[compReport interactionsArray] addObject:compInteraction];
-            added = true;
-            break;
-        }
-    }
-    if(!added) {
-        CSNPComponentReport *compReport = [self createComponentReport:componentID];
-        [[compReport interactionsArray] addObject:compInteraction];
-        [[adReport componentsArray] addObject:compReport];
-    }
-}
-
-- (CSNPComponentReport *) createComponentReport:(uint64_t)componentId {
+- (CSNPComponentReport *) createComponentReport:(uint64_t)componentID {
     CSNPComponentReport *compReport = [[CSNPComponentReport alloc] init];
-    [compReport setComponentId:componentId];
+    [compReport setComponentId:componentID];
     return compReport;
 }
 
