@@ -4,18 +4,20 @@
 @property NSData *adUnit;
 @property NSData *deviceID;
 @property NSData *ipAddress;
+@property NSString *timeZone;
 @property CSNPAdReports *adReports;
 @property uint64_t epoch;
 @end
 
 @implementation CSNAdReportsBuilder
 
-- (instancetype) initWithAdUnit:(NSData *)adUnit deviceID:(NSData *)deviceID ipAddress:(NSData *)ipAddress {
+- (instancetype) initWithAdUnit:(NSData *)adUnit deviceID:(NSData *)deviceID ipAddress:(NSData *)ipAddress timeZone:(NSString *)timeZone {
     _adUnit = adUnit;
     _deviceID = deviceID;
     _ipAddress = ipAddress;
+    _timeZone = timeZone;
     _epoch = [self currentTime];
-    _adReports = [[CSNPAdReports alloc] init];
+    _adReports = [self createAdReports];
     return self;
 }
 
@@ -40,13 +42,28 @@
 }
 
 - (CSNPAdReports *) buildReport {
-    return nil;
+    CSNPAdReports *adReports = _adReports;
+    _adReports = [self createAdReports];
+    return adReports;
     
 }
 
 // return the current device time in milliseconds since the unix epoch
 - (uint64_t) currentTime {
     return (uint64_t)([[NSDate date] timeIntervalSince1970] * 1000.0);
+}
+
+- (CSNPAdReports *) createAdReports {
+    CSNPDeviceID *deviceID = [[CSNPDeviceID alloc] init];
+    [deviceID setDeviceIdType:CSNPDeviceID_Type_Idfa];
+    [deviceID setDeviceId:_deviceID];
+    CSNPAdReports *adReports = [[CSNPAdReports alloc] init];
+    [adReports setAdUnit:_adUnit];
+    [adReports setDeviceId:deviceID];
+    [adReports setIpAddr:_ipAddress];
+    [adReports setTimezone:_timeZone];
+    [adReports setDeviceTime:[self currentTime]];
+    return adReports;
 }
 
 - (CSNPAdReport *) createAdReport:(uint64_t)requestID adID:(uint64_t)adID {

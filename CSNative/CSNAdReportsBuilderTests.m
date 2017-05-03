@@ -21,9 +21,24 @@
     [super tearDown];
 }
 
+- (void)testCreateAdReports {
+    NSData *adUnit = [[NSData alloc] init];
+    NSData *deviceId = [[NSData alloc] init];
+    NSData *ipAddr = [[NSData alloc] init];
+    NSString *timeZone = @"UTC";
+    CSNAdReportsBuilder *builder = [[CSNAdReportsBuilder alloc] initWithAdUnit:adUnit deviceID:deviceId ipAddress:ipAddr timeZone:timeZone];
+    XCTAssert([[builder adReports] adUnit] == adUnit);
+    XCTAssert([[[builder adReports] deviceId] deviceIdType] == CSNPDeviceID_Type_Idfa);
+    XCTAssert([[[builder adReports] deviceId] deviceId] == deviceId);
+    XCTAssert([[builder adReports] ipAddr] == ipAddr);
+    XCTAssert([[builder adReports] timezone] == timeZone);
+    
+}
+
+
 - (void)testReportInteraction {
     NSData *bogus = [[NSData alloc] init];
-    CSNAdReportsBuilder *builder = [[CSNAdReportsBuilder alloc] initWithAdUnit:bogus deviceID:bogus ipAddress:bogus];
+    CSNAdReportsBuilder *builder = [[CSNAdReportsBuilder alloc] initWithAdUnit:bogus deviceID:bogus ipAddress:bogus timeZone:@"UTC"];
     [builder recordInteraction:0 adID:0 componentID:0 interactionKind:0];
     uint32_t ad_report_count = 0;
     uint32_t comp_report_count = 0;
