@@ -1788,20 +1788,20 @@ void SetCSNPComponentInteraction_Kind_RawValue(CSNPComponentInteraction *message
 @implementation CSNPComponentReport
 
 @dynamic componentId;
-@dynamic deviceTime;
-@dynamic visibilitySampleCounts;
-@dynamic adVisibilitySamplesArray, adVisibilitySamplesArray_Count;
+@dynamic visibilityEpoch;
+@dynamic visibilitySampleCount;
+@dynamic viewVisibilitySamplesArray, viewVisibilitySamplesArray_Count;
 @dynamic deviceVisibilitySamplesArray, deviceVisibilitySamplesArray_Count;
 @dynamic interactionsArray, interactionsArray_Count;
 
 typedef struct CSNPComponentReport__storage_ {
   uint32_t _has_storage_[1];
-  GPBUInt64Array *adVisibilitySamplesArray;
+  GPBUInt64Array *viewVisibilitySamplesArray;
   GPBUInt64Array *deviceVisibilitySamplesArray;
   NSMutableArray *interactionsArray;
   uint64_t componentId;
-  uint64_t deviceTime;
-  uint64_t visibilitySampleCounts;
+  uint64_t visibilityEpoch;
+  uint64_t visibilitySampleCount;
 } CSNPComponentReport__storage_;
 
 // This method is threadsafe because it is initially called
@@ -1820,29 +1820,29 @@ typedef struct CSNPComponentReport__storage_ {
         .dataType = GPBDataTypeUInt64,
       },
       {
-        .name = "deviceTime",
+        .name = "visibilityEpoch",
         .dataTypeSpecific.className = NULL,
-        .number = CSNPComponentReport_FieldNumber_DeviceTime,
+        .number = CSNPComponentReport_FieldNumber_VisibilityEpoch,
         .hasIndex = 1,
-        .offset = (uint32_t)offsetof(CSNPComponentReport__storage_, deviceTime),
+        .offset = (uint32_t)offsetof(CSNPComponentReport__storage_, visibilityEpoch),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeUInt64,
       },
       {
-        .name = "visibilitySampleCounts",
+        .name = "visibilitySampleCount",
         .dataTypeSpecific.className = NULL,
-        .number = CSNPComponentReport_FieldNumber_VisibilitySampleCounts,
+        .number = CSNPComponentReport_FieldNumber_VisibilitySampleCount,
         .hasIndex = 2,
-        .offset = (uint32_t)offsetof(CSNPComponentReport__storage_, visibilitySampleCounts),
+        .offset = (uint32_t)offsetof(CSNPComponentReport__storage_, visibilitySampleCount),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeUInt64,
       },
       {
-        .name = "adVisibilitySamplesArray",
+        .name = "viewVisibilitySamplesArray",
         .dataTypeSpecific.className = NULL,
-        .number = CSNPComponentReport_FieldNumber_AdVisibilitySamplesArray,
+        .number = CSNPComponentReport_FieldNumber_ViewVisibilitySamplesArray,
         .hasIndex = GPBNoHasBit,
-        .offset = (uint32_t)offsetof(CSNPComponentReport__storage_, adVisibilitySamplesArray),
+        .offset = (uint32_t)offsetof(CSNPComponentReport__storage_, viewVisibilitySamplesArray),
         .flags = (GPBFieldFlags)(GPBFieldRepeated | GPBFieldPacked),
         .dataType = GPBDataTypeUInt64,
       },

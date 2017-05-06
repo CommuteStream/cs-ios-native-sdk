@@ -686,9 +686,9 @@ void SetCSNPComponentInteraction_Kind_RawValue(CSNPComponentInteraction *message
 
 typedef GPB_ENUM(CSNPComponentReport_FieldNumber) {
   CSNPComponentReport_FieldNumber_ComponentId = 1,
-  CSNPComponentReport_FieldNumber_DeviceTime = 2,
-  CSNPComponentReport_FieldNumber_VisibilitySampleCounts = 3,
-  CSNPComponentReport_FieldNumber_AdVisibilitySamplesArray = 4,
+  CSNPComponentReport_FieldNumber_VisibilityEpoch = 2,
+  CSNPComponentReport_FieldNumber_VisibilitySampleCount = 3,
+  CSNPComponentReport_FieldNumber_ViewVisibilitySamplesArray = 4,
   CSNPComponentReport_FieldNumber_DeviceVisibilitySamplesArray = 5,
   CSNPComponentReport_FieldNumber_InteractionsArray = 6,
 };
@@ -697,13 +697,13 @@ typedef GPB_ENUM(CSNPComponentReport_FieldNumber) {
 
 @property(nonatomic, readwrite) uint64_t componentId;
 
-@property(nonatomic, readwrite) uint64_t deviceTime;
+@property(nonatomic, readwrite) uint64_t visibilityEpoch;
 
-@property(nonatomic, readwrite) uint64_t visibilitySampleCounts;
+@property(nonatomic, readwrite) uint64_t visibilitySampleCount;
 
-@property(nonatomic, readwrite, strong, null_resettable) GPBUInt64Array *adVisibilitySamplesArray;
-/** The number of items in @c adVisibilitySamplesArray without causing the array to be created. */
-@property(nonatomic, readonly) NSUInteger adVisibilitySamplesArray_Count;
+@property(nonatomic, readwrite, strong, null_resettable) GPBUInt64Array *viewVisibilitySamplesArray;
+/** The number of items in @c viewVisibilitySamplesArray without causing the array to be created. */
+@property(nonatomic, readonly) NSUInteger viewVisibilitySamplesArray_Count;
 
 @property(nonatomic, readwrite, strong, null_resettable) GPBUInt64Array *deviceVisibilitySamplesArray;
 /** The number of items in @c deviceVisibilitySamplesArray without causing the array to be created. */

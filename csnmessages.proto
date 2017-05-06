@@ -174,8 +174,8 @@ message ComponentInteraction {
 message ComponentReport {
   uint64 component_id = 1;
   uint64 visibility_epoch = 2;
-  uint64 visibility_sample_counts = 3;
-  repeated uint64 ad_visibility_samples = 4;
+  uint64 visibility_sample_count = 3;
+  repeated uint64 view_visibility_samples = 4;
   repeated uint64 device_visibility_samples = 5;
   repeated ComponentInteraction interactions = 6;
 }

@@ -107,6 +107,27 @@
 }
 
 - (void) addComponentVisibility:(CSNPComponentReport *)compReport viewVisibility:(double)viewVisibility deviceVisibility:(double)deviceVisibility {
+    if([compReport visibilitySampleCount] == 0) {
+        [compReport setVisibilityEpoch:[self currentTime]];
+    }
+    uint8_t position = [compReport visibilitySampleCount] % 16;
+    uint8_t viewEncoded = [self encodeVisibility:viewVisibility];
+    uint8_t deviceEncoded = [self encodeVisibility:deviceVisibility];
+    if(position == 0) {
+        uint64_t viewSample = [self setSample:0 position:0 value:viewEncoded];
+        uint64_t deviceSample = [self setSample:0 position:0 value:deviceEncoded];
+        [[compReport viewVisibilitySamplesArray] addValue:viewSample];
+        [[compReport deviceVisibilitySamplesArray] addValue:deviceSample];
+    } else {
+        uint64_t idx = [compReport viewVisibilitySamplesArray_Count] - 1;
+        uint64_t curViewSample = [[compReport viewVisibilitySamplesArray] valueAtIndex:idx];
+        uint64_t curDeviceSample = [[compReport viewVisibilitySamplesArray] valueAtIndex:idx];
+        uint64_t viewSample = [self setSample:curViewSample position:position value:viewEncoded];
+        uint64_t deviceSample = [self setSample:curDeviceSample position:position value:deviceEncoded];
+        [[compReport viewVisibilitySamplesArray] replaceValueAtIndex:idx withValue:viewSample];
+        [[compReport deviceVisibilitySamplesArray] replaceValueAtIndex:idx withValue:(deviceSample)];
+    }
+    [compReport setVisibilitySampleCount:[compReport visibilitySampleCount] + 1];
 }
 
 - (CSNPAdReport *) createAdReport:(uint64_t)requestID adID:(uint64_t)adID {
@@ -122,6 +143,21 @@
     return compReport;
 }
 
+// encode a double visibility percentage (0.0 to 1.0) value into a 4 bit histogram value
+- (uint8_t) encodeVisibility:(double)visibility {
+    return (uint8_t)round(visibility*15.0) & 0x0F;
+}
 
+// set a 4 bit portion of a 64bit value to the sample value which is a 4 bit value itself
+- (uint64_t) setSample:(uint64_t)sample position:(uint8_t)position value:(uint8_t)value  {
+    uint64_t shift = position*4;
+    uint64_t valueMask = 0x000000000000000F;
+    valueMask = valueMask << shift;
+    uint64_t sampleMask = valueMask ^ 0xFFFFFFFFFFFFFFFF;
+    uint64_t shiftedValue = ((uint64_t)value) << shift;
+    uint64_t maskedSample = sample & sampleMask;
+    uint64_t newSample = maskedSample | shiftedValue;
+    return newSample;
+}
 
 @end
