@@ -38,7 +38,6 @@
     CSNPAdReports *adReports = _adReports;
     _adReports = [self createAdReports];
     return adReports;
-    
 }
 
 // return the current device time in milliseconds since the unix epoch

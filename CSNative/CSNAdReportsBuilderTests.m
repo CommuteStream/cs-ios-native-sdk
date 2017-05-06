@@ -60,7 +60,6 @@
     for(uint8_t value = 0; value < 16; value++) {
         sample = [builder setSample:sample position:value value:value];
     }
-    NSLog(@"sample %llx, expect %llx", sample, expect);
     XCTAssert(sample == expect);
 }
 
@@ -70,6 +69,8 @@
     NSData *bogus = [[NSData alloc] init];
     CSNAdReportsBuilder *builder = [[CSNAdReportsBuilder alloc] initWithAdUnit:bogus deviceID:bogus ipAddress:bogus timeZone:@"UTC"];
     [builder recordVisibility:0 adID:0 componentID:0 viewVisibility:0.5 deviceVisibility:0.1];
+    uint64_t expectViewVal = [builder setSample:0 position:0 value:[builder encodeVisibility:0.5]];
+    uint64_t expectDevVal = [builder setSample:0 position:0 value:[builder encodeVisibility:0.1]];
     uint32_t ad_report_count = 0;
     uint32_t comp_report_count = 0;
     uint32_t visibility_count = 0;
@@ -80,6 +81,8 @@
                 if([compReport componentId] == 0) {
                     comp_report_count += 1;
                     visibility_count += [compReport visibilitySampleCount];
+                    XCTAssert([[compReport viewVisibilitySamplesArray] valueAtIndex:0] == expectViewVal);
+                    XCTAssert([[compReport deviceVisibilitySamplesArray] valueAtIndex:0] == expectDevVal);
                 }
             }
         }
@@ -87,6 +90,7 @@
     XCTAssert(ad_report_count == 1);
     XCTAssert(comp_report_count == 1);
     XCTAssert(visibility_count == 1);
+    
     
     [builder recordVisibility:0 adID:0 componentID:0 viewVisibility:1.0 deviceVisibility:0.25];
 
@@ -149,6 +153,16 @@
     XCTAssert(ad_report_count == 1);
     XCTAssert(comp_report_count == 1);
     XCTAssert(comp_interactions_count == 2);
+}
+
+- (void) testBuildReport {
+    NSData *bogus = [[NSData alloc] init];
+    CSNAdReportsBuilder *builder = [[CSNAdReportsBuilder alloc] initWithAdUnit:bogus deviceID:bogus ipAddress:bogus timeZone:@"UTC"];
+    CSNPAdReports *report = [builder buildReport];
+    XCTAssert([[report adUnit] isEqualToData:bogus]);
+    XCTAssert([[report ipAddr] isEqualToData:bogus]);
+    XCTAssert([[report timezone] isEqualToString:@"UTC"]);
+    XCTAssert([[[report deviceId] deviceId] isEqualToData:bogus]);
 }
 
 

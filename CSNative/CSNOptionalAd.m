@@ -8,7 +8,7 @@
 }
 
 - (instancetype) initWithoutAd {
-    _ad = NULL;
+    _ad = nil;
     return self;
 }
 
