@@ -19,6 +19,7 @@
 @property NSArray<NSData *> *ipAddresses;
 @property NSString *timeZone;
 @property CSNAdReportsBuilder *reportsBuilder;
+@property NSTimer *reportsTimer;
 @end
 
 @implementation CSNAdsController
@@ -58,6 +59,12 @@ CSNModalWindow *modalWindowView;
     _client = client;
     _visMonitor = [[CSNVisibilityMonitor alloc] init];
     _reportsBuilder = [[CSNAdReportsBuilder alloc] initWithAdUnit:_adUnit deviceID:_deviceID ipAddresses:_ipAddresses timeZone:_timeZone];
+    
+    // send reports timer
+    _reportsTimer = [NSTimer timerWithTimeInterval:30.0 repeats:true block:^(NSTimer * _Nonnull timer) {
+        [self sendReports];
+    }];
+    [[NSRunLoop mainRunLoop] addTimer:_reportsTimer forMode:NSDefaultRunLoopMode];
     return self;
 }
 
@@ -220,6 +227,13 @@ CSNModalWindow *modalWindowView;
     }
     freeifaddrs(ifa);
     return addrs;
+}
+
+- (void) sendReports {
+    CSNPAdReports *reports = [_reportsBuilder buildReport];
+    [_client sendAdReports:reports success:^{
+    } failure:^(NSError *error) {
+    }];
 }
 
 @end
