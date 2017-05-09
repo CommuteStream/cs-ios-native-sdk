@@ -177,8 +177,9 @@ CSNModalWindow *modalWindowView;
     for(id<CSNComponentView> componentView in [self componentViews:parent]) {
         // periodically poll view for visibility
         [componentView setAd:ad];
+        uint64_t componentID = [componentView componentID];
         [componentView addTapHandler:^{
-            NSLog(@"%@", [ad body]);
+            [_reportsBuilder recordInteraction:[ad requestID] adID:[ad adID] componentID:componentID interactionKind:CSNPComponentInteractionKind_Tap];
             CGRect bounds = [[UIScreen mainScreen] bounds];
             CSNModalWindow *modalWindow = [[CSNModalWindow alloc] initWithFrame:bounds forAd:ad];
             modalWindow.windowLevel = UIWindowLevelAlert;

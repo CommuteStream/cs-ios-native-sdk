@@ -1,14 +1,16 @@
 #import "CSNVisibilityMonitor.h"
 
 @interface CSNVisibilityMonitor ()
+@property CSNAdReportsBuilder *reportsBuilder;
 @property NSHashTable<id<CSNComponentView>> *componentViews;
 @property NSTimer *timer;
 @end
 
 @implementation CSNVisibilityMonitor
 
-- (instancetype) init {
+- (instancetype) initWithReportsBuilder:(CSNAdReportsBuilder *)reportsBuilder {
     _componentViews = [NSHashTable hashTableWithOptions:NSHashTableStrongMemory];
+    _reportsBuilder = reportsBuilder;
     [self start];
     return self;
 }
@@ -29,7 +31,6 @@
 }
 
 - (void) checkViews {
-    NSLog(@"checking %lu views for visibility", (unsigned long)[_componentViews count]);
     for(id componentView in _componentViews) {
         UIView *view = (UIView *)componentView;
         CGRect viewFrame = view.frame;
@@ -43,16 +44,12 @@
         if(viewArea > 0 && windowArea > 0) {
             viewVisible = (double)intersectedArea / (double)viewArea;
             deviceVisible = (double)intersectedArea / (double)windowArea;
-            //NSLog(@"component view %@ for component %lld  view visible pct %f, window visible pct %f", view, [componentView componentID], viewVisible, deviceVisible);
         }
-        uint64_t componentID = [componentView componentID];
+        uint64_t requestID = [[componentView ad] requestID];
         uint64_t adID = [componentView adID];
-        [self recordVisibility:adID componentID:componentID viewVisibility:viewVisible deviceVisibility:deviceVisible];
+        uint64_t componentID = [componentView componentID];
+        [_reportsBuilder recordVisibility:requestID adID:adID componentID:componentID viewVisibility:viewVisible deviceVisibility:deviceVisible];
     }
-}
-
-- (void) recordVisibility:(uint64_t)adID componentID:(uint64_t)componentID viewVisibility:(double)viewVisibility deviceVisibility:(double)deviceVisibility {
-    
 }
 
 @end
