@@ -562,7 +562,7 @@ typedef GPB_ENUM(CSNPAdRequest_FieldNumber) {
 typedef GPB_ENUM(CSNPAdRequests_FieldNumber) {
   CSNPAdRequests_FieldNumber_AdUnit = 1,
   CSNPAdRequests_FieldNumber_DeviceId = 2,
-  CSNPAdRequests_FieldNumber_IpAddr = 3,
+  CSNPAdRequests_FieldNumber_IpAddressesArray = 3,
   CSNPAdRequests_FieldNumber_Timezone = 4,
   CSNPAdRequests_FieldNumber_AdRequestsArray = 5,
 };
@@ -578,7 +578,9 @@ typedef GPB_ENUM(CSNPAdRequests_FieldNumber) {
 /** Test to see if @c deviceId has been set. */
 @property(nonatomic, readwrite) BOOL hasDeviceId;
 
-@property(nonatomic, readwrite, copy, null_resettable) NSData *ipAddr;
+@property(nonatomic, readwrite, strong, null_resettable) NSMutableArray<NSData*> *ipAddressesArray;
+/** The number of items in @c ipAddressesArray without causing the array to be created. */
+@property(nonatomic, readonly) NSUInteger ipAddressesArray_Count;
 
 @property(nonatomic, readwrite, copy, null_resettable) NSString *timezone;
 
@@ -741,7 +743,7 @@ typedef GPB_ENUM(CSNPAdReports_FieldNumber) {
   CSNPAdReports_FieldNumber_AdUnit = 1,
   CSNPAdReports_FieldNumber_DeviceId = 2,
   CSNPAdReports_FieldNumber_Timezone = 3,
-  CSNPAdReports_FieldNumber_IpAddr = 4,
+  CSNPAdReports_FieldNumber_IpAddressesArray = 4,
   CSNPAdReports_FieldNumber_DeviceTime = 5,
   CSNPAdReports_FieldNumber_AdReportsArray = 6,
 };
@@ -756,7 +758,9 @@ typedef GPB_ENUM(CSNPAdReports_FieldNumber) {
 
 @property(nonatomic, readwrite, copy, null_resettable) NSString *timezone;
 
-@property(nonatomic, readwrite, copy, null_resettable) NSData *ipAddr;
+@property(nonatomic, readwrite, strong, null_resettable) NSMutableArray<NSData*> *ipAddressesArray;
+/** The number of items in @c ipAddressesArray without causing the array to be created. */
+@property(nonatomic, readonly) NSUInteger ipAddressesArray_Count;
 
 @property(nonatomic, readwrite) uint64_t deviceTime;
 

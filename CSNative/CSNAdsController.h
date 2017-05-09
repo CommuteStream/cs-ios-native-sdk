@@ -5,7 +5,7 @@
 
 @interface CSNAdsController : NSObject
 
-- (instancetype) init;
+- (instancetype) initWithAdUnit:(NSData *)adUnit;
 
 - (void) fetchAds:(NSArray<CSNAdRequest *> *)adRequests completed:(void (^)(NSArray<CSNOptionalAd *> *))completed;
 
@@ -13,6 +13,6 @@
 
 - (instancetype) initMocked;
 
-- (instancetype) initWithClient:(id<CSNClient>)client;
+- (instancetype) initWithClient:(id<CSNClient>)client adUnit:(NSData *)adUnit;
 
 @end

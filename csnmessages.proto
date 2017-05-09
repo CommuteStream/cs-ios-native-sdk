@@ -136,7 +136,7 @@ message AdRequest {
 message AdRequests {
   bytes ad_unit = 1;
   DeviceID device_id = 2;
-  bytes ip_addr = 3;
+  repeated bytes ip_addresses = 3;
   string timezone = 4;
   repeated AdRequest ad_requests = 5;
 }
@@ -190,7 +190,7 @@ message AdReports {
   bytes ad_unit = 1;
   DeviceID device_id = 2;
   string timezone = 3;
-  bytes ip_addr = 4;
+  repeated bytes ip_addresses = 4;
   uint64 device_time = 5;
   repeated AdReport ad_reports = 6;
 }

@@ -25,21 +25,32 @@
 
 - (void)testCreateAdReports {
     NSData *adUnit = [[NSData alloc] init];
-    NSData *deviceId = [[NSData alloc] init];
-    NSData *ipAddr = [[NSData alloc] init];
+    NSData *rawID = [[NSData alloc] init];
+    CSNPDeviceID *deviceID = [[CSNPDeviceID alloc] init];
+    [deviceID setDeviceIdType:CSNPDeviceID_Type_Idfa];
+    [deviceID setDeviceId:rawID];
+    NSMutableArray<NSData *> *ipAddrs = [[NSMutableArray alloc] init];
+    [ipAddrs addObject:[[NSData alloc] init]];
     NSString *timeZone = @"UTC";
-    CSNAdReportsBuilder *builder = [[CSNAdReportsBuilder alloc] initWithAdUnit:adUnit deviceID:deviceId ipAddress:ipAddr timeZone:timeZone];
+    CSNAdReportsBuilder *builder = [[CSNAdReportsBuilder alloc] initWithAdUnit:adUnit deviceID:deviceID ipAddresses:ipAddrs timeZone:timeZone];
     XCTAssert([[builder adReports] adUnit] == adUnit);
     XCTAssert([[[builder adReports] deviceId] deviceIdType] == CSNPDeviceID_Type_Idfa);
-    XCTAssert([[[builder adReports] deviceId] deviceId] == deviceId);
-    XCTAssert([[builder adReports] ipAddr] == ipAddr);
+    XCTAssert([[[builder adReports] deviceId] deviceId] == rawID);
+    //XCTAssert([[builder adReports] ipAddressesArray] == ipAddrs);
     XCTAssert([[builder adReports] timezone] == timeZone);
     
 }
 
 - (void) testEncodeVisibility {
-    NSData *bogus = [[NSData alloc] init];
-    CSNAdReportsBuilder *builder = [[CSNAdReportsBuilder alloc] initWithAdUnit:bogus deviceID:bogus ipAddress:bogus timeZone:@"UTC"];
+    NSData *adUnit = [[NSData alloc] init];
+    NSData *rawID = [[NSData alloc] init];
+    CSNPDeviceID *deviceID = [[CSNPDeviceID alloc] init];
+    [deviceID setDeviceIdType:CSNPDeviceID_Type_Idfa];
+    [deviceID setDeviceId:rawID];
+    NSMutableArray<NSData *> *ipAddrs = [[NSMutableArray alloc] init];
+    [ipAddrs addObject:[[NSData alloc] init]];
+    NSString *timeZone = @"UTC";
+    CSNAdReportsBuilder *builder = [[CSNAdReportsBuilder alloc] initWithAdUnit:adUnit deviceID:deviceID ipAddresses:ipAddrs timeZone:timeZone];
     double increment = 1.0/15.0;
     double curVis = 0.0;
     for(uint8_t curVisEnc = 0; curVisEnc < 16; curVisEnc++) {
@@ -53,8 +64,15 @@
 
 
 - (void) testSetSample {
-    NSData *bogus = [[NSData alloc] init];
-    CSNAdReportsBuilder *builder = [[CSNAdReportsBuilder alloc] initWithAdUnit:bogus deviceID:bogus ipAddress:bogus timeZone:@"UTC"];
+    NSData *adUnit = [[NSData alloc] init];
+    NSData *rawID = [[NSData alloc] init];
+    CSNPDeviceID *deviceID = [[CSNPDeviceID alloc] init];
+    [deviceID setDeviceIdType:CSNPDeviceID_Type_Idfa];
+    [deviceID setDeviceId:rawID];
+    NSMutableArray<NSData *> *ipAddrs = [[NSMutableArray alloc] init];
+    [ipAddrs addObject:[[NSData alloc] init]];
+    NSString *timeZone = @"UTC";
+    CSNAdReportsBuilder *builder = [[CSNAdReportsBuilder alloc] initWithAdUnit:adUnit deviceID:deviceID ipAddresses:ipAddrs timeZone:timeZone];
     uint64_t expect = 0xFEDCBA9876543210;
     uint64_t sample = 0;
     for(uint8_t value = 0; value < 16; value++) {
@@ -66,8 +84,15 @@
 
 
 - (void)testRecordInteraction {
-    NSData *bogus = [[NSData alloc] init];
-    CSNAdReportsBuilder *builder = [[CSNAdReportsBuilder alloc] initWithAdUnit:bogus deviceID:bogus ipAddress:bogus timeZone:@"UTC"];
+    NSData *adUnit = [[NSData alloc] init];
+    NSData *rawID = [[NSData alloc] init];
+    CSNPDeviceID *deviceID = [[CSNPDeviceID alloc] init];
+    [deviceID setDeviceIdType:CSNPDeviceID_Type_Idfa];
+    [deviceID setDeviceId:rawID];
+    NSMutableArray<NSData *> *ipAddrs = [[NSMutableArray alloc] init];
+    [ipAddrs addObject:[[NSData alloc] init]];
+    NSString *timeZone = @"UTC";
+    CSNAdReportsBuilder *builder = [[CSNAdReportsBuilder alloc] initWithAdUnit:adUnit deviceID:deviceID ipAddresses:ipAddrs timeZone:timeZone];
     [builder recordVisibility:0 adID:0 componentID:0 viewVisibility:0.5 deviceVisibility:0.1];
     uint64_t expectViewVal = [builder setSample:0 position:0 value:[builder encodeVisibility:0.5]];
     uint64_t expectDevVal = [builder setSample:0 position:0 value:[builder encodeVisibility:0.1]];
@@ -114,8 +139,15 @@
 }
 
 - (void)testRecordVisibility {
-    NSData *bogus = [[NSData alloc] init];
-    CSNAdReportsBuilder *builder = [[CSNAdReportsBuilder alloc] initWithAdUnit:bogus deviceID:bogus ipAddress:bogus timeZone:@"UTC"];
+    NSData *adUnit = [[NSData alloc] init];
+    NSData *rawID = [[NSData alloc] init];
+    CSNPDeviceID *deviceID = [[CSNPDeviceID alloc] init];
+    [deviceID setDeviceIdType:CSNPDeviceID_Type_Idfa];
+    [deviceID setDeviceId:rawID];
+    NSMutableArray<NSData *> *ipAddrs = [[NSMutableArray alloc] init];
+    [ipAddrs addObject:[[NSData alloc] init]];
+    NSString *timeZone = @"UTC";
+    CSNAdReportsBuilder *builder = [[CSNAdReportsBuilder alloc] initWithAdUnit:adUnit deviceID:deviceID ipAddresses:ipAddrs timeZone:timeZone];
     [builder recordInteraction:0 adID:0 componentID:0 interactionKind:0];
     uint32_t ad_report_count = 0;
     uint32_t comp_report_count = 0;
@@ -156,21 +188,20 @@
 }
 
 - (void) testBuildReport {
-    NSData *bogus = [[NSData alloc] init];
-    CSNAdReportsBuilder *builder = [[CSNAdReportsBuilder alloc] initWithAdUnit:bogus deviceID:bogus ipAddress:bogus timeZone:@"UTC"];
+    NSData *adUnit = [[NSData alloc] init];
+    NSData *rawID = [[NSData alloc] init];
+    CSNPDeviceID *deviceID = [[CSNPDeviceID alloc] init];
+    [deviceID setDeviceIdType:CSNPDeviceID_Type_Idfa];
+    [deviceID setDeviceId:rawID];
+    NSMutableArray<NSData *> *ipAddrs = [[NSMutableArray alloc] init];
+    [ipAddrs addObject:[[NSData alloc] init]];
+    NSString *timeZone = @"UTC";
+    CSNAdReportsBuilder *builder = [[CSNAdReportsBuilder alloc] initWithAdUnit:adUnit deviceID:deviceID ipAddresses:ipAddrs timeZone:timeZone];
     CSNPAdReports *report = [builder buildReport];
-    XCTAssert([[report adUnit] isEqualToData:bogus]);
-    XCTAssert([[report ipAddr] isEqualToData:bogus]);
+    XCTAssert([[report adUnit] isEqualToData:adUnit]);
+    //XCTAssert([report ipAddressesArray] == ipAddrs);
     XCTAssert([[report timezone] isEqualToString:@"UTC"]);
-    XCTAssert([[[report deviceId] deviceId] isEqualToData:bogus]);
-}
-
-
-- (void)testPerformanceExample {
-    // This is an example of a performance test case.
-    [self measureBlock:^{
-        // Put the code you want to measure the time of here.
-    }];
+    XCTAssert([[[report deviceId] deviceId] isEqualToData:rawID]);
 }
 
 @end

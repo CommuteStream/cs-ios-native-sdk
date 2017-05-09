@@ -2,8 +2,8 @@
 
 @interface CSNAdReportsBuilder ()
 @property NSData *adUnit;
-@property NSData *deviceID;
-@property NSData *ipAddress;
+@property CSNPDeviceID *deviceID;
+@property NSArray<NSData *> *ipAddresses;
 @property NSString *timeZone;
 @property CSNPAdReports *adReports;
 @property uint64_t epoch;
@@ -11,10 +11,10 @@
 
 @implementation CSNAdReportsBuilder
 
-- (instancetype) initWithAdUnit:(NSData *)adUnit deviceID:(NSData *)deviceID ipAddress:(NSData *)ipAddress timeZone:(NSString *)timeZone {
+- (instancetype) initWithAdUnit:(NSData *)adUnit deviceID:(CSNPDeviceID *)deviceID ipAddresses:(NSArray<NSData *> *)ipAddresses timeZone:(NSString *)timeZone {
     _adUnit = adUnit;
     _deviceID = deviceID;
-    _ipAddress = ipAddress;
+    _ipAddresses = ipAddresses;
     _timeZone = timeZone;
     _epoch = [self currentTime];
     _adReports = [self createAdReports];
@@ -46,13 +46,10 @@
 }
 
 - (CSNPAdReports *) createAdReports {
-    CSNPDeviceID *deviceID = [[CSNPDeviceID alloc] init];
-    [deviceID setDeviceIdType:CSNPDeviceID_Type_Idfa];
-    [deviceID setDeviceId:_deviceID];
     CSNPAdReports *adReports = [[CSNPAdReports alloc] init];
     [adReports setAdUnit:_adUnit];
-    [adReports setDeviceId:deviceID];
-    [adReports setIpAddr:_ipAddress];
+    [adReports setDeviceId:_deviceID];
+    [adReports setIpAddressesArray:[NSMutableArray arrayWithArray:_ipAddresses]];
     [adReports setTimezone:_timeZone];
     [adReports setDeviceTime:[self currentTime]];
     return adReports;
@@ -118,7 +115,7 @@
         [[compReport viewVisibilitySamplesArray] addValue:viewSample];
         [[compReport deviceVisibilitySamplesArray] addValue:deviceSample];
     } else {
-        uint64_t idx = [compReport viewVisibilitySamplesArray_Count] - 1;
+        NSUInteger idx = [compReport viewVisibilitySamplesArray_Count] - 1;
         uint64_t curViewSample = [[compReport viewVisibilitySamplesArray] valueAtIndex:idx];
         uint64_t curDeviceSample = [[compReport viewVisibilitySamplesArray] valueAtIndex:idx];
         uint64_t viewSample = [self setSample:curViewSample position:position value:viewEncoded];

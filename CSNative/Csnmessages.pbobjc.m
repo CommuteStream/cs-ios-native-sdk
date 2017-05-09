@@ -1428,7 +1428,7 @@ typedef struct CSNPAdRequest__storage_ {
 
 @dynamic adUnit;
 @dynamic hasDeviceId, deviceId;
-@dynamic ipAddr;
+@dynamic ipAddressesArray, ipAddressesArray_Count;
 @dynamic timezone;
 @dynamic adRequestsArray, adRequestsArray_Count;
 
@@ -1436,7 +1436,7 @@ typedef struct CSNPAdRequests__storage_ {
   uint32_t _has_storage_[1];
   NSData *adUnit;
   CSNPDeviceID *deviceId;
-  NSData *ipAddr;
+  NSMutableArray *ipAddressesArray;
   NSString *timezone;
   NSMutableArray *adRequestsArray;
 } CSNPAdRequests__storage_;
@@ -1466,19 +1466,19 @@ typedef struct CSNPAdRequests__storage_ {
         .dataType = GPBDataTypeMessage,
       },
       {
-        .name = "ipAddr",
+        .name = "ipAddressesArray",
         .dataTypeSpecific.className = NULL,
-        .number = CSNPAdRequests_FieldNumber_IpAddr,
-        .hasIndex = 2,
-        .offset = (uint32_t)offsetof(CSNPAdRequests__storage_, ipAddr),
-        .flags = GPBFieldOptional,
+        .number = CSNPAdRequests_FieldNumber_IpAddressesArray,
+        .hasIndex = GPBNoHasBit,
+        .offset = (uint32_t)offsetof(CSNPAdRequests__storage_, ipAddressesArray),
+        .flags = GPBFieldRepeated,
         .dataType = GPBDataTypeBytes,
       },
       {
         .name = "timezone",
         .dataTypeSpecific.className = NULL,
         .number = CSNPAdRequests_FieldNumber_Timezone,
-        .hasIndex = 3,
+        .hasIndex = 2,
         .offset = (uint32_t)offsetof(CSNPAdRequests__storage_, timezone),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeString,
@@ -1953,7 +1953,7 @@ typedef struct CSNPAdReport__storage_ {
 @dynamic adUnit;
 @dynamic hasDeviceId, deviceId;
 @dynamic timezone;
-@dynamic ipAddr;
+@dynamic ipAddressesArray, ipAddressesArray_Count;
 @dynamic deviceTime;
 @dynamic adReportsArray, adReportsArray_Count;
 
@@ -1962,7 +1962,7 @@ typedef struct CSNPAdReports__storage_ {
   NSData *adUnit;
   CSNPDeviceID *deviceId;
   NSString *timezone;
-  NSData *ipAddr;
+  NSMutableArray *ipAddressesArray;
   NSMutableArray *adReportsArray;
   uint64_t deviceTime;
 } CSNPAdReports__storage_;
@@ -2001,19 +2001,19 @@ typedef struct CSNPAdReports__storage_ {
         .dataType = GPBDataTypeString,
       },
       {
-        .name = "ipAddr",
+        .name = "ipAddressesArray",
         .dataTypeSpecific.className = NULL,
-        .number = CSNPAdReports_FieldNumber_IpAddr,
-        .hasIndex = 3,
-        .offset = (uint32_t)offsetof(CSNPAdReports__storage_, ipAddr),
-        .flags = GPBFieldOptional,
+        .number = CSNPAdReports_FieldNumber_IpAddressesArray,
+        .hasIndex = GPBNoHasBit,
+        .offset = (uint32_t)offsetof(CSNPAdReports__storage_, ipAddressesArray),
+        .flags = GPBFieldRepeated,
         .dataType = GPBDataTypeBytes,
       },
       {
         .name = "deviceTime",
         .dataTypeSpecific.className = NULL,
         .number = CSNPAdReports_FieldNumber_DeviceTime,
-        .hasIndex = 4,
+        .hasIndex = 3,
         .offset = (uint32_t)offsetof(CSNPAdReports__storage_, deviceTime),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeUInt64,
