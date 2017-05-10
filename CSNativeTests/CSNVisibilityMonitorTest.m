@@ -25,7 +25,7 @@
 - (void)testVisibility {
     XCTestExpectation *expectation = [self expectationWithDescription:@"failure"];
     CSNLogoView *view = [[CSNLogoView alloc] init];
-    CSNVisibilityMonitor *monitor = [[CSNVisibilityMonitor alloc] init];
+    CSNVisibilityMonitor *monitor = [[CSNVisibilityMonitor alloc] initWithReportsBuilder:nil];
     [monitor addView:view];
     XCTAssert([[monitor componentViews] containsObject:view]);
     XCTAssert([[monitor timer] isValid]);

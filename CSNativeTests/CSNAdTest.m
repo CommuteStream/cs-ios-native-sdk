@@ -34,7 +34,7 @@
     [message setImage:imageData];
     CSNLogoComponent *component = [[CSNLogoComponent alloc] initWithMessage:message];
     XCTAssert([component componentID] == [message componentId]);
-        XCTAssert([[component image] size].width == [image size].width);
+    XCTAssert([[component image] size].width == [image size].width);
     XCTAssert([[component image] size].height == [image size].height);
 }
 

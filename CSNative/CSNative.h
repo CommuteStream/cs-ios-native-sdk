@@ -25,5 +25,6 @@ FOUNDATION_EXPORT const unsigned char CSNativeVersionString[];
 #import <CSNative/CSNAdsController.h>
 #import <CSNative/CSNTransit.h>
 #import <CSNative/CSNAdRequest.h>
+#import <CSNative/CSNAdReportsBuilder.h>
 #import <CSNative/CSNVisibilityMonitor.h>
 

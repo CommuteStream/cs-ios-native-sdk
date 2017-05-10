@@ -54,7 +54,7 @@
     [_adResponses setObject:adResponse forKey:requestSha];
 }
 
-- (void) sendAdReport:(CSNPAdReport *)adReport success:(void (^)())success failure:(void (^)(NSError *))failure {
+- (void) sendAdReports:(CSNPAdReports *)adReport success:(void (^)())success failure:(void (^)(NSError *))failure {
     success();
 }
 

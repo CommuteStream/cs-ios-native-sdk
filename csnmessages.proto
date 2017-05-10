@@ -134,10 +134,11 @@ message AdRequest {
 
 // AdRequests contains relevant information needed to attempt filling ad requests
 message AdRequests {
-  string ad_unit = 1;
+  bytes ad_unit = 1;
   DeviceID device_id = 2;
-  string timezone = 3;
-  repeated AdRequest ad_requests = 4;
+  repeated bytes ip_addresses = 3;
+  string timezone = 4;
+  repeated AdRequest ad_requests = 5;
 }
 
 // AdResponse is a mapping between an AdRequest hash_id and the set of ads
@@ -158,44 +159,38 @@ message DeviceID  {
     AAID = 1;
   }
   Type device_id_type = 1;
-  string device_id = 2;
+  bytes device_id = 2;
 }
 
-
-message SimpleStat {
-  double min = 1;
-  double max = 2;
-  double mean = 3;
-}
-
-message AdVisibility {
-  uint64 request_id = 1;
-  uint64 ad_id = 2;
-  uint64 component_id = 3;
-  uint64 epoch_offset = 4;
-  uint64 duration = 5;
-  SimpleStat component_visibility = 6;
-  SimpleStat screen_visibility = 7;
-}
-
-enum AdInteractionKind {
+enum ComponentInteractionKind {
   Tap = 0;
 }
 
-message AdInteraction {
+message ComponentInteraction {
+  uint64 device_time = 1;
+  ComponentInteractionKind kind = 2;
+}
+
+message ComponentReport {
+  uint64 component_id = 1;
+  uint64 visibility_epoch = 2;
+  uint64 visibility_sample_count = 3;
+  repeated uint64 view_visibility_samples = 4;
+  repeated uint64 device_visibility_samples = 5;
+  repeated ComponentInteraction interactions = 6;
+}
+
+message AdReport {
   uint64 request_id = 1;
   uint64 ad_id = 2;
-  uint64 component_id = 3;
-  uint64 duration = 4;
-  uint64 epoch_offset = 5;
-  AdInteractionKind kind = 6;
+  repeated ComponentReport components = 3;
 }
   
-message AdReport {
-  string ad_unit = 1;
+message AdReports {
+  bytes ad_unit = 1;
   DeviceID device_id = 2;
   string timezone = 3;
-  uint64 epoch = 4;
-  repeated AdVisibility ad_visibilty = 5;
-  repeated AdInteraction ad_interactions = 6;
+  repeated bytes ip_addresses = 4;
+  uint64 device_time = 5;
+  repeated AdReport ad_reports = 6;
 }

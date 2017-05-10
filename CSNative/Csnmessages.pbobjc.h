@@ -28,13 +28,14 @@
 CF_EXTERN_C_BEGIN
 
 @class CSNPActionComponent;
-@class CSNPAdInteraction;
+@class CSNPAdReport;
 @class CSNPAdRequest;
 @class CSNPAdResponse;
-@class CSNPAdVisibility;
 @class CSNPAdvertiserComponent;
 @class CSNPBodyComponent;
 @class CSNPColors;
+@class CSNPComponentInteraction;
+@class CSNPComponentReport;
 @class CSNPDeviceID;
 @class CSNPHeadlineComponent;
 @class CSNPHeroComponent;
@@ -43,7 +44,6 @@ CF_EXTERN_C_BEGIN
 @class CSNPLogoComponent;
 @class CSNPNativeAd;
 @class CSNPSecondaryActionComponent;
-@class CSNPSimpleStat;
 @class CSNPTransitAgency;
 @class CSNPTransitRoute;
 @class CSNPTransitStop;
@@ -93,25 +93,25 @@ GPBEnumDescriptor *CSNPActionKind_EnumDescriptor(void);
  **/
 BOOL CSNPActionKind_IsValidValue(int32_t value);
 
-#pragma mark - Enum CSNPAdInteractionKind
+#pragma mark - Enum CSNPComponentInteractionKind
 
-typedef GPB_ENUM(CSNPAdInteractionKind) {
+typedef GPB_ENUM(CSNPComponentInteractionKind) {
   /**
    * Value used if any message's field encounters a value that is not defined
    * by this enum. The message will also have C functions to get/set the rawValue
    * of the field.
    **/
-  CSNPAdInteractionKind_GPBUnrecognizedEnumeratorValue = kGPBUnrecognizedEnumeratorValue,
-  CSNPAdInteractionKind_Tap = 0,
+  CSNPComponentInteractionKind_GPBUnrecognizedEnumeratorValue = kGPBUnrecognizedEnumeratorValue,
+  CSNPComponentInteractionKind_Tap = 0,
 };
 
-GPBEnumDescriptor *CSNPAdInteractionKind_EnumDescriptor(void);
+GPBEnumDescriptor *CSNPComponentInteractionKind_EnumDescriptor(void);
 
 /**
  * Checks to see if the given value is defined by the enum or was not known at
  * the time this source was generated.
  **/
-BOOL CSNPAdInteractionKind_IsValidValue(int32_t value);
+BOOL CSNPComponentInteractionKind_IsValidValue(int32_t value);
 
 #pragma mark - Enum CSNPDeviceID_Type
 
@@ -562,8 +562,9 @@ typedef GPB_ENUM(CSNPAdRequest_FieldNumber) {
 typedef GPB_ENUM(CSNPAdRequests_FieldNumber) {
   CSNPAdRequests_FieldNumber_AdUnit = 1,
   CSNPAdRequests_FieldNumber_DeviceId = 2,
-  CSNPAdRequests_FieldNumber_Timezone = 3,
-  CSNPAdRequests_FieldNumber_AdRequestsArray = 4,
+  CSNPAdRequests_FieldNumber_IpAddressesArray = 3,
+  CSNPAdRequests_FieldNumber_Timezone = 4,
+  CSNPAdRequests_FieldNumber_AdRequestsArray = 5,
 };
 
 /**
@@ -571,11 +572,15 @@ typedef GPB_ENUM(CSNPAdRequests_FieldNumber) {
  **/
 @interface CSNPAdRequests : GPBMessage
 
-@property(nonatomic, readwrite, copy, null_resettable) NSString *adUnit;
+@property(nonatomic, readwrite, copy, null_resettable) NSData *adUnit;
 
 @property(nonatomic, readwrite, strong, null_resettable) CSNPDeviceID *deviceId;
 /** Test to see if @c deviceId has been set. */
 @property(nonatomic, readwrite) BOOL hasDeviceId;
+
+@property(nonatomic, readwrite, strong, null_resettable) NSMutableArray<NSData*> *ipAddressesArray;
+/** The number of items in @c ipAddressesArray without causing the array to be created. */
+@property(nonatomic, readonly) NSUInteger ipAddressesArray_Count;
 
 @property(nonatomic, readwrite, copy, null_resettable) NSString *timezone;
 
@@ -636,7 +641,7 @@ typedef GPB_ENUM(CSNPDeviceID_FieldNumber) {
 
 @property(nonatomic, readwrite) CSNPDeviceID_Type deviceIdType;
 
-@property(nonatomic, readwrite, copy, null_resettable) NSString *deviceId;
+@property(nonatomic, readwrite, copy, null_resettable) NSData *deviceId;
 
 @end
 
@@ -652,111 +657,100 @@ int32_t CSNPDeviceID_DeviceIdType_RawValue(CSNPDeviceID *message);
  **/
 void SetCSNPDeviceID_DeviceIdType_RawValue(CSNPDeviceID *message, int32_t value);
 
-#pragma mark - CSNPSimpleStat
+#pragma mark - CSNPComponentInteraction
 
-typedef GPB_ENUM(CSNPSimpleStat_FieldNumber) {
-  CSNPSimpleStat_FieldNumber_Min = 1,
-  CSNPSimpleStat_FieldNumber_Max = 2,
-  CSNPSimpleStat_FieldNumber_Mean = 3,
+typedef GPB_ENUM(CSNPComponentInteraction_FieldNumber) {
+  CSNPComponentInteraction_FieldNumber_DeviceTime = 1,
+  CSNPComponentInteraction_FieldNumber_Kind = 2,
 };
 
-@interface CSNPSimpleStat : GPBMessage
+@interface CSNPComponentInteraction : GPBMessage
 
-@property(nonatomic, readwrite) double min;
+@property(nonatomic, readwrite) uint64_t deviceTime;
 
-@property(nonatomic, readwrite) double max;
-
-@property(nonatomic, readwrite) double mean;
-
-@end
-
-#pragma mark - CSNPAdVisibility
-
-typedef GPB_ENUM(CSNPAdVisibility_FieldNumber) {
-  CSNPAdVisibility_FieldNumber_RequestId = 1,
-  CSNPAdVisibility_FieldNumber_AdId = 2,
-  CSNPAdVisibility_FieldNumber_ComponentId = 3,
-  CSNPAdVisibility_FieldNumber_EpochOffset = 4,
-  CSNPAdVisibility_FieldNumber_Duration = 5,
-  CSNPAdVisibility_FieldNumber_ComponentVisibility = 6,
-  CSNPAdVisibility_FieldNumber_ScreenVisibility = 7,
-};
-
-@interface CSNPAdVisibility : GPBMessage
-
-@property(nonatomic, readwrite) uint64_t requestId;
-
-@property(nonatomic, readwrite) uint64_t adId;
-
-@property(nonatomic, readwrite) uint64_t componentId;
-
-@property(nonatomic, readwrite) uint64_t epochOffset;
-
-@property(nonatomic, readwrite) uint64_t duration;
-
-@property(nonatomic, readwrite, strong, null_resettable) CSNPSimpleStat *componentVisibility;
-/** Test to see if @c componentVisibility has been set. */
-@property(nonatomic, readwrite) BOOL hasComponentVisibility;
-
-@property(nonatomic, readwrite, strong, null_resettable) CSNPSimpleStat *screenVisibility;
-/** Test to see if @c screenVisibility has been set. */
-@property(nonatomic, readwrite) BOOL hasScreenVisibility;
-
-@end
-
-#pragma mark - CSNPAdInteraction
-
-typedef GPB_ENUM(CSNPAdInteraction_FieldNumber) {
-  CSNPAdInteraction_FieldNumber_RequestId = 1,
-  CSNPAdInteraction_FieldNumber_AdId = 2,
-  CSNPAdInteraction_FieldNumber_ComponentId = 3,
-  CSNPAdInteraction_FieldNumber_Duration = 4,
-  CSNPAdInteraction_FieldNumber_EpochOffset = 5,
-  CSNPAdInteraction_FieldNumber_Kind = 6,
-};
-
-@interface CSNPAdInteraction : GPBMessage
-
-@property(nonatomic, readwrite) uint64_t requestId;
-
-@property(nonatomic, readwrite) uint64_t adId;
-
-@property(nonatomic, readwrite) uint64_t componentId;
-
-@property(nonatomic, readwrite) uint64_t duration;
-
-@property(nonatomic, readwrite) uint64_t epochOffset;
-
-@property(nonatomic, readwrite) CSNPAdInteractionKind kind;
+@property(nonatomic, readwrite) CSNPComponentInteractionKind kind;
 
 @end
 
 /**
- * Fetches the raw value of a @c CSNPAdInteraction's @c kind property, even
+ * Fetches the raw value of a @c CSNPComponentInteraction's @c kind property, even
  * if the value was not defined by the enum at the time the code was generated.
  **/
-int32_t CSNPAdInteraction_Kind_RawValue(CSNPAdInteraction *message);
+int32_t CSNPComponentInteraction_Kind_RawValue(CSNPComponentInteraction *message);
 /**
- * Sets the raw value of an @c CSNPAdInteraction's @c kind property, allowing
+ * Sets the raw value of an @c CSNPComponentInteraction's @c kind property, allowing
  * it to be set to a value that was not defined by the enum at the time the code
  * was generated.
  **/
-void SetCSNPAdInteraction_Kind_RawValue(CSNPAdInteraction *message, int32_t value);
+void SetCSNPComponentInteraction_Kind_RawValue(CSNPComponentInteraction *message, int32_t value);
+
+#pragma mark - CSNPComponentReport
+
+typedef GPB_ENUM(CSNPComponentReport_FieldNumber) {
+  CSNPComponentReport_FieldNumber_ComponentId = 1,
+  CSNPComponentReport_FieldNumber_VisibilityEpoch = 2,
+  CSNPComponentReport_FieldNumber_VisibilitySampleCount = 3,
+  CSNPComponentReport_FieldNumber_ViewVisibilitySamplesArray = 4,
+  CSNPComponentReport_FieldNumber_DeviceVisibilitySamplesArray = 5,
+  CSNPComponentReport_FieldNumber_InteractionsArray = 6,
+};
+
+@interface CSNPComponentReport : GPBMessage
+
+@property(nonatomic, readwrite) uint64_t componentId;
+
+@property(nonatomic, readwrite) uint64_t visibilityEpoch;
+
+@property(nonatomic, readwrite) uint64_t visibilitySampleCount;
+
+@property(nonatomic, readwrite, strong, null_resettable) GPBUInt64Array *viewVisibilitySamplesArray;
+/** The number of items in @c viewVisibilitySamplesArray without causing the array to be created. */
+@property(nonatomic, readonly) NSUInteger viewVisibilitySamplesArray_Count;
+
+@property(nonatomic, readwrite, strong, null_resettable) GPBUInt64Array *deviceVisibilitySamplesArray;
+/** The number of items in @c deviceVisibilitySamplesArray without causing the array to be created. */
+@property(nonatomic, readonly) NSUInteger deviceVisibilitySamplesArray_Count;
+
+@property(nonatomic, readwrite, strong, null_resettable) NSMutableArray<CSNPComponentInteraction*> *interactionsArray;
+/** The number of items in @c interactionsArray without causing the array to be created. */
+@property(nonatomic, readonly) NSUInteger interactionsArray_Count;
+
+@end
 
 #pragma mark - CSNPAdReport
 
 typedef GPB_ENUM(CSNPAdReport_FieldNumber) {
-  CSNPAdReport_FieldNumber_AdUnit = 1,
-  CSNPAdReport_FieldNumber_DeviceId = 2,
-  CSNPAdReport_FieldNumber_Timezone = 3,
-  CSNPAdReport_FieldNumber_Epoch = 4,
-  CSNPAdReport_FieldNumber_AdVisibiltyArray = 5,
-  CSNPAdReport_FieldNumber_AdInteractionsArray = 6,
+  CSNPAdReport_FieldNumber_RequestId = 1,
+  CSNPAdReport_FieldNumber_AdId = 2,
+  CSNPAdReport_FieldNumber_ComponentsArray = 3,
 };
 
 @interface CSNPAdReport : GPBMessage
 
-@property(nonatomic, readwrite, copy, null_resettable) NSString *adUnit;
+@property(nonatomic, readwrite) uint64_t requestId;
+
+@property(nonatomic, readwrite) uint64_t adId;
+
+@property(nonatomic, readwrite, strong, null_resettable) NSMutableArray<CSNPComponentReport*> *componentsArray;
+/** The number of items in @c componentsArray without causing the array to be created. */
+@property(nonatomic, readonly) NSUInteger componentsArray_Count;
+
+@end
+
+#pragma mark - CSNPAdReports
+
+typedef GPB_ENUM(CSNPAdReports_FieldNumber) {
+  CSNPAdReports_FieldNumber_AdUnit = 1,
+  CSNPAdReports_FieldNumber_DeviceId = 2,
+  CSNPAdReports_FieldNumber_Timezone = 3,
+  CSNPAdReports_FieldNumber_IpAddressesArray = 4,
+  CSNPAdReports_FieldNumber_DeviceTime = 5,
+  CSNPAdReports_FieldNumber_AdReportsArray = 6,
+};
+
+@interface CSNPAdReports : GPBMessage
+
+@property(nonatomic, readwrite, copy, null_resettable) NSData *adUnit;
 
 @property(nonatomic, readwrite, strong, null_resettable) CSNPDeviceID *deviceId;
 /** Test to see if @c deviceId has been set. */
@@ -764,15 +758,15 @@ typedef GPB_ENUM(CSNPAdReport_FieldNumber) {
 
 @property(nonatomic, readwrite, copy, null_resettable) NSString *timezone;
 
-@property(nonatomic, readwrite) uint64_t epoch;
+@property(nonatomic, readwrite, strong, null_resettable) NSMutableArray<NSData*> *ipAddressesArray;
+/** The number of items in @c ipAddressesArray without causing the array to be created. */
+@property(nonatomic, readonly) NSUInteger ipAddressesArray_Count;
 
-@property(nonatomic, readwrite, strong, null_resettable) NSMutableArray<CSNPAdVisibility*> *adVisibiltyArray;
-/** The number of items in @c adVisibiltyArray without causing the array to be created. */
-@property(nonatomic, readonly) NSUInteger adVisibiltyArray_Count;
+@property(nonatomic, readwrite) uint64_t deviceTime;
 
-@property(nonatomic, readwrite, strong, null_resettable) NSMutableArray<CSNPAdInteraction*> *adInteractionsArray;
-/** The number of items in @c adInteractionsArray without causing the array to be created. */
-@property(nonatomic, readonly) NSUInteger adInteractionsArray_Count;
+@property(nonatomic, readwrite, strong, null_resettable) NSMutableArray<CSNPAdReport*> *adReportsArray;
+/** The number of items in @c adReportsArray without causing the array to be created. */
+@property(nonatomic, readonly) NSUInteger adReportsArray_Count;
 
 @end
 

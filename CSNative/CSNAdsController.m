@@ -5,30 +5,66 @@
 #import "CSNLogoView.h"
 #import "CSNModalWindow.h"
 #import "CSNVisibilityMonitor.h"
+#import "CSNAdReportsBuilder.h"
 #import "Csnmessages.pbobjc.h"
+
+#include <ifaddrs.h>
+#include <arpa/inet.h>
 
 @interface CSNAdsController ()
 @property id<CSNClient> client;
 @property CSNVisibilityMonitor *visMonitor;
-@property NSMutableDictionary *cachedResponses;
+@property NSData *adUnit;
+@property CSNPDeviceID *deviceID;
+@property NSArray<NSData *> *ipAddresses;
+@property NSString *timeZone;
+@property CSNAdReportsBuilder *reportsBuilder;
+@property NSTimer *reportsTimer;
 @end
 
 @implementation CSNAdsController
 
 CSNModalWindow *modalWindowView;
 
-- (instancetype) init {
-    return [self initWithClient:[[CSNHttpClient alloc] initWithHost:@"api.commutestream.com"]];
+- (instancetype) initWithAdUnit:(NSString *)adUnit {
+    NSUUID *adUnitUUID = [[NSUUID alloc] initWithUUIDString:adUnit];
+    uuid_t uuid;
+    [adUnitUUID getUUIDBytes:uuid];
+    NSData *adUnitData = [NSData dataWithBytes:uuid length:16];
+    return [self initWithClient:[[CSNHttpClient alloc] initWithHost:@"api.commutestream.com"] adUnit:adUnitData];
 }
 
 - (instancetype) initMocked {
-    return [self initWithClient:[[CSNMockClient alloc] init]];
+    uuid_t uuid = {0, 0, 0, 0, 0, 0 , 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+    NSData *empty = [NSData dataWithBytes:uuid length:16];
+    return [self initWithClient:[[CSNMockClient alloc] init] adUnit:empty];
 }
 
-- (instancetype) initWithClient:(id<CSNClient>)client {
+- (instancetype) initWithClient:(id<CSNClient>)client adUnit:(NSData *)adUnit {
+    // get device id
+    NSUUID *vendorID = [[UIDevice currentDevice] identifierForVendor];
+    uuid_t vendorUUID;
+    [vendorID getUUIDBytes:vendorUUID];
+    NSData *deviceID = [[NSData alloc] initWithBytes:vendorUUID length:16];
+    _deviceID = [[CSNPDeviceID alloc] init];
+    [_deviceID setDeviceIdType:CSNPDeviceID_Type_Idfa];
+    [_deviceID setDeviceId:deviceID];
+    
+    // get ip addresses
+    _ipAddresses = [self getIpAddresses];
+    
+    // get timezone
+    _timeZone = [[NSTimeZone localTimeZone] name];
+    
     _client = client;
-    _cachedResponses = [[NSMutableDictionary alloc] init];
     _visMonitor = [[CSNVisibilityMonitor alloc] init];
+    _reportsBuilder = [[CSNAdReportsBuilder alloc] initWithAdUnit:_adUnit deviceID:_deviceID ipAddresses:_ipAddresses timeZone:_timeZone];
+    
+    // send reports timer
+    _reportsTimer = [NSTimer timerWithTimeInterval:30.0 repeats:true block:^(NSTimer * _Nonnull timer) {
+        [self sendReports];
+    }];
+    [[NSRunLoop mainRunLoop] addTimer:_reportsTimer forMode:NSDefaultRunLoopMode];
     return self;
 }
 
@@ -46,6 +82,10 @@ CSNModalWindow *modalWindowView;
 - (CSNPAdRequests *) buildRequestsMessage:(NSArray<CSNAdRequest *> *)adRequests {
     NSMutableDictionary *uniqueAdRequests = [[NSMutableDictionary alloc] initWithCapacity:[adRequests count]];
     CSNPAdRequests *adRequestsMsg = [[CSNPAdRequests alloc] init];
+    [adRequestsMsg setIpAddressesArray:[NSMutableArray arrayWithArray:_ipAddresses]];
+    [adRequestsMsg setAdUnit:_adUnit];
+    [adRequestsMsg setDeviceId:_deviceID];
+    [adRequestsMsg setTimezone:_timeZone];
     for(id adRequest in adRequests) {
         NSData *requestSha = [adRequest sha256];
         CSNPAdRequest *adRequestMsg = [uniqueAdRequests objectForKey:requestSha];
@@ -140,11 +180,13 @@ CSNModalWindow *modalWindowView;
 }
 
 - (void) setupComponentViews:(UIView *)parent ad:(CSNAd *)ad {
+    
     for(id<CSNComponentView> componentView in [self componentViews:parent]) {
         // periodically poll view for visibility
         [componentView setAd:ad];
+        uint64_t componentID = [componentView componentID];
         [componentView addTapHandler:^{
-            NSLog(@"%@", [ad body]);
+            [_reportsBuilder recordInteraction:[ad requestID] adID:[ad adID] componentID:componentID interactionKind:CSNPComponentInteractionKind_Tap];
             CGRect bounds = [[UIScreen mainScreen] bounds];
             CSNModalWindow *modalWindow = [[CSNModalWindow alloc] initWithFrame:bounds forAd:ad];
             modalWindow.windowLevel = UIWindowLevelAlert;
@@ -154,9 +196,44 @@ CSNModalWindow *modalWindowView;
             
         }];
         [_visMonitor addView:componentView];
-        //[_visibilityMonitor addView:componentView ad:ad];
-        //[_interactionMonitor addView:componentView ad:ad];
     }
+}
+
+- (NSArray<NSData *> *) getIpAddresses {
+    NSMutableArray *addrs = [[NSMutableArray alloc] init];
+    struct ifaddrs *ifa, *ifa_tmp;
+    
+    if (getifaddrs(&ifa) == -1) {
+        return addrs;
+    }
+    
+    ifa_tmp = ifa;
+    while (ifa_tmp) {
+        if ((ifa_tmp->ifa_addr) && ((ifa_tmp->ifa_addr->sa_family == AF_INET) ||
+                                    (ifa_tmp->ifa_addr->sa_family == AF_INET6))) {
+            if (ifa_tmp->ifa_addr->sa_family == AF_INET) {
+                // create IPv4 string
+                struct sockaddr_in *in = (struct sockaddr_in*) ifa_tmp->ifa_addr;
+                NSData *addr = [NSData dataWithBytes:&in->sin_addr length:in->sin_len];
+                [addrs addObject:addr];
+            } else { // AF_INET6
+                // create IPv6 string
+                struct sockaddr_in6 *in6 = (struct sockaddr_in6*) ifa_tmp->ifa_addr;
+                NSData *addr = [NSData dataWithBytes:&in6->sin6_addr length:in6->sin6_len];
+                [addrs addObject:addr];
+            }
+        }
+        ifa_tmp = ifa_tmp->ifa_next;
+    }
+    freeifaddrs(ifa);
+    return addrs;
+}
+
+- (void) sendReports {
+    CSNPAdReports *reports = [_reportsBuilder buildReport];
+    [_client sendAdReports:reports success:^{
+    } failure:^(NSError *error) {
+    }];
 }
 
 @end

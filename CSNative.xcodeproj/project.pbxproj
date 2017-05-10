@@ -24,6 +24,9 @@
 		1B0E3D9C1EB0DD3B00C95354 /* CSNOptionalAd.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B0E3D9A1EB0DD3B00C95354 /* CSNOptionalAd.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1B0E3D9D1EB0DD3B00C95354 /* CSNOptionalAd.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B0E3D9B1EB0DD3B00C95354 /* CSNOptionalAd.m */; };
 		1B0E3D9F1EB11CD500C95354 /* CSNTransitRouteTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B0E3D9E1EB11CD400C95354 /* CSNTransitRouteTests.m */; };
+		1B0E3DA61EB3CA8000C95354 /* CSNAdReportsBuilder.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B0E3DA41EB3CA8000C95354 /* CSNAdReportsBuilder.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1B0E3DA71EB3CA8000C95354 /* CSNAdReportsBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B0E3DA51EB3CA8000C95354 /* CSNAdReportsBuilder.m */; };
+		1B0E3DA91EBA210600C95354 /* CSNAdReportsBuilderTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B0E3DA81EBA210600C95354 /* CSNAdReportsBuilderTests.m */; };
 		1B2CCB131E79E0C800B6FBC2 /* CSNAdRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B2CCB111E79E0C800B6FBC2 /* CSNAdRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1B2CCB141E79E0C800B6FBC2 /* CSNAdRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B2CCB121E79E0C800B6FBC2 /* CSNAdRequest.m */; };
 		1B555FCF1E60A3F800FE1C08 /* CSNative.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B555FC51E60A3F800FE1C08 /* CSNative.framework */; };
@@ -92,6 +95,9 @@
 		1B0E3D9A1EB0DD3B00C95354 /* CSNOptionalAd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSNOptionalAd.h; sourceTree = "<group>"; };
 		1B0E3D9B1EB0DD3B00C95354 /* CSNOptionalAd.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSNOptionalAd.m; sourceTree = "<group>"; };
 		1B0E3D9E1EB11CD400C95354 /* CSNTransitRouteTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSNTransitRouteTests.m; sourceTree = "<group>"; };
+		1B0E3DA41EB3CA8000C95354 /* CSNAdReportsBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSNAdReportsBuilder.h; sourceTree = "<group>"; };
+		1B0E3DA51EB3CA8000C95354 /* CSNAdReportsBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSNAdReportsBuilder.m; sourceTree = "<group>"; };
+		1B0E3DA81EBA210600C95354 /* CSNAdReportsBuilderTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CSNAdReportsBuilderTests.m; path = ../CSNative/CSNAdReportsBuilderTests.m; sourceTree = "<group>"; };
 		1B2CCB111E79E0C800B6FBC2 /* CSNAdRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSNAdRequest.h; sourceTree = "<group>"; };
 		1B2CCB121E79E0C800B6FBC2 /* CSNAdRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSNAdRequest.m; sourceTree = "<group>"; };
 		1B2CCB2E1E7B020B00B6FBC2 /* universal.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = universal.sh; sourceTree = "<group>"; };
@@ -243,6 +249,8 @@
 				7F1E0B221E89B25F00498B76 /* CSNSecondaryActionView.m */,
 				1B0E3D9A1EB0DD3B00C95354 /* CSNOptionalAd.h */,
 				1B0E3D9B1EB0DD3B00C95354 /* CSNOptionalAd.m */,
+				1B0E3DA41EB3CA8000C95354 /* CSNAdReportsBuilder.h */,
+				1B0E3DA51EB3CA8000C95354 /* CSNAdReportsBuilder.m */,
 			);
 			path = CSNative;
 			sourceTree = "<group>";
@@ -252,6 +260,7 @@
 			children = (
 				1B555FEF1E60B0B500FE1C08 /* CSNHttpClientTest.m */,
 				1B555FD51E60A3F800FE1C08 /* Info.plist */,
+				1B0E3DA81EBA210600C95354 /* CSNAdReportsBuilderTests.m */,
 				1B5560581E64989B00FE1C08 /* CSNAdsControllerTest.m */,
 				1B5560681E6611DD00FE1C08 /* CSNAdTest.m */,
 				1B5560721E67424F00FE1C08 /* CSNTransitStopTests.m */,
@@ -291,6 +300,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1B0E3DA61EB3CA8000C95354 /* CSNAdReportsBuilder.h in Headers */,
 				1B5560701E67423F00FE1C08 /* CSNTransit.h in Headers */,
 				7F2630AF1E83045A001F36D6 /* CSNAdvertiserView.h in Headers */,
 				7F2630C91E831B95001F36D6 /* CSNTransitSubtitleView.h in Headers */,
@@ -536,6 +546,7 @@
 				1B5560571E648AC200FE1C08 /* CSNAdsController.m in Sources */,
 				1B0E3D9D1EB0DD3B00C95354 /* CSNOptionalAd.m in Sources */,
 				1B555FEE1E60AD7A00FE1C08 /* Csnmessages.pbobjc.m in Sources */,
+				1B0E3DA71EB3CA8000C95354 /* CSNAdReportsBuilder.m in Sources */,
 				1B5560771E6742E700FE1C08 /* CSNMockClient.m in Sources */,
 				1BC79FB51E71EE92008D146A /* CSNVisibilityMonitor.m in Sources */,
 				7F26303F1E819A38001F36D6 /* CSNModalWindow.m in Sources */,
@@ -550,6 +561,7 @@
 				1B5560591E64989B00FE1C08 /* CSNAdsControllerTest.m in Sources */,
 				1B5560691E6611DD00FE1C08 /* CSNAdTest.m in Sources */,
 				1BC79FB71E73332C008D146A /* CSNVisibilityMonitorTest.m in Sources */,
+				1B0E3DA91EBA210600C95354 /* CSNAdReportsBuilderTests.m in Sources */,
 				1B555FF01E60B0B500FE1C08 /* CSNHttpClientTest.m in Sources */,
 				1B5560791E67497100FE1C08 /* CSNLogoViewTests.m in Sources */,
 				7F26306B1E81CC01001F36D6 /* CSNHeroViewTests.m in Sources */,
