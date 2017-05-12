@@ -49,6 +49,7 @@ CF_EXTERN_C_BEGIN
 @class CSNPTransitStop;
 @class CSNPTransitSubtitleComponent;
 @class CSNPTransitTitleComponent;
+@class CSNPViewComponent;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -415,22 +416,35 @@ typedef GPB_ENUM(CSNPSecondaryActionComponent_FieldNumber) {
 
 @end
 
+#pragma mark - CSNPViewComponent
+
+typedef GPB_ENUM(CSNPViewComponent_FieldNumber) {
+  CSNPViewComponent_FieldNumber_ComponentId = 1,
+};
+
+@interface CSNPViewComponent : GPBMessage
+
+@property(nonatomic, readwrite) uint64_t componentId;
+
+@end
+
 #pragma mark - CSNPNativeAd
 
 typedef GPB_ENUM(CSNPNativeAd_FieldNumber) {
   CSNPNativeAd_FieldNumber_RequestId = 1,
   CSNPNativeAd_FieldNumber_AdId = 2,
   CSNPNativeAd_FieldNumber_Colors = 3,
-  CSNPNativeAd_FieldNumber_SecondaryActionScreen = 4,
-  CSNPNativeAd_FieldNumber_TransitTitle = 5,
-  CSNPNativeAd_FieldNumber_TransitSubtitle = 6,
-  CSNPNativeAd_FieldNumber_Logo = 7,
-  CSNPNativeAd_FieldNumber_Headline = 8,
-  CSNPNativeAd_FieldNumber_Body = 9,
-  CSNPNativeAd_FieldNumber_Advertiser = 10,
-  CSNPNativeAd_FieldNumber_Location = 11,
-  CSNPNativeAd_FieldNumber_Hero = 12,
-  CSNPNativeAd_FieldNumber_ActionsArray = 13,
+  CSNPNativeAd_FieldNumber_ActionsArray = 4,
+  CSNPNativeAd_FieldNumber_View = 5,
+  CSNPNativeAd_FieldNumber_SecondaryActionScreen = 7,
+  CSNPNativeAd_FieldNumber_TransitTitle = 8,
+  CSNPNativeAd_FieldNumber_TransitSubtitle = 9,
+  CSNPNativeAd_FieldNumber_Logo = 10,
+  CSNPNativeAd_FieldNumber_Headline = 11,
+  CSNPNativeAd_FieldNumber_Body = 12,
+  CSNPNativeAd_FieldNumber_Advertiser = 13,
+  CSNPNativeAd_FieldNumber_Location = 14,
+  CSNPNativeAd_FieldNumber_Hero = 15,
 };
 
 @interface CSNPNativeAd : GPBMessage
@@ -442,6 +456,14 @@ typedef GPB_ENUM(CSNPNativeAd_FieldNumber) {
 @property(nonatomic, readwrite, strong, null_resettable) CSNPColors *colors;
 /** Test to see if @c colors has been set. */
 @property(nonatomic, readwrite) BOOL hasColors;
+
+@property(nonatomic, readwrite, strong, null_resettable) NSMutableArray<CSNPActionComponent*> *actionsArray;
+/** The number of items in @c actionsArray without causing the array to be created. */
+@property(nonatomic, readonly) NSUInteger actionsArray_Count;
+
+@property(nonatomic, readwrite, strong, null_resettable) CSNPViewComponent *view;
+/** Test to see if @c view has been set. */
+@property(nonatomic, readwrite) BOOL hasView;
 
 @property(nonatomic, readwrite, strong, null_resettable) CSNPSecondaryActionComponent *secondaryActionScreen;
 /** Test to see if @c secondaryActionScreen has been set. */
@@ -478,44 +500,6 @@ typedef GPB_ENUM(CSNPNativeAd_FieldNumber) {
 @property(nonatomic, readwrite, strong, null_resettable) CSNPHeroComponent *hero;
 /** Test to see if @c hero has been set. */
 @property(nonatomic, readwrite) BOOL hasHero;
-
-@property(nonatomic, readwrite, strong, null_resettable) NSMutableArray<CSNPActionComponent*> *actionsArray;
-/** The number of items in @c actionsArray without causing the array to be created. */
-@property(nonatomic, readonly) NSUInteger actionsArray_Count;
-
-@end
-
-#pragma mark - CSNPStopAd
-
-typedef GPB_ENUM(CSNPStopAd_FieldNumber) {
-  CSNPStopAd_FieldNumber_StopTuple = 1,
-  CSNPStopAd_FieldNumber_AdId = 2,
-};
-
-@interface CSNPStopAd : GPBMessage
-
-@property(nonatomic, readwrite, strong, null_resettable) CSNPTransitStop *stopTuple;
-/** Test to see if @c stopTuple has been set. */
-@property(nonatomic, readwrite) BOOL hasStopTuple;
-
-@property(nonatomic, readwrite) uint64_t adId;
-
-@end
-
-#pragma mark - CSNPLocationAd
-
-typedef GPB_ENUM(CSNPLocationAd_FieldNumber) {
-  CSNPLocationAd_FieldNumber_Loc = 1,
-  CSNPLocationAd_FieldNumber_AdId = 2,
-};
-
-@interface CSNPLocationAd : GPBMessage
-
-@property(nonatomic, readwrite, strong, null_resettable) CSNPLocation *loc;
-/** Test to see if @c loc has been set. */
-@property(nonatomic, readwrite) BOOL hasLoc;
-
-@property(nonatomic, readwrite) uint64_t adId;
 
 @end
 

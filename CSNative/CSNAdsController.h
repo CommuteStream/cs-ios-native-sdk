@@ -9,7 +9,7 @@
 
 - (void) fetchAds:(NSArray<CSNAdRequest *> *)adRequests completed:(void (^)(NSArray<CSNOptionalAd *> *))completed;
 
-- (void) buildView:(UIView  *)view ad:(CSNAd *)ad;
+- (void) buildView:(UIView  *)view ad:(CSNAd *)ad parentTouch:(bool)parentTouch;
 
 - (instancetype) initMocked;
 

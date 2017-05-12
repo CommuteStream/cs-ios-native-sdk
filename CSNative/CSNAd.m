@@ -1,5 +1,16 @@
 #import "CSNAd.h"
 
+
+@implementation CSNViewComponent
+
+- (instancetype) initWithMessage:(CSNPViewComponent *)message {
+    _componentID = [message componentId];
+    return self;
+}
+
+@end
+
+
 @implementation CSNHeadlineComponent
 
 - (instancetype) initWithMessage:(CSNPHeadlineComponent *)message {
@@ -111,6 +122,7 @@
 - (instancetype) initWithMessage:(CSNPNativeAd *)message {
     _adID = [message adId];
     _requestID = [message requestId];
+    _view = [[CSNViewComponent alloc] initWithMessage:[message view]];
     _headline = [[CSNHeadlineComponent alloc] initWithMessage:[message headline]];
     _transitTitle = [[CSNTransitTitleComponent alloc] initWithMessage:[message transitTitle]];
     _transitSubtitle = [[CSNTransitSubtitleComponent alloc] initWithMessage:[message transitSubtitle]];

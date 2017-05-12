@@ -74,7 +74,7 @@
         XCTAssert(optAd != nil);
         CSNAd *ad = [optAd ad];
         XCTAssert(ad != nil);
-        [controller buildView:view ad:ad];
+        [controller buildView:view ad:ad parentTouch:true];
         XCTAssert([logoView ad] != nil);
         XCTAssert([headlineView ad] != nil);
         [expectation fulfill];

@@ -11,6 +11,8 @@
 #include <ifaddrs.h>
 #include <arpa/inet.h>
 
+
+
 @interface CSNAdsController ()
 @property id<CSNClient> client;
 @property CSNVisibilityMonitor *visMonitor;
@@ -20,6 +22,20 @@
 @property NSString *timeZone;
 @property CSNAdReportsBuilder *reportsBuilder;
 @property NSTimer *reportsTimer;
+- (void) openModal:(CSNAd *)ad componentID:(uint64_t)componentID interactionKind:(int32_t)interactionKind;
+@end
+
+@interface CSNTapDelegate : NSObject
+@property CSNAd *ad;
+@property uint64_t componentID;
+@property CSNAdsController *adsController;
+-(void) tapViewAction:(UIGestureRecognizer *)sender;
+@end
+
+@implementation CSNTapDelegate
+- (void) tapViewAction:(UIGestureRecognizer *)sender {
+    [_adsController openModal:_ad componentID:_componentID interactionKind:CSNPComponentInteractionKind_Tap];
+}
 @end
 
 @implementation CSNAdsController
@@ -149,9 +165,9 @@ CSNModalWindow *modalWindowView;
     return ads;
 }
 
-- (void) buildView:(UIView *)view ad:(CSNAd *)ad {
-    if(ad != nil) {
-        [self setupComponentViews:view ad:ad];
+- (void) buildView:(UIView *)view ad:(CSNAd *)ad parentTouch:(bool)parentTouch {
+    if(view != nil && ad != nil) {
+        [self setupComponentViews:view ad:ad parentTouch:parentTouch];
     }
 }
 
@@ -179,24 +195,25 @@ CSNModalWindow *modalWindowView;
     }
 }
 
-- (void) setupComponentViews:(UIView *)parent ad:(CSNAd *)ad {
+- (void) setupComponentViews:(UIView *)parent ad:(CSNAd *)ad parentTouch:(bool)parentTouch {
     
     for(id<CSNComponentView> componentView in [self componentViews:parent]) {
-        // periodically poll view for visibility
         [componentView setAd:ad];
-        uint64_t componentID = [componentView componentID];
-        [componentView addTapHandler:^{
-            [_reportsBuilder recordInteraction:[ad requestID] adID:[ad adID] componentID:componentID interactionKind:CSNPComponentInteractionKind_Tap];
-            CGRect bounds = [[UIScreen mainScreen] bounds];
-            CSNModalWindow *modalWindow = [[CSNModalWindow alloc] initWithFrame:bounds forAd:ad];
-            modalWindow.windowLevel = UIWindowLevelAlert;
-            [_visMonitor addView:[modalWindow getSecondaryActionView]];
-            modalWindowView = modalWindow;
-            [modalWindow makeKeyAndVisible];
-            
-        }];
         [_visMonitor addView:componentView];
+        [self setTapHandler:parent ad:ad componentID:[[ad view] componentID]];
     }
+    if(parentTouch) {
+        [self setTapHandler:parent ad:ad componentID:[[ad view] componentID]];
+    }
+}
+
+- (void) setTapHandler:(UIView *)view ad:(CSNAd *)ad componentID:(uint64_t)componentID {
+    CSNTapDelegate *tapDelegate = [[CSNTapDelegate alloc] init];
+    [tapDelegate setAd:ad];
+    [tapDelegate setAdsController:self];
+    UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:tapDelegate action:@selector(tapViewAction:)];
+    [view addGestureRecognizer:tapRecognizer];
+    [view setUserInteractionEnabled:YES];
 }
 
 - (NSArray<NSData *> *) getIpAddresses {
@@ -234,6 +251,10 @@ CSNModalWindow *modalWindowView;
     [_client sendAdReports:reports success:^{
     } failure:^(NSError *error) {
     }];
+}
+
+- (void) openModal:(CSNAd *)ad componentID:(uint64_t)componentID interactionKind:(int32_t)interactionKind{
+    
 }
 
 @end

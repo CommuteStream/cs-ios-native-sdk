@@ -96,30 +96,25 @@ message SecondaryActionComponent {
   uint64 component_id = 1;
 }
 
+message ViewComponent {
+  uint64 component_id = 1;
+}
+
 message NativeAd {
   uint64 request_id = 1;
   uint64 ad_id = 2;
   Colors colors = 3;
-  SecondaryActionComponent secondary_action_screen = 4;
-  TransitTitleComponent transit_title = 5;
-  TransitSubtitleComponent transit_subtitle = 6;
-  LogoComponent logo = 7;
-  HeadlineComponent headline = 8;
-  BodyComponent body = 9;
-  AdvertiserComponent advertiser = 10;
-  LocationComponent location = 11;
-  HeroComponent hero = 12;
-  repeated ActionComponent actions = 13;
-}
-
-message StopAd {
-  TransitStop stop_tuple = 1;
-  uint64 ad_id = 2;
-}
-
-message LocationAd {
-  Location loc = 1;
-  uint64 ad_id = 2;
+  repeated ActionComponent actions = 4;
+  ViewComponent view = 5;
+  SecondaryActionComponent secondary_action_screen = 7;
+  TransitTitleComponent transit_title = 8;
+  TransitSubtitleComponent transit_subtitle = 9;
+  LogoComponent logo = 10;
+  HeadlineComponent headline = 11;
+  BodyComponent body = 12;
+  AdvertiserComponent advertiser = 13;
+  LocationComponent location = 14;
+  HeroComponent hero = 15;
 }
 
 // AdRequest contains a hash_id which is the hash everything but the num_of_ads 
