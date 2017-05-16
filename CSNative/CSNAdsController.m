@@ -25,7 +25,7 @@
 - (void) openModal:(CSNAd *)ad componentID:(uint64_t)componentID interactionKind:(int32_t)interactionKind;
 @end
 
-@interface CSNTapDelegate : NSObject
+@interface CSNTapDelegate : NSObject <UIGestureRecognizerDelegate>
 @property CSNAd *ad;
 @property uint64_t componentID;
 @property CSNAdsController *adsController;
@@ -210,6 +210,7 @@ CSNModalWindow *modalWindowView;
 - (void) setTapHandler:(UIView *)view ad:(CSNAd *)ad componentID:(uint64_t)componentID {
     CSNTapDelegate *tapDelegate = [[CSNTapDelegate alloc] init];
     [tapDelegate setAd:ad];
+    [tapDelegate setComponentID:componentID];
     [tapDelegate setAdsController:self];
     UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:tapDelegate action:@selector(tapViewAction:)];
     [view addGestureRecognizer:tapRecognizer];
