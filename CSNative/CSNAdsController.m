@@ -19,6 +19,7 @@
 @property NSData *adUnit;
 @property CSNPDeviceID *deviceID;
 @property NSArray<NSData *> *ipAddresses;
+@property NSMapTable* tapDelegates;
 @property NSString *timeZone;
 @property CSNAdReportsBuilder *reportsBuilder;
 @property NSTimer *reportsTimer;
@@ -33,6 +34,9 @@
 @end
 
 @implementation CSNTapDelegate
+- (void) dealloc {
+    NSLog(@"de-allocating tap delegate for ad %lld", [_ad adID]);
+}
 - (void) tapViewAction:(UIGestureRecognizer *)sender {
     [_adsController openModal:_ad componentID:_componentID interactionKind:CSNPComponentInteractionKind_Tap];
 }
@@ -80,6 +84,7 @@ CSNModalWindow *modalWindowView;
     _reportsTimer = [NSTimer timerWithTimeInterval:30.0 repeats:true block:^(NSTimer * _Nonnull timer) {
         [self sendReports];
     }];
+    _tapDelegates = [[NSMapTable alloc] initWithKeyOptions:NSMapTableWeakMemory valueOptions:NSMapTableStrongMemory capacity:10];
     [[NSRunLoop mainRunLoop] addTimer:_reportsTimer forMode:NSDefaultRunLoopMode];
     return self;
 }
@@ -213,8 +218,11 @@ CSNModalWindow *modalWindowView;
     [tapDelegate setComponentID:componentID];
     [tapDelegate setAdsController:self];
     UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:tapDelegate action:@selector(tapViewAction:)];
+    [tapRecognizer setNumberOfTapsRequired:1];
+    [tapRecognizer setDelegate:tapRecognizer];
     [view addGestureRecognizer:tapRecognizer];
     [view setUserInteractionEnabled:YES];
+    [_tapDelegates setObject:tapDelegate forKey:view];
 }
 
 - (NSArray<NSData *> *) getIpAddresses {
