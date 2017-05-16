@@ -205,7 +205,7 @@ CSNModalWindow *modalWindowView;
     for(id<CSNComponentView> componentView in [self componentViews:parent]) {
         [componentView setAd:ad];
         [_visMonitor addView:componentView];
-        [self setTapHandler:parent ad:ad componentID:[[ad view] componentID]];
+        [self setTapHandler:(UIView *)componentView ad:ad componentID:[componentView componentID]];
     }
     if(parentTouch) {
         [self setTapHandler:parent ad:ad componentID:[[ad view] componentID]];
