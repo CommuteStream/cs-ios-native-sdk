@@ -135,8 +135,9 @@
         NSUInteger actionIndex = 0;
         
         CGFloat buttonFontSize = 22.0;
+        NSUInteger actionCount = [[nativeAd actions] count];
         
-        switch (actionArray.count) {
+        switch ([[nativeAd actions] count]) {
             case 1:
                 buttonFontSize = 22.0;
                 break;
@@ -153,21 +154,19 @@
                 break;
         }
         
-        
-        for(CSNActionComponent *action in [nativeAd action]){
+        for(CSNActionComponent *action in [nativeAd actions]){
             
             //CGFloat actionButtonsYPos = (adInfoView.frame.origin.y + adInfoView.frame.size.height) + (actionIndex * 50) + (actionIndex * 5);
             CGFloat actionButtonsYPos = (adInfoView.frame.origin.y + adInfoView.frame.size.height) + 5.0;
             
-            CGFloat actionButtonsWidth = (self.frame.size.width/actionArray.count);
+            CGFloat actionButtonsWidth = (self.frame.size.width/actionCount);
             
-            CSNActionView *actionButton = [[CSNActionView alloc] initWithFrame:CGRectMake(5.0 + (actionIndex * (actionButtonsWidth - (5.0/actionArray.count))), actionButtonsYPos, actionButtonsWidth - (5.0 + (5.0/actionArray.count)), 50.0)];
+            CSNActionView *actionButton = [[CSNActionView alloc] initWithFrame:CGRectMake(5.0 + (actionIndex * (actionButtonsWidth - (5.0/actionCount))), actionButtonsYPos, actionButtonsWidth - (5.0 + (5.0/actionCount)), 50.0)];
             
             [actionButton setAd:nativeAd atActionIndex:actionIndex];
             
-            [actionButton setBackgroundColor:[UIColor colorWithRed:[item]/255.0 green:<#(CGFloat)#> blue:<#(CGFloat)#> alpha:<#(CGFloat)#>]]
-            [actionButton setBackgroundColor: [[[nativeAd actions] objectAtIndex:actionIndex] backgroundColor]];
-            [actionButton setTitleColor:[[[nativeAd actions] objectAtIndex:actionIndex] backgroundColor] forState:UIControlStateNormal];
+            [actionButton setBackgroundColor:[[action colors] background]];
+            [actionButton setTitleColor:[[action colors] foreground] forState:UIControlStateNormal];
             [[actionButton titleLabel] setFont: [UIFont systemFontOfSize:buttonFontSize]];
             [actionButton addTapHandler:^{
                 

@@ -6,6 +6,12 @@
 @property (readonly) uint64_t componentID;
 @end
 
+@interface CSNColors : NSObject
+@property (readonly, nonnull) UIColor *foreground;
+@property (readonly, nonnull) UIColor *background;
+- (instancetype _Nonnull) initWithMessage:(CSNPColors * _Nonnull)message;
+@end
+
 @interface CSNViewComponent : NSObject <CSNAdComponent>
 @property (readonly) uint64_t componentID;
 - (instancetype _Nonnull) initWithMessage:(CSNPViewComponent * _Nonnull)message;
@@ -66,7 +72,7 @@
 @property (readonly) CSNPActionKind kind;
 @property (copy, readonly, nonnull) NSString *url;
 @property (copy, readonly, nonnull) NSString *title;
-@property (copy, readonly, nonnull) NSArray *colors;
+@property (copy, readonly, nonnull) CSNColors *colors;
 
 - (instancetype _Nonnull) initWithMessage:(CSNPActionComponent * _Nonnull)message;
 @end

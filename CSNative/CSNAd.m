@@ -1,6 +1,23 @@
 #import "CSNAd.h"
 
 
+@implementation CSNColors
+
+- (instancetype) initWithMessage:(CSNPColors *)message {
+    _foreground = [self decodeColor:[message foreground]];
+    _background = [self decodeColor:[message background]];
+    return self;
+}
+
+- (UIColor *) decodeColor:(CSNPColor *)color {
+    CGFloat red = (CGFloat)[color red]/255.0;
+    CGFloat green = (CGFloat)[color green]/255.0;
+    CGFloat blue = (CGFloat)[color blue]/255.0;
+    return [UIColor colorWithRed:red green:green blue:blue alpha:1.0];
+}
+
+@end
+
 @implementation CSNViewComponent
 
 - (instancetype) initWithMessage:(CSNPViewComponent *)message {
@@ -108,10 +125,7 @@
     _kind = [message kind];
     _title = [message title];
     _url = [message URL];
-    //_foregroundColor = [NSKeyedUnarchiver unarchiveObjectWithData:[message foregroundColor]];
-    //_backgroundColor = [NSKeyedUnarchiver unarchiveObjectWithData:[message backgroundColor]];
-    
-    
+    _colors = [[CSNColors alloc] initWithMessage:[message colors]];
     return self;
 }
 
