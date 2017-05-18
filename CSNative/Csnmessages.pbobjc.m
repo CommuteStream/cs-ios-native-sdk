@@ -524,14 +524,14 @@ void SetCSNPHeroComponent_Kind_RawValue(CSNPHeroComponent *message, int32_t valu
 @dynamic kind;
 @dynamic URL;
 @dynamic title;
-@dynamic color;
+@dynamic hasColors, colors;
 
 typedef struct CSNPActionComponent__storage_ {
   uint32_t _has_storage_[1];
   CSNPActionKind kind;
   NSString *URL;
   NSString *title;
-  NSData *color;
+  CSNPColors *colors;
   uint64_t componentId;
 } CSNPActionComponent__storage_;
 
@@ -578,13 +578,13 @@ typedef struct CSNPActionComponent__storage_ {
         .dataType = GPBDataTypeString,
       },
       {
-        .name = "color",
-        .dataTypeSpecific.className = NULL,
-        .number = CSNPActionComponent_FieldNumber_Color,
+        .name = "colors",
+        .dataTypeSpecific.className = GPBStringifySymbol(CSNPColors),
+        .number = CSNPActionComponent_FieldNumber_Colors,
         .hasIndex = 4,
-        .offset = (uint32_t)offsetof(CSNPActionComponent__storage_, color),
+        .offset = (uint32_t)offsetof(CSNPActionComponent__storage_, colors),
         .flags = GPBFieldOptional,
-        .dataType = GPBDataTypeBytes,
+        .dataType = GPBDataTypeMessage,
       },
     };
     GPBDescriptor *localDescriptor =
@@ -944,17 +944,82 @@ typedef struct CSNPAdvertiserComponent__storage_ {
 
 @end
 
+#pragma mark - CSNPColor
+
+@implementation CSNPColor
+
+@dynamic red;
+@dynamic green;
+@dynamic blue;
+
+typedef struct CSNPColor__storage_ {
+  uint32_t _has_storage_[1];
+  uint32_t red;
+  uint32_t green;
+  uint32_t blue;
+} CSNPColor__storage_;
+
+// This method is threadsafe because it is initially called
+// in +initialize for each subclass.
++ (GPBDescriptor *)descriptor {
+  static GPBDescriptor *descriptor = nil;
+  if (!descriptor) {
+    static GPBMessageFieldDescription fields[] = {
+      {
+        .name = "red",
+        .dataTypeSpecific.className = NULL,
+        .number = CSNPColor_FieldNumber_Red,
+        .hasIndex = 0,
+        .offset = (uint32_t)offsetof(CSNPColor__storage_, red),
+        .flags = GPBFieldOptional,
+        .dataType = GPBDataTypeUInt32,
+      },
+      {
+        .name = "green",
+        .dataTypeSpecific.className = NULL,
+        .number = CSNPColor_FieldNumber_Green,
+        .hasIndex = 1,
+        .offset = (uint32_t)offsetof(CSNPColor__storage_, green),
+        .flags = GPBFieldOptional,
+        .dataType = GPBDataTypeUInt32,
+      },
+      {
+        .name = "blue",
+        .dataTypeSpecific.className = NULL,
+        .number = CSNPColor_FieldNumber_Blue,
+        .hasIndex = 2,
+        .offset = (uint32_t)offsetof(CSNPColor__storage_, blue),
+        .flags = GPBFieldOptional,
+        .dataType = GPBDataTypeUInt32,
+      },
+    };
+    GPBDescriptor *localDescriptor =
+        [GPBDescriptor allocDescriptorForClass:[CSNPColor class]
+                                     rootClass:[CSNPCsnmessagesRoot class]
+                                          file:CSNPCsnmessagesRoot_FileDescriptor()
+                                        fields:fields
+                                    fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
+                                   storageSize:sizeof(CSNPColor__storage_)
+                                         flags:GPBDescriptorInitializationFlag_None];
+    NSAssert(descriptor == nil, @"Startup recursed!");
+    descriptor = localDescriptor;
+  }
+  return descriptor;
+}
+
+@end
+
 #pragma mark - CSNPColors
 
 @implementation CSNPColors
 
-@dynamic background;
-@dynamic foreground;
+@dynamic hasBackground, background;
+@dynamic hasForeground, foreground;
 
 typedef struct CSNPColors__storage_ {
   uint32_t _has_storage_[1];
-  NSString *background;
-  NSString *foreground;
+  CSNPColor *background;
+  CSNPColor *foreground;
 } CSNPColors__storage_;
 
 // This method is threadsafe because it is initially called
@@ -965,21 +1030,21 @@ typedef struct CSNPColors__storage_ {
     static GPBMessageFieldDescription fields[] = {
       {
         .name = "background",
-        .dataTypeSpecific.className = NULL,
+        .dataTypeSpecific.className = GPBStringifySymbol(CSNPColor),
         .number = CSNPColors_FieldNumber_Background,
         .hasIndex = 0,
         .offset = (uint32_t)offsetof(CSNPColors__storage_, background),
         .flags = GPBFieldOptional,
-        .dataType = GPBDataTypeString,
+        .dataType = GPBDataTypeMessage,
       },
       {
         .name = "foreground",
-        .dataTypeSpecific.className = NULL,
+        .dataTypeSpecific.className = GPBStringifySymbol(CSNPColor),
         .number = CSNPColors_FieldNumber_Foreground,
         .hasIndex = 1,
         .offset = (uint32_t)offsetof(CSNPColors__storage_, foreground),
         .flags = GPBFieldOptional,
-        .dataType = GPBDataTypeString,
+        .dataType = GPBDataTypeMessage,
       },
     };
     GPBDescriptor *localDescriptor =

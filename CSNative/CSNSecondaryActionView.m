@@ -129,8 +129,6 @@
         [adInfoView addSubview:advertiserLabel];
         [self addSubview:adInfoView];
         
-        NSMutableArray *actionArray = [[NSMutableArray alloc] initWithArray:[nativeAd actions]];
-        
         //CGFloat actionButtonsYPos = adInfoView.frame.origin.y + adInfoView.frame.size.height;
         
         CGFloat frameHeight = 0.0;
@@ -156,8 +154,7 @@
         }
         
         
-        for(NSDictionary *item in actionArray){
-            NSLog(@"Item in Array = %@", item);
+        for(CSNActionComponent *action in [nativeAd action]){
             
             //CGFloat actionButtonsYPos = (adInfoView.frame.origin.y + adInfoView.frame.size.height) + (actionIndex * 50) + (actionIndex * 5);
             CGFloat actionButtonsYPos = (adInfoView.frame.origin.y + adInfoView.frame.size.height) + 5.0;
@@ -168,8 +165,9 @@
             
             [actionButton setAd:nativeAd atActionIndex:actionIndex];
             
-            [actionButton setBackgroundColor: [[[nativeAd actions] objectAtIndex:actionIndex] color]];
-            [actionButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+            [actionButton setBackgroundColor:[UIColor colorWithRed:[item]/255.0 green:<#(CGFloat)#> blue:<#(CGFloat)#> alpha:<#(CGFloat)#>]]
+            [actionButton setBackgroundColor: [[[nativeAd actions] objectAtIndex:actionIndex] backgroundColor]];
+            [actionButton setTitleColor:[[[nativeAd actions] objectAtIndex:actionIndex] backgroundColor] forState:UIControlStateNormal];
             [[actionButton titleLabel] setFont: [UIFont systemFontOfSize:buttonFontSize]];
             [actionButton addTapHandler:^{
                 

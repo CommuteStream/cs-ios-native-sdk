@@ -35,8 +35,9 @@
         [self addSubview:cardView];
         [modalWindowBkg setUserInteractionEnabled:YES];
         
-        
-        UIImage *buttonBkg = [UIImage imageNamed:@"close_interstitial_card.png"];
+        NSString *imagePath = [[NSBundle bundleForClass:[CSNModalWindow class]] pathForResource:@"close_interstitial_card" ofType:@"png"];
+        NSData *imageData = [NSData dataWithContentsOfFile:imagePath];
+        UIImage *buttonBkg = [[UIImage alloc] initWithData:imageData];
         CGRect closeInterstitialCardButtonRect = CGRectMake(self.bounds.size.width/2.0,(self.bounds.size.height - 130.0),80.0, 80.0);
         closeModalWindow = [UIButton buttonWithType:UIButtonTypeCustom];
         closeModalWindow.frame = closeInterstitialCardButtonRect;

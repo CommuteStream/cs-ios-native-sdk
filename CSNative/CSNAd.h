@@ -66,7 +66,8 @@
 @property (readonly) CSNPActionKind kind;
 @property (copy, readonly, nonnull) NSString *url;
 @property (copy, readonly, nonnull) NSString *title;
-@property (copy, readonly, nonnull) UIColor *color;
+@property (copy, readonly, nonnull) NSArray *colors;
+
 - (instancetype _Nonnull) initWithMessage:(CSNPActionComponent * _Nonnull)message;
 @end
 

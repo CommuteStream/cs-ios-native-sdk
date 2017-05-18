@@ -33,6 +33,7 @@ CF_EXTERN_C_BEGIN
 @class CSNPAdResponse;
 @class CSNPAdvertiserComponent;
 @class CSNPBodyComponent;
+@class CSNPColor;
 @class CSNPColors;
 @class CSNPComponentInteraction;
 @class CSNPComponentReport;
@@ -270,7 +271,7 @@ typedef GPB_ENUM(CSNPActionComponent_FieldNumber) {
   CSNPActionComponent_FieldNumber_Kind = 2,
   CSNPActionComponent_FieldNumber_URL = 3,
   CSNPActionComponent_FieldNumber_Title = 4,
-  CSNPActionComponent_FieldNumber_Color = 5,
+  CSNPActionComponent_FieldNumber_Colors = 5,
 };
 
 @interface CSNPActionComponent : GPBMessage
@@ -283,7 +284,9 @@ typedef GPB_ENUM(CSNPActionComponent_FieldNumber) {
 
 @property(nonatomic, readwrite, copy, null_resettable) NSString *title;
 
-@property(nonatomic, readwrite, copy, null_resettable) NSData *color;
+@property(nonatomic, readwrite, strong, null_resettable) CSNPColors *colors;
+/** Test to see if @c colors has been set. */
+@property(nonatomic, readwrite) BOOL hasColors;
 
 @end
 
@@ -389,6 +392,24 @@ typedef GPB_ENUM(CSNPAdvertiserComponent_FieldNumber) {
 
 @end
 
+#pragma mark - CSNPColor
+
+typedef GPB_ENUM(CSNPColor_FieldNumber) {
+  CSNPColor_FieldNumber_Red = 1,
+  CSNPColor_FieldNumber_Green = 2,
+  CSNPColor_FieldNumber_Blue = 3,
+};
+
+@interface CSNPColor : GPBMessage
+
+@property(nonatomic, readwrite) uint32_t red;
+
+@property(nonatomic, readwrite) uint32_t green;
+
+@property(nonatomic, readwrite) uint32_t blue;
+
+@end
+
 #pragma mark - CSNPColors
 
 typedef GPB_ENUM(CSNPColors_FieldNumber) {
@@ -398,9 +419,13 @@ typedef GPB_ENUM(CSNPColors_FieldNumber) {
 
 @interface CSNPColors : GPBMessage
 
-@property(nonatomic, readwrite, copy, null_resettable) NSString *background;
+@property(nonatomic, readwrite, strong, null_resettable) CSNPColor *background;
+/** Test to see if @c background has been set. */
+@property(nonatomic, readwrite) BOOL hasBackground;
 
-@property(nonatomic, readwrite, copy, null_resettable) NSString *foreground;
+@property(nonatomic, readwrite, strong, null_resettable) CSNPColor *foreground;
+/** Test to see if @c foreground has been set. */
+@property(nonatomic, readwrite) BOOL hasForeground;
 
 @end
 

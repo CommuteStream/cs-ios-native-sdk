@@ -108,7 +108,8 @@
     _kind = [message kind];
     _title = [message title];
     _url = [message URL];
-    _color = [NSKeyedUnarchiver unarchiveObjectWithData:[message color]];
+    //_foregroundColor = [NSKeyedUnarchiver unarchiveObjectWithData:[message foregroundColor]];
+    //_backgroundColor = [NSKeyedUnarchiver unarchiveObjectWithData:[message backgroundColor]];
     
     
     return self;

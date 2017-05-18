@@ -53,7 +53,7 @@ message ActionComponent {
   ActionKind kind = 2;
   string url = 3;
   string title = 4;
-  bytes color = 5;
+  Colors colors = 5;
 }
 
 
@@ -87,9 +87,15 @@ message AdvertiserComponent {
   string advertiser = 2;
 }
 
+message Color {
+ uint32 red = 1;
+ uint32 green = 2;
+ uint32 blue = 3;
+}
+
 message Colors {
-  string background = 1;
-  string foreground = 2;
+  Color background = 1;
+  Color foreground = 2;
 }
 
 message SecondaryActionComponent {
