@@ -5,6 +5,7 @@ This SDK allows you to add CommuteStream Native Ads to your app.
 These instructions assume you have already followed the instructions at: [https://commutestream.com/sdkinstructions](https://commutestream.com/sdkinstructions).
 
 
+
 ## Requirements
 
 - iOS 8.0 and up
@@ -43,6 +44,8 @@ CommuteStream Native Ads were built specifically for transit apps. Our SDK is pa
 
 Components are meant to be used where the publisher sees fit, but should be placed with the understanding that the ad data they display, will be relevant to the transit data surrounding them. The following components are available and listed in order of usage priority:
 
+<img width="500px" style="margin: 40px auto; display: block;" src="https://s3.amazonaws.com/commutestream-cdn/native-ad-sdk-readme-assets/components_example.png">
+
 - Headline - Displays a strong call-to-action or phrase that relates the value of the offer in as few words as possible –e.g., *"Free 12 oz. Coffee"*
 
 
@@ -52,11 +55,13 @@ Components are meant to be used where the publisher sees fit, but should be plac
 - Logo - Shows the brand of the company being advertised. In most cases, logos are meant to be displayed with other components such as a Headline, Body or Advertiser, but can be placed alone as an embeleshment to a list item for a transit stop or route.
 
 
-- Advertiser - Shows the name of the advertiser. –e.g., "Starbucks Coffee"
+- Advertiser - Shows the name of the advertiser. –e.g., "Just Coffee"
 
 **Action Cards**
 
 The Action Card is shown anytime a Logo, Body, Headline, Advertiser, or any grouping thereof is tapped on. It is the ultimate native ad, floating above the contents of the app, it keeps the user experience and related transit information in context. The action card includes the following components by default:
+
+<img width="550px" style="margin: 40px auto; display: block;" src="https://s3.amazonaws.com/commutestream-cdn/native-ad-sdk-readme-assets/action_card_example.png">
 
 - Title - Explains the transit context of the ad. For example, if the user tapped on an icon that was placed on a train stop list, it might read *"Near Belmont Red Line Stop."*
 
