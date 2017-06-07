@@ -104,7 +104,21 @@ cell.contentView.addSubview(headlineView)
 ```
 
 #### Using Storyboards
-Some developers prefer to layout components using loadable .xib files. Our SDK makes this simple and intuitive.
+
+<img width="350px" style="margin: 0 0 20px; display: block;" src="https://s3.amazonaws.com/commutestream-cdn/native-ad-sdk-readme-assets/xib_example.png">
+Some developers prefer to layout components using loadable .xib files. Our SDK makes this simple and intuitive. Use the following UIKit components as they relate to the CS components you want in your .xib file:
+
+- CSNHeadlineView -> UILabel
+- CSNBodyView -> UILabel
+- CSNLogoView -> UIImageView
+- CSNAdvertiserView -> UILabel
+
+Once you have a UIKit component placed, select it, and view its properties in the right panel's **Identity Inspector**. Under **Custom Class**, set its Class property to the corresponding CSNative class from the list above.
+
+
+
+
+<img width="250px" style="margin: 0 0 40px 8px; display: block;" src="https://s3.amazonaws.com/commutestream-cdn/native-ad-sdk-readme-assets/custom_class_example.png">
 
 For more tips and code snippets, visit our [Native Ads Best Practices](http://commutestream.com/native-ads-best-practices) page.
 
