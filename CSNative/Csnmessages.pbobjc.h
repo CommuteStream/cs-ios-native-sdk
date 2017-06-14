@@ -28,6 +28,7 @@
 CF_EXTERN_C_BEGIN
 
 @class CSNPActionComponent;
+@class CSNPAdImpression;
 @class CSNPAdReport;
 @class CSNPAdRequest;
 @class CSNPAdResponse;
@@ -726,12 +727,25 @@ typedef GPB_ENUM(CSNPComponentReport_FieldNumber) {
 
 @end
 
+#pragma mark - CSNPAdImpression
+
+typedef GPB_ENUM(CSNPAdImpression_FieldNumber) {
+  CSNPAdImpression_FieldNumber_DeviceTime = 1,
+};
+
+@interface CSNPAdImpression : GPBMessage
+
+@property(nonatomic, readwrite) uint64_t deviceTime;
+
+@end
+
 #pragma mark - CSNPAdReport
 
 typedef GPB_ENUM(CSNPAdReport_FieldNumber) {
   CSNPAdReport_FieldNumber_RequestId = 1,
   CSNPAdReport_FieldNumber_AdId = 2,
   CSNPAdReport_FieldNumber_ComponentsArray = 3,
+  CSNPAdReport_FieldNumber_ImpressionsArray = 4,
 };
 
 @interface CSNPAdReport : GPBMessage
@@ -743,6 +757,10 @@ typedef GPB_ENUM(CSNPAdReport_FieldNumber) {
 @property(nonatomic, readwrite, strong, null_resettable) NSMutableArray<CSNPComponentReport*> *componentsArray;
 /** The number of items in @c componentsArray without causing the array to be created. */
 @property(nonatomic, readonly) NSUInteger componentsArray_Count;
+
+@property(nonatomic, readwrite, strong, null_resettable) NSMutableArray<CSNPAdImpression*> *impressionsArray;
+/** The number of items in @c impressionsArray without causing the array to be created. */
+@property(nonatomic, readonly) NSUInteger impressionsArray_Count;
 
 @end
 

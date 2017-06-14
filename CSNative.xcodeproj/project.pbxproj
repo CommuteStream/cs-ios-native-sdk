@@ -29,6 +29,9 @@
 		1B0E3DA91EBA210600C95354 /* CSNAdReportsBuilderTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B0E3DA81EBA210600C95354 /* CSNAdReportsBuilderTests.m */; };
 		1B2CCB131E79E0C800B6FBC2 /* CSNAdRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B2CCB111E79E0C800B6FBC2 /* CSNAdRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1B2CCB141E79E0C800B6FBC2 /* CSNAdRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B2CCB121E79E0C800B6FBC2 /* CSNAdRequest.m */; };
+		1B3D97671EF17FC700BD74F2 /* CSNImpressionDetector.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B3D97651EF17FC700BD74F2 /* CSNImpressionDetector.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1B3D97681EF17FC700BD74F2 /* CSNImpressionDetector.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B3D97661EF17FC700BD74F2 /* CSNImpressionDetector.m */; };
+		1B3D976A1EF18DC400BD74F2 /* CSNImpressionDetectorTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B3D97691EF18DC400BD74F2 /* CSNImpressionDetectorTest.m */; };
 		1B555FCF1E60A3F800FE1C08 /* CSNative.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B555FC51E60A3F800FE1C08 /* CSNative.framework */; };
 		1B555FD61E60A3F800FE1C08 /* CSNative.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B555FC81E60A3F800FE1C08 /* CSNative.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1B555FE11E60A60E00FE1C08 /* CSNClient.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B555FDF1E60A60E00FE1C08 /* CSNClient.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -44,7 +47,6 @@
 		1B5560571E648AC200FE1C08 /* CSNAdsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B5560551E648AC200FE1C08 /* CSNAdsController.m */; };
 		1B5560591E64989B00FE1C08 /* CSNAdsControllerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B5560581E64989B00FE1C08 /* CSNAdsControllerTest.m */; };
 		1B55605F1E65037B00FE1C08 /* CSNAd.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B55605D1E65037B00FE1C08 /* CSNAd.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		1B5560601E65037B00FE1C08 /* CSNAd.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B55605E1E65037B00FE1C08 /* CSNAd.m */; };
 		1B5560631E65FD2A00FE1C08 /* CSNComponentView.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B5560621E65FD2A00FE1C08 /* CSNComponentView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1B5560661E66053100FE1C08 /* CSNHeadlineView.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B5560641E66053100FE1C08 /* CSNHeadlineView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1B5560671E66053100FE1C08 /* CSNHeadlineView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B5560651E66053100FE1C08 /* CSNHeadlineView.m */; };
@@ -59,6 +61,7 @@
 		1BC79FB41E71EE92008D146A /* CSNVisibilityMonitor.h in Headers */ = {isa = PBXBuildFile; fileRef = 1BC79FB21E71EE92008D146A /* CSNVisibilityMonitor.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1BC79FB51E71EE92008D146A /* CSNVisibilityMonitor.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BC79FB31E71EE92008D146A /* CSNVisibilityMonitor.m */; };
 		1BC79FB71E73332C008D146A /* CSNVisibilityMonitorTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BC79FB61E73332C008D146A /* CSNVisibilityMonitorTest.m */; };
+		1BE6F4F61ED33353009F1B6D /* CSNAd.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B55605E1E65037B00FE1C08 /* CSNAd.m */; };
 		450CEE9BA1525442C8718883 /* Pods_CSNativeTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE17F149E54E79C0A0DD74A1 /* Pods_CSNativeTests.framework */; };
 		7F1E0B231E89B25F00498B76 /* CSNSecondaryActionView.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F1E0B211E89B25F00498B76 /* CSNSecondaryActionView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7F1E0B241E89B25F00498B76 /* CSNSecondaryActionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F1E0B221E89B25F00498B76 /* CSNSecondaryActionView.m */; };
@@ -101,6 +104,9 @@
 		1B2CCB111E79E0C800B6FBC2 /* CSNAdRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSNAdRequest.h; sourceTree = "<group>"; };
 		1B2CCB121E79E0C800B6FBC2 /* CSNAdRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSNAdRequest.m; sourceTree = "<group>"; };
 		1B2CCB2E1E7B020B00B6FBC2 /* universal.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = universal.sh; sourceTree = "<group>"; };
+		1B3D97651EF17FC700BD74F2 /* CSNImpressionDetector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSNImpressionDetector.h; sourceTree = "<group>"; };
+		1B3D97661EF17FC700BD74F2 /* CSNImpressionDetector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSNImpressionDetector.m; sourceTree = "<group>"; };
+		1B3D97691EF18DC400BD74F2 /* CSNImpressionDetectorTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSNImpressionDetectorTest.m; sourceTree = "<group>"; };
 		1B555FC51E60A3F800FE1C08 /* CSNative.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CSNative.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1B555FC81E60A3F800FE1C08 /* CSNative.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CSNative.h; sourceTree = "<group>"; };
 		1B555FC91E60A3F800FE1C08 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -237,6 +243,8 @@
 				1B5560751E6742E700FE1C08 /* CSNMockClient.m */,
 				1BC79FB21E71EE92008D146A /* CSNVisibilityMonitor.h */,
 				1BC79FB31E71EE92008D146A /* CSNVisibilityMonitor.m */,
+				1B3D97651EF17FC700BD74F2 /* CSNImpressionDetector.h */,
+				1B3D97661EF17FC700BD74F2 /* CSNImpressionDetector.m */,
 				1B2CCB111E79E0C800B6FBC2 /* CSNAdRequest.h */,
 				1B2CCB121E79E0C800B6FBC2 /* CSNAdRequest.m */,
 				7F26303C1E819A38001F36D6 /* CSNModalWindow.h */,
@@ -269,6 +277,7 @@
 				1BC79FB61E73332C008D146A /* CSNVisibilityMonitorTest.m */,
 				7F26306A1E81CC01001F36D6 /* CSNHeroViewTests.m */,
 				1B0E3D9E1EB11CD400C95354 /* CSNTransitRouteTests.m */,
+				1B3D97691EF18DC400BD74F2 /* CSNImpressionDetectorTest.m */,
 			);
 			path = CSNativeTests;
 			sourceTree = "<group>";
@@ -301,6 +310,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1B0E3DA61EB3CA8000C95354 /* CSNAdReportsBuilder.h in Headers */,
+				1B3D97671EF17FC700BD74F2 /* CSNImpressionDetector.h in Headers */,
 				1B5560701E67423F00FE1C08 /* CSNTransit.h in Headers */,
 				7F2630AF1E83045A001F36D6 /* CSNAdvertiserView.h in Headers */,
 				7F2630C91E831B95001F36D6 /* CSNTransitSubtitleView.h in Headers */,
@@ -536,12 +546,13 @@
 				1B555FFA1E61134500FE1C08 /* CSNLogoView.m in Sources */,
 				7F26304B1E81B2A6001F36D6 /* CSNHeroView.m in Sources */,
 				1B555FE61E60A6B500FE1C08 /* CSNHttpClient.m in Sources */,
+				1B3D97681EF17FC700BD74F2 /* CSNImpressionDetector.m in Sources */,
 				1B5560671E66053100FE1C08 /* CSNHeadlineView.m in Sources */,
 				7F21139E1E843DF30096DA45 /* CSNActionView.m in Sources */,
+				1BE6F4F61ED33353009F1B6D /* CSNAd.m in Sources */,
 				7F2630B01E83045A001F36D6 /* CSNAdvertiserView.m in Sources */,
 				7F26309D1E82F667001F36D6 /* CSNBodyView.m in Sources */,
 				7F2630C01E8317D8001F36D6 /* CSNTransitTitleView.m in Sources */,
-				1B5560601E65037B00FE1C08 /* CSNAd.m in Sources */,
 				1B5560711E67423F00FE1C08 /* CSNTransit.m in Sources */,
 				1B5560571E648AC200FE1C08 /* CSNAdsController.m in Sources */,
 				1B0E3D9D1EB0DD3B00C95354 /* CSNOptionalAd.m in Sources */,
@@ -560,6 +571,7 @@
 			files = (
 				1B5560591E64989B00FE1C08 /* CSNAdsControllerTest.m in Sources */,
 				1B5560691E6611DD00FE1C08 /* CSNAdTest.m in Sources */,
+				1B3D976A1EF18DC400BD74F2 /* CSNImpressionDetectorTest.m in Sources */,
 				1BC79FB71E73332C008D146A /* CSNVisibilityMonitorTest.m in Sources */,
 				1B0E3DA91EBA210600C95354 /* CSNAdReportsBuilderTests.m in Sources */,
 				1B555FF01E60B0B500FE1C08 /* CSNHttpClientTest.m in Sources */,

@@ -1892,6 +1892,49 @@ typedef struct CSNPComponentReport__storage_ {
 
 @end
 
+#pragma mark - CSNPAdImpression
+
+@implementation CSNPAdImpression
+
+@dynamic deviceTime;
+
+typedef struct CSNPAdImpression__storage_ {
+  uint32_t _has_storage_[1];
+  uint64_t deviceTime;
+} CSNPAdImpression__storage_;
+
+// This method is threadsafe because it is initially called
+// in +initialize for each subclass.
++ (GPBDescriptor *)descriptor {
+  static GPBDescriptor *descriptor = nil;
+  if (!descriptor) {
+    static GPBMessageFieldDescription fields[] = {
+      {
+        .name = "deviceTime",
+        .dataTypeSpecific.className = NULL,
+        .number = CSNPAdImpression_FieldNumber_DeviceTime,
+        .hasIndex = 0,
+        .offset = (uint32_t)offsetof(CSNPAdImpression__storage_, deviceTime),
+        .flags = GPBFieldOptional,
+        .dataType = GPBDataTypeUInt64,
+      },
+    };
+    GPBDescriptor *localDescriptor =
+        [GPBDescriptor allocDescriptorForClass:[CSNPAdImpression class]
+                                     rootClass:[CSNPCsnmessagesRoot class]
+                                          file:CSNPCsnmessagesRoot_FileDescriptor()
+                                        fields:fields
+                                    fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
+                                   storageSize:sizeof(CSNPAdImpression__storage_)
+                                         flags:GPBDescriptorInitializationFlag_None];
+    NSAssert(descriptor == nil, @"Startup recursed!");
+    descriptor = localDescriptor;
+  }
+  return descriptor;
+}
+
+@end
+
 #pragma mark - CSNPAdReport
 
 @implementation CSNPAdReport
@@ -1899,10 +1942,12 @@ typedef struct CSNPComponentReport__storage_ {
 @dynamic requestId;
 @dynamic adId;
 @dynamic componentsArray, componentsArray_Count;
+@dynamic impressionsArray, impressionsArray_Count;
 
 typedef struct CSNPAdReport__storage_ {
   uint32_t _has_storage_[1];
   NSMutableArray *componentsArray;
+  NSMutableArray *impressionsArray;
   uint64_t requestId;
   uint64_t adId;
 } CSNPAdReport__storage_;
@@ -1937,6 +1982,15 @@ typedef struct CSNPAdReport__storage_ {
         .number = CSNPAdReport_FieldNumber_ComponentsArray,
         .hasIndex = GPBNoHasBit,
         .offset = (uint32_t)offsetof(CSNPAdReport__storage_, componentsArray),
+        .flags = GPBFieldRepeated,
+        .dataType = GPBDataTypeMessage,
+      },
+      {
+        .name = "impressionsArray",
+        .dataTypeSpecific.className = GPBStringifySymbol(CSNPAdImpression),
+        .number = CSNPAdReport_FieldNumber_ImpressionsArray,
+        .hasIndex = GPBNoHasBit,
+        .offset = (uint32_t)offsetof(CSNPAdReport__storage_, impressionsArray),
         .flags = GPBFieldRepeated,
         .dataType = GPBDataTypeMessage,
       },
