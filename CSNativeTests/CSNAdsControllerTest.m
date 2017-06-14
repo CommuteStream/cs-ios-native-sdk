@@ -24,6 +24,11 @@
     [super tearDown];
 }
 
+- (void) testInitWithAdUnit {
+    CSNAdsController *controller = [[CSNAdsController alloc] initWithAdUnit:@"2562ccec-0788-44c9-a17d-13e0a114ff99"];
+    XCTAssert(controller != nil);
+}
+
 - (void)testFindViews {
     UIView *view  = [[UIView alloc] init];
     UIView *subview0 = [[UIView alloc] init];

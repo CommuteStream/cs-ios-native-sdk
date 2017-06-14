@@ -1,4 +1,5 @@
 #import "CSNAdReportsBuilder.h"
+#import "CSNImpressionDetector.h"
 
 @interface CSNAdReportsBuilder ()
 @property NSData *adUnit;
@@ -7,6 +8,7 @@
 @property NSString *timeZone;
 @property CSNPAdReports *adReports;
 @property uint64_t epoch;
+@property CSNImpressionDetector *impressionDetector;
 @end
 
 @implementation CSNAdReportsBuilder
@@ -18,18 +20,26 @@
     _timeZone = timeZone;
     _epoch = [self currentTime];
     _adReports = [self createAdReports];
+    _impressionDetector = [[CSNImpressionDetector alloc] init];
     return self;
 }
 
 - (void) recordInteraction:(uint64_t)requestID adID:(uint64_t)adID componentID:(uint64_t)componentID interactionKind:(int32_t)interactionKind {
     CSNPAdReport *adReport = [self getAdReport:_adReports requestID:requestID adID:adID];
+    if([_impressionDetector recordInteraction:requestID adID:adID componentID:componentID interactionKind:interactionKind]) {
+        [self addImpression:adReport];
+    }
     CSNPComponentReport *compReport = [self getComponentReport:adReport componentID:componentID];
     [self addComponentInteraction:compReport interactionKind:interactionKind];
 
 }
 
 - (void) recordVisibility:(uint64_t)requestID adID:(uint64_t)adID componentID:(uint64_t)componentID viewVisibility:(double)viewVisiblity deviceVisibility:(double)deviceVisibility {
+
     CSNPAdReport *adReport = [self getAdReport:_adReports requestID:requestID adID:adID];
+    if([_impressionDetector recordVisibility:requestID adID:adID componentID:componentID viewVisibility:viewVisiblity deviceVisibility:deviceVisibility]) {
+        [self addImpression:adReport];
+    }
     CSNPComponentReport *compReport = [self getComponentReport:adReport componentID:componentID];
     [self addComponentVisibility:compReport viewVisibility:viewVisiblity deviceVisibility:deviceVisibility];
 }
@@ -53,6 +63,12 @@
     [adReports setTimezone:_timeZone];
     [adReports setDeviceTime:[self currentTime]];
     return adReports;
+}
+
+- (void) addImpression:(CSNPAdReport *) adReport {
+    CSNPAdImpression *adImpression = [[CSNPAdImpression alloc] init];
+    [adImpression setDeviceTime:[self currentTime]];
+    [[adReport impressionsArray] addObject:adImpression];
 }
 
 - (void) addComponentInteraction:(CSNPComponentReport *)compReport interactionKind:(int32_t)interactionKind {

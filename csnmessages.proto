@@ -181,10 +181,15 @@ message ComponentReport {
   repeated ComponentInteraction interactions = 6;
 }
 
+message AdImpression {
+  uint64 device_time = 1;
+}
+
 message AdReport {
   uint64 request_id = 1;
   uint64 ad_id = 2;
   repeated ComponentReport components = 3;
+  repeated AdImpression impressions = 4;
 }
   
 message AdReports {
