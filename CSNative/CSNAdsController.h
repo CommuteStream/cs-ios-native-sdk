@@ -5,7 +5,7 @@
 
 @interface CSNAdsController : NSObject
 
-- (instancetype) initWithAdUnit:(NSData *)adUnit;
+- (instancetype) initWithAdUnit:(NSString *)adUnit;
 
 - (void) fetchAds:(NSArray<CSNAdRequest *> *)adRequests completed:(void (^)(NSArray<CSNOptionalAd *> *))completed;
 
