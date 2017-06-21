@@ -94,6 +94,7 @@
 - (instancetype) initWithMessage:(CSNPLogoComponent *)message {
     _componentID = [message componentId];
     _image = [UIImage imageWithData:[message image]];
+    NSLog(@"initialized logo with image @%", _image.description);
     return self;
 }
 
@@ -153,6 +154,7 @@
         
     }
     _actions = actions;
+    NSLog(@"initialized ad %@", [self description]);
     return self;
 }
 

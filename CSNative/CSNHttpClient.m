@@ -9,8 +9,8 @@
 - (instancetype) initWithHost:(NSString *)host {
     _host = host;
     NSURLSessionConfiguration *config = [NSURLSessionConfiguration ephemeralSessionConfiguration];
-    [config setTimeoutIntervalForRequest:1];
-    [config setTimeoutIntervalForResource:1];
+    [config setTimeoutIntervalForRequest:20];
+    [config setTimeoutIntervalForResource:20];
     _session = [NSURLSession sessionWithConfiguration:config];
     return self;
 }
@@ -18,10 +18,11 @@
 - (void) getAds:(CSNPAdRequests *)adRequests success:(void (^)(CSNPAdResponses *))success failure:(void (^)(NSError *))failure {
     NSURL *url = [[NSURL alloc] initWithString:[NSString stringWithFormat:@"https://%@/v2/native_ads", _host]];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
+    [request setHTTPMethod:@"POST"];
     [request setHTTPBody:[adRequests data]];
-    [[request allHTTPHeaderFields] setValue:@"v1" forKey:@"X-CS-Protocol"];
-    [[request allHTTPHeaderFields] setValue:@"application/x-protobuf" forKey:@"Content-Type"];
-    [[request allHTTPHeaderFields] setValue:@"application/x-protobuf" forKey:@"Accepts"];
+    [request setValue:@"v1" forHTTPHeaderField:@"X-CS-Protocol"];
+    [request setValue:@"application/x-protobuf" forHTTPHeaderField:@"Content-Type"];
+    [request setValue:@"application/x-protobuf" forHTTPHeaderField:@"Accepts"];
     NSURLSessionDataTask *task = [_session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         if(error != NULL) {
             return failure(error);
@@ -48,10 +49,12 @@
 - (void) sendAdReports:(CSNPAdReport *)adReports success:(void (^)())success failure:(void (^)(NSError *))failure {
     NSURL *url = [[NSURL alloc] initWithString:[NSString stringWithFormat:@"https://%@/v2/native_reports", _host]];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
+    [request setHTTPMethod:@"POST"];
     [request setHTTPBody:[adReports data]];
-    [[request allHTTPHeaderFields] setValue:@"v1" forKey:@"X-CS-Protocol"];
-    [[request allHTTPHeaderFields] setValue:@"application/x-protobuf" forKey:@"Content-Type"];
-    [[request allHTTPHeaderFields] setValue:@"application/x-protobuf" forKey:@"Accepts"];
+    [request setValue:@"application/x-protobuf" forHTTPHeaderField:@"Content-Type"];
+    [request setValue:@"v1" forHTTPHeaderField:@"X-CS-Protocol"];
+    [request setValue:@"application/x-protobuf" forHTTPHeaderField:@"Content-Type"];
+    [request setValue:@"application/x-protobuf" forHTTPHeaderField:@"Accepts"];
     NSURLSessionDataTask *task = [_session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         if(error != NULL) {
             return failure(error);
