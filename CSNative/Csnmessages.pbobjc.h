@@ -49,8 +49,6 @@ CF_EXTERN_C_BEGIN
 @class CSNPTransitAgency;
 @class CSNPTransitRoute;
 @class CSNPTransitStop;
-@class CSNPTransitSubtitleComponent;
-@class CSNPTransitTitleComponent;
 @class CSNPViewComponent;
 
 NS_ASSUME_NONNULL_BEGIN
@@ -303,36 +301,6 @@ int32_t CSNPActionComponent_Kind_RawValue(CSNPActionComponent *message);
  **/
 void SetCSNPActionComponent_Kind_RawValue(CSNPActionComponent *message, int32_t value);
 
-#pragma mark - CSNPTransitTitleComponent
-
-typedef GPB_ENUM(CSNPTransitTitleComponent_FieldNumber) {
-  CSNPTransitTitleComponent_FieldNumber_ComponentId = 1,
-  CSNPTransitTitleComponent_FieldNumber_Title = 2,
-};
-
-@interface CSNPTransitTitleComponent : GPBMessage
-
-@property(nonatomic, readwrite) uint64_t componentId;
-
-@property(nonatomic, readwrite, copy, null_resettable) NSString *title;
-
-@end
-
-#pragma mark - CSNPTransitSubtitleComponent
-
-typedef GPB_ENUM(CSNPTransitSubtitleComponent_FieldNumber) {
-  CSNPTransitSubtitleComponent_FieldNumber_ComponentId = 1,
-  CSNPTransitSubtitleComponent_FieldNumber_Subtitle = 2,
-};
-
-@interface CSNPTransitSubtitleComponent : GPBMessage
-
-@property(nonatomic, readwrite) uint64_t componentId;
-
-@property(nonatomic, readwrite, copy, null_resettable) NSString *subtitle;
-
-@end
-
 #pragma mark - CSNPLogoComponent
 
 typedef GPB_ENUM(CSNPLogoComponent_FieldNumber) {
@@ -434,11 +402,17 @@ typedef GPB_ENUM(CSNPColors_FieldNumber) {
 
 typedef GPB_ENUM(CSNPSecondaryActionComponent_FieldNumber) {
   CSNPSecondaryActionComponent_FieldNumber_ComponentId = 1,
+  CSNPSecondaryActionComponent_FieldNumber_Title = 2,
+  CSNPSecondaryActionComponent_FieldNumber_Subtitle = 3,
 };
 
 @interface CSNPSecondaryActionComponent : GPBMessage
 
 @property(nonatomic, readwrite) uint64_t componentId;
+
+@property(nonatomic, readwrite, copy, null_resettable) NSString *title;
+
+@property(nonatomic, readwrite, copy, null_resettable) NSString *subtitle;
 
 @end
 
@@ -459,18 +433,17 @@ typedef GPB_ENUM(CSNPViewComponent_FieldNumber) {
 typedef GPB_ENUM(CSNPNativeAd_FieldNumber) {
   CSNPNativeAd_FieldNumber_RequestId = 1,
   CSNPNativeAd_FieldNumber_AdId = 2,
-  CSNPNativeAd_FieldNumber_Colors = 3,
-  CSNPNativeAd_FieldNumber_ActionsArray = 4,
-  CSNPNativeAd_FieldNumber_View = 5,
+  CSNPNativeAd_FieldNumber_VersionId = 3,
+  CSNPNativeAd_FieldNumber_Colors = 4,
+  CSNPNativeAd_FieldNumber_ActionsArray = 5,
+  CSNPNativeAd_FieldNumber_View = 6,
   CSNPNativeAd_FieldNumber_SecondaryActionScreen = 7,
-  CSNPNativeAd_FieldNumber_TransitTitle = 8,
-  CSNPNativeAd_FieldNumber_TransitSubtitle = 9,
-  CSNPNativeAd_FieldNumber_Logo = 10,
-  CSNPNativeAd_FieldNumber_Headline = 11,
-  CSNPNativeAd_FieldNumber_Body = 12,
-  CSNPNativeAd_FieldNumber_Advertiser = 13,
-  CSNPNativeAd_FieldNumber_Location = 14,
-  CSNPNativeAd_FieldNumber_Hero = 15,
+  CSNPNativeAd_FieldNumber_Logo = 8,
+  CSNPNativeAd_FieldNumber_Headline = 9,
+  CSNPNativeAd_FieldNumber_Body = 10,
+  CSNPNativeAd_FieldNumber_Advertiser = 11,
+  CSNPNativeAd_FieldNumber_Location = 12,
+  CSNPNativeAd_FieldNumber_Hero = 13,
 };
 
 @interface CSNPNativeAd : GPBMessage
@@ -478,6 +451,8 @@ typedef GPB_ENUM(CSNPNativeAd_FieldNumber) {
 @property(nonatomic, readwrite) uint64_t requestId;
 
 @property(nonatomic, readwrite) uint64_t adId;
+
+@property(nonatomic, readwrite) uint64_t versionId;
 
 @property(nonatomic, readwrite, strong, null_resettable) CSNPColors *colors;
 /** Test to see if @c colors has been set. */
@@ -494,14 +469,6 @@ typedef GPB_ENUM(CSNPNativeAd_FieldNumber) {
 @property(nonatomic, readwrite, strong, null_resettable) CSNPSecondaryActionComponent *secondaryActionScreen;
 /** Test to see if @c secondaryActionScreen has been set. */
 @property(nonatomic, readwrite) BOOL hasSecondaryActionScreen;
-
-@property(nonatomic, readwrite, strong, null_resettable) CSNPTransitTitleComponent *transitTitle;
-/** Test to see if @c transitTitle has been set. */
-@property(nonatomic, readwrite) BOOL hasTransitTitle;
-
-@property(nonatomic, readwrite, strong, null_resettable) CSNPTransitSubtitleComponent *transitSubtitle;
-/** Test to see if @c transitSubtitle has been set. */
-@property(nonatomic, readwrite) BOOL hasTransitSubtitle;
 
 @property(nonatomic, readwrite, strong, null_resettable) CSNPLogoComponent *logo;
 /** Test to see if @c logo has been set. */
@@ -744,8 +711,9 @@ typedef GPB_ENUM(CSNPAdImpression_FieldNumber) {
 typedef GPB_ENUM(CSNPAdReport_FieldNumber) {
   CSNPAdReport_FieldNumber_RequestId = 1,
   CSNPAdReport_FieldNumber_AdId = 2,
-  CSNPAdReport_FieldNumber_ComponentsArray = 3,
-  CSNPAdReport_FieldNumber_ImpressionsArray = 4,
+  CSNPAdReport_FieldNumber_VersionId = 3,
+  CSNPAdReport_FieldNumber_ComponentsArray = 4,
+  CSNPAdReport_FieldNumber_ImpressionsArray = 5,
 };
 
 @interface CSNPAdReport : GPBMessage
@@ -753,6 +721,8 @@ typedef GPB_ENUM(CSNPAdReport_FieldNumber) {
 @property(nonatomic, readwrite) uint64_t requestId;
 
 @property(nonatomic, readwrite) uint64_t adId;
+
+@property(nonatomic, readwrite) uint64_t versionId;
 
 @property(nonatomic, readwrite, strong, null_resettable) NSMutableArray<CSNPComponentReport*> *componentsArray;
 /** The number of items in @c componentsArray without causing the array to be created. */

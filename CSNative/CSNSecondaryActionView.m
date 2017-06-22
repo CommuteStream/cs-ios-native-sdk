@@ -1,17 +1,9 @@
-//
-//  CSNSecondaryActionView.m
-//  CSNative
-//
-//  Created by David Rogers on 3/27/17.
-//  Copyright © 2017 CommuteStream. All rights reserved.
-//
-
 #import "CSNSecondaryActionView.h"
 
 @implementation CSNSecondaryActionView{
     CSNHeroView *heroImageView;
-    CSNTransitTitleView *transitHeaderLabel;
-    CSNTransitSubtitleView *transitSubheaderLabel;
+    UILabel *secondaryTitle;
+    UILabel *secondarySubtitle;
     
     CSNHeadlineView *headlineLabel;
     CSNBodyView *bodyLabel;
@@ -61,23 +53,19 @@
         
         CGFloat yPosition = 5.0;
         
-        if(![[[nativeAd transitTitle] title] isEqualToString:@""]){
-            NSLog(@"Reached");
-            NSLog(@"%@", [[nativeAd transitTitle] title]);
-            transitHeaderLabel = [[CSNTransitTitleView alloc] initWithFrame:CGRectMake(9.0, yPosition + 5.0, self.frame.size.width - 50.0, 16.0)];
-            [transitHeaderLabel setFont:[UIFont boldSystemFontOfSize:14.0]];
-            [transitHeaderLabel setAd:nativeAd];
-            yPosition = transitHeaderLabel.frame.origin.y + transitHeaderLabel.frame.size.height;
+        if(![[[nativeAd secondary] title] isEqualToString:@""]){
+            secondaryTitle = [[UILabel alloc] initWithFrame:CGRectMake(9.0, yPosition + 5.0, self.frame.size.width - 50.0, 16.0)];
+            [secondaryTitle setFont:[UIFont boldSystemFontOfSize:14.0]];
+            [secondaryTitle setText:[[nativeAd secondary] title]];
+            yPosition = secondaryTitle.frame.origin.y + secondaryTitle.frame.size.height;
         }
         
-        if(![[[nativeAd transitSubtitle] subtitle] isEqualToString:@""]){
-            transitSubheaderLabel = [[CSNTransitSubtitleView alloc] initWithFrame:CGRectMake(9.0, yPosition + 5.0, self.frame.size.width - 50.0, 14.0)];
-            [transitSubheaderLabel setFont:[UIFont systemFontOfSize:12.0]];
-            [transitSubheaderLabel setTextColor:[UIColor darkGrayColor]];
-            [transitSubheaderLabel setAd:nativeAd];
-            
-            yPosition = transitSubheaderLabel.frame.origin.y + transitSubheaderLabel.frame.size.height;
-
+        if(![[[nativeAd secondary] subtitle] isEqualToString:@""]){
+            secondarySubtitle = [[UILabel alloc] initWithFrame:CGRectMake(9.0, yPosition + 5.0, self.frame.size.width - 50.0, 14.0)];
+            [secondarySubtitle setFont:[UIFont systemFontOfSize:12.0]];
+            [secondarySubtitle setTextColor:[UIColor darkGrayColor]];
+            [secondarySubtitle setText:[[nativeAd secondary] subtitle]];
+            yPosition = secondarySubtitle.frame.origin.y + secondarySubtitle.frame.size.height;
         }
         
         CGFloat heroWidth = self.frame.size.width - 10;
@@ -119,8 +107,8 @@
         
         
         
-        [self addSubview:transitHeaderLabel];
-        [self addSubview:transitSubheaderLabel];
+        [self addSubview:secondaryTitle];
+        [self addSubview:secondarySubtitle];
         [self addSubview:heroImageView];
         
         [adInfoView addSubview:adLogoImage];
@@ -208,7 +196,7 @@
 
 - (void) setAd:(CSNAd *)ad {
     _ad = ad;
-    _componentID = [[ad transitTitle] componentID];
+    _componentID = [[ad secondary] componentID];
 }
 
 @end

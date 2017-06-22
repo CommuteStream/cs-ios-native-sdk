@@ -61,6 +61,7 @@ CSNModalWindow *modalWindowView;
 }
 
 - (instancetype) initWithClient:(id<CSNClient>)client adUnit:(NSData *)adUnit {
+    _adUnit = adUnit;
     // get device id
     NSUUID *vendorID = [[UIDevice currentDevice] identifierForVendor];
     uuid_t vendorUUID;

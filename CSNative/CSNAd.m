@@ -38,28 +38,6 @@
 
 @end
 
-
-@implementation CSNTransitTitleComponent
-
-- (instancetype) initWithMessage:(CSNPTransitTitleComponent *)message {
-    _componentID = [message componentId];
-    _title = [message title];
-    return self;
-}
-
-@end
-
-@implementation CSNTransitSubtitleComponent
-
-- (instancetype) initWithMessage:(CSNPTransitSubtitleComponent *)message {
-    _componentID = [message componentId];
-    _subtitle = [message subtitle];
-    return self;
-}
-
-@end
-
-
 @implementation CSNBodyComponent
 
 - (instancetype) initWithMessage:(CSNPBodyComponent *)message {
@@ -84,6 +62,8 @@
 
 - (instancetype) initWithMessage:(CSNPSecondaryActionComponent *)message {
     _componentID = [message componentId];
+    _title = [message title];
+    _subtitle = [message subtitle];
     return self;
 }
 
@@ -94,7 +74,6 @@
 - (instancetype) initWithMessage:(CSNPLogoComponent *)message {
     _componentID = [message componentId];
     _image = [UIImage imageWithData:[message image]];
-    NSLog(@"initialized logo with image @%", _image.description);
     return self;
 }
 
@@ -112,7 +91,6 @@
         //TODO: Decode blob to nsstring
         _html = @"";
     }
-    
     return self;
 }
 
@@ -140,12 +118,11 @@
     _requestID = [message requestId];
     _view = [[CSNViewComponent alloc] initWithMessage:[message view]];
     _headline = [[CSNHeadlineComponent alloc] initWithMessage:[message headline]];
-    _transitTitle = [[CSNTransitTitleComponent alloc] initWithMessage:[message transitTitle]];
-    _transitSubtitle = [[CSNTransitSubtitleComponent alloc] initWithMessage:[message transitSubtitle]];
     _body = [[CSNBodyComponent alloc] initWithMessage:[message body]];
     _advertiser = [[CSNAdvertiserComponent alloc] initWithMessage:[message advertiser]];
     _logo = [[CSNLogoComponent alloc] initWithMessage:[message logo]];
     _hero = [[CSNHeroComponent alloc] initWithMessage:[message hero]];
+    _secondary = [[CSNSecondaryActionComponent alloc] initWithMessage:[message secondaryActionScreen]];
     
     NSMutableArray *actions = [[NSMutableArray alloc] initWithCapacity:[message actionsArray_Count]];
     for (id action in [message actionsArray]){

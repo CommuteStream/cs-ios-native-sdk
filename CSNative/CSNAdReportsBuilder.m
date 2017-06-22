@@ -56,6 +56,7 @@
 }
 
 - (CSNPAdReports *) createAdReports {
+    NSLog(@"ad unit uuid for reports: %@", _adUnit);
     CSNPAdReports *adReports = [[CSNPAdReports alloc] init];
     [adReports setAdUnit:_adUnit];
     [adReports setDeviceId:_deviceID];

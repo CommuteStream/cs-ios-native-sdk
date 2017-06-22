@@ -57,15 +57,6 @@ message ActionComponent {
 }
 
 
-message TransitTitleComponent {
-  uint64 component_id = 1;
-  string title = 2;
-}
-
-message TransitSubtitleComponent {
-  uint64 component_id = 1;
-  string subtitle = 2;
-}
 
 message LogoComponent {
   uint64 component_id = 1;
@@ -100,6 +91,8 @@ message Colors {
 
 message SecondaryActionComponent {
   uint64 component_id = 1;
+  string title = 2;
+  string subtitle = 3;
 }
 
 message ViewComponent {
@@ -109,18 +102,17 @@ message ViewComponent {
 message NativeAd {
   uint64 request_id = 1;
   uint64 ad_id = 2;
-  Colors colors = 3;
-  repeated ActionComponent actions = 4;
-  ViewComponent view = 5;
+  uint64 version_id = 3;
+  Colors colors = 4;
+  repeated ActionComponent actions = 5;
+  ViewComponent view = 6;
   SecondaryActionComponent secondary_action_screen = 7;
-  TransitTitleComponent transit_title = 8;
-  TransitSubtitleComponent transit_subtitle = 9;
-  LogoComponent logo = 10;
-  HeadlineComponent headline = 11;
-  BodyComponent body = 12;
-  AdvertiserComponent advertiser = 13;
-  LocationComponent location = 14;
-  HeroComponent hero = 15;
+  LogoComponent logo = 8;
+  HeadlineComponent headline = 9;
+  BodyComponent body = 10;
+  AdvertiserComponent advertiser = 11;
+  LocationComponent location = 12;
+  HeroComponent hero = 13;
 }
 
 // AdRequest contains a hash_id which is the hash everything but the num_of_ads 
@@ -188,8 +180,9 @@ message AdImpression {
 message AdReport {
   uint64 request_id = 1;
   uint64 ad_id = 2;
-  repeated ComponentReport components = 3;
-  repeated AdImpression impressions = 4;
+  uint64 version_id = 3;
+  repeated ComponentReport components = 4;
+  repeated AdImpression impressions = 5;
 }
   
 message AdReports {

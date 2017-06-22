@@ -23,18 +23,6 @@
 - (instancetype _Nonnull) initWithMessage:(CSNPHeadlineComponent * _Nonnull)message;
 @end
 
-@interface CSNTransitTitleComponent : NSObject <CSNAdComponent>
-@property (readonly) uint64_t componentID;
-@property (copy, readonly, nonnull) NSString *title;
-- (instancetype _Nonnull) initWithMessage:(CSNPTransitTitleComponent * _Nonnull)message;
-@end;
-
-@interface CSNTransitSubtitleComponent : NSObject <CSNAdComponent>
-@property (readonly) uint64_t componentID;
-@property (copy, readonly, nonnull) NSString *subtitle;
-- (instancetype _Nonnull) initWithMessage:(CSNPTransitSubtitleComponent * _Nonnull)message;
-@end;
-
 @interface CSNBodyComponent : NSObject <CSNAdComponent>
 @property (readonly) uint64_t componentID;
 @property (copy, readonly, nonnull) NSString *body;
@@ -49,6 +37,8 @@
 
 @interface CSNSecondaryActionComponent : NSObject <CSNAdComponent>
 @property (readonly) uint64_t componentID;
+@property (copy, readonly, nonnull) NSString *title;
+@property (copy, readonly, nonnull) NSString *subtitle;
 - (instancetype _Nonnull) initWithMessage:(CSNPSecondaryActionComponent * _Nonnull)message;
 @end;
 
@@ -90,13 +80,12 @@
 @property ( readonly) uint64_t adID;
 @property (copy, readonly, nonnull) CSNViewComponent *view;
 @property (copy, readonly, nonnull) CSNHeadlineComponent *headline;
-@property (copy, readonly, nonnull) CSNTransitTitleComponent *transitTitle;
-@property (copy, readonly, nonnull) CSNTransitSubtitleComponent *transitSubtitle;
 @property (copy, readonly, nonnull) CSNBodyComponent *body;
 @property (copy, readonly, nonnull) CSNAdvertiserComponent *advertiser;
 @property (copy, readonly, nonnull) CSNLogoComponent *logo;
 @property (copy, readonly, nullable) CSNLocationComponent *location;
 @property (copy, readonly, nonnull) CSNHeroComponent *hero;
+@property (copy, readonly, nonnull) CSNSecondaryActionComponent *secondary;
 @property (copy, readonly, nonnull) NSArray<CSNActionComponent *> *actions;
 - (instancetype _Nonnull) initWithMessage:(CSNPNativeAd * _Nonnull)message;
 @end

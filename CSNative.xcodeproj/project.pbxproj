@@ -77,10 +77,6 @@
 		7F26309D1E82F667001F36D6 /* CSNBodyView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F26309B1E82F667001F36D6 /* CSNBodyView.m */; };
 		7F2630AF1E83045A001F36D6 /* CSNAdvertiserView.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F2630AD1E83045A001F36D6 /* CSNAdvertiserView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7F2630B01E83045A001F36D6 /* CSNAdvertiserView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F2630AE1E83045A001F36D6 /* CSNAdvertiserView.m */; };
-		7F2630BF1E8317D8001F36D6 /* CSNTransitTitleView.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F2630BD1E8317D8001F36D6 /* CSNTransitTitleView.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7F2630C01E8317D8001F36D6 /* CSNTransitTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F2630BE1E8317D8001F36D6 /* CSNTransitTitleView.m */; };
-		7F2630C91E831B95001F36D6 /* CSNTransitSubtitleView.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F2630C71E831B95001F36D6 /* CSNTransitSubtitleView.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7F2630CA1E831B95001F36D6 /* CSNTransitSubtitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F2630C81E831B95001F36D6 /* CSNTransitSubtitleView.m */; };
 		BFD4D671F72DB355E089E1E2 /* Pods_CSNative.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D23200ADBD9A081E804130FF /* Pods_CSNative.framework */; };
 /* End PBXBuildFile section */
 
@@ -156,10 +152,6 @@
 		7F26309B1E82F667001F36D6 /* CSNBodyView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSNBodyView.m; sourceTree = "<group>"; };
 		7F2630AD1E83045A001F36D6 /* CSNAdvertiserView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSNAdvertiserView.h; sourceTree = "<group>"; };
 		7F2630AE1E83045A001F36D6 /* CSNAdvertiserView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSNAdvertiserView.m; sourceTree = "<group>"; };
-		7F2630BD1E8317D8001F36D6 /* CSNTransitTitleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSNTransitTitleView.h; sourceTree = "<group>"; };
-		7F2630BE1E8317D8001F36D6 /* CSNTransitTitleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSNTransitTitleView.m; sourceTree = "<group>"; };
-		7F2630C71E831B95001F36D6 /* CSNTransitSubtitleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSNTransitSubtitleView.h; sourceTree = "<group>"; };
-		7F2630C81E831B95001F36D6 /* CSNTransitSubtitleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSNTransitSubtitleView.m; sourceTree = "<group>"; };
 		8850AC2CB18382AAF0651534 /* Pods-CSNativeTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CSNativeTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CSNativeTests/Pods-CSNativeTests.debug.xcconfig"; sourceTree = "<group>"; };
 		9597F9B0B621D1ACFA1B1820 /* Pods-CSNative.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CSNative.release.xcconfig"; path = "Pods/Target Support Files/Pods-CSNative/Pods-CSNative.release.xcconfig"; sourceTree = "<group>"; };
 		D23200ADBD9A081E804130FF /* Pods_CSNative.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CSNative.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -227,10 +219,6 @@
 				1B55605D1E65037B00FE1C08 /* CSNAd.h */,
 				1B55605E1E65037B00FE1C08 /* CSNAd.m */,
 				1B5560621E65FD2A00FE1C08 /* CSNComponentView.h */,
-				7F2630BD1E8317D8001F36D6 /* CSNTransitTitleView.h */,
-				7F2630BE1E8317D8001F36D6 /* CSNTransitTitleView.m */,
-				7F2630C71E831B95001F36D6 /* CSNTransitSubtitleView.h */,
-				7F2630C81E831B95001F36D6 /* CSNTransitSubtitleView.m */,
 				1B5560641E66053100FE1C08 /* CSNHeadlineView.h */,
 				1B5560651E66053100FE1C08 /* CSNHeadlineView.m */,
 				7F26309A1E82F667001F36D6 /* CSNBodyView.h */,
@@ -313,8 +301,6 @@
 				1B3D97671EF17FC700BD74F2 /* CSNImpressionDetector.h in Headers */,
 				1B5560701E67423F00FE1C08 /* CSNTransit.h in Headers */,
 				7F2630AF1E83045A001F36D6 /* CSNAdvertiserView.h in Headers */,
-				7F2630C91E831B95001F36D6 /* CSNTransitSubtitleView.h in Headers */,
-				7F2630BF1E8317D8001F36D6 /* CSNTransitTitleView.h in Headers */,
 				1B5560761E6742E700FE1C08 /* CSNMockClient.h in Headers */,
 				7F1E0B231E89B25F00498B76 /* CSNSecondaryActionView.h in Headers */,
 				1B555FF91E61134500FE1C08 /* CSNLogoView.h in Headers */,
@@ -541,7 +527,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7F2630CA1E831B95001F36D6 /* CSNTransitSubtitleView.m in Sources */,
 				7F1E0B241E89B25F00498B76 /* CSNSecondaryActionView.m in Sources */,
 				1B555FFA1E61134500FE1C08 /* CSNLogoView.m in Sources */,
 				7F26304B1E81B2A6001F36D6 /* CSNHeroView.m in Sources */,
@@ -552,7 +537,6 @@
 				1BE6F4F61ED33353009F1B6D /* CSNAd.m in Sources */,
 				7F2630B01E83045A001F36D6 /* CSNAdvertiserView.m in Sources */,
 				7F26309D1E82F667001F36D6 /* CSNBodyView.m in Sources */,
-				7F2630C01E8317D8001F36D6 /* CSNTransitTitleView.m in Sources */,
 				1B5560711E67423F00FE1C08 /* CSNTransit.m in Sources */,
 				1B5560571E648AC200FE1C08 /* CSNAdsController.m in Sources */,
 				1B0E3D9D1EB0DD3B00C95354 /* CSNOptionalAd.m in Sources */,

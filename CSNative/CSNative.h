@@ -12,8 +12,6 @@ FOUNDATION_EXPORT const unsigned char CSNativeVersionString[];
 #import <CSNative/CSNMockClient.h>
 #import <CSNative/CSNComponentView.h>
 #import <CSNative/CSNLogoView.h>
-#import <CSNative/CSNTransitTitleView.h>
-#import <CSNative/CSNTransitSubtitleView.h>
 #import <CSNative/CSNHeroView.h>
 #import <CSNative/CSNSecondaryActionView.h>
 #import <CSNative/CSNHeadlineView.h>
