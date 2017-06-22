@@ -23,36 +23,36 @@
 
 - (void)testImpressionTime {
     CSNImpressionDetector *detector = [[CSNImpressionDetector alloc] initWithSampleSkew:1000 impressionTime:1 impressionDuration:30000 impressionVisibility:0.5];
-    XCTAssert([detector recordVisibility:0 adID:0 componentID:0 viewVisibility:0.5 deviceVisibility:0.5] == false);
+    XCTAssert([detector recordVisibility:0 adID:0 versionID:0 componentID:0 viewVisibility:0.5 deviceVisibility:0.5] == false);
     usleep(2000);
-    XCTAssert([detector recordVisibility:0 adID:0 componentID:0 viewVisibility:0.5 deviceVisibility:0.5] == true);
+    XCTAssert([detector recordVisibility:0 adID:0 versionID:0 componentID:0 viewVisibility:0.5 deviceVisibility:0.5] == true);
 }
 
 
 - (void)testImpressionVisibility {
     CSNImpressionDetector *detector = [[CSNImpressionDetector alloc] initWithSampleSkew:1000 impressionTime:1 impressionDuration:30000 impressionVisibility:0.3];
-    XCTAssert([detector recordVisibility:0 adID:0 componentID:0 viewVisibility:0.2 deviceVisibility:0.1] == false);
+    XCTAssert([detector recordVisibility:0 adID:0 versionID:0 componentID:0 viewVisibility:0.2 deviceVisibility:0.1] == false);
     usleep(1500);
-    XCTAssert([detector recordVisibility:0 adID:0 componentID:0 viewVisibility:0.2 deviceVisibility:0.1] == false);
+    XCTAssert([detector recordVisibility:0 adID:0 versionID:0 componentID:0 viewVisibility:0.2 deviceVisibility:0.1] == false);
     usleep(500);
-    XCTAssert([detector recordVisibility:0 adID:0 componentID:0 viewVisibility:0.3 deviceVisibility:0.2] == false);
+    XCTAssert([detector recordVisibility:0 adID:0 versionID:0 componentID:0 viewVisibility:0.3 deviceVisibility:0.2] == false);
     usleep(2000);
-    XCTAssert([detector recordVisibility:0 adID:0 componentID:0 viewVisibility:0.3 deviceVisibility:0.2] == true);
+    XCTAssert([detector recordVisibility:0 adID:0 versionID:0 componentID:0 viewVisibility:0.3 deviceVisibility:0.2] == true);
 }
 
 - (void)testImpressionDuration {
     CSNImpressionDetector *detector = [[CSNImpressionDetector alloc] initWithSampleSkew:1000 impressionTime:1 impressionDuration:10 impressionVisibility:0.5];
-    XCTAssert([detector recordVisibility:0 adID:0 componentID:0 viewVisibility:0.5 deviceVisibility:0.1] == false);
+    XCTAssert([detector recordVisibility:0 adID:0 versionID:0 componentID:0 viewVisibility:0.5 deviceVisibility:0.1] == false);
     usleep(2000);
-    XCTAssert([detector recordVisibility:0 adID:0 componentID:0 viewVisibility:0.5 deviceVisibility:0.1] == true);
+    XCTAssert([detector recordVisibility:0 adID:0 versionID:0 componentID:0 viewVisibility:0.5 deviceVisibility:0.1] == true);
     usleep(1500);
-    XCTAssert([detector recordVisibility:0 adID:0 componentID:0 viewVisibility:0.3 deviceVisibility:0.2] == false);
+    XCTAssert([detector recordVisibility:0 adID:0 versionID:0 componentID:0 viewVisibility:0.3 deviceVisibility:0.2] == false);
     usleep(1500);
-    XCTAssert([detector recordVisibility:0 adID:0 componentID:0 viewVisibility:0.5 deviceVisibility:0.2] == false);
+    XCTAssert([detector recordVisibility:0 adID:0 versionID:0 componentID:0 viewVisibility:0.5 deviceVisibility:0.2] == false);
     usleep(15000);
-    XCTAssert([detector recordVisibility:0 adID:0 componentID:0 viewVisibility:0.5 deviceVisibility:0.2] == true);
+    XCTAssert([detector recordVisibility:0 adID:0 versionID:0 componentID:0 viewVisibility:0.5 deviceVisibility:0.2] == true);
     usleep(1500);
-    XCTAssert([detector recordVisibility:0 adID:0 componentID:0 viewVisibility:0.5 deviceVisibility:0.2] == false);
+    XCTAssert([detector recordVisibility:0 adID:0 versionID:0 componentID:0 viewVisibility:0.5 deviceVisibility:0.2] == false);
 }
 
 @end

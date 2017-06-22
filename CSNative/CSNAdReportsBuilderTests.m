@@ -93,7 +93,7 @@
     [ipAddrs addObject:[[NSData alloc] init]];
     NSString *timeZone = @"UTC";
     CSNAdReportsBuilder *builder = [[CSNAdReportsBuilder alloc] initWithAdUnit:adUnit deviceID:deviceID ipAddresses:ipAddrs timeZone:timeZone];
-    [builder recordVisibility:0 adID:0 componentID:0 viewVisibility:0.5 deviceVisibility:0.1];
+    [builder recordVisibility:0 adID:0 versionID:0 componentID:0 viewVisibility:0.5 deviceVisibility:0.1];
     uint64_t expectViewVal = [builder setSample:0 position:0 value:[builder encodeVisibility:0.5]];
     uint64_t expectDevVal = [builder setSample:0 position:0 value:[builder encodeVisibility:0.1]];
     uint32_t ad_report_count = 0;
@@ -117,7 +117,7 @@
     XCTAssert(visibility_count == 1);
     
     
-    [builder recordVisibility:0 adID:0 componentID:0 viewVisibility:1.0 deviceVisibility:0.25];
+    [builder recordVisibility:0 adID:0 versionID:0 componentID:0 viewVisibility:1.0 deviceVisibility:0.25];
 
     ad_report_count = 0;
     comp_report_count = 0;
@@ -148,7 +148,7 @@
     [ipAddrs addObject:[[NSData alloc] init]];
     NSString *timeZone = @"UTC";
     CSNAdReportsBuilder *builder = [[CSNAdReportsBuilder alloc] initWithAdUnit:adUnit deviceID:deviceID ipAddresses:ipAddrs timeZone:timeZone];
-    [builder recordInteraction:0 adID:0 componentID:0 interactionKind:0];
+    [builder recordInteraction:0 adID:0 versionID:0 componentID:0 interactionKind:0];
     uint32_t ad_report_count = 0;
     uint32_t comp_report_count = 0;
     uint32_t comp_interactions_count = 0;
@@ -167,7 +167,7 @@
     XCTAssert(comp_report_count == 1);
     XCTAssert(comp_interactions_count == 1);
     
-    [builder recordInteraction:0 adID:0 componentID:0 interactionKind:0];
+    [builder recordInteraction:0 adID:0 versionID:0 componentID:0 interactionKind:0];
     ad_report_count = 0;
     comp_report_count = 0;
     comp_interactions_count = 0;

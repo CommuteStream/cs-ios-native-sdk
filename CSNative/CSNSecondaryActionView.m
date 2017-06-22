@@ -1,4 +1,5 @@
 #import "CSNSecondaryActionView.h"
+#import <CSNative/CSNative.h>
 
 @implementation CSNSecondaryActionView{
     CSNHeroView *heroImageView;
@@ -37,7 +38,7 @@
 }
 
 
-- (id) initWithFrame:(CGRect)aRect forAd:(CSNAd *)nativeAd {
+- (id) initWithFrame:(CGRect)aRect forAd:(CSNAd *)nativeAd withReportsBuilder:(CSNAdReportsBuilder *)reportBuilder {
     self = [super initWithFrame:aRect];
     
     if (self)
@@ -157,10 +158,10 @@
             [actionButton setTitleColor:[[action colors] foreground] forState:UIControlStateNormal];
             [[actionButton titleLabel] setFont: [UIFont systemFontOfSize:buttonFontSize]];
             [actionButton addTapHandler:^{
+                [reportBuilder recordInteraction:[nativeAd requestID] adID:[nativeAd adID] versionID:[nativeAd versionID] componentID:[action componentID] interactionKind:CSNPComponentInteractionKind_Tap];
                 
                 NSString *urlString = [[[nativeAd actions] objectAtIndex:actionIndex] url];
                 NSURL *url = [NSURL URLWithString:urlString];
-                //NSLog(@"tapped it %@", [[[nativeAd actions] objectAtIndex:actionIndex] url]);
                 
                 if ([[UIApplication sharedApplication] respondsToSelector:@selector(openURL:options:completionHandler:)]) {
                     [[UIApplication sharedApplication] openURL:url options:@{} completionHandler:NULL];

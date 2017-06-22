@@ -20,7 +20,7 @@
 // Ensure a non-200 response is a failure
 - (void)testGetStopAdsNon200 {
     XCTestExpectation *expectation = [self expectationWithDescription:@"failure"];
-    CSNHttpClient *client = [[CSNHttpClient alloc] initWithHost:@"api.commutestream.com"];
+    CSNHttpClient *client = [[CSNHttpClient alloc] initWithHost:@"api.commutestream.com" requestTimeout:1 responseTimeout:1];
     [OHHTTPStubs stubRequestsPassingTest:^BOOL(NSURLRequest * request) {
         return [request.URL.host isEqualToString:@"api.commutestream.com"];
     } withStubResponse:^OHHTTPStubsResponse * (NSURLRequest * request) {
@@ -44,7 +44,7 @@
 // Ensure a 200 response with an invalid content type is a failure
 - (void)testGetStopdAds200InvalidContentType {
     XCTestExpectation *expectation = [self expectationWithDescription:@"failure"];
-    CSNHttpClient *client = [[CSNHttpClient alloc] initWithHost:@"api.commutestream.com"];
+    CSNHttpClient *client = [[CSNHttpClient alloc] initWithHost:@"api.commutestream.com" requestTimeout:1 responseTimeout:1];
     [OHHTTPStubs stubRequestsPassingTest:^BOOL(NSURLRequest * request) {
         return [request.URL.host isEqualToString:@"api.commutestream.com"];
     } withStubResponse:^OHHTTPStubsResponse * (NSURLRequest * request) {
@@ -68,7 +68,7 @@
 // Ensure a 200 response with an invalid body data is a failure
 - (void) testGetStopdAds200InvalidBody {
     XCTestExpectation *expectation = [self expectationWithDescription:@"failure"];
-    CSNHttpClient *client = [[CSNHttpClient alloc] initWithHost:@"api.commutestream.com"];
+    CSNHttpClient *client = [[CSNHttpClient alloc] initWithHost:@"api.commutestream.com" requestTimeout:1 responseTimeout:1];
     [OHHTTPStubs stubRequestsPassingTest:^BOOL(NSURLRequest * request) {
         return [request.URL.host isEqualToString:@"api.commutestream.com"];
     } withStubResponse:^OHHTTPStubsResponse * (NSURLRequest * request) {
@@ -92,7 +92,7 @@
 // Ensure a slow request time is a failure
 - (void) testGetStopAdsSlowRequest {
     XCTestExpectation *expectation = [self expectationWithDescription:@"failure"];
-    CSNHttpClient *client = [[CSNHttpClient alloc] initWithHost:@"api.commutestream.com"];
+    CSNHttpClient *client = [[CSNHttpClient alloc] initWithHost:@"api.commutestream.com" requestTimeout:1 responseTimeout:1];
     [OHHTTPStubs stubRequestsPassingTest:^BOOL(NSURLRequest * request) {
         return [request.URL.host isEqualToString:@"api.commutestream.com"];
     } withStubResponse:^OHHTTPStubsResponse * (NSURLRequest * request) {
@@ -116,7 +116,7 @@
 // Ensure a slow response time is a failure
 - (void) testGetStopAdsSlowResponse {
     XCTestExpectation *expectation = [self expectationWithDescription:@"failure"];
-    CSNHttpClient *client = [[CSNHttpClient alloc] initWithHost:@"api.commutestream.com"];
+    CSNHttpClient *client = [[CSNHttpClient alloc] initWithHost:@"api.commutestream.com" requestTimeout:1 responseTimeout:1];
     [OHHTTPStubs stubRequestsPassingTest:^BOOL(NSURLRequest * request) {
         return [request.URL.host isEqualToString:@"api.commutestream.com"];
     } withStubResponse:^OHHTTPStubsResponse * (NSURLRequest * request) {
@@ -141,7 +141,7 @@
 - (void) testGetStopAdsSuccess {
     NSData *responseData = [[[CSNPAdResponse alloc] init] data];
     XCTestExpectation *expectation = [self expectationWithDescription:@"success"];
-    CSNHttpClient *client = [[CSNHttpClient alloc] initWithHost:@"api.commutestream.com"];
+    CSNHttpClient *client = [[CSNHttpClient alloc] initWithHost:@"api.commutestream.com" requestTimeout:1 responseTimeout:1];
     [OHHTTPStubs stubRequestsPassingTest:^BOOL(NSURLRequest * request) {
         return [request.URL.host isEqualToString:@"api.commutestream.com"];
     } withStubResponse:^OHHTTPStubsResponse * (NSURLRequest * request) {

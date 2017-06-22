@@ -20,14 +20,14 @@
     return self;
 }
 
-- (id) initWithFrame:(CGRect)frame forAd:(CSNAd *)nativeAd {
+- (id) initWithFrame:(CGRect)frame forAd:(CSNAd *)nativeAd withReportsBuilder:(CSNAdReportsBuilder *)reportsBuilder {
     self = [super initWithFrame:frame];
     if (self)
     {
         
         modalWindowBkg = [[UIView alloc] initWithFrame:self.bounds];
         CGRect cardViewRect = CGRectMake(self.bounds.size.width/2.0, 500.0, self.bounds.size.width - 50.0, 325.0);
-        cardView = [[CSNSecondaryActionView alloc] initWithFrame:cardViewRect forAd:nativeAd];
+        cardView = [[CSNSecondaryActionView alloc] initWithFrame:cardViewRect forAd:nativeAd withReportsBuilder:reportsBuilder];
         
         [modalWindowBkg setBackgroundColor:[UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.6]];
         [modalWindowBkg setAlpha:0.0];

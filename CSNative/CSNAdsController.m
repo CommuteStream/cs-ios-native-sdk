@@ -51,7 +51,7 @@ CSNModalWindow *modalWindowView;
     uuid_t uuid;
     [adUnitUUID getUUIDBytes:uuid];
     NSData *adUnitData = [NSData dataWithBytes:uuid length:16];
-    return [self initWithClient:[[CSNHttpClient alloc] initWithHost:@"api.commutestream.com"] adUnit:adUnitData];
+    return [self initWithClient:[[CSNHttpClient alloc] initWithHost:@"api.commutestream.com" requestTimeout:5 responseTimeout:5] adUnit:adUnitData];
 }
 
 - (instancetype) initMocked {
@@ -220,7 +220,7 @@ CSNModalWindow *modalWindowView;
     [tapDelegate setAdsController:self];
     UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:tapDelegate action:@selector(tapViewAction:)];
     [tapRecognizer setNumberOfTapsRequired:1];
-    [tapRecognizer setDelegate:tapRecognizer];
+    //[tapRecognizer setDelegate:tapRecognizer];
     [view addGestureRecognizer:tapRecognizer];
     [view setUserInteractionEnabled:YES];
     [_tapDelegates setObject:tapDelegate forKey:view];
@@ -266,7 +266,7 @@ CSNModalWindow *modalWindowView;
 - (void) openModal:(CSNAd *)ad componentID:(uint64_t)componentID interactionKind:(int32_t)interactionKind{
     [_reportsBuilder recordInteraction:[ad requestID] adID:[ad adID] versionID:[ad versionID] componentID:componentID interactionKind:interactionKind];
     CGRect bounds = [[UIScreen mainScreen] bounds];
-    CSNModalWindow *modalWindow = [[CSNModalWindow alloc] initWithFrame:bounds forAd:ad];
+    CSNModalWindow *modalWindow = [[CSNModalWindow alloc] initWithFrame:bounds forAd:ad withReportsBuilder:_reportsBuilder];
     modalWindow.windowLevel = UIWindowLevelAlert;
     [_visMonitor addView:[modalWindow getSecondaryActionView]];
     modalWindowView = modalWindow;

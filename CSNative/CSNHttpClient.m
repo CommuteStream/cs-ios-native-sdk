@@ -6,11 +6,11 @@
     NSURLSession *_session;
 }
 
-- (instancetype) initWithHost:(NSString *)host {
+- (instancetype) initWithHost:(NSString *)host requestTimeout:(uint64_t)requestTimeout responseTimeout:(uint64_t)responseTimeout {
     _host = host;
     NSURLSessionConfiguration *config = [NSURLSessionConfiguration ephemeralSessionConfiguration];
-    [config setTimeoutIntervalForRequest:20];
-    [config setTimeoutIntervalForResource:20];
+    [config setTimeoutIntervalForRequest:requestTimeout];
+    [config setTimeoutIntervalForResource:responseTimeout];
     _session = [NSURLSession sessionWithConfiguration:config];
     return self;
 }
