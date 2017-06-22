@@ -24,9 +24,9 @@
     return self;
 }
 
-- (void) recordInteraction:(uint64_t)requestID adID:(uint64_t)adID componentID:(uint64_t)componentID interactionKind:(int32_t)interactionKind {
-    CSNPAdReport *adReport = [self getAdReport:_adReports requestID:requestID adID:adID];
-    if([_impressionDetector recordInteraction:requestID adID:adID componentID:componentID interactionKind:interactionKind]) {
+- (void) recordInteraction:(uint64_t)requestID adID:(uint64_t)adID versionID:(uint64_t)versionID componentID:(uint64_t)componentID interactionKind:(int32_t)interactionKind {
+    CSNPAdReport *adReport = [self getAdReport:_adReports requestID:requestID adID:adID versionID:versionID];
+    if([_impressionDetector recordInteraction:requestID adID:adID versionID:versionID componentID:componentID interactionKind:interactionKind]) {
         [self addImpression:adReport];
     }
     CSNPComponentReport *compReport = [self getComponentReport:adReport componentID:componentID];
@@ -34,10 +34,9 @@
 
 }
 
-- (void) recordVisibility:(uint64_t)requestID adID:(uint64_t)adID componentID:(uint64_t)componentID viewVisibility:(double)viewVisiblity deviceVisibility:(double)deviceVisibility {
-
-    CSNPAdReport *adReport = [self getAdReport:_adReports requestID:requestID adID:adID];
-    if([_impressionDetector recordVisibility:requestID adID:adID componentID:componentID viewVisibility:viewVisiblity deviceVisibility:deviceVisibility]) {
+- (void) recordVisibility:(uint64_t)requestID adID:(uint64_t)adID versionID:(uint64_t)versionID componentID:(uint64_t)componentID viewVisibility:(double)viewVisiblity deviceVisibility:(double)deviceVisibility {
+    CSNPAdReport *adReport = [self getAdReport:_adReports requestID:requestID adID:adID versionID:versionID];
+    if([_impressionDetector recordVisibility:requestID adID:adID versionID:versionID componentID:componentID viewVisibility:viewVisiblity deviceVisibility:deviceVisibility]) {
         [self addImpression:adReport];
     }
     CSNPComponentReport *compReport = [self getComponentReport:adReport componentID:componentID];
@@ -79,21 +78,21 @@
     [[compReport interactionsArray] addObject:compInteraction];
 }
 
-- (CSNPAdReport *) findAdReport:(CSNPAdReports *)adReports requestID:(uint64_t)requestID adID:(uint64_t)adID {
+- (CSNPAdReport *) findAdReport:(CSNPAdReports *)adReports requestID:(uint64_t)requestID adID:(uint64_t)adID versionID:(uint64_t)versionID {
     for (id adReport in [_adReports adReportsArray]) {
-        if([adReport adId] == adID && [adReport requestId] == requestID) {
+        if([adReport adId] == adID && [adReport versionId] == versionID && [adReport requestId] == requestID) {
             return adReport;
         }
     }
     return nil;
 }
 
-- (CSNPAdReport *) getAdReport:(CSNPAdReports *)adReports requestID:(uint64_t)requestID adID:(uint64_t)adID {
-    CSNPAdReport *adReport = [self findAdReport:adReports requestID:requestID adID:adID];
+- (CSNPAdReport *) getAdReport:(CSNPAdReports *)adReports requestID:(uint64_t)requestID adID:(uint64_t)adID versionID:(uint64_t)versionID {
+    CSNPAdReport *adReport = [self findAdReport:adReports requestID:requestID adID:adID versionID:versionID];
     if(adReport){
         return adReport;
     } else {
-        adReport = [self createAdReport:requestID adID:adID];
+        adReport = [self createAdReport:requestID adID:adID versionID:versionID];
         [[adReports adReportsArray] addObject:adReport];
         return adReport;
     }
@@ -143,9 +142,10 @@
     [compReport setVisibilitySampleCount:[compReport visibilitySampleCount] + 1];
 }
 
-- (CSNPAdReport *) createAdReport:(uint64_t)requestID adID:(uint64_t)adID {
+- (CSNPAdReport *) createAdReport:(uint64_t)requestID adID:(uint64_t)adID versionID:(uint64_t)versionID {
     CSNPAdReport *adReport = [[CSNPAdReport alloc] init];
     [adReport setAdId:adID];
+    [adReport setVersionId:versionID];
     [adReport setRequestId:requestID];
     return adReport;
 }

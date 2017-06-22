@@ -88,7 +88,7 @@
     if(_kind == CSNPHeroKind_Image){
         _image = [UIImage imageWithData:[message blob]];
     }else if(_kind == CSNPHeroKind_Html){
-        //TODO: Decode blob to nsstring
+        //TODO: Decode blob to nsstring and use html when available in the view (unsupported here)
         _html = @"";
     }
     return self;
@@ -115,6 +115,7 @@
 
 - (instancetype) initWithMessage:(CSNPNativeAd *)message {
     _adID = [message adId];
+    _versionID = [message versionId];
     _requestID = [message requestId];
     _view = [[CSNViewComponent alloc] initWithMessage:[message view]];
     _headline = [[CSNHeadlineComponent alloc] initWithMessage:[message headline]];
@@ -123,7 +124,7 @@
     _logo = [[CSNLogoComponent alloc] initWithMessage:[message logo]];
     _hero = [[CSNHeroComponent alloc] initWithMessage:[message hero]];
     _secondary = [[CSNSecondaryActionComponent alloc] initWithMessage:[message secondaryActionScreen]];
-    
+
     NSMutableArray *actions = [[NSMutableArray alloc] initWithCapacity:[message actionsArray_Count]];
     for (id action in [message actionsArray]){
         CSNActionComponent *actionComp = [[CSNActionComponent alloc] initWithMessage:action];
@@ -131,7 +132,6 @@
         
     }
     _actions = actions;
-    NSLog(@"initialized ad %@", [self description]);
     return self;
 }
 

@@ -264,7 +264,7 @@ CSNModalWindow *modalWindowView;
 }
 
 - (void) openModal:(CSNAd *)ad componentID:(uint64_t)componentID interactionKind:(int32_t)interactionKind{
-    [_reportsBuilder recordInteraction:[ad requestID] adID:[ad adID] componentID:componentID interactionKind:interactionKind];
+    [_reportsBuilder recordInteraction:[ad requestID] adID:[ad adID] versionID:[ad versionID] componentID:componentID interactionKind:interactionKind];
     CGRect bounds = [[UIScreen mainScreen] bounds];
     CSNModalWindow *modalWindow = [[CSNModalWindow alloc] initWithFrame:bounds forAd:ad];
     modalWindow.windowLevel = UIWindowLevelAlert;

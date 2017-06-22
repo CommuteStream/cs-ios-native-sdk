@@ -45,7 +45,7 @@ const double IMPRESSION_VISIBILITY = 0.5;
     return self;
 }
 
-- (bool) recordVisibility:(uint64_t)requestID adID:(uint64_t)adID componentID:(uint64_t)componentID viewVisibility:(double)viewVisiblity deviceVisibility:(double)deviceVisibility {
+- (bool) recordVisibility:(uint64_t)requestID adID:(uint64_t)adID versionID:(uint64_t)versionID componentID:(uint64_t)componentID viewVisibility:(double)viewVisiblity deviceVisibility:(double)deviceVisibility {
     uint64_t time = [self currentTime];
     NSNumber *adKey = [NSNumber numberWithUnsignedLongLong:adID];
     CSNImpressionCounter *impCounter = [_visibleCounters objectForKey:adKey];
@@ -74,7 +74,7 @@ const double IMPRESSION_VISIBILITY = 0.5;
 }
 
 
-- (bool) recordInteraction:(uint64_t)requestID adID:(uint64_t)adID componentID:(uint64_t)componentID interactionKind:(int32_t)interactionKind {
+- (bool) recordInteraction:(uint64_t)requestID adID:(uint64_t)adID versionID:(uint64_t)versionID componentID:(uint64_t)componentID interactionKind:(int32_t)interactionKind {
     uint64_t time = [self currentTime];
     NSNumber *adKey = [NSNumber numberWithUnsignedLongLong:adID];
     CSNImpressionCounter *impCounter = [_visibleCounters objectForKey:adKey];

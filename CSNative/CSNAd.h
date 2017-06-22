@@ -77,7 +77,8 @@
 
 @interface CSNAd : NSObject
 @property (readonly) uint64_t requestID;
-@property ( readonly) uint64_t adID;
+@property (readonly) uint64_t adID;
+@property (readonly) uint64_t versionID;
 @property (copy, readonly, nonnull) CSNViewComponent *view;
 @property (copy, readonly, nonnull) CSNHeadlineComponent *headline;
 @property (copy, readonly, nonnull) CSNBodyComponent *body;

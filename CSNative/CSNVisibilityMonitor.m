@@ -46,9 +46,10 @@
             deviceVisible = (double)intersectedArea / (double)windowArea;
         }
         uint64_t requestID = [[componentView ad] requestID];
-        uint64_t adID = [componentView adID];
+        uint64_t adID = [[componentView ad] adID];
+        uint64_t versionID = [[componentView ad] versionID];
         uint64_t componentID = [componentView componentID];
-        [_reportsBuilder recordVisibility:requestID adID:adID componentID:componentID viewVisibility:viewVisible deviceVisibility:deviceVisible];
+        [_reportsBuilder recordVisibility:requestID adID:adID versionID:versionID componentID:componentID viewVisibility:viewVisible deviceVisibility:deviceVisible];
     }
 }
 
