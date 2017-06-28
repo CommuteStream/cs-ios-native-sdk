@@ -47,13 +47,17 @@ const double IMPRESSION_VISIBILITY = 0.5;
 
 - (bool) recordVisibility:(uint64_t)requestID adID:(uint64_t)adID versionID:(uint64_t)versionID componentID:(uint64_t)componentID viewVisibility:(double)viewVisiblity deviceVisibility:(double)deviceVisibility {
     uint64_t time = [self currentTime];
-    NSNumber *adKey = [NSNumber numberWithUnsignedLongLong:adID];
+    id objects[] = {
+        [NSNumber numberWithUnsignedLongLong:requestID],
+        [NSNumber numberWithUnsignedLongLong:adID],
+        [NSNumber numberWithUnsignedLongLong:versionID]
+    };
+    NSArray *adKey = [NSArray arrayWithObjects:objects count:3];
     CSNImpressionCounter *impCounter = [_visibleCounters objectForKey:adKey];
     if(impCounter == nil) {
         impCounter = [[CSNImpressionCounter alloc] init];
         [_visibleCounters setObject:impCounter forKey:adKey];
     }
-  
     if(viewVisiblity >= self.impressionVisiblity) {
         uint64_t visibleDiff = time - impCounter.lastVisibleTime;
         if(visibleDiff < self.maxSampleSkew) {
@@ -76,7 +80,12 @@ const double IMPRESSION_VISIBILITY = 0.5;
 
 - (bool) recordInteraction:(uint64_t)requestID adID:(uint64_t)adID versionID:(uint64_t)versionID componentID:(uint64_t)componentID interactionKind:(int32_t)interactionKind {
     uint64_t time = [self currentTime];
-    NSNumber *adKey = [NSNumber numberWithUnsignedLongLong:adID];
+    id objects[] = {
+        [NSNumber numberWithUnsignedLongLong:requestID],
+        [NSNumber numberWithUnsignedLongLong:adID],
+        [NSNumber numberWithUnsignedLongLong:versionID]
+    };
+    NSArray *adKey = [NSArray arrayWithObjects:objects count:3];
     CSNImpressionCounter *impCounter = [_visibleCounters objectForKey:adKey];
     if(impCounter == nil) {
         impCounter = [[CSNImpressionCounter alloc] init];

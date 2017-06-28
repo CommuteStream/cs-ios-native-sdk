@@ -93,7 +93,10 @@
                      }
                      completion:^(BOOL finished){
                          [self setHidden:YES];
-                         
+                         // avoid tracking this view for impressions by hidding it and setting its size to 0
+                         [cardView setFrame:CGRectMake(0,0,0,0)];
+                         [cardView setHidden:YES];
+                         [self removeFromSuperview];
                      }];
     
 }

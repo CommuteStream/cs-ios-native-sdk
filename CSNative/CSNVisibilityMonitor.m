@@ -9,14 +9,14 @@
 @implementation CSNVisibilityMonitor
 
 - (instancetype) initWithReportsBuilder:(CSNAdReportsBuilder *)reportsBuilder {
-    _componentViews = [NSHashTable hashTableWithOptions:NSHashTableStrongMemory];
+    _componentViews = [NSHashTable hashTableWithOptions:NSHashTableWeakMemory];
     _reportsBuilder = reportsBuilder;
     [self start];
     return self;
 }
 
 - (void) start {
-    _timer = [NSTimer timerWithTimeInterval:0.1 repeats:true block:^(NSTimer * _Nonnull timer) {
+    _timer = [NSTimer timerWithTimeInterval:0.25 repeats:true block:^(NSTimer * _Nonnull timer) {
         [self checkViews];
     }];
     [[NSRunLoop mainRunLoop] addTimer:_timer forMode:NSDefaultRunLoopMode];
@@ -33,6 +33,7 @@
 - (void) checkViews {
     for(id componentView in _componentViews) {
         UIView *view = (UIView *)componentView;
+        bool hidden = view.hidden;
         CGRect viewFrame = view.frame;
         CGRect windowFrame = view.window.frame;
         CGRect intersected = CGRectIntersection(viewFrame, windowFrame);
@@ -41,7 +42,7 @@
         int64_t viewArea = viewFrame.size.width * viewFrame.size.height;
         double viewVisible = 0;
         double deviceVisible = 0;
-        if(viewArea > 0 && windowArea > 0) {
+        if(viewArea > 0 && windowArea > 0 && !hidden) {
             viewVisible = (double)intersectedArea / (double)viewArea;
             deviceVisible = (double)intersectedArea / (double)windowArea;
         }
