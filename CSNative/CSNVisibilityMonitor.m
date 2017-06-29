@@ -42,7 +42,8 @@
         int64_t viewArea = viewFrame.size.width * viewFrame.size.height;
         double viewVisible = 0;
         double deviceVisible = 0;
-        if(viewArea > 0 && windowArea > 0 && !hidden) {
+        bool isActive = [[UIApplication sharedApplication] applicationState] == UIApplicationStateActive;
+        if(viewArea > 0 && windowArea > 0 && !hidden && isActive) {
             viewVisible = (double)intersectedArea / (double)viewArea;
             deviceVisible = (double)intersectedArea / (double)windowArea;
         }

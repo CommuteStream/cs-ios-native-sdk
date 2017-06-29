@@ -15,4 +15,6 @@
 
 - (instancetype) initWithClient:(id<CSNClient>)client adUnit:(NSData *)adUnit;
 
+- (void) applicationDidEnterBackground;
+
 @end

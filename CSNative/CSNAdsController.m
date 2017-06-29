@@ -273,4 +273,8 @@ CSNModalWindow *modalWindowView;
     [modalWindow makeKeyAndVisible];
 }
 
+- (void) applicationDidEnterBackground {
+    [self sendReports];
+}
+
 @end
