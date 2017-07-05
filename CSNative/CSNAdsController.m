@@ -81,9 +81,7 @@ CSNModalWindow *modalWindowView;
 
     _reportsBuilder = [[CSNAdReportsBuilder alloc] initWithAdUnit:_adUnit deviceID:_deviceID ipAddresses:_ipAddresses timeZone:_timeZone];
     // send reports timer
-    _reportsTimer = [NSTimer timerWithTimeInterval:15.0 repeats:true block:^(NSTimer * _Nonnull timer) {
-        [self sendReports];
-    }];
+    _reportsTimer = [NSTimer timerWithTimeInterval:15.0 target:self selector:@selector(sendReports) userInfo:nil repeats:YES];
     _visMonitor = [[CSNVisibilityMonitor alloc] initWithReportsBuilder:_reportsBuilder];
     _tapDelegates = [[NSMapTable alloc] initWithKeyOptions:NSMapTableWeakMemory valueOptions:NSMapTableStrongMemory capacity:10];
     [[NSRunLoop mainRunLoop] addTimer:_reportsTimer forMode:NSDefaultRunLoopMode];

@@ -16,9 +16,7 @@
 }
 
 - (void) start {
-    _timer = [NSTimer timerWithTimeInterval:0.25 repeats:true block:^(NSTimer * _Nonnull timer) {
-        [self checkViews];
-    }];
+    _timer = [NSTimer timerWithTimeInterval:0.25 target:self selector:@selector(checkViews) userInfo:nil repeats:YES];
     [[NSRunLoop mainRunLoop] addTimer:_timer forMode:NSDefaultRunLoopMode];
 }
 
