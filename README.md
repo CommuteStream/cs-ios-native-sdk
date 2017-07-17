@@ -37,6 +37,8 @@ Clone the repository or download the appropriate zip file:
     
     Add `#import <CSNative/CommuteStream.h>` to your projects `Bridging-Header.h` 	  file. 
 
+4. Depending on your project settings, you may need to set **Allow Non-modular Includes In Framework Modules** to **YES** in **Build Settings**.
+
 ## Overview
 CommuteStream Native Ads were built specifically for transit apps. Our SDK is packed with flexible components that allow publishers to seamlessly display advertising alongside public transit information.
 
@@ -189,7 +191,9 @@ adRequests.append(adRequest)
 ### CSNAdsController
 In order to fetch ads with the array of **CSNAdRequest**s, you must call the ``fetchAds`` method on an instance of **CSNAdsController**. This will invoke a callback that returns an **ads** array.
 
-The **ads** array has the same object count as the adRequests array provided in the call. Some indexes have a **CSNAd**, and others have a **nil** value.
+The **ads** array has the same object count and order as the adRequests array provided in the call. This makes it easy to map to the transit context you made the requests for.
+
+All indexes in the array have a **CSNOptionalAd**, and each one of these has an **ad** property that is either a **CSNAd** or a **nil** value.
 You will use this array to display ad content in the components you added to your app design.
 
 **Objective-C**
@@ -231,3 +235,48 @@ The ``buildView`` method accepts three parameters:
 ```
 adController.build(cell.contentView, ad:(ad as CSNOptionalAd).ad, parentTouch: false)
 ```
+
+## Releasing Your App
+
+Since the .framework file must be embedded into your app, the unnecessary architectures have to be “stripped out." Follow the steps before you archive and upload to the App Store:
+
+1. Make sure you've added the CSNative.framework to **Embed Frameworks** in **Build Phases**.
+
+2. Also in **Build Phases**, click the **+** sign to add a **New Run Script Phase**. Make sure this is after the Embed Frameworks section.
+
+3. Set the Shell path to **/bin/sh**
+
+4. Paste in the following script:
+
+```
+APP_PATH="${TARGET_BUILD_DIR}/${WRAPPER_NAME}"
+
+# This script loops through the frameworks embedded in the application and
+# removes unused architectures.
+find "$APP_PATH" -name '*.framework' -type d | while read -r FRAMEWORK
+do
+    FRAMEWORK_EXECUTABLE_NAME=$(defaults read "$FRAMEWORK/Info.plist" CFBundleExecutable)
+    FRAMEWORK_EXECUTABLE_PATH="$FRAMEWORK/$FRAMEWORK_EXECUTABLE_NAME"
+    echo "Executable is $FRAMEWORK_EXECUTABLE_PATH"
+
+    EXTRACTED_ARCHS=()
+
+    for ARCH in $ARCHS
+    do
+        echo "Extracting $ARCH from $FRAMEWORK_EXECUTABLE_NAME"
+        lipo -extract "$ARCH" "$FRAMEWORK_EXECUTABLE_PATH" -o "$FRAMEWORK_EXECUTABLE_PATH-$ARCH"
+        EXTRACTED_ARCHS+=("$FRAMEWORK_EXECUTABLE_PATH-$ARCH")
+    done
+
+    echo "Merging extracted architectures: ${ARCHS}"
+    lipo -o "$FRAMEWORK_EXECUTABLE_PATH-merged" -create "${EXTRACTED_ARCHS[@]}"
+    rm "${EXTRACTED_ARCHS[@]}"
+
+    echo "Replacing original executable with thinned version"
+    rm "$FRAMEWORK_EXECUTABLE_PATH"
+    mv "$FRAMEWORK_EXECUTABLE_PATH-merged" "$FRAMEWORK_EXECUTABLE_PATH"
+
+done
+```
+
+5. **IMPORTANT:** When working on your app in XCode, delete this run script because it throws errors during regular debug development.
