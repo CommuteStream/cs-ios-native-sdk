@@ -45,12 +45,14 @@
         
         closeModalWindowFrame.origin.x = (closeModalWindow.frame.origin.x - closeModalWindow.frame.size.width/2);
         
+        
         [closeModalWindow setFrame:closeModalWindowFrame];
         [closeModalWindow setAlpha:0.0];
         [closeModalWindow setBackgroundImage:buttonBkg forState:UIControlStateNormal];
         [closeModalWindow addTarget:self action:@selector(tapViewAction:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:closeModalWindow];
         
+        CGFloat cardTop = (closeModalWindowFrame.origin.y/2) - (cardView.frame.size.height/2);
         
         [UIView animateWithDuration:0.3
                          animations:^{
@@ -58,7 +60,7 @@
                              [closeModalWindow setAlpha:1.0];
                              [modalWindowBkg setAlpha:1.0];
                              [cardView setAlpha:1.0];
-                             [cardView setFrame:CGRectMake(cardView.frame.origin.x, 100.0, cardView.frame.size.width, cardView.frame.size.height)];
+                             [cardView setFrame:CGRectMake(cardView.frame.origin.x, cardTop, cardView.frame.size.width, cardView.frame.size.height)];
                              
                              
                          }
