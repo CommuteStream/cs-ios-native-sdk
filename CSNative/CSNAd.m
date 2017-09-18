@@ -88,8 +88,7 @@
     if(_kind == CSNPHeroKind_Image){
         _image = [UIImage imageWithData:[message blob]];
     }else if(_kind == CSNPHeroKind_Html){
-        //TODO: Decode blob to nsstring and use html when available in the view (unsupported here)
-        _html = @"";
+        _html = [NSString stringWithUTF8String:[[message blob] bytes]];
     }
     return self;
 }
