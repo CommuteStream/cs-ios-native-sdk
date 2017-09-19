@@ -542,6 +542,7 @@ typedef GPB_ENUM(CSNPAdRequests_FieldNumber) {
   CSNPAdRequests_FieldNumber_IpAddressesArray = 3,
   CSNPAdRequests_FieldNumber_Timezone = 4,
   CSNPAdRequests_FieldNumber_AdRequestsArray = 5,
+  CSNPAdRequests_FieldNumber_SdkVersion = 6,
 };
 
 /**
@@ -564,6 +565,8 @@ typedef GPB_ENUM(CSNPAdRequests_FieldNumber) {
 @property(nonatomic, readwrite, strong, null_resettable) NSMutableArray<CSNPAdRequest*> *adRequestsArray;
 /** The number of items in @c adRequestsArray without causing the array to be created. */
 @property(nonatomic, readonly) NSUInteger adRequestsArray_Count;
+
+@property(nonatomic, readwrite, copy, null_resettable) NSString *sdkVersion;
 
 @end
 
@@ -743,6 +746,7 @@ typedef GPB_ENUM(CSNPAdReports_FieldNumber) {
   CSNPAdReports_FieldNumber_IpAddressesArray = 4,
   CSNPAdReports_FieldNumber_DeviceTime = 5,
   CSNPAdReports_FieldNumber_AdReportsArray = 6,
+  CSNPAdReports_FieldNumber_SdkVersion = 7,
 };
 
 @interface CSNPAdReports : GPBMessage
@@ -764,6 +768,8 @@ typedef GPB_ENUM(CSNPAdReports_FieldNumber) {
 @property(nonatomic, readwrite, strong, null_resettable) NSMutableArray<CSNPAdReport*> *adReportsArray;
 /** The number of items in @c adReportsArray without causing the array to be created. */
 @property(nonatomic, readonly) NSUInteger adReportsArray_Count;
+
+@property(nonatomic, readwrite, copy, null_resettable) NSString *sdkVersion;
 
 @end
 

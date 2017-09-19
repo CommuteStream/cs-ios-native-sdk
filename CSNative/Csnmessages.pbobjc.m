@@ -1345,6 +1345,7 @@ typedef struct CSNPAdRequest__storage_ {
 @dynamic ipAddressesArray, ipAddressesArray_Count;
 @dynamic timezone;
 @dynamic adRequestsArray, adRequestsArray_Count;
+@dynamic sdkVersion;
 
 typedef struct CSNPAdRequests__storage_ {
   uint32_t _has_storage_[1];
@@ -1353,6 +1354,7 @@ typedef struct CSNPAdRequests__storage_ {
   NSMutableArray *ipAddressesArray;
   NSString *timezone;
   NSMutableArray *adRequestsArray;
+  NSString *sdkVersion;
 } CSNPAdRequests__storage_;
 
 // This method is threadsafe because it is initially called
@@ -1405,6 +1407,15 @@ typedef struct CSNPAdRequests__storage_ {
         .offset = (uint32_t)offsetof(CSNPAdRequests__storage_, adRequestsArray),
         .flags = GPBFieldRepeated,
         .dataType = GPBDataTypeMessage,
+      },
+      {
+        .name = "sdkVersion",
+        .dataTypeSpecific.className = NULL,
+        .number = CSNPAdRequests_FieldNumber_SdkVersion,
+        .hasIndex = 3,
+        .offset = (uint32_t)offsetof(CSNPAdRequests__storage_, sdkVersion),
+        .flags = GPBFieldOptional,
+        .dataType = GPBDataTypeString,
       },
     };
     GPBDescriptor *localDescriptor =
@@ -1935,6 +1946,7 @@ typedef struct CSNPAdReport__storage_ {
 @dynamic ipAddressesArray, ipAddressesArray_Count;
 @dynamic deviceTime;
 @dynamic adReportsArray, adReportsArray_Count;
+@dynamic sdkVersion;
 
 typedef struct CSNPAdReports__storage_ {
   uint32_t _has_storage_[1];
@@ -1943,6 +1955,7 @@ typedef struct CSNPAdReports__storage_ {
   NSString *timezone;
   NSMutableArray *ipAddressesArray;
   NSMutableArray *adReportsArray;
+  NSString *sdkVersion;
   uint64_t deviceTime;
 } CSNPAdReports__storage_;
 
@@ -2005,6 +2018,15 @@ typedef struct CSNPAdReports__storage_ {
         .offset = (uint32_t)offsetof(CSNPAdReports__storage_, adReportsArray),
         .flags = GPBFieldRepeated,
         .dataType = GPBDataTypeMessage,
+      },
+      {
+        .name = "sdkVersion",
+        .dataTypeSpecific.className = NULL,
+        .number = CSNPAdReports_FieldNumber_SdkVersion,
+        .hasIndex = 4,
+        .offset = (uint32_t)offsetof(CSNPAdReports__storage_, sdkVersion),
+        .flags = GPBFieldOptional,
+        .dataType = GPBDataTypeString,
       },
     };
     GPBDescriptor *localDescriptor =

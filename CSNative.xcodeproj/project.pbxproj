@@ -61,6 +61,7 @@
 		1BC79FB41E71EE92008D146A /* CSNVisibilityMonitor.h in Headers */ = {isa = PBXBuildFile; fileRef = 1BC79FB21E71EE92008D146A /* CSNVisibilityMonitor.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1BC79FB51E71EE92008D146A /* CSNVisibilityMonitor.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BC79FB31E71EE92008D146A /* CSNVisibilityMonitor.m */; };
 		1BC79FB71E73332C008D146A /* CSNVisibilityMonitorTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BC79FB61E73332C008D146A /* CSNVisibilityMonitorTest.m */; };
+		1BE1B1611F716B0600E26ABB /* CSNSDKVersion.h in Headers */ = {isa = PBXBuildFile; fileRef = 1BE1B1601F716B0600E26ABB /* CSNSDKVersion.h */; };
 		1BE6F4F61ED33353009F1B6D /* CSNAd.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B55605E1E65037B00FE1C08 /* CSNAd.m */; };
 		450CEE9BA1525442C8718883 /* Pods_CSNativeTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE17F149E54E79C0A0DD74A1 /* Pods_CSNativeTests.framework */; };
 		7F1E0B231E89B25F00498B76 /* CSNSecondaryActionView.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F1E0B211E89B25F00498B76 /* CSNSecondaryActionView.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -136,6 +137,7 @@
 		1BC79FB21E71EE92008D146A /* CSNVisibilityMonitor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSNVisibilityMonitor.h; sourceTree = "<group>"; };
 		1BC79FB31E71EE92008D146A /* CSNVisibilityMonitor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSNVisibilityMonitor.m; sourceTree = "<group>"; };
 		1BC79FB61E73332C008D146A /* CSNVisibilityMonitorTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSNVisibilityMonitorTest.m; sourceTree = "<group>"; };
+		1BE1B1601F716B0600E26ABB /* CSNSDKVersion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSNSDKVersion.h; sourceTree = "<group>"; };
 		5501E0D3CBC17B50D64846B3 /* Pods-CSNativeTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CSNativeTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-CSNativeTests/Pods-CSNativeTests.release.xcconfig"; sourceTree = "<group>"; };
 		5F7B3C7CA7AA5D2380F846BD /* Pods-CSNative.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CSNative.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CSNative/Pods-CSNative.debug.xcconfig"; sourceTree = "<group>"; };
 		7F1E0B211E89B25F00498B76 /* CSNSecondaryActionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSNSecondaryActionView.h; sourceTree = "<group>"; };
@@ -247,6 +249,7 @@
 				1B0E3D9B1EB0DD3B00C95354 /* CSNOptionalAd.m */,
 				1B0E3DA41EB3CA8000C95354 /* CSNAdReportsBuilder.h */,
 				1B0E3DA51EB3CA8000C95354 /* CSNAdReportsBuilder.m */,
+				1BE1B1601F716B0600E26ABB /* CSNSDKVersion.h */,
 			);
 			path = CSNative;
 			sourceTree = "<group>";
@@ -308,6 +311,7 @@
 				7F26304A1E81B2A6001F36D6 /* CSNHeroView.h in Headers */,
 				1B5560661E66053100FE1C08 /* CSNHeadlineView.h in Headers */,
 				7F21139D1E843DF30096DA45 /* CSNActionView.h in Headers */,
+				1BE1B1611F716B0600E26ABB /* CSNSDKVersion.h in Headers */,
 				1B2CCB131E79E0C800B6FBC2 /* CSNAdRequest.h in Headers */,
 				1BC79FB41E71EE92008D146A /* CSNVisibilityMonitor.h in Headers */,
 				1B555FED1E60AD7A00FE1C08 /* Csnmessages.pbobjc.h in Headers */,

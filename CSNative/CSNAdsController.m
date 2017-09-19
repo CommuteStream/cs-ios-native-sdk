@@ -1,3 +1,4 @@
+#import "CSNSDKVersion.h"
 #import "CSNAdsController.h"
 #import "CSNClient.h"
 #import "CSNHttpClient.h"
@@ -106,6 +107,7 @@ CSNModalWindow *modalWindowView;
     [adRequestsMsg setAdUnit:_adUnit];
     [adRequestsMsg setDeviceId:_deviceID];
     [adRequestsMsg setTimezone:_timeZone];
+    [adRequestsMsg setSdkVersion:SDK_VERSION];
     for(id adRequest in adRequests) {
         NSData *requestSha = [adRequest sha256];
         CSNPAdRequest *adRequestMsg = [uniqueAdRequests objectForKey:requestSha];

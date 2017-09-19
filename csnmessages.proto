@@ -132,6 +132,7 @@ message AdRequests {
   repeated bytes ip_addresses = 3;
   string timezone = 4;
   repeated AdRequest ad_requests = 5;
+  string sdk_version = 6;
 }
 
 // AdResponse is a mapping between an AdRequest hash_id and the set of ads
@@ -192,4 +193,5 @@ message AdReports {
   repeated bytes ip_addresses = 4;
   uint64 device_time = 5;
   repeated AdReport ad_reports = 6;
+  string sdk_version = 7;
 }
