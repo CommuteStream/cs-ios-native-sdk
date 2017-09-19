@@ -1,3 +1,4 @@
+#import "CSNSDKVersion.h"
 #import "CSNAdReportsBuilder.h"
 #import "CSNImpressionDetector.h"
 
@@ -61,6 +62,7 @@
     [adReports setIpAddressesArray:[NSMutableArray arrayWithArray:_ipAddresses]];
     [adReports setTimezone:_timeZone];
     [adReports setDeviceTime:[self currentTime]];
+    [adReports setSdkVersion:SDK_VERSION];
     return adReports;
 }
 
