@@ -239,6 +239,7 @@ typedef GPB_ENUM(CSNPHeroComponent_FieldNumber) {
   CSNPHeroComponent_FieldNumber_ComponentId = 1,
   CSNPHeroComponent_FieldNumber_Kind = 2,
   CSNPHeroComponent_FieldNumber_Blob = 3,
+  CSNPHeroComponent_FieldNumber_Interactive = 4,
 };
 
 @interface CSNPHeroComponent : GPBMessage
@@ -248,6 +249,8 @@ typedef GPB_ENUM(CSNPHeroComponent_FieldNumber) {
 @property(nonatomic, readwrite) CSNPHeroKind kind;
 
 @property(nonatomic, readwrite, copy, null_resettable) NSData *blob;
+
+@property(nonatomic, readwrite) BOOL interactive;
 
 @end
 

@@ -42,6 +42,7 @@ message HeroComponent {
   uint64 component_id = 1;
   HeroKind kind = 2;
   bytes blob = 3;
+  bool interactive = 4;
 }
 
 enum ActionKind {

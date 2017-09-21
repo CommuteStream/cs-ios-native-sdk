@@ -90,6 +90,7 @@
     }else if(_kind == CSNPHeroKind_Html){
         _html = [NSString stringWithUTF8String:[[message blob] bytes]];
     }
+    _interactive = [message interactive];
     return self;
 }
 

@@ -72,6 +72,7 @@
 @property (readonly) CSNPHeroKind kind;
 @property (copy, readonly, nonnull) UIImage *image;
 @property (copy, readonly, nonnull) NSString *html;
+@property (readonly) bool interactive;
 - (instancetype _Nonnull) initWithMessage:(CSNPHeroComponent * _Nonnull)message;
 @end
 

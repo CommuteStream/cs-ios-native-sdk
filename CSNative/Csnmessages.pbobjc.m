@@ -446,6 +446,7 @@ typedef struct CSNPLocationComponent__storage_ {
 @dynamic componentId;
 @dynamic kind;
 @dynamic blob;
+@dynamic interactive;
 
 typedef struct CSNPHeroComponent__storage_ {
   uint32_t _has_storage_[1];
@@ -486,6 +487,15 @@ typedef struct CSNPHeroComponent__storage_ {
         .offset = (uint32_t)offsetof(CSNPHeroComponent__storage_, blob),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeBytes,
+      },
+      {
+        .name = "interactive",
+        .dataTypeSpecific.className = NULL,
+        .number = CSNPHeroComponent_FieldNumber_Interactive,
+        .hasIndex = 3,
+        .offset = 4,  // Stored in _has_storage_ to save space.
+        .flags = GPBFieldOptional,
+        .dataType = GPBDataTypeBool,
       },
     };
     GPBDescriptor *localDescriptor =
