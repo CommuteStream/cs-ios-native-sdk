@@ -1,4 +1,5 @@
 #import "CSNHeroView.h"
+@import WebKit;
 
 @implementation CSNHeroView
 
@@ -16,7 +17,7 @@
     _ad = ad;
     _componentID = [[ad hero] componentID];
     if ([[ad hero] html] != nil) {
-        UIWebView *heroWebView = [[UIWebView alloc] init];
+        WKWebView *heroWebView = [[WKWebView alloc] init];
         [heroWebView loadHTMLString:[[ad hero] html] baseURL:nil];
         [heroWebView setFrame: self.bounds];
         [heroWebView setUserInteractionEnabled:[[ad hero] interactive]];
