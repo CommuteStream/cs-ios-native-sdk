@@ -43,7 +43,7 @@
     
     if (self)
     {
-        
+        CGFloat frameHeight = 0.0;
         [self setFrame:aRect];
         [self setBackgroundColor:[UIColor colorWithRed:0.86 green:0.86 blue:0.86 alpha:1.0]];
         [self setAlpha:0.0];
@@ -81,6 +81,8 @@
         [heroImageView setAd:nativeAd];
         
         yPosition = heroImageView.frame.origin.y + heroImageView.frame.size.height;
+        
+        frameHeight = yPosition + 5.0;
         
         adInfoView = [[UIView alloc] initWithFrame:CGRectMake(5.0, yPosition, self.frame.size.width - 10.0, 50.0)];
         
@@ -126,7 +128,7 @@
         
         adInfoView.frame = adInfoFrame;
         
-        
+        frameHeight = adInfoView.frame.origin.y + adInfoView.frame.size.height + 5.0;
         
         [self addSubview:secondaryTitle];
         [self addSubview:secondarySubtitle];
@@ -140,7 +142,7 @@
         
         //CGFloat actionButtonsYPos = adInfoView.frame.origin.y + adInfoView.frame.size.height;
         
-        CGFloat frameHeight = 0.0;
+        
         NSUInteger actionIndex = 0;
         
         CGFloat buttonFontSize = 22.0;

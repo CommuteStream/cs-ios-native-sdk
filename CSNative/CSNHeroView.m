@@ -19,7 +19,7 @@
         UIWebView *heroWebView = [[UIWebView alloc] init];
         [heroWebView loadHTMLString:[[ad hero] html] baseURL:nil];
         [heroWebView setFrame: self.bounds];
-        [heroWebView setUserInteractionEnabled:false];
+        [heroWebView setUserInteractionEnabled:YES];
         [self addSubview:heroWebView];
     } else {
         UIImageView *heroImageView = [[UIImageView alloc] initWithImage:[[ad hero] image]];
