@@ -267,7 +267,7 @@ CSNModalWindow *modalWindowView;
     [_reportsBuilder recordInteraction:[ad requestID] adID:[ad adID] versionID:[ad versionID] componentID:componentID interactionKind:interactionKind];
     CGRect bounds = [[UIScreen mainScreen] bounds];
     CSNModalWindow *modalWindow = [[CSNModalWindow alloc] initWithFrame:bounds forAd:ad withReportsBuilder:_reportsBuilder];
-    modalWindow.windowLevel = UIWindowLevelAlert;
+    modalWindow.windowLevel = UIWindowLevelNormal;
     [_visMonitor addView:[modalWindow getSecondaryActionView]];
     modalWindowView = modalWindow;
     [modalWindow makeKeyAndVisible];
