@@ -114,6 +114,10 @@
         //newFrame.size.height = expectedLabelSize.height;
         //bodyLabel.frame = newFrame;
         
+        NSString *imagePath = [[NSBundle bundleForClass:[CSNSecondaryActionView class]] pathForResource:@"powered_by_commutestream" ofType:@"png"];
+        NSData *imageData = [NSData dataWithContentsOfFile:imagePath];
+        UIImage *buttonBkg = [[UIImage alloc] initWithData:imageData];
+        
         [bodyLabel setTextColor:[UIColor darkGrayColor]];
         [bodyLabel setAd:nativeAd];
         [bodyLabel sizeToFit];
@@ -130,9 +134,15 @@
         
         frameHeight = adInfoView.frame.origin.y + adInfoView.frame.size.height + 5.0;
         
+        CGRect poweredByCSButtonRect = CGRectMake(self.frame.size.width - ((self.frame.size.width/2) + 162/2), -20.0, 162, 12);
+        UIButton *poweredByCS = [UIButton buttonWithType:UIButtonTypeCustom];
+        poweredByCS.frame = poweredByCSButtonRect;
+        [poweredByCS setBackgroundImage:buttonBkg forState:UIControlStateNormal];
+        
         [self addSubview:secondaryTitle];
         [self addSubview:secondarySubtitle];
         [self addSubview:heroImageView];
+        [self addSubview:poweredByCS];
         
         [adInfoView addSubview:adLogoImage];
         [adInfoView addSubview:headlineLabel];
