@@ -46,7 +46,7 @@
     [task resume];
 }
 
-- (void) sendAdReports:(CSNPAdReport *)adReports success:(void (^)())success failure:(void (^)(NSError *))failure {
+- (void) sendAdReports:(CSNPAdReport *)adReports success:(void (^)(void))success failure:(void (^)(NSError *))failure {
     NSURL *url = [[NSURL alloc] initWithString:[NSString stringWithFormat:@"https://%@/v2/native_reports", _host]];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
     [request setHTTPMethod:@"POST"];
@@ -69,11 +69,11 @@
             return failure(error);
         }
         NSError *protobufError;
-        CSNPAdResponses *adResponses = [CSNPAdResponses parseFromData:data error:&protobufError];
+        [CSNPAdResponses parseFromData:data error:&protobufError];
         if(protobufError) {
             return failure(protobufError);
         }
-        return success(adResponses);
+        return success();
     }];
     [task resume];
 }

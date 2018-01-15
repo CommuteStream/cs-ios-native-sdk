@@ -61,7 +61,7 @@
     [_adResponses setObject:adResponse forKey:[adResponse hashId]];
 }
 
-- (void) sendAdReports:(CSNPAdReports *)adReport success:(void (^)())success failure:(void (^)(NSError *))failure {
+- (void) sendAdReports:(CSNPAdReports *)adReport success:(void (^)(void))success failure:(void (^)(NSError *))failure {
     success();
 }
 
