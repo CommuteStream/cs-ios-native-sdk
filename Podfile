@@ -20,6 +20,10 @@ post_install do |installer|
     target.new_shell_script_build_phase.shell_script = "mkdir -p $PODS_CONFIGURATION_BUILD_DIR/#{target.name}"
     target.build_configurations.each do |config|
       config.build_settings['CONFIGURATION_BUILD_DIR'] = '$PODS_CONFIGURATION_BUILD_DIR'
+      config.build_settings['ONLY_ACTIVE_ARCH'] = 'NO'
     end
+  end
+  installer.pods_project.build_configurations.each do |config|
+    config.build_settings['ONLY_ACTIVE_ARCH'] = 'NO'
   end
 end
