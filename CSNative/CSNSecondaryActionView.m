@@ -45,17 +45,18 @@
     {
         CGFloat frameHeight = 0.0;
         [self setFrame:aRect];
-        [self setBackgroundColor:[UIColor colorWithRed:0.86 green:0.86 blue:0.86 alpha:1.0]];
         [self setAlpha:0.0];
+        
+        CGFloat topBuffer = 20.0;
         
         CGRect tempFrame = [self frame];
         tempFrame.origin.x = (self.frame.origin.x - self.frame.size.width/2);
         [self setFrame:tempFrame];
         
-        CGFloat yPosition = 5.0;
+        CGFloat yPosition = 5.0 + topBuffer;
         
         if(![[[nativeAd secondary] title] isEqualToString:@""]){
-            secondaryTitle = [[UILabel alloc] initWithFrame:CGRectMake(9.0, yPosition + 4.0, self.frame.size.width - 18.0, 16.0)];
+            secondaryTitle = [[UILabel alloc] initWithFrame:CGRectMake(9.0, yPosition + 2.0, self.frame.size.width - 18.0, 16.0)];
             [secondaryTitle setFont:[UIFont boldSystemFontOfSize:14.0]];
             [secondaryTitle setText:[[nativeAd secondary] title]];
             yPosition = secondaryTitle.frame.origin.y + secondaryTitle.frame.size.height;
@@ -96,10 +97,14 @@
         
         headlineLabel = [[CSNHeadlineView alloc] initWithFrame:CGRectMake(44.0, 7.0, adInfoView.frame.size.width - 50.0, 14.0)];
         [headlineLabel setFont:[UIFont boldSystemFontOfSize:12.0]];
+        [headlineLabel setLineBreakMode:NSLineBreakByWordWrapping];
+        headlineLabel.numberOfLines = 0;
         [headlineLabel setAd:nativeAd];
+        [headlineLabel sizeToFit];
         
+        yPosition = headlineLabel.frame.origin.y + headlineLabel.frame.size.height;
         
-        bodyLabel = [[CSNBodyView alloc] initWithFrame:CGRectMake(44.0, 21.0, adInfoView.frame.size.width - 50.0, 14.0)];
+        bodyLabel = [[CSNBodyView alloc] initWithFrame:CGRectMake(44.0, yPosition, adInfoView.frame.size.width - 50.0, 14.0)];
         //NSString *bodyString = nativeAd.body.body;
         [bodyLabel setFont:[UIFont systemFontOfSize:10.0]];
         [bodyLabel setLineBreakMode:NSLineBreakByWordWrapping];
@@ -134,11 +139,17 @@
         
         frameHeight = adInfoView.frame.origin.y + adInfoView.frame.size.height + 5.0;
         
-        CGRect poweredByCSButtonRect = CGRectMake(self.frame.size.width - ((self.frame.size.width/2) + 162/2), -20.0, 162, 12);
+        CGRect poweredByCSButtonRect = CGRectMake(self.frame.size.width - ((self.frame.size.width/2) + 162/2), 0.0, 162, 12);
         UIButton *poweredByCS = [UIButton buttonWithType:UIButtonTypeCustom];
+        
+        [poweredByCS addTarget:self action:@selector(tapViewAction:) forControlEvents:UIControlEventTouchUpInside];
         poweredByCS.frame = poweredByCSButtonRect;
         [poweredByCS setBackgroundImage:buttonBkg forState:UIControlStateNormal];
         
+        UIView *backgroundPlate = [[UIView alloc] initWithFrame:CGRectMake(0.0, 20.0, self.frame.size.width, self.frame.size.height)];
+        
+        [backgroundPlate setBackgroundColor:[UIColor colorWithRed:0.86 green:0.86 blue:0.86 alpha:1.0]];
+        [self addSubview:backgroundPlate];
         [self addSubview:secondaryTitle];
         [self addSubview:secondarySubtitle];
         [self addSubview:heroImageView];
@@ -220,12 +231,26 @@
         
         
         self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, self.frame.size.width, frameHeight);
+        [backgroundPlate setFrame:CGRectMake(0, 20.0, self.frame.size.width, self.frame.size.height - 20.0)];
 
         [self setAd:nativeAd];        
     }
     
     
     return self;
+    
+}
+    
+-(void) tapViewAction:(UIGestureRecognizer *)sender{
+    NSString *urlString = @"https://commutestream.com";
+    NSURL *url = [NSURL URLWithString:urlString];
+    
+    if ([[UIApplication sharedApplication] respondsToSelector:@selector(openURL:options:completionHandler:)]) {
+        [[UIApplication sharedApplication] openURL:url options:@{} completionHandler:NULL];
+    }else{
+        // Fallback on earlier versions
+        [[UIApplication sharedApplication] openURL:url];
+    }
     
 }
 
