@@ -3,6 +3,6 @@
 
 @import Foundation;
 
-static NSString *SDK_VERSION = @"1.1.2";
+static NSString *SDK_VERSION = @"1.1.3";
 
 #endif
