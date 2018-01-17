@@ -39,6 +39,7 @@ CF_EXTERN_C_BEGIN
 @class CSNPComponentInteraction;
 @class CSNPComponentReport;
 @class CSNPDeviceID;
+@class CSNPDeviceLocation;
 @class CSNPHeadlineComponent;
 @class CSNPHeroComponent;
 @class CSNPLocation;
@@ -546,6 +547,7 @@ typedef GPB_ENUM(CSNPAdRequests_FieldNumber) {
   CSNPAdRequests_FieldNumber_Timezone = 4,
   CSNPAdRequests_FieldNumber_AdRequestsArray = 5,
   CSNPAdRequests_FieldNumber_SdkVersion = 6,
+  CSNPAdRequests_FieldNumber_DeviceLocationsArray = 7,
 };
 
 /**
@@ -570,6 +572,10 @@ typedef GPB_ENUM(CSNPAdRequests_FieldNumber) {
 @property(nonatomic, readonly) NSUInteger adRequestsArray_Count;
 
 @property(nonatomic, readwrite, copy, null_resettable) NSString *sdkVersion;
+
+@property(nonatomic, readwrite, strong, null_resettable) NSMutableArray<CSNPDeviceLocation*> *deviceLocationsArray;
+/** The number of items in @c deviceLocationsArray without causing the array to be created. */
+@property(nonatomic, readonly) NSUInteger deviceLocationsArray_Count;
 
 @end
 
@@ -618,6 +624,7 @@ typedef GPB_ENUM(CSNPAdResponses_FieldNumber) {
 typedef GPB_ENUM(CSNPDeviceID_FieldNumber) {
   CSNPDeviceID_FieldNumber_DeviceIdType = 1,
   CSNPDeviceID_FieldNumber_DeviceId = 2,
+  CSNPDeviceID_FieldNumber_LimitTracking = 3,
 };
 
 @interface CSNPDeviceID : GPBMessage
@@ -625,6 +632,8 @@ typedef GPB_ENUM(CSNPDeviceID_FieldNumber) {
 @property(nonatomic, readwrite) CSNPDeviceID_Type deviceIdType;
 
 @property(nonatomic, readwrite, copy, null_resettable) NSData *deviceId;
+
+@property(nonatomic, readwrite) BOOL limitTracking;
 
 @end
 
@@ -639,6 +648,48 @@ int32_t CSNPDeviceID_DeviceIdType_RawValue(CSNPDeviceID *message);
  * was generated.
  **/
 void SetCSNPDeviceID_DeviceIdType_RawValue(CSNPDeviceID *message, int32_t value);
+
+#pragma mark - CSNPDeviceLocation
+
+typedef GPB_ENUM(CSNPDeviceLocation_FieldNumber) {
+  CSNPDeviceLocation_FieldNumber_Timestamp = 1,
+  CSNPDeviceLocation_FieldNumber_Latitude = 2,
+  CSNPDeviceLocation_FieldNumber_Longitude = 3,
+  CSNPDeviceLocation_FieldNumber_Altitude = 4,
+  CSNPDeviceLocation_FieldNumber_Bearing = 5,
+  CSNPDeviceLocation_FieldNumber_Speed = 6,
+  CSNPDeviceLocation_FieldNumber_HorizontalAccuracy = 7,
+  CSNPDeviceLocation_FieldNumber_VerticalAccuracy = 8,
+  CSNPDeviceLocation_FieldNumber_BearingAccuracy = 9,
+  CSNPDeviceLocation_FieldNumber_SpeedAccuracy = 10,
+  CSNPDeviceLocation_FieldNumber_Provider = 11,
+};
+
+@interface CSNPDeviceLocation : GPBMessage
+
+@property(nonatomic, readwrite) uint64_t timestamp;
+
+@property(nonatomic, readwrite) double latitude;
+
+@property(nonatomic, readwrite) double longitude;
+
+@property(nonatomic, readwrite) double altitude;
+
+@property(nonatomic, readwrite) double bearing;
+
+@property(nonatomic, readwrite) double speed;
+
+@property(nonatomic, readwrite) double horizontalAccuracy;
+
+@property(nonatomic, readwrite) double verticalAccuracy;
+
+@property(nonatomic, readwrite) double bearingAccuracy;
+
+@property(nonatomic, readwrite) double speedAccuracy;
+
+@property(nonatomic, readwrite, copy, null_resettable) NSString *provider;
+
+@end
 
 #pragma mark - CSNPComponentInteraction
 
@@ -750,6 +801,7 @@ typedef GPB_ENUM(CSNPAdReports_FieldNumber) {
   CSNPAdReports_FieldNumber_DeviceTime = 5,
   CSNPAdReports_FieldNumber_AdReportsArray = 6,
   CSNPAdReports_FieldNumber_SdkVersion = 7,
+  CSNPAdReports_FieldNumber_DeviceLocationsArray = 8,
 };
 
 @interface CSNPAdReports : GPBMessage
@@ -773,6 +825,10 @@ typedef GPB_ENUM(CSNPAdReports_FieldNumber) {
 @property(nonatomic, readonly) NSUInteger adReportsArray_Count;
 
 @property(nonatomic, readwrite, copy, null_resettable) NSString *sdkVersion;
+
+@property(nonatomic, readwrite, strong, null_resettable) NSMutableArray<CSNPDeviceLocation*> *deviceLocationsArray;
+/** The number of items in @c deviceLocationsArray without causing the array to be created. */
+@property(nonatomic, readonly) NSUInteger deviceLocationsArray_Count;
 
 @end
 

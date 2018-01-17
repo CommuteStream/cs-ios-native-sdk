@@ -1356,6 +1356,7 @@ typedef struct CSNPAdRequest__storage_ {
 @dynamic timezone;
 @dynamic adRequestsArray, adRequestsArray_Count;
 @dynamic sdkVersion;
+@dynamic deviceLocationsArray, deviceLocationsArray_Count;
 
 typedef struct CSNPAdRequests__storage_ {
   uint32_t _has_storage_[1];
@@ -1365,6 +1366,7 @@ typedef struct CSNPAdRequests__storage_ {
   NSString *timezone;
   NSMutableArray *adRequestsArray;
   NSString *sdkVersion;
+  NSMutableArray *deviceLocationsArray;
 } CSNPAdRequests__storage_;
 
 // This method is threadsafe because it is initially called
@@ -1426,6 +1428,15 @@ typedef struct CSNPAdRequests__storage_ {
         .offset = (uint32_t)offsetof(CSNPAdRequests__storage_, sdkVersion),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeString,
+      },
+      {
+        .name = "deviceLocationsArray",
+        .dataTypeSpecific.className = GPBStringifySymbol(CSNPDeviceLocation),
+        .number = CSNPAdRequests_FieldNumber_DeviceLocationsArray,
+        .hasIndex = GPBNoHasBit,
+        .offset = (uint32_t)offsetof(CSNPAdRequests__storage_, deviceLocationsArray),
+        .flags = GPBFieldRepeated,
+        .dataType = GPBDataTypeMessage,
       },
     };
     GPBDescriptor *localDescriptor =
@@ -1558,6 +1569,7 @@ typedef struct CSNPAdResponses__storage_ {
 
 @dynamic deviceIdType;
 @dynamic deviceId;
+@dynamic limitTracking;
 
 typedef struct CSNPDeviceID__storage_ {
   uint32_t _has_storage_[1];
@@ -1588,6 +1600,15 @@ typedef struct CSNPDeviceID__storage_ {
         .offset = (uint32_t)offsetof(CSNPDeviceID__storage_, deviceId),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeBytes,
+      },
+      {
+        .name = "limitTracking",
+        .dataTypeSpecific.className = NULL,
+        .number = CSNPDeviceID_FieldNumber_LimitTracking,
+        .hasIndex = 2,
+        .offset = 3,  // Stored in _has_storage_ to save space.
+        .flags = GPBFieldOptional,
+        .dataType = GPBDataTypeBool,
       },
     };
     GPBDescriptor *localDescriptor =
@@ -1651,6 +1672,159 @@ BOOL CSNPDeviceID_Type_IsValidValue(int32_t value__) {
       return NO;
   }
 }
+
+#pragma mark - CSNPDeviceLocation
+
+@implementation CSNPDeviceLocation
+
+@dynamic timestamp;
+@dynamic latitude;
+@dynamic longitude;
+@dynamic altitude;
+@dynamic bearing;
+@dynamic speed;
+@dynamic horizontalAccuracy;
+@dynamic verticalAccuracy;
+@dynamic bearingAccuracy;
+@dynamic speedAccuracy;
+@dynamic provider;
+
+typedef struct CSNPDeviceLocation__storage_ {
+  uint32_t _has_storage_[1];
+  NSString *provider;
+  uint64_t timestamp;
+  double latitude;
+  double longitude;
+  double altitude;
+  double bearing;
+  double speed;
+  double horizontalAccuracy;
+  double verticalAccuracy;
+  double bearingAccuracy;
+  double speedAccuracy;
+} CSNPDeviceLocation__storage_;
+
+// This method is threadsafe because it is initially called
+// in +initialize for each subclass.
++ (GPBDescriptor *)descriptor {
+  static GPBDescriptor *descriptor = nil;
+  if (!descriptor) {
+    static GPBMessageFieldDescription fields[] = {
+      {
+        .name = "timestamp",
+        .dataTypeSpecific.className = NULL,
+        .number = CSNPDeviceLocation_FieldNumber_Timestamp,
+        .hasIndex = 0,
+        .offset = (uint32_t)offsetof(CSNPDeviceLocation__storage_, timestamp),
+        .flags = GPBFieldOptional,
+        .dataType = GPBDataTypeUInt64,
+      },
+      {
+        .name = "latitude",
+        .dataTypeSpecific.className = NULL,
+        .number = CSNPDeviceLocation_FieldNumber_Latitude,
+        .hasIndex = 1,
+        .offset = (uint32_t)offsetof(CSNPDeviceLocation__storage_, latitude),
+        .flags = GPBFieldOptional,
+        .dataType = GPBDataTypeDouble,
+      },
+      {
+        .name = "longitude",
+        .dataTypeSpecific.className = NULL,
+        .number = CSNPDeviceLocation_FieldNumber_Longitude,
+        .hasIndex = 2,
+        .offset = (uint32_t)offsetof(CSNPDeviceLocation__storage_, longitude),
+        .flags = GPBFieldOptional,
+        .dataType = GPBDataTypeDouble,
+      },
+      {
+        .name = "altitude",
+        .dataTypeSpecific.className = NULL,
+        .number = CSNPDeviceLocation_FieldNumber_Altitude,
+        .hasIndex = 3,
+        .offset = (uint32_t)offsetof(CSNPDeviceLocation__storage_, altitude),
+        .flags = GPBFieldOptional,
+        .dataType = GPBDataTypeDouble,
+      },
+      {
+        .name = "bearing",
+        .dataTypeSpecific.className = NULL,
+        .number = CSNPDeviceLocation_FieldNumber_Bearing,
+        .hasIndex = 4,
+        .offset = (uint32_t)offsetof(CSNPDeviceLocation__storage_, bearing),
+        .flags = GPBFieldOptional,
+        .dataType = GPBDataTypeDouble,
+      },
+      {
+        .name = "speed",
+        .dataTypeSpecific.className = NULL,
+        .number = CSNPDeviceLocation_FieldNumber_Speed,
+        .hasIndex = 5,
+        .offset = (uint32_t)offsetof(CSNPDeviceLocation__storage_, speed),
+        .flags = GPBFieldOptional,
+        .dataType = GPBDataTypeDouble,
+      },
+      {
+        .name = "horizontalAccuracy",
+        .dataTypeSpecific.className = NULL,
+        .number = CSNPDeviceLocation_FieldNumber_HorizontalAccuracy,
+        .hasIndex = 6,
+        .offset = (uint32_t)offsetof(CSNPDeviceLocation__storage_, horizontalAccuracy),
+        .flags = GPBFieldOptional,
+        .dataType = GPBDataTypeDouble,
+      },
+      {
+        .name = "verticalAccuracy",
+        .dataTypeSpecific.className = NULL,
+        .number = CSNPDeviceLocation_FieldNumber_VerticalAccuracy,
+        .hasIndex = 7,
+        .offset = (uint32_t)offsetof(CSNPDeviceLocation__storage_, verticalAccuracy),
+        .flags = GPBFieldOptional,
+        .dataType = GPBDataTypeDouble,
+      },
+      {
+        .name = "bearingAccuracy",
+        .dataTypeSpecific.className = NULL,
+        .number = CSNPDeviceLocation_FieldNumber_BearingAccuracy,
+        .hasIndex = 8,
+        .offset = (uint32_t)offsetof(CSNPDeviceLocation__storage_, bearingAccuracy),
+        .flags = GPBFieldOptional,
+        .dataType = GPBDataTypeDouble,
+      },
+      {
+        .name = "speedAccuracy",
+        .dataTypeSpecific.className = NULL,
+        .number = CSNPDeviceLocation_FieldNumber_SpeedAccuracy,
+        .hasIndex = 9,
+        .offset = (uint32_t)offsetof(CSNPDeviceLocation__storage_, speedAccuracy),
+        .flags = GPBFieldOptional,
+        .dataType = GPBDataTypeDouble,
+      },
+      {
+        .name = "provider",
+        .dataTypeSpecific.className = NULL,
+        .number = CSNPDeviceLocation_FieldNumber_Provider,
+        .hasIndex = 10,
+        .offset = (uint32_t)offsetof(CSNPDeviceLocation__storage_, provider),
+        .flags = GPBFieldOptional,
+        .dataType = GPBDataTypeString,
+      },
+    };
+    GPBDescriptor *localDescriptor =
+        [GPBDescriptor allocDescriptorForClass:[CSNPDeviceLocation class]
+                                     rootClass:[CSNPCsnmessagesRoot class]
+                                          file:CSNPCsnmessagesRoot_FileDescriptor()
+                                        fields:fields
+                                    fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
+                                   storageSize:sizeof(CSNPDeviceLocation__storage_)
+                                         flags:GPBDescriptorInitializationFlag_None];
+    NSAssert(descriptor == nil, @"Startup recursed!");
+    descriptor = localDescriptor;
+  }
+  return descriptor;
+}
+
+@end
 
 #pragma mark - CSNPComponentInteraction
 
@@ -1957,6 +2131,7 @@ typedef struct CSNPAdReport__storage_ {
 @dynamic deviceTime;
 @dynamic adReportsArray, adReportsArray_Count;
 @dynamic sdkVersion;
+@dynamic deviceLocationsArray, deviceLocationsArray_Count;
 
 typedef struct CSNPAdReports__storage_ {
   uint32_t _has_storage_[1];
@@ -1966,6 +2141,7 @@ typedef struct CSNPAdReports__storage_ {
   NSMutableArray *ipAddressesArray;
   NSMutableArray *adReportsArray;
   NSString *sdkVersion;
+  NSMutableArray *deviceLocationsArray;
   uint64_t deviceTime;
 } CSNPAdReports__storage_;
 
@@ -2037,6 +2213,15 @@ typedef struct CSNPAdReports__storage_ {
         .offset = (uint32_t)offsetof(CSNPAdReports__storage_, sdkVersion),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeString,
+      },
+      {
+        .name = "deviceLocationsArray",
+        .dataTypeSpecific.className = GPBStringifySymbol(CSNPDeviceLocation),
+        .number = CSNPAdReports_FieldNumber_DeviceLocationsArray,
+        .hasIndex = GPBNoHasBit,
+        .offset = (uint32_t)offsetof(CSNPAdReports__storage_, deviceLocationsArray),
+        .flags = GPBFieldRepeated,
+        .dataType = GPBDataTypeMessage,
       },
     };
     GPBDescriptor *localDescriptor =
