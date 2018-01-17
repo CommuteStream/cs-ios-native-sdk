@@ -1,3 +1,4 @@
+@import AdSupport;
 #import "CSNSDKVersion.h"
 #import "CSNAdsController.h"
 #import "CSNClient.h"
@@ -49,7 +50,6 @@
 CSNModalWindow *modalWindowView;
 
 - (instancetype) initWithAdUnit:(NSString *)adUnit {
-    CSNLocationManager *locManager = [CSNLocationManager sharedLocationManager];
     NSUUID *adUnitUUID = [[NSUUID alloc] initWithUUIDString:adUnit];
     uuid_t uuid;
     [adUnitUUID getUUIDBytes:uuid];
@@ -65,14 +65,9 @@ CSNModalWindow *modalWindowView;
 
 - (instancetype) initWithClient:(id<CSNClient>)client adUnit:(NSData *)adUnit {
     _adUnit = adUnit;
+
     // get device id
-    NSUUID *vendorID = [[UIDevice currentDevice] identifierForVendor];
-    uuid_t vendorUUID;
-    [vendorID getUUIDBytes:vendorUUID];
-    NSData *deviceID = [[NSData alloc] initWithBytes:vendorUUID length:16];
-    _deviceID = [[CSNPDeviceID alloc] init];
-    [_deviceID setDeviceIdType:CSNPDeviceID_Type_Idfa];
-    [_deviceID setDeviceId:deviceID];
+    _deviceID = [self getDeviceID];
     
     // get ip addresses
     _ipAddresses = [self getIpAddresses];
@@ -89,6 +84,19 @@ CSNModalWindow *modalWindowView;
     _tapDelegates = [[NSMapTable alloc] initWithKeyOptions:NSMapTableWeakMemory valueOptions:NSMapTableStrongMemory capacity:10];
     [[NSRunLoop mainRunLoop] addTimer:_reportsTimer forMode:NSDefaultRunLoopMode];
     return self;
+}
+
+- (CSNPDeviceID *) getDeviceID {
+    ASIdentifierManager *adIdentManager = [ASIdentifierManager sharedManager];
+    NSUUID *vendorID = [adIdentManager advertisingIdentifier];
+    uuid_t vendorUUID;
+    [vendorID getUUIDBytes:vendorUUID];
+    NSData *deviceIDData = [[NSData alloc] initWithBytes:vendorUUID length:16];
+    CSNPDeviceID *deviceID = [[CSNPDeviceID alloc] init];
+    [deviceID setDeviceIdType:CSNPDeviceID_Type_Idfa];
+    [deviceID setDeviceId:deviceIDData];
+    [deviceID setLimitTracking:![adIdentManager isAdvertisingTrackingEnabled]];
+    return deviceID;
 }
 
 - (void) fetchAds:(NSArray<CSNAdRequest *> *)adRequests completed:(void (^)(NSArray<CSNOptionalAd *> *))completed {
@@ -260,7 +268,13 @@ CSNModalWindow *modalWindowView;
 }
 
 - (void) sendReports {
-    [[CSNLocationManager sharedLocationManager] getLocations];
+    // update device id, ip addresses, and location of report before sending
+    // will periodically cause the device and ip addresses to be refreshed (every 30s)
+    _deviceID = [self getDeviceID];
+    _ipAddresses = [self getIpAddresses];
+    [_reportsBuilder setDeviceID:_deviceID];
+    [_reportsBuilder setIpAddresses:_ipAddresses];
+    [_reportsBuilder setLocations:[[CSNLocationManager sharedLocationManager] getLocations]];
     CSNPAdReports *reports = [_reportsBuilder buildReport];
     [_client sendAdReports:reports success:^{
     } failure:^(NSError *error) {

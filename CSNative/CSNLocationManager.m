@@ -57,14 +57,17 @@ const CLLocationDistance kDistanceFilter = 50.0; // distance in meters that must
 
 #pragma mark - Public
 
--(NSArray<CLLocation* > *)getLocations
+-(NSArray<CSNPDeviceLocation* > *)getLocations
 {
     [self checkRecentLocation];
-    NSArray<CLLocation *> *locations = [_locations copy];
-    if([locations count] == 0 && _lastLocation) {
-        locations = @[_lastLocation];
+    NSMutableArray<CSNPDeviceLocation *> *locations = [[NSMutableArray alloc] initWithCapacity:[_locations count]];
+    for(CLLocation *location in _locations) {
+        [locations addObject:[self encodeLocation:location]];
     }
     [_locations removeAllObjects];
+    if([locations count] == 0 && _lastLocation) {
+        [locations addObject:[self encodeLocation:_lastLocation]];
+    }
     return locations;
 }
 
@@ -85,6 +88,20 @@ const CLLocationDistance kDistanceFilter = 50.0; // distance in meters that must
 }
 
 #pragma mark - Internal
+
+- (CSNPDeviceLocation *) encodeLocation:(CLLocation *)location {
+    uint64_t timestamp = [[location timestamp] timeIntervalSince1970] * 1000.0;
+    CSNPDeviceLocation *deviceLocation = [[CSNPDeviceLocation alloc] init];
+    [deviceLocation setTimestamp:timestamp];
+    [deviceLocation setLatitude:location.coordinate.latitude];
+    [deviceLocation setLongitude:location.coordinate.longitude];
+    [deviceLocation setAltitude:location.altitude];
+    [deviceLocation setBearing:location.course];
+    [deviceLocation setSpeed:location.speed];
+    [deviceLocation setHorizontalAccuracy:location.horizontalAccuracy];
+    [deviceLocation setVerticalAccuracy:location.verticalAccuracy];
+    return deviceLocation;
+}
 
 -(void)checkRecentLocation {
     CLLocation *recentLocation = _locationManager.location;

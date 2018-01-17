@@ -2,6 +2,8 @@
 @import CoreLocation;
 @import UIKit;
 
+#import "Csnmessages.pbobjc.h"
+
 @interface CSNLocationManager : NSObject
 
 /**
@@ -14,7 +16,7 @@
  * will always return the last known location of the device if available.
  * Automatically updates when location changes are seen.
  */
--(NSArray<CLLocation * > *)getLocations;
+-(NSArray<CSNPDeviceLocation * > *)getLocations;
 
 /**
  * Enable automatic updates
