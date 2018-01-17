@@ -4,6 +4,7 @@
 #import "CSNHttpClient.h"
 #import "CSNMockClient.h"
 #import "CSNLogoView.h"
+#import "CSNLocationManager.h"
 #import "CSNModalWindow.h"
 #import "CSNVisibilityMonitor.h"
 #import "CSNAdReportsBuilder.h"
@@ -48,6 +49,7 @@
 CSNModalWindow *modalWindowView;
 
 - (instancetype) initWithAdUnit:(NSString *)adUnit {
+    CSNLocationManager *locManager = [CSNLocationManager sharedLocationManager];
     NSUUID *adUnitUUID = [[NSUUID alloc] initWithUUIDString:adUnit];
     uuid_t uuid;
     [adUnitUUID getUUIDBytes:uuid];
@@ -101,6 +103,7 @@ CSNModalWindow *modalWindowView;
 }
 
 - (CSNPAdRequests *) buildRequestsMessage:(NSArray<CSNAdRequest *> *)adRequests {
+    [[CSNLocationManager sharedLocationManager] getLocations];
     NSMutableDictionary *uniqueAdRequests = [[NSMutableDictionary alloc] initWithCapacity:[adRequests count]];
     CSNPAdRequests *adRequestsMsg = [[CSNPAdRequests alloc] init];
     [adRequestsMsg setIpAddressesArray:[NSMutableArray arrayWithArray:_ipAddresses]];
@@ -257,6 +260,7 @@ CSNModalWindow *modalWindowView;
 }
 
 - (void) sendReports {
+    [[CSNLocationManager sharedLocationManager] getLocations];
     CSNPAdReports *reports = [_reportsBuilder buildReport];
     [_client sendAdReports:reports success:^{
     } failure:^(NSError *error) {

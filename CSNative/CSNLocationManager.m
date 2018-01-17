@@ -1,68 +1,50 @@
 #import "CSNLocationManager.h"
 
-const CLLocationDistance kCityBlockDistanceFilter = 100.0;
-
-const NSTimeInterval kLocationUpdateDuration = 15.0;
-
-const NSTimeInterval kLocationUpdateInterval = 10.0 * 60.0;
+const CLLocationDistance kDistanceFilter = 50.0; // distance in meters that must change for update to be recieved
 
 @interface CSNLocationManager () <CLLocationManagerDelegate>
 
-@property (nonatomic, readwrite) CLLocation *lastKnownLocation;
 @property (nonatomic) CLLocationManager *locationManager;
-@property (nonatomic) BOOL authorizedForLocationServices;
-@property (nonatomic) NSDate *timeOfLastLocationUpdate;
-@property (nonatomic) NSTimer *nextLocationUpdateTimer;
-@property (nonatomic) NSTimer *locationUpdateDurationTimer;
+@property (nonatomic, readwrite) CLLocation *lastLocation;
+@property (nonatomic) NSDate *lastUpdate;
+@property (nonatomic) bool automaticUpdatesEnabled;
+@property (nonatomic, readwrite) NSMutableArray<CLLocation *> *locations;
 
 @end
 
 
 @implementation CSNLocationManager
 
-
-+ (instancetype)sharedProvider
++ (instancetype) sharedLocationManager
 {
-    static CSLocationManager *sharedProvider = nil;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        sharedProvider = [[[self class] alloc] init];
-    });
-    return sharedProvider;
+    static CSNLocationManager *sharedLocationManager = nil;
+    @synchronized(self) {
+        if (sharedLocationManager == nil)
+            sharedLocationManager = [[self alloc] init];
+    }
+    return sharedLocationManager;
 }
 
 - (instancetype)init
 {
     self = [super init];
     if (self) {
-        _locationUpdatesEnabled = YES;
-        
+        _automaticUpdatesEnabled = false;
         _locationManager = [[CLLocationManager alloc] init];
         _locationManager.delegate = self;
-        _locationManager.distanceFilter = kCityBlockDistanceFilter;
-        
-        // CLLocationManager's `location` property may already contain location data upon
-        // initialization (for example, if the application uses significant location updates).
-        CLLocation *existingLocation = _locationManager.location;
-        if ([self locationHasValidCoordinates:existingLocation]) {
-            _lastKnownLocation = existingLocation;
-            NSLog(@"Found previous location information.");
-        }
-        
+        _locationManager.distanceFilter = kDistanceFilter;
+        _locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters;
+        _locations = [[NSMutableArray alloc] init];
         
         // Avoid processing location updates when the application enters the background.
         [[NSNotificationCenter defaultCenter] addObserverForName:UIApplicationDidEnterBackgroundNotification object:[UIApplication sharedApplication] queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *note) {
-            [self stopAllCurrentOrScheduledLocationUpdates];
+            [self stopUpdates];
         }];
         
         // Re-activate location updates when the application comes back to the foreground.
         [[NSNotificationCenter defaultCenter] addObserverForName:UIApplicationWillEnterForegroundNotification object:[UIApplication sharedApplication] queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *note) {
-            if (_locationUpdatesEnabled) {
-                [self resumeLocationUpdatesAfterBackgrounding];
-            }
+            [self startUpdates];
         }];
-        
-        [self startRecurringLocationUpdates];
     }
     return self;
 }
@@ -75,38 +57,39 @@ const NSTimeInterval kLocationUpdateInterval = 10.0 * 60.0;
 
 #pragma mark - Public
 
-- (CLLocation *)lastKnownLocation
+-(NSArray<CLLocation* > *)getLocations
 {
-    if (!self.locationUpdatesEnabled) {
-        return nil;
+    [self checkRecentLocation];
+    NSArray<CLLocation *> *locations = [_locations copy];
+    if([locations count] == 0 && _lastLocation) {
+        locations = @[_lastLocation];
     }
-    
-    return _lastKnownLocation;
+    [_locations removeAllObjects];
+    return locations;
 }
 
-- (void)setLocationUpdatesEnabled:(BOOL)enabled
+-(void)enableAutomaticUpdates
 {
-    _locationUpdatesEnabled = enabled;
-    
-    if (!_locationUpdatesEnabled) {
-        [self stopAllCurrentOrScheduledLocationUpdates];
-        self.lastKnownLocation = nil;
-    } else if (![self.locationUpdateDurationTimer isValid] && ![self.nextLocationUpdateTimer isValid]) {
-        [self startRecurringLocationUpdates];
+    if(!_automaticUpdatesEnabled) {
+        _automaticUpdatesEnabled = true;
+        [self startUpdates];
+    }
+}
+
+-(void)disableAutomaticUpdates
+{
+    if(_automaticUpdatesEnabled) {
+        _automaticUpdatesEnabled = false;
+        [self stopUpdates];
     }
 }
 
 #pragma mark - Internal
 
-- (void)setAuthorizedForLocationServices:(BOOL)authorizedForLocationServices
-{
-    _authorizedForLocationServices = authorizedForLocationServices;
-    
-    if (_authorizedForLocationServices && [CLLocationManager locationServicesEnabled]) {
-        [self startRecurringLocationUpdates];
-    } else {
-        [self stopAllCurrentOrScheduledLocationUpdates];
-        self.lastKnownLocation = nil;
+-(void)checkRecentLocation {
+    CLLocation *recentLocation = _locationManager.location;
+    if(_lastLocation != recentLocation) {
+        [self addLocation:recentLocation];
     }
 }
 
@@ -120,105 +103,46 @@ const NSTimeInterval kLocationUpdateInterval = 10.0 * 60.0;
 }
 
 /**
- * Tells the location provider to start periodically retrieving new location data.
- *
- * The location provider will activate its underlying location manager for a specified amount of
- * time, during which the provider may receive delegate callbacks about location updates. After this
- * duration, the provider will schedule a future update. These updates can be stopped via
- * -stopAllCurrentOrScheduledLocationUpdates.
+ * Start recurring location updates or timer to check for periodically check for location services being enabled
  */
-- (void)startRecurringLocationUpdates
+- (void)startUpdates
 {
-    self.timeOfLastLocationUpdate = [NSDate date];
-    
-    if (![CLLocationManager locationServicesEnabled] || ![self isAuthorizedStatus:[CLLocationManager authorizationStatus]]) {
-        NSLog(@"Will not start location updates: the application is not authorized "
-                   @"for location services.");
+    // if automatic updates have been disabled then give up on starting updates
+    if(!_automaticUpdatesEnabled) {
         return;
     }
     
-    if (!_locationUpdatesEnabled) {
-        NSLog(@"Will not start location updates because they have been disabled.");
-        return;
-    }
-    
-    [self.locationManager startUpdatingLocation];
-    
-    [self.locationUpdateDurationTimer invalidate];
-    self.locationUpdateDurationTimer = [NSTimer scheduledTimerWithTimeInterval:kLocationUpdateDuration target:self selector:@selector(currentLocationUpdateDidFinish) userInfo:nil repeats:NO];
-}
-
-- (void)currentLocationUpdateDidFinish
-{
-    NSLog(@"Stopping the current location update session and scheduling the next session.");
-    [self.locationUpdateDurationTimer invalidate];
-    [self.locationManager stopUpdatingLocation];
-    
-    [self scheduleNextLocationUpdateAfterDelay: kLocationUpdateInterval];
-}
-
-- (void)scheduleNextLocationUpdateAfterDelay:(NSTimeInterval)delay
-{
-    NSLog(@"Next user location update due in %.1f seconds.", delay);
-    [self.nextLocationUpdateTimer invalidate];
-    //self.nextLocationUpdateTimer = [NSTimer timerWithTimeInterval:delay target:self selector:@selector(startRecurringLocationUpdates) userInfo:nil repeats:NO];
-    
-    self.nextLocationUpdateTimer = [NSTimer scheduledTimerWithTimeInterval:delay target:self selector:@selector(startRecurringLocationUpdates) userInfo:nil repeats:NO];
-    
-}
-
-- (void)stopAllCurrentOrScheduledLocationUpdates
-{
-    NSLog(@"Stopping any scheduled location updates.");
-    [self.locationUpdateDurationTimer invalidate];
-    [self.locationManager stopUpdatingLocation];
-    
-    [self.nextLocationUpdateTimer invalidate];
-}
-
-- (void)resumeLocationUpdatesAfterBackgrounding
-{
-    NSTimeInterval timeSinceLastUpdate = [[NSDate date] timeIntervalSinceDate:self.timeOfLastLocationUpdate];
-    
-    if (timeSinceLastUpdate >= kLocationUpdateInterval) {
-        NSLog(@"Last known user location is stale. Updating location.");
-        [self startRecurringLocationUpdates];
-    } else if (timeSinceLastUpdate >= 0) {
-        NSTimeInterval timeToNextUpdate = kLocationUpdateInterval - timeSinceLastUpdate;
-        [self scheduleNextLocationUpdateAfterDelay:timeToNextUpdate];
+    if ([CLLocationManager locationServicesEnabled] && [self isAuthorizedStatus:[CLLocationManager authorizationStatus]]) {
+        NSLog(@"Start automatically updating location");
+        [self addLocation:_locationManager.location];
+        [self.locationManager startUpdatingLocation];
     } else {
-        [self scheduleNextLocationUpdateAfterDelay:kLocationUpdateInterval];
+        NSLog(@"Not automatically updating location, not authorized or enabled");
     }
 }
 
-#pragma mark - CLLocation Helpers
-
-- (BOOL)isLocation:(CLLocation *)location betterThanLocation:(CLLocation *)otherLocation
+- (void)stopUpdates
 {
-    if (!otherLocation) {
-        return YES;
-    }
-    
-    // Nil locations and locations with invalid horizontal accuracy are worse than any location.
-    if (![self locationHasValidCoordinates:location]) {
-        return NO;
-    }
-    
-    if ([self isLocation:location olderThanLocation:otherLocation]) {
-        return NO;
-    }
-    
-    return YES;
+    NSLog(@"Stop automatically updating location.");
+    [self.locationManager stopUpdatingLocation];
 }
 
-- (BOOL)locationHasValidCoordinates:(CLLocation *)location
+- (void)addLocations:(NSArray *)locations
 {
-    return location && location.horizontalAccuracy > 0;
+    for (CLLocation *location in locations) {
+        [self addLocation:location];
+    }
 }
 
-- (BOOL)isLocation:(CLLocation *)location olderThanLocation:(CLLocation *)otherLocation
+- (void) addLocation:(CLLocation *)location
 {
-    return [location.timestamp timeIntervalSinceDate:otherLocation.timestamp] < 0;
+    if(!location) {
+        return;
+    }
+    NSLog(@"Adding new location %@.", location);
+    _lastLocation = location;
+    _lastUpdate = [[NSDate alloc] init];
+    [_locations addObject:location];
 }
 
 #pragma mark - <CLLocationManagerDelegate> (iOS 6.0+)
@@ -231,57 +155,34 @@ const NSTimeInterval kLocationUpdateInterval = 10.0 * 60.0;
         case kCLAuthorizationStatusNotDetermined:
         case kCLAuthorizationStatusDenied:
         case kCLAuthorizationStatusRestricted:
-            self.authorizedForLocationServices = NO;
+            [self stopUpdates];
             break;
         case kCLAuthorizationStatusAuthorizedAlways: // same as kCLAuthorizationStatusAuthorized
 #if __IPHONE_OS_VERSION_MAX_ALLOWED >= 80000
         case kCLAuthorizationStatusAuthorizedWhenInUse:
 #endif
-            self.authorizedForLocationServices = YES;
+            [self startUpdates];
             break;
         default:
-            self.authorizedForLocationServices = NO;
             break;
     }
 }
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
 {
-    NSLog(@"Called didUpdateLocations: %@", locations);
-
+    [self addLocations:locations];
 }
 
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
 {
     if (error.code == kCLErrorDenied) {
         NSLog(@"Location manager failed: the user has denied access to location services.");
-        [self stopAllCurrentOrScheduledLocationUpdates];
+        [self stopUpdates];
     } else if (error.code == kCLErrorLocationUnknown) {
         NSLog(@"Location manager could not obtain a location right now.");
     }
 }
-- (void)locationManager:(CLLocationManager *)manager addLocations:(NSArray *)locations
-{
-    //TODO add locations to location manager and remove old ones
-    for (CLLocation *location in locations) {
-        if ([self isLocation:location betterThanLocation:self.lastKnownLocation]) {
-            self.lastKnownLocation = location;
-            NSLog(@"Updated last known user location: %@", location);
-        }
-    }
-}
 
-#pragma mark - <CLLocationManagerDelegate> (iOS < 6.0)
-
-- (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
-{
-    // TODO add location
-    if ([self isLocation:newLocation betterThanLocation:self.lastKnownLocation]) {
-        self.lastKnownLocation = newLocation;
-        //
-        NSLog(@"Updated last known user location.");
-    }
-}
 
 @end
 

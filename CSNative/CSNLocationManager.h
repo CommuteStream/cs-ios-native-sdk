@@ -1,27 +1,29 @@
-@import Foundation
-@import CoreLocation
-@import UIKit
+@import Foundation;
+@import CoreLocation;
+@import UIKit;
 
 @interface CSNLocationManager : NSObject
 
 /**
- * Returns the shared instance of the `MPGeolocationProvider` class.
- *
- * @return The shared instance of the `MPGeolocationProvider` class.
+ * Get a pointer to the location manager singleton
  */
-+ (instancetype)sharedProvider;
++ (instancetype)sharedLocationManager;
 
 /**
- * The most recent location determined by the location provider.
+ * Get an array containing all the recently updated locations that have been queued. Always nonnull,
+ * will always return the last known location of the device if available.
+ * Automatically updates when location changes are seen.
  */
-@property (nonatomic, readonly) CLLocation *lastKnownLocation;
+-(NSArray<CLLocation * > *)getLocations;
 
 /**
- * Determines whether the location provider should attempt to listen for location updates. The
- * default value is YES.
+ * Enable automatic updates
  */
-@property (nonatomic, assign) BOOL locationUpdatesEnabled;
+-(void)enableAutomaticUpdates;
 
-
+/**
+ * Disable automatic updates
+ */
+-(void)disableAutomaticUpdates;
 
 @end
