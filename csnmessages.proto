@@ -3,7 +3,7 @@
 syntax = "proto3";
 package google.protobuf;
 option objc_class_prefix = "CSNP";
-option java_package = "com.commutestream.sdk.protobuf";
+option java_package = "com.commutestream.nativeads.protobuf";
 
 message TransitAgency {
   string agency_id = 1;
@@ -56,8 +56,6 @@ message ActionComponent {
   string title = 4;
   Colors colors = 5;
 }
-
-
 
 message LogoComponent {
   uint64 component_id = 1;
@@ -134,6 +132,7 @@ message AdRequests {
   string timezone = 4;
   repeated AdRequest ad_requests = 5;
   string sdk_version = 6;
+  repeated DeviceLocation device_locations = 7;
 }
 
 // AdResponse is a mapping between an AdRequest hash_id and the set of ads
@@ -155,6 +154,21 @@ message DeviceID  {
   }
   Type device_id_type = 1;
   bytes device_id = 2;
+  bool limit_tracking = 3;
+}
+
+message DeviceLocation {
+  uint64 timestamp = 1;
+  double latitude = 2;
+  double longitude = 3;
+  double altitude = 4;
+  double bearing = 5;
+  double speed = 6;
+  double horizontal_accuracy = 7;
+  double vertical_accuracy = 8;
+  double bearing_accuracy = 9;
+  double speed_accuracy = 10;
+  string provider = 11;
 }
 
 enum ComponentInteractionKind {
@@ -195,4 +209,5 @@ message AdReports {
   uint64 device_time = 5;
   repeated AdReport ad_reports = 6;
   string sdk_version = 7;
+  repeated DeviceLocation device_locations = 8;
 }

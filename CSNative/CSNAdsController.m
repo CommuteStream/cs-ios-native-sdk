@@ -1,9 +1,11 @@
+@import AdSupport;
 #import "CSNSDKVersion.h"
 #import "CSNAdsController.h"
 #import "CSNClient.h"
 #import "CSNHttpClient.h"
 #import "CSNMockClient.h"
 #import "CSNLogoView.h"
+#import "CSNLocationManager.h"
 #import "CSNModalWindow.h"
 #import "CSNVisibilityMonitor.h"
 #import "CSNAdReportsBuilder.h"
@@ -63,14 +65,9 @@ CSNModalWindow *modalWindowView;
 
 - (instancetype) initWithClient:(id<CSNClient>)client adUnit:(NSData *)adUnit {
     _adUnit = adUnit;
+
     // get device id
-    NSUUID *vendorID = [[UIDevice currentDevice] identifierForVendor];
-    uuid_t vendorUUID;
-    [vendorID getUUIDBytes:vendorUUID];
-    NSData *deviceID = [[NSData alloc] initWithBytes:vendorUUID length:16];
-    _deviceID = [[CSNPDeviceID alloc] init];
-    [_deviceID setDeviceIdType:CSNPDeviceID_Type_Idfa];
-    [_deviceID setDeviceId:deviceID];
+    _deviceID = [self getDeviceID];
     
     // get ip addresses
     _ipAddresses = [self getIpAddresses];
@@ -89,6 +86,19 @@ CSNModalWindow *modalWindowView;
     return self;
 }
 
+- (CSNPDeviceID *) getDeviceID {
+    ASIdentifierManager *adIdentManager = [ASIdentifierManager sharedManager];
+    NSUUID *vendorID = [adIdentManager advertisingIdentifier];
+    uuid_t vendorUUID;
+    [vendorID getUUIDBytes:vendorUUID];
+    NSData *deviceIDData = [[NSData alloc] initWithBytes:vendorUUID length:16];
+    CSNPDeviceID *deviceID = [[CSNPDeviceID alloc] init];
+    [deviceID setDeviceIdType:CSNPDeviceID_Type_Idfa];
+    [deviceID setDeviceId:deviceIDData];
+    [deviceID setLimitTracking:![adIdentManager isAdvertisingTrackingEnabled]];
+    return deviceID;
+}
+
 - (void) fetchAds:(NSArray<CSNAdRequest *> *)adRequests completed:(void (^)(NSArray<CSNOptionalAd *> *))completed {
     CSNPAdRequests *adRequestsMessage = [self buildRequestsMessage:adRequests];
     [_client getAds:adRequestsMessage success:^(CSNPAdResponses *adResponsesMessage) {
@@ -101,6 +111,7 @@ CSNModalWindow *modalWindowView;
 }
 
 - (CSNPAdRequests *) buildRequestsMessage:(NSArray<CSNAdRequest *> *)adRequests {
+    [[CSNLocationManager sharedLocationManager] getLocations];
     NSMutableDictionary *uniqueAdRequests = [[NSMutableDictionary alloc] initWithCapacity:[adRequests count]];
     CSNPAdRequests *adRequestsMsg = [[CSNPAdRequests alloc] init];
     [adRequestsMsg setIpAddressesArray:[NSMutableArray arrayWithArray:_ipAddresses]];
@@ -235,19 +246,30 @@ CSNModalWindow *modalWindowView;
     }
     
     ifa_tmp = ifa;
+    //char netaddr[INET6_ADDRSTRLEN];
     while (ifa_tmp) {
         if ((ifa_tmp->ifa_addr) && ((ifa_tmp->ifa_addr->sa_family == AF_INET) ||
                                     (ifa_tmp->ifa_addr->sa_family == AF_INET6))) {
             if (ifa_tmp->ifa_addr->sa_family == AF_INET) {
                 // create IPv4 string
                 struct sockaddr_in *in = (struct sockaddr_in*) ifa_tmp->ifa_addr;
-                NSData *addr = [NSData dataWithBytes:&in->sin_addr length:in->sin_len];
-                [addrs addObject:addr];
+                //inet_ntop(AF_INET, &in->sin_addr, netaddr, INET6_ADDRSTRLEN);
+                if(in->sin_addr.s_addr != htonl(INADDR_LOOPBACK)) {
+                    //NSLog(@"Ipv4 added %@", [NSString stringWithUTF8String:netaddr]);
+                    NSData *addr = [NSData dataWithBytes:&in->sin_addr.s_addr length:4];
+                    //NSLog(@"Ipv4 addr in NSData %@", [addr description]);
+                    [addrs addObject:addr];
+                }
             } else { // AF_INET6
                 // create IPv6 string
                 struct sockaddr_in6 *in6 = (struct sockaddr_in6*) ifa_tmp->ifa_addr;
-                NSData *addr = [NSData dataWithBytes:&in6->sin6_addr length:in6->sin6_len];
-                [addrs addObject:addr];
+                //inet_ntop(AF_INET6, &in6->sin6_addr, netaddr, INET6_ADDRSTRLEN);
+                if(!IN6_IS_ADDR_LINKLOCAL(&in6->sin6_addr) && !IN6_IS_ADDR_LOOPBACK(&in6->sin6_addr)) {
+                    //NSLog(@"Ipv6 added %@", [NSString stringWithUTF8String:netaddr]);
+                    NSData *addr = [NSData dataWithBytes:in6->sin6_addr.s6_addr length:16];
+                    //NSLog(@"Ipv6 addr in NSData %@", [addr description]);
+                    [addrs addObject:addr];
+                }
             }
         }
         ifa_tmp = ifa_tmp->ifa_next;
@@ -257,6 +279,13 @@ CSNModalWindow *modalWindowView;
 }
 
 - (void) sendReports {
+    // update device id, ip addresses, and location of report before sending
+    // will periodically cause the device and ip addresses to be refreshed (every 30s)
+    _deviceID = [self getDeviceID];
+    _ipAddresses = [self getIpAddresses];
+    [_reportsBuilder setDeviceID:_deviceID];
+    [_reportsBuilder setIpAddresses:_ipAddresses];
+    [_reportsBuilder setLocations:[[CSNLocationManager sharedLocationManager] getLocations]];
     CSNPAdReports *reports = [_reportsBuilder buildReport];
     [_client sendAdReports:reports success:^{
     } failure:^(NSError *error) {

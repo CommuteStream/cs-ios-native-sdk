@@ -4,8 +4,8 @@
 
 @interface CSNAdReportsBuilder ()
 @property NSData *adUnit;
-@property CSNPDeviceID *deviceID;
-@property NSArray<NSData *> *ipAddresses;
+@property (nonatomic) CSNPDeviceID *deviceID;
+@property (nonatomic) NSArray<NSData *> *ipAddresses;
 @property NSString *timeZone;
 @property CSNPAdReports *adReports;
 @property uint64_t epoch;
@@ -23,6 +23,24 @@
     _adReports = [self createAdReports];
     _impressionDetector = [[CSNImpressionDetector alloc] init];
     return self;
+}
+
+- (void) setDeviceID:(CSNPDeviceID *)deviceID
+{
+    _deviceID = deviceID;
+    [_adReports setDeviceId:_deviceID];
+}
+
+- (void) setIpAddresses:(NSArray<NSData *> *)ipAddresses
+{
+    _ipAddresses = ipAddresses;
+    [_adReports setIpAddressesArray:[NSMutableArray arrayWithArray:_ipAddresses]];
+    
+}
+
+- (void) setLocations:(NSArray<CSNPDeviceLocation *> *)locations
+{
+    [_adReports setDeviceLocationsArray:[NSMutableArray arrayWithArray:locations]];
 }
 
 - (void) recordInteraction:(uint64_t)requestID adID:(uint64_t)adID versionID:(uint64_t)versionID componentID:(uint64_t)componentID interactionKind:(int32_t)interactionKind {

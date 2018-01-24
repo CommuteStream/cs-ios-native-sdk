@@ -28,6 +28,8 @@
 		1B0E3DA61EB3CA8000C95354 /* CSNAdReportsBuilder.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B0E3DA41EB3CA8000C95354 /* CSNAdReportsBuilder.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1B0E3DA71EB3CA8000C95354 /* CSNAdReportsBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B0E3DA51EB3CA8000C95354 /* CSNAdReportsBuilder.m */; };
 		1B0E3DA91EBA210600C95354 /* CSNAdReportsBuilderTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B0E3DA81EBA210600C95354 /* CSNAdReportsBuilderTests.m */; };
+		1B0EC34A200FAEDD001B4822 /* CSNLocationManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B0EC349200FAEDD001B4822 /* CSNLocationManager.h */; };
+		1B0EC34C200FAEE5001B4822 /* CSNLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B0EC34B200FAEE5001B4822 /* CSNLocationManager.m */; };
 		1B2CCB131E79E0C800B6FBC2 /* CSNAdRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B2CCB111E79E0C800B6FBC2 /* CSNAdRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1B2CCB141E79E0C800B6FBC2 /* CSNAdRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B2CCB121E79E0C800B6FBC2 /* CSNAdRequest.m */; };
 		1B3D97671EF17FC700BD74F2 /* CSNImpressionDetector.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B3D97651EF17FC700BD74F2 /* CSNImpressionDetector.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -107,6 +109,8 @@
 		1B0E3DA41EB3CA8000C95354 /* CSNAdReportsBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSNAdReportsBuilder.h; sourceTree = "<group>"; };
 		1B0E3DA51EB3CA8000C95354 /* CSNAdReportsBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSNAdReportsBuilder.m; sourceTree = "<group>"; };
 		1B0E3DA81EBA210600C95354 /* CSNAdReportsBuilderTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CSNAdReportsBuilderTests.m; path = ../CSNative/CSNAdReportsBuilderTests.m; sourceTree = "<group>"; };
+		1B0EC349200FAEDD001B4822 /* CSNLocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSNLocationManager.h; sourceTree = "<group>"; };
+		1B0EC34B200FAEE5001B4822 /* CSNLocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSNLocationManager.m; sourceTree = "<group>"; };
 		1B2CCB111E79E0C800B6FBC2 /* CSNAdRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSNAdRequest.h; sourceTree = "<group>"; };
 		1B2CCB121E79E0C800B6FBC2 /* CSNAdRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSNAdRequest.m; sourceTree = "<group>"; };
 		1B2CCB2E1E7B020B00B6FBC2 /* universal.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = universal.sh; sourceTree = "<group>"; };
@@ -215,6 +219,8 @@
 		1B555FC71E60A3F800FE1C08 /* CSNative */ = {
 			isa = PBXGroup;
 			children = (
+				1B0EC349200FAEDD001B4822 /* CSNLocationManager.h */,
+				1B0EC34B200FAEE5001B4822 /* CSNLocationManager.m */,
 				7FDABC1020094B3F0006DFF6 /* powered_by_commutestream.png */,
 				7F2630401E819B75001F36D6 /* close_interstitial_card.png */,
 				1B5560481E61F2FB00FE1C08 /* cs.png */,
@@ -330,6 +336,7 @@
 				1B5560561E648AC200FE1C08 /* CSNAdsController.h in Headers */,
 				1B5560631E65FD2A00FE1C08 /* CSNComponentView.h in Headers */,
 				1B555FE11E60A60E00FE1C08 /* CSNClient.h in Headers */,
+				1B0EC34A200FAEDD001B4822 /* CSNLocationManager.h in Headers */,
 				7F26309C1E82F667001F36D6 /* CSNBodyView.h in Headers */,
 				7F26303E1E819A38001F36D6 /* CSNModalWindow.h in Headers */,
 				1B55605F1E65037B00FE1C08 /* CSNAd.h in Headers */,
@@ -562,6 +569,7 @@
 				1B5560671E66053100FE1C08 /* CSNHeadlineView.m in Sources */,
 				7F21139E1E843DF30096DA45 /* CSNActionView.m in Sources */,
 				1BE6F4F61ED33353009F1B6D /* CSNAd.m in Sources */,
+				1B0EC34C200FAEE5001B4822 /* CSNLocationManager.m in Sources */,
 				7F2630B01E83045A001F36D6 /* CSNAdvertiserView.m in Sources */,
 				7F26309D1E82F667001F36D6 /* CSNBodyView.m in Sources */,
 				1B5560711E67423F00FE1C08 /* CSNTransit.m in Sources */,
