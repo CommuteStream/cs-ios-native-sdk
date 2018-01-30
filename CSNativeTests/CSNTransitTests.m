@@ -1,11 +1,11 @@
 @import XCTest;
 @import CSNative;
 
-@interface CSNTransitRouteTests : XCTestCase
+@interface CSNTransitTests : XCTestCase
 
 @end
 
-@implementation CSNTransitRouteTests
+@implementation CSNTransitTests
 
 - (void)setUp {
     [super setUp];

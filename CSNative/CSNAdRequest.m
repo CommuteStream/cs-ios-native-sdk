@@ -24,21 +24,33 @@
     CC_SHA256_Init(&shactx);
     for(id agency in _agencies) {
         const char *agencyID = [[agency agencyID] UTF8String];
-        CC_SHA256_Update(&shactx, agencyID, (unsigned int)strlen(agencyID));
+        if(agencyID) {
+            CC_SHA256_Update(&shactx, agencyID, (unsigned int)strlen(agencyID));
+        }
     }
     for(id route in _routes) {
         const char *agencyID = [[route agencyID] UTF8String];
-        CC_SHA256_Update(&shactx, agencyID, (unsigned int)strlen(agencyID));
+        if(agencyID) {
+            CC_SHA256_Update(&shactx, agencyID, (unsigned int)strlen(agencyID));
+        }
         const char *routeID = [[route routeID] UTF8String];
-        CC_SHA256_Update(&shactx, routeID, (unsigned int)strlen(routeID));
+        if(routeID) {
+            CC_SHA256_Update(&shactx, routeID, (unsigned int)strlen(routeID));
+        }
     }
     for(id stop in _stops) {
         const char *agencyID = [[stop agencyID] UTF8String];
-        CC_SHA256_Update(&shactx, agencyID, (unsigned int)strlen(agencyID));
+        if(agencyID) {
+            CC_SHA256_Update(&shactx, agencyID, (unsigned int)strlen(agencyID));
+        }
         const char *routeID = [[stop routeID] UTF8String];
-        CC_SHA256_Update(&shactx, routeID, (unsigned int)strlen(routeID));
+        if(routeID) {
+            CC_SHA256_Update(&shactx, routeID, (unsigned int)strlen(routeID));
+        }
         const char *stopID = [[stop stopID] UTF8String];
-        CC_SHA256_Update(&shactx, stopID, (unsigned int)strlen(stopID));
+        if(stopID) {
+            CC_SHA256_Update(&shactx, stopID, (unsigned int)strlen(stopID));
+        }
     }
     CC_SHA256_Final(result.mutableBytes, &shactx);
     return result;

@@ -24,7 +24,7 @@
 /* Begin PBXBuildFile section */
 		1B0E3D9C1EB0DD3B00C95354 /* CSNOptionalAd.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B0E3D9A1EB0DD3B00C95354 /* CSNOptionalAd.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1B0E3D9D1EB0DD3B00C95354 /* CSNOptionalAd.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B0E3D9B1EB0DD3B00C95354 /* CSNOptionalAd.m */; };
-		1B0E3D9F1EB11CD500C95354 /* CSNTransitRouteTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B0E3D9E1EB11CD400C95354 /* CSNTransitRouteTests.m */; };
+		1B0E3D9F1EB11CD500C95354 /* CSNTransitTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B0E3D9E1EB11CD400C95354 /* CSNTransitTests.m */; };
 		1B0E3DA61EB3CA8000C95354 /* CSNAdReportsBuilder.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B0E3DA41EB3CA8000C95354 /* CSNAdReportsBuilder.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1B0E3DA71EB3CA8000C95354 /* CSNAdReportsBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B0E3DA51EB3CA8000C95354 /* CSNAdReportsBuilder.m */; };
 		1B0E3DA91EBA210600C95354 /* CSNAdReportsBuilderTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B0E3DA81EBA210600C95354 /* CSNAdReportsBuilderTests.m */; };
@@ -61,6 +61,7 @@
 		1B5560771E6742E700FE1C08 /* CSNMockClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B5560751E6742E700FE1C08 /* CSNMockClient.m */; };
 		1B5560791E67497100FE1C08 /* CSNLogoViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B5560781E67497100FE1C08 /* CSNLogoViewTests.m */; };
 		1B55607E1E6E06D600FE1C08 /* CSNTitleViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B55607D1E6E06D600FE1C08 /* CSNTitleViewTests.m */; };
+		1BBEF5122020C94400709EAD /* CSNAdRequestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BBEF5112020C94400709EAD /* CSNAdRequestTests.m */; };
 		1BC79FB41E71EE92008D146A /* CSNVisibilityMonitor.h in Headers */ = {isa = PBXBuildFile; fileRef = 1BC79FB21E71EE92008D146A /* CSNVisibilityMonitor.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1BC79FB51E71EE92008D146A /* CSNVisibilityMonitor.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BC79FB31E71EE92008D146A /* CSNVisibilityMonitor.m */; };
 		1BC79FB71E73332C008D146A /* CSNVisibilityMonitorTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BC79FB61E73332C008D146A /* CSNVisibilityMonitorTest.m */; };
@@ -105,7 +106,7 @@
 /* Begin PBXFileReference section */
 		1B0E3D9A1EB0DD3B00C95354 /* CSNOptionalAd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSNOptionalAd.h; sourceTree = "<group>"; };
 		1B0E3D9B1EB0DD3B00C95354 /* CSNOptionalAd.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSNOptionalAd.m; sourceTree = "<group>"; };
-		1B0E3D9E1EB11CD400C95354 /* CSNTransitRouteTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSNTransitRouteTests.m; sourceTree = "<group>"; };
+		1B0E3D9E1EB11CD400C95354 /* CSNTransitTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSNTransitTests.m; sourceTree = "<group>"; };
 		1B0E3DA41EB3CA8000C95354 /* CSNAdReportsBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSNAdReportsBuilder.h; sourceTree = "<group>"; };
 		1B0E3DA51EB3CA8000C95354 /* CSNAdReportsBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSNAdReportsBuilder.m; sourceTree = "<group>"; };
 		1B0E3DA81EBA210600C95354 /* CSNAdReportsBuilderTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CSNAdReportsBuilderTests.m; path = ../CSNative/CSNAdReportsBuilderTests.m; sourceTree = "<group>"; };
@@ -147,6 +148,7 @@
 		1B5560751E6742E700FE1C08 /* CSNMockClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSNMockClient.m; sourceTree = "<group>"; };
 		1B5560781E67497100FE1C08 /* CSNLogoViewTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSNLogoViewTests.m; sourceTree = "<group>"; };
 		1B55607D1E6E06D600FE1C08 /* CSNTitleViewTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSNTitleViewTests.m; sourceTree = "<group>"; };
+		1BBEF5112020C94400709EAD /* CSNAdRequestTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CSNAdRequestTests.m; sourceTree = "<group>"; };
 		1BC79FB21E71EE92008D146A /* CSNVisibilityMonitor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSNVisibilityMonitor.h; sourceTree = "<group>"; };
 		1BC79FB31E71EE92008D146A /* CSNVisibilityMonitor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSNVisibilityMonitor.m; sourceTree = "<group>"; };
 		1BC79FB61E73332C008D146A /* CSNVisibilityMonitorTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSNVisibilityMonitorTest.m; sourceTree = "<group>"; };
@@ -284,8 +286,9 @@
 				1B55607D1E6E06D600FE1C08 /* CSNTitleViewTests.m */,
 				1BC79FB61E73332C008D146A /* CSNVisibilityMonitorTest.m */,
 				7F26306A1E81CC01001F36D6 /* CSNHeroViewTests.m */,
-				1B0E3D9E1EB11CD400C95354 /* CSNTransitRouteTests.m */,
+				1B0E3D9E1EB11CD400C95354 /* CSNTransitTests.m */,
 				1B3D97691EF18DC400BD74F2 /* CSNImpressionDetectorTest.m */,
+				1BBEF5112020C94400709EAD /* CSNAdRequestTests.m */,
 			);
 			path = CSNativeTests;
 			sourceTree = "<group>";
@@ -595,8 +598,9 @@
 				1B0E3DA91EBA210600C95354 /* CSNAdReportsBuilderTests.m in Sources */,
 				1B555FF01E60B0B500FE1C08 /* CSNHttpClientTest.m in Sources */,
 				1B5560791E67497100FE1C08 /* CSNLogoViewTests.m in Sources */,
+				1BBEF5122020C94400709EAD /* CSNAdRequestTests.m in Sources */,
 				7F26306B1E81CC01001F36D6 /* CSNHeroViewTests.m in Sources */,
-				1B0E3D9F1EB11CD500C95354 /* CSNTransitRouteTests.m in Sources */,
+				1B0E3D9F1EB11CD500C95354 /* CSNTransitTests.m in Sources */,
 				1B55607E1E6E06D600FE1C08 /* CSNTitleViewTests.m in Sources */,
 				1B5560731E67424F00FE1C08 /* CSNTransitStopTests.m in Sources */,
 			);
