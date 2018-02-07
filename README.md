@@ -12,7 +12,8 @@ These instructions assume you have already followed the instructions at: [https:
 - Protocol Buffers: [https://developers.google.com/protocol-buffers](https://developers.google.com/protocol-buffers). We recommend using CocoaPods.
 
 ## Downloading
-Latest CS iOS Native SDK:
+**Latest CS iOS Native SDK:**
+
 http://download.commutestream.com/native-sdk/CSNative-iOS-1.2.1.framework.zip
 
 **GitHub:**
