@@ -13,7 +13,6 @@ These instructions assume you have already followed the instructions at: [https:
 
 ## Downloading
 **Latest CS iOS Native SDK:**
-
 http://download.commutestream.com/native-sdk/CSNative-iOS-1.2.1.framework.zip
 
 **GitHub:**
