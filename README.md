@@ -205,7 +205,7 @@ You will use this array to display ad content in the components you added to you
 
 **Objective-C**
 ```
-CSNAdsController *adsController = [[CSNAdsController alloc] initWithClient:ad_client adUnit:ad_unit];
+CSNAdsController *adsController = [[CSNAdsController alloc] initWithAdUnit: @"xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"]
 [adsController adsController fetchAds:adRequests completed: ^(NSArray <CSNOptionalAd *> *ads) {
 	_ads = ads;
     NSLog(@"%ld", [_ads count]);
@@ -216,7 +216,7 @@ CSNAdsController *adsController = [[CSNAdsController alloc] initWithClient:ad_cl
 
 **Swift**
 ```
-var adsController = CSNAdsController.init(client: ad_client, adUnit: ad_unit)
+var adsController = CSNAdsController(adUnit: "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx");
 adsController.fetchAds(adRequests, completed: {(ads) in
 	self.stopAds = ads
     self.routeStopsListTableView.reloadData()
