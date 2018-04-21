@@ -133,46 +133,52 @@ There are three levels of transit data you can provide with your **CSNAdRequest*
 
 **Objective-C**
 ```
+CSNAdRequest *agencyAdRequest = [[CSNAdRequest alloc] init];
 CSNTransitAgency *agency = [[CSNTransitAgency alloc] initWithIDs:@"agency_id"];
 
-[adRequest addAgency:agency];
+[agencyAdRequest addAgency:agency];
 ```
 **Swift**
 ```
+let agencyAdRequest = CSNAdRequest.init()
 let agency = CSNTransitAgency.init(ids:"agency_id")
 
-adRequest.addAgency(agency)
+agencyAdRequest.addAgency(agency)
 ```
 
 #### CSNTransitRoute (more specific)
 
 **Objective-C**
 ```
+CSNAdRequest *routeAdRequest = [[CSNAdRequest alloc] init];
 CSNTransitRoute *route = [[CSNTransitRoute alloc] initWithIDs:@"agency_id" routeID:@"route_id"];
 
-[adRequest addRoute:route];
+[routeAdRequest addRoute:route];
 ```
 
 **Swift**
 ```
+let routeAdRequest = CSNAdRequest.init()
 let route = CSNTransitRoute.init(ids:"agency_id", routeID:"route_id")
 
-adRequest.addRoute(route)
+routeAdRequest.addRoute(route)
 ```
 
 #### CSNTransitStop (most specific)
 **Objective-C**
 ```
+CSNAdRequest *stopAdRequest = [[CSNAdRequest alloc] init];
 CSNTransitStop *stop = [[CSNTransitStop alloc] initWithIDs:@"agency_id" routeID:@"route_id" stopID:@"stop_id"];
 
-[adRequest addStop:stop];
+[stopAdRequest addStop:stop];
 ```
 
 **Swift**
 ```
+let stopAdRequest = CSNAdRequest.init()
 let stop = CSNTransitStop.init(ids:"agency_id", routeID: "route_id", stopID: "stop_id")
 
-adRequest.addStop(stop)
+stopAdRequest.addStop(stop)
 ```
 
 Each **CSNAdRequest** must be added to a mutable array, which will then be used to fetch ads using the **CSNAdsController** class.
