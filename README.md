@@ -25,18 +25,18 @@ http://download.commutestream.com/native-sdk/CSNative-iOS-1.2.1.framework.zip
 
 
 2. In your project's target, under Build Phases > Embed Frameworks, drag
-`CSNNative.framework` to the list of embedded frameworks.
+`CSNative.framework` to the list of embedded frameworks.
 
 
 3. Import the header files:
 
 	**Objective-C**
 
-	Add `#import <CSNative/CommuteStream.h>` to the top of each ViewController 		that requests ads.
+	Add `#import <CSNative/CSNative.h>` to the top of each ViewController 		that requests ads.
     
     **Swift**
     
-    Add `#import <CSNative/CommuteStream.h>` to your projects `Bridging-Header.h` 	  file. 
+    Add `#import <CSNative/CSNative.h>` to your projects `Bridging-Header.h` 	  file. 
 
 4. Depending on your project settings, you may need to set **Allow Non-modular Includes In Framework Modules** to **YES** in **Build Settings**.
 
