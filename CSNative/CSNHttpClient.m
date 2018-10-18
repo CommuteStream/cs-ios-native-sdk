@@ -78,4 +78,41 @@
     [task resume];
 }
 
+- (void) getMarkets:(void (^)(NSSet *))success failure:(void (^)(NSError *))failure {
+    NSURL *url = [[NSURL alloc] initWithString:[NSString stringWithFormat:@"https://%@/v2/markets", _host]];
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
+    [request setHTTPMethod:@"GET"];
+    [request setValue:@"v1" forHTTPHeaderField:@"X-CS-Protocol"];
+    [request setValue:@"application/json" forHTTPHeaderField:@"Accepts"];
+    NSURLSessionDataTask *task = [_session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        if(error != NULL) {
+            return failure(error);
+        }
+        NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
+        if([httpResponse statusCode] != 200) {
+            NSError *error = [[NSError alloc] initWithDomain:@"com.commutestream.native" code:[httpResponse statusCode] userInfo:@{@"request":request, @"response":httpResponse}];
+            return failure(error);
+        }
+        if(![[[httpResponse allHeaderFields] valueForKey:@"Content-Type"] isEqualToString:@"application/x-protobuf"]) {
+            NSError *error = [[NSError alloc] initWithDomain:@"com.commutestream.native" code:-1 userInfo:@{@"request":request, @"response":httpResponse}];
+            return failure(error);
+        }
+        NSArray<NSString *> *jsonDataArray = [[NSArray alloc] init];
+        if(data == nil) {
+            NSError *error = [[NSError alloc] initWithDomain:@"com.commutestream.native" code:-2 userInfo:@{@"request":request, @"response":httpResponse}];
+            return failure(error);
+        }
+        NSError *jsonError;
+        jsonDataArray = [NSJSONSerialization
+                         JSONObjectWithData: data
+                         options: NSJSONReadingMutableContainers
+                         error: &jsonError];
+        if(!jsonDataArray) {
+            return failure(jsonError);
+        }
+        return success([[NSSet alloc] initWithArray:jsonDataArray]);
+    }];
+    [task resume];
+}
+
 @end

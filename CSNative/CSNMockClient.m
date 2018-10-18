@@ -3,6 +3,7 @@
 #import "CSNAdRequest.h"
 
 @interface CSNMockClient ()
+@property NSSet<NSString *> *markets;
 @property NSMutableDictionary *adResponses;
 @end
 
@@ -64,5 +65,20 @@
 - (void) sendAdReports:(CSNPAdReports *)adReport success:(void (^)(void))success failure:(void (^)(NSError *))failure {
     success();
 }
+
+- (void) getMarkets:(void (^)(NSSet *))success failure:(void (^)(NSError *))failure {
+    if(_markets) {
+        success(_markets);
+    } else {
+        NSError *e = [[NSError alloc] init];
+        failure(e);
+    }
+}
+
+- (void) setMarketsResponse:(NSSet<NSString *> *)markets {
+    _markets = markets;
+}
+
+
 
 @end

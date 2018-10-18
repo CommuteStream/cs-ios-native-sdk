@@ -11,4 +11,6 @@
 - (void) addAgency:(CSNTransitAgency *)agency;
 - (void) addRoute:(CSNTransitRoute *)route;
 - (void) addStop:(CSNTransitStop *)stop;
+- (void) removeUnknownMarkets:(NSSet<NSString*> *)markets;
+- (NSUInteger) numOfTargets;
 @end

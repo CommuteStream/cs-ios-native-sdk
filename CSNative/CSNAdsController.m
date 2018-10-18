@@ -14,19 +14,27 @@
 #include <ifaddrs.h>
 #include <arpa/inet.h>
 
-
-
 @interface CSNAdsController ()
 @property id<CSNClient> client;
 @property CSNVisibilityMonitor *visMonitor;
+@property NSSet *markets;
+@property NSTimer *marketsRetryTimer;
 @property NSData *adUnit;
 @property CSNPDeviceID *deviceID;
 @property NSArray<NSData *> *ipAddresses;
+@property NSMutableArray *pendingRequests;
 @property NSMapTable* tapDelegates;
 @property NSString *timeZone;
 @property CSNAdReportsBuilder *reportsBuilder;
 @property NSTimer *reportsTimer;
 - (void) openModal:(CSNAd *)ad componentID:(uint64_t)componentID interactionKind:(int32_t)interactionKind;
+@end
+@interface CSNPendingAdRequests : NSObject
+@property NSArray<CSNAdRequest *> *adRequests;
+@property void (^completed)(NSArray<CSNOptionalAd *> *);
+@end
+
+@implementation CSNPendingAdRequests
 @end
 
 @interface CSNTapDelegate : NSObject <UIGestureRecognizerDelegate>
@@ -60,11 +68,29 @@ CSNModalWindow *modalWindowView;
 - (instancetype) initMocked {
     uuid_t uuid = {0, 0, 0, 0, 0, 0 , 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
     NSData *empty = [NSData dataWithBytes:uuid length:16];
-    return [self initWithClient:[[CSNMockClient alloc] init] adUnit:empty];
+    CSNMockClient *mockClient = [[CSNMockClient alloc] init];
+    [mockClient setMarketsResponse:[NSSet setWithObjects:@"commutestream", nil]];
+    return [self initWithClient:mockClient adUnit:empty];
+}
+
+- (void) loadMarkets {
+    // get markets
+    [_client getMarkets:^(NSSet *markets) {
+        [self setMarkets:markets];
+        [self fetchPending];
+    } failure:^(NSError *error) {
+        _marketsRetryTimer = [NSTimer timerWithTimeInterval:10.0 repeats:false block:^(NSTimer * _Nonnull timer) {
+            [self loadMarkets];
+        }];
+        [[NSRunLoop mainRunLoop] addTimer:_marketsRetryTimer forMode:NSDefaultRunLoopMode];
+    }];
 }
 
 - (instancetype) initWithClient:(id<CSNClient>)client adUnit:(NSData *)adUnit {
+    _client = client;
     _adUnit = adUnit;
+    
+    _pendingRequests = [[NSMutableArray alloc] init];
 
     // get device id
     _deviceID = [self getDeviceID];
@@ -75,7 +101,7 @@ CSNModalWindow *modalWindowView;
     // get timezone
     _timeZone = [[NSTimeZone localTimeZone] name];
     
-    _client = client;
+    [self loadMarkets];
 
     _reportsBuilder = [[CSNAdReportsBuilder alloc] initWithAdUnit:_adUnit deviceID:_deviceID ipAddresses:_ipAddresses timeZone:_timeZone];
     // send reports timer
@@ -84,6 +110,10 @@ CSNModalWindow *modalWindowView;
     _tapDelegates = [[NSMapTable alloc] initWithKeyOptions:NSMapTableWeakMemory valueOptions:NSMapTableStrongMemory capacity:10];
     [[NSRunLoop mainRunLoop] addTimer:_reportsTimer forMode:NSDefaultRunLoopMode];
     return self;
+}
+
+- (bool) isReady {
+    return _markets != nil;
 }
 
 - (CSNPDeviceID *) getDeviceID {
@@ -100,13 +130,42 @@ CSNModalWindow *modalWindowView;
 }
 
 - (void) fetchAds:(NSArray<CSNAdRequest *> *)adRequests completed:(void (^)(NSArray<CSNOptionalAd *> *))completed {
+    if([self isReady]) {
+        [self doFetchAds:adRequests completed:completed];
+    } else {
+        CSNPendingAdRequests *pendingRequest = [[CSNPendingAdRequests alloc] init];
+        pendingRequest.adRequests = adRequests;
+        pendingRequest.completed = completed;
+        [_pendingRequests addObject:pendingRequest];
+    }
+}
+
+- (void) fetchPending {
+    if([self isReady] && _pendingRequests) {
+        for(CSNPendingAdRequests *pendingRequest in _pendingRequests) {
+            [self doFetchAds:pendingRequest.adRequests completed:pendingRequest.completed];
+        }
+        [_pendingRequests removeAllObjects];
+    }
+}
+
+- (void) doFetchAds:(NSArray<CSNAdRequest *> *)adRequests completed:(void (^)(NSArray<CSNOptionalAd *> *))completed {
+    NSMutableArray<CSNOptionalAd *> *nullAds = [[NSMutableArray alloc] init];
+    for(CSNAdRequest * adRequest __unused in adRequests) {
+        [nullAds addObject:[[CSNOptionalAd alloc] initWithoutAd]];
+    }
     CSNPAdRequests *adRequestsMessage = [self buildRequestsMessage:adRequests];
+    if([adRequestsMessage adRequestsArray_Count] == 0) {
+        completed(nullAds);
+        return;
+    }
     [_client getAds:adRequestsMessage success:^(CSNPAdResponses *adResponsesMessage) {
         NSArray *ads = [self buildAds:adRequests response:adResponsesMessage];
         completed(ads);
     } failure:^(NSError *error) {
         // on failure, log
         NSLog(@"CSNAdsController fetch ads failed, cause %@", error);
+        completed(nullAds);
     }];
 }
 
@@ -120,34 +179,37 @@ CSNModalWindow *modalWindowView;
     [adRequestsMsg setTimezone:_timeZone];
     [adRequestsMsg setSdkVersion:SDK_VERSION];
     for(id adRequest in adRequests) {
-        NSData *requestSha = [adRequest sha256];
-        CSNPAdRequest *adRequestMsg = [uniqueAdRequests objectForKey:requestSha];
-        if(adRequestMsg) {
-            [adRequestMsg setNumOfAds:[adRequestMsg numOfAds] + 1];
-        } else {
-            adRequestMsg = [[CSNPAdRequest alloc] init];
-            [adRequestMsg setHashId:requestSha];
-            [adRequestMsg setNumOfAds:1];
-            for(id agency in [[adRequest agencies] array]) {
-                CSNPTransitAgency *transitAgency = [[CSNPTransitAgency alloc] init];
-                [transitAgency setAgencyId:[agency agencyID]];
-                [[adRequestMsg agenciesArray] addObject:transitAgency];
+        [adRequest removeUnknownMarkets:_markets];
+        if([adRequest numOfTargets] > 0) {
+            NSData *requestSha = [adRequest sha256];
+            CSNPAdRequest *adRequestMsg = [uniqueAdRequests objectForKey:requestSha];
+            if(adRequestMsg) {
+                [adRequestMsg setNumOfAds:[adRequestMsg numOfAds] + 1];
+            } else {
+                adRequestMsg = [[CSNPAdRequest alloc] init];
+                [adRequestMsg setHashId:requestSha];
+                [adRequestMsg setNumOfAds:1];
+                for(id agency in [[adRequest agencies] array]) {
+                    CSNPTransitAgency *transitAgency = [[CSNPTransitAgency alloc] init];
+                    [transitAgency setAgencyId:[agency agencyID]];
+                    [[adRequestMsg agenciesArray] addObject:transitAgency];
+                }
+                for(id route in [[adRequest routes] array]) {
+                    CSNPTransitRoute *transitRoute = [[CSNPTransitRoute alloc] init];
+                    [transitRoute setAgencyId:[route agencyID]];
+                    [transitRoute setRouteId:[route routeID]];
+                    [[adRequestMsg routesArray] addObject:transitRoute];
+                }
+                for(id stop in [[adRequest stops] array]) {
+                    CSNPTransitStop *transitStop = [[CSNPTransitStop alloc] init];
+                    [transitStop setAgencyId:[stop agencyID]];
+                    [transitStop setRouteId:[stop routeID]];
+                    [transitStop setStopId:[stop stopID]];
+                    [[adRequestMsg stopsArray] addObject:transitStop];
+                }
+                [uniqueAdRequests setObject:adRequestMsg forKey:requestSha];
+                [[adRequestsMsg adRequestsArray] addObject:adRequestMsg];
             }
-            for(id route in [[adRequest routes] array]) {
-                CSNPTransitRoute *transitRoute = [[CSNPTransitRoute alloc] init];
-                [transitRoute setAgencyId:[route agencyID]];
-                [transitRoute setRouteId:[route routeID]];
-                [[adRequestMsg routesArray] addObject:transitRoute];
-            }
-            for(id stop in [[adRequest stops] array]) {
-                CSNPTransitStop *transitStop = [[CSNPTransitStop alloc] init];
-                [transitStop setAgencyId:[stop agencyID]];
-                [transitStop setRouteId:[stop routeID]];
-                [transitStop setStopId:[stop stopID]];
-                [[adRequestMsg stopsArray] addObject:transitStop];
-            }
-            [uniqueAdRequests setObject:adRequestMsg forKey:requestSha];
-            [[adRequestsMsg adRequestsArray] addObject:adRequestMsg];
         }
     }
     return adRequestsMsg;

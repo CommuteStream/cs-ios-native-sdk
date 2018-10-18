@@ -68,4 +68,32 @@
     [_stops addObject:stop];
 }
 
+- (void) removeUnknownMarkets:(NSSet<NSString *> *)markets {
+    NSMutableOrderedSet *newAgencies = [[NSMutableOrderedSet alloc] init];
+    NSMutableOrderedSet *newRoutes = [[NSMutableOrderedSet alloc] init];
+    NSMutableOrderedSet *newStops = [[NSMutableOrderedSet alloc] init];
+    for (CSNTransitAgency *agency in _agencies) {
+        if([markets containsObject:[agency agencyID]]) {
+            [newAgencies addObject:agency];
+        }
+    }
+    for (CSNTransitRoute *route in _routes) {
+        if([markets containsObject:[route agencyID]]) {
+            [newRoutes addObject:route];
+        }
+    }
+    for (CSNTransitStop *stop in _stops) {
+        if([markets containsObject:[stop agencyID]]) {
+            [newStops addObject:stop];
+        }
+    }
+    _agencies = newAgencies;
+    _routes = newRoutes;
+    _stops = newStops;
+}
+
+- (NSUInteger) numOfTargets {
+    return [_agencies count] + [_routes count] + [_stops count];
+}
+
 @end
