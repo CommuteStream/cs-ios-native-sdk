@@ -13,7 +13,7 @@
 
 - (instancetype) initMocked;
 
-- (instancetype) initWithClient:(id<CSNClient>)client adUnit:(NSData *)adUnit;
+- (instancetype) initWithClient:(id<CSNClient>)client adUnit:(NSUUID *)adUnit;
 
 - (void) applicationDidEnterBackground;
 

@@ -30,6 +30,12 @@
 		1B0E3DA91EBA210600C95354 /* CSNAdReportsBuilderTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B0E3DA81EBA210600C95354 /* CSNAdReportsBuilderTests.m */; };
 		1B0EC34A200FAEDD001B4822 /* CSNLocationManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B0EC349200FAEDD001B4822 /* CSNLocationManager.h */; };
 		1B0EC34C200FAEE5001B4822 /* CSNLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B0EC34B200FAEE5001B4822 /* CSNLocationManager.m */; };
+		1B21873921793E790079ED2C /* CSNAdUnitSettings.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B21873821793E790079ED2C /* CSNAdUnitSettings.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1B21873B217E4B260079ED2C /* CSNAdUnitSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B21873A217E4B260079ED2C /* CSNAdUnitSettings.m */; };
+		1B245087218764840020F004 /* CSNAdRequestTask.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B245086218764840020F004 /* CSNAdRequestTask.h */; };
+		1B245089218765560020F004 /* CSNAdRequestTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B245088218765560020F004 /* CSNAdRequestTask.m */; };
+		1B24508B21878B030020F004 /* CSNClientInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B24508A21878B030020F004 /* CSNClientInfo.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1B24508D21878C840020F004 /* CSNClientInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B24508C21878C840020F004 /* CSNClientInfo.m */; };
 		1B2CCB131E79E0C800B6FBC2 /* CSNAdRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B2CCB111E79E0C800B6FBC2 /* CSNAdRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1B2CCB141E79E0C800B6FBC2 /* CSNAdRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B2CCB121E79E0C800B6FBC2 /* CSNAdRequest.m */; };
 		1B3D97671EF17FC700BD74F2 /* CSNImpressionDetector.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B3D97651EF17FC700BD74F2 /* CSNImpressionDetector.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -112,6 +118,12 @@
 		1B0E3DA81EBA210600C95354 /* CSNAdReportsBuilderTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CSNAdReportsBuilderTests.m; path = ../CSNative/CSNAdReportsBuilderTests.m; sourceTree = "<group>"; };
 		1B0EC349200FAEDD001B4822 /* CSNLocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSNLocationManager.h; sourceTree = "<group>"; };
 		1B0EC34B200FAEE5001B4822 /* CSNLocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSNLocationManager.m; sourceTree = "<group>"; };
+		1B21873821793E790079ED2C /* CSNAdUnitSettings.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CSNAdUnitSettings.h; sourceTree = "<group>"; };
+		1B21873A217E4B260079ED2C /* CSNAdUnitSettings.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CSNAdUnitSettings.m; sourceTree = "<group>"; };
+		1B245086218764840020F004 /* CSNAdRequestTask.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CSNAdRequestTask.h; sourceTree = "<group>"; };
+		1B245088218765560020F004 /* CSNAdRequestTask.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CSNAdRequestTask.m; sourceTree = "<group>"; };
+		1B24508A21878B030020F004 /* CSNClientInfo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CSNClientInfo.h; sourceTree = "<group>"; };
+		1B24508C21878C840020F004 /* CSNClientInfo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CSNClientInfo.m; sourceTree = "<group>"; };
 		1B2CCB111E79E0C800B6FBC2 /* CSNAdRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSNAdRequest.h; sourceTree = "<group>"; };
 		1B2CCB121E79E0C800B6FBC2 /* CSNAdRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSNAdRequest.m; sourceTree = "<group>"; };
 		1B2CCB2E1E7B020B00B6FBC2 /* universal.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = universal.sh; sourceTree = "<group>"; };
@@ -269,6 +281,12 @@
 				1B0E3DA41EB3CA8000C95354 /* CSNAdReportsBuilder.h */,
 				1B0E3DA51EB3CA8000C95354 /* CSNAdReportsBuilder.m */,
 				1BE1B1601F716B0600E26ABB /* CSNSDKVersion.h */,
+				1B21873821793E790079ED2C /* CSNAdUnitSettings.h */,
+				1B21873A217E4B260079ED2C /* CSNAdUnitSettings.m */,
+				1B245086218764840020F004 /* CSNAdRequestTask.h */,
+				1B245088218765560020F004 /* CSNAdRequestTask.m */,
+				1B24508A21878B030020F004 /* CSNClientInfo.h */,
+				1B24508C21878C840020F004 /* CSNClientInfo.m */,
 			);
 			path = CSNative;
 			sourceTree = "<group>";
@@ -324,6 +342,7 @@
 				1B3D97671EF17FC700BD74F2 /* CSNImpressionDetector.h in Headers */,
 				1B5560701E67423F00FE1C08 /* CSNTransit.h in Headers */,
 				7F2630AF1E83045A001F36D6 /* CSNAdvertiserView.h in Headers */,
+				1B24508B21878B030020F004 /* CSNClientInfo.h in Headers */,
 				1B5560761E6742E700FE1C08 /* CSNMockClient.h in Headers */,
 				7F1E0B231E89B25F00498B76 /* CSNSecondaryActionView.h in Headers */,
 				1B555FF91E61134500FE1C08 /* CSNLogoView.h in Headers */,
@@ -338,9 +357,11 @@
 				1B555FE51E60A6B500FE1C08 /* CSNHttpClient.h in Headers */,
 				1B5560561E648AC200FE1C08 /* CSNAdsController.h in Headers */,
 				1B5560631E65FD2A00FE1C08 /* CSNComponentView.h in Headers */,
+				1B245087218764840020F004 /* CSNAdRequestTask.h in Headers */,
 				1B555FE11E60A60E00FE1C08 /* CSNClient.h in Headers */,
 				1B0EC34A200FAEDD001B4822 /* CSNLocationManager.h in Headers */,
 				7F26309C1E82F667001F36D6 /* CSNBodyView.h in Headers */,
+				1B21873921793E790079ED2C /* CSNAdUnitSettings.h in Headers */,
 				7F26303E1E819A38001F36D6 /* CSNModalWindow.h in Headers */,
 				1B55605F1E65037B00FE1C08 /* CSNAd.h in Headers */,
 				1B555FD61E60A3F800FE1C08 /* CSNative.h in Headers */,
@@ -359,7 +380,6 @@
 				1B555FC11E60A3F800FE1C08 /* Frameworks */,
 				1B555FC21E60A3F800FE1C08 /* Headers */,
 				1B555FC31E60A3F800FE1C08 /* Resources */,
-				53ECB3980E6212C75AE9AADD /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -379,7 +399,6 @@
 				1B555FCB1E60A3F800FE1C08 /* Frameworks */,
 				1B555FCC1E60A3F800FE1C08 /* Resources */,
 				7D9A4CB488578301D1684405 /* [CP] Embed Pods Frameworks */,
-				E71B2CFFCFAFD967DB733F2C /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -469,22 +488,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "#!/bin/sh\n\n######################\n# Options\n######################\n\nREVEAL_ARCHIVE_IN_FINDER=false\n\nFRAMEWORK_NAME=\"${PROJECT_NAME}\"\n\nSIMULATOR_LIBRARY_PATH=\"${BUILD_DIR}/${CONFIGURATION}-iphonesimulator/${FRAMEWORK_NAME}.framework\"\n\nDEVICE_LIBRARY_PATH=\"${BUILD_DIR}/${CONFIGURATION}-iphoneos/${FRAMEWORK_NAME}.framework\"\n\nUNIVERSAL_LIBRARY_DIR=\"${BUILD_DIR}/${CONFIGURATION}-iphoneuniversal\"\n\nFRAMEWORK=\"${UNIVERSAL_LIBRARY_DIR}/${FRAMEWORK_NAME}.framework\"\n\n\n######################\n# Build Frameworks\n######################\n\nxcodebuild -workspace ${PROJECT_NAME}.xcworkspace -scheme ${PROJECT_NAME} -sdk iphonesimulator -configuration ${CONFIGURATION} clean build CONFIGURATION_BUILD_DIR=${BUILD_DIR}/${CONFIGURATION}-iphonesimulator 2>&1\n\nxcodebuild -workspace ${PROJECT_NAME}.xcworkspace -scheme ${PROJECT_NAME} -sdk iphoneos -configuration ${CONFIGURATION} clean build CONFIGURATION_BUILD_DIR=${BUILD_DIR}/${CONFIGURATION}-iphoneos 2>&1\n\n######################\n# Create directory for universal\n######################\n\nrm -rf \"${UNIVERSAL_LIBRARY_DIR}\"\n\nmkdir \"${UNIVERSAL_LIBRARY_DIR}\"\n\nmkdir \"${FRAMEWORK}\"\n\n\n######################\n# Copy files Framework\n######################\n\ncp -r \"${DEVICE_LIBRARY_PATH}/.\" \"${FRAMEWORK}\"\n\n\n######################\n# Make an universal binary\n######################\n\nlipo \"${SIMULATOR_LIBRARY_PATH}/${FRAMEWORK_NAME}\" \"${DEVICE_LIBRARY_PATH}/${FRAMEWORK_NAME}\" -create -output \"${FRAMEWORK}/${FRAMEWORK_NAME}\" | echo\n\n# For Swift framework, Swiftmodule needs to be copied in the universal framework\nif [ -d \"${SIMULATOR_LIBRARY_PATH}/Modules/${FRAMEWORK_NAME}.swiftmodule/\" ]; then\ncp -f ${SIMULATOR_LIBRARY_PATH}/Modules/${FRAMEWORK_NAME}.swiftmodule/* \"${FRAMEWORK}/Modules/${FRAMEWORK_NAME}.swiftmodule/\" | echo\n                                                                      fi\n                                                                      \n                                                                      if [ -d \"${DEVICE_LIBRARY_PATH}/Modules/${FRAMEWORK_NAME}.swiftmodule/\" ]; then\n                                                                      cp -f ${DEVICE_LIBRARY_PATH}/Modules/${FRAMEWORK_NAME}.swiftmodule/* \"${FRAMEWORK}/Modules/${FRAMEWORK_NAME}.swiftmodule/\" | echo\n                                                                      fi\n                                                                      \n                                                                      ######################\n                                                                      # On Release, copy the result to release directory\n                                                                      ######################\n                                                                      OUTPUT_DIR=\"${PROJECT_DIR}/Output/${FRAMEWORK_NAME}-${CONFIGURATION}-iphoneuniversal/\"\n                                                                      \n                                                                      rm -rf \"$OUTPUT_DIR\"\n                                                                      mkdir -p \"$OUTPUT_DIR\"\n                                                                      \n                                                                      cp -r \"${FRAMEWORK}\" \"$OUTPUT_DIR\"\n                                                                      \n                                                                      if [ ${REVEAL_ARCHIVE_IN_FINDER} = true ]; then\n                                                                      open \"${OUTPUT_DIR}/\"\n                                                                      fi";
-		};
-		53ECB3980E6212C75AE9AADD /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CSNative/Pods-CSNative-resources.sh\"\n";
-			showEnvVarsInLog = 0;
+			shellScript = "#!/bin/sh\n\n######################\n# Options\n######################\n\nREVEAL_ARCHIVE_IN_FINDER=true\n\nFRAMEWORK_NAME=\"${PROJECT_NAME}\"\n\nSIMULATOR_LIBRARY_PATH=\"${BUILD_DIR}/${CONFIGURATION}-iphonesimulator/${FRAMEWORK_NAME}.framework\"\n\nDEVICE_LIBRARY_PATH=\"${BUILD_DIR}/${CONFIGURATION}-iphoneos/${FRAMEWORK_NAME}.framework\"\n\nUNIVERSAL_LIBRARY_DIR=\"${BUILD_DIR}/${CONFIGURATION}-iphoneuniversal\"\n\nFRAMEWORK=\"${UNIVERSAL_LIBRARY_DIR}/${FRAMEWORK_NAME}.framework\"\n\nOBJROOT=\"${OBJROOT}/DependentBuilds\"\n\n\n######################\n# Build Frameworks\n######################\n\nxcodebuild -workspace ${PROJECT_NAME}.xcworkspace -scheme ${PROJECT_NAME} -sdk iphonesimulator -configuration ${CONFIGURATION} clean build CONFIGURATION_BUILD_DIR=${BUILD_DIR}/${CONFIGURATION}-iphonesimulator -UseModernBuildSystem=NO 2>&1\n\nxcodebuild -workspace ${PROJECT_NAME}.xcworkspace -scheme ${PROJECT_NAME} -sdk iphoneos -configuration ${CONFIGURATION} clean build CONFIGURATION_BUILD_DIR=${BUILD_DIR}/${CONFIGURATION}-iphoneos  -UseModernBuildSystem=NO 2>&1\n\n######################\n# Create directory for universal\n######################\n\nrm -rf \"${UNIVERSAL_LIBRARY_DIR}\"\n\nmkdir \"${UNIVERSAL_LIBRARY_DIR}\"\n\nmkdir \"${FRAMEWORK}\"\n\n\n######################\n# Copy files Framework\n######################\n\ncp -r \"${DEVICE_LIBRARY_PATH}/.\" \"${FRAMEWORK}\"\n\n\n######################\n# Make an universal binary\n######################\n\nlipo \"${SIMULATOR_LIBRARY_PATH}/${FRAMEWORK_NAME}\" \"${DEVICE_LIBRARY_PATH}/${FRAMEWORK_NAME}\" -create -output \"${FRAMEWORK}/${FRAMEWORK_NAME}\" | echo\n\n# For Swift framework, Swiftmodule needs to be copied in the universal framework\nif [ -d \"${SIMULATOR_LIBRARY_PATH}/Modules/${FRAMEWORK_NAME}.swiftmodule/\" ]; then\ncp -f ${SIMULATOR_LIBRARY_PATH}/Modules/${FRAMEWORK_NAME}.swiftmodule/* \"${FRAMEWORK}/Modules/${FRAMEWORK_NAME}.swiftmodule/\" | echo\nfi\n\nif [ -d \"${DEVICE_LIBRARY_PATH}/Modules/${FRAMEWORK_NAME}.swiftmodule/\" ]; then\ncp -f ${DEVICE_LIBRARY_PATH}/Modules/${FRAMEWORK_NAME}.swiftmodule/* \"${FRAMEWORK}/Modules/${FRAMEWORK_NAME}.swiftmodule/\" | echo\nfi\n\n######################\n# On Release, copy the result to release directory\n######################\nOUTPUT_DIR=\"${PROJECT_DIR}/Output/${FRAMEWORK_NAME}-${CONFIGURATION}-iphoneuniversal/\"\n\nrm -rf \"$OUTPUT_DIR\"\nmkdir -p \"$OUTPUT_DIR\"\n\ncp -r \"${FRAMEWORK}\" \"$OUTPUT_DIR\"\n\nif [ ${REVEAL_ARCHIVE_IN_FINDER} = true ]; then\nopen \"${OUTPUT_DIR}/\"\nfi\n";
 		};
 		7D9A4CB488578301D1684405 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -542,21 +546,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		E71B2CFFCFAFD967DB733F2C /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CSNativeTests/Pods-CSNativeTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -574,13 +563,16 @@
 				1BE6F4F61ED33353009F1B6D /* CSNAd.m in Sources */,
 				1B0EC34C200FAEE5001B4822 /* CSNLocationManager.m in Sources */,
 				7F2630B01E83045A001F36D6 /* CSNAdvertiserView.m in Sources */,
+				1B21873B217E4B260079ED2C /* CSNAdUnitSettings.m in Sources */,
 				7F26309D1E82F667001F36D6 /* CSNBodyView.m in Sources */,
+				1B245089218765560020F004 /* CSNAdRequestTask.m in Sources */,
 				1B5560711E67423F00FE1C08 /* CSNTransit.m in Sources */,
 				1B5560571E648AC200FE1C08 /* CSNAdsController.m in Sources */,
 				1B0E3D9D1EB0DD3B00C95354 /* CSNOptionalAd.m in Sources */,
 				1B555FEE1E60AD7A00FE1C08 /* Csnmessages.pbobjc.m in Sources */,
 				1B0E3DA71EB3CA8000C95354 /* CSNAdReportsBuilder.m in Sources */,
 				1B5560771E6742E700FE1C08 /* CSNMockClient.m in Sources */,
+				1B24508D21878C840020F004 /* CSNClientInfo.m in Sources */,
 				1BC79FB51E71EE92008D146A /* CSNVisibilityMonitor.m in Sources */,
 				7F26303F1E819A38001F36D6 /* CSNModalWindow.m in Sources */,
 				1B2CCB141E79E0C800B6FBC2 /* CSNAdRequest.m in Sources */,

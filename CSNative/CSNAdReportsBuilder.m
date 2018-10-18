@@ -1,12 +1,10 @@
 #import "CSNSDKVersion.h"
+
 #import "CSNAdReportsBuilder.h"
 #import "CSNImpressionDetector.h"
 
 @interface CSNAdReportsBuilder ()
-@property NSData *adUnit;
-@property (nonatomic) CSNPDeviceID *deviceID;
-@property (nonatomic) NSArray<NSData *> *ipAddresses;
-@property NSString *timeZone;
+@property CSNClientInfo *clientInfo;
 @property CSNPAdReports *adReports;
 @property uint64_t epoch;
 @property CSNImpressionDetector *impressionDetector;
@@ -14,11 +12,8 @@
 
 @implementation CSNAdReportsBuilder
 
-- (instancetype) initWithAdUnit:(NSData *)adUnit deviceID:(CSNPDeviceID *)deviceID ipAddresses:(NSArray<NSData *> *)ipAddresses timeZone:(NSString *)timeZone {
-    _adUnit = adUnit;
-    _deviceID = deviceID;
-    _ipAddresses = ipAddresses;
-    _timeZone = timeZone;
+- (instancetype) initWithClientInfo:(CSNClientInfo *)clientInfo {
+    _clientInfo = clientInfo;
     _epoch = [self currentTime];
     _adReports = [self createAdReports];
     _impressionDetector = [[CSNImpressionDetector alloc] init];
@@ -27,14 +22,12 @@
 
 - (void) setDeviceID:(CSNPDeviceID *)deviceID
 {
-    _deviceID = deviceID;
-    [_adReports setDeviceId:_deviceID];
+    [_adReports setDeviceId:deviceID];
 }
 
 - (void) setIpAddresses:(NSArray<NSData *> *)ipAddresses
 {
-    _ipAddresses = ipAddresses;
-    [_adReports setIpAddressesArray:[NSMutableArray arrayWithArray:_ipAddresses]];
+    [_adReports setIpAddressesArray:[NSMutableArray arrayWithArray:ipAddresses]];
     
 }
 
@@ -75,12 +68,12 @@
 
 - (CSNPAdReports *) createAdReports {
     CSNPAdReports *adReports = [[CSNPAdReports alloc] init];
-    [adReports setAdUnit:_adUnit];
-    [adReports setDeviceId:_deviceID];
-    [adReports setIpAddressesArray:[NSMutableArray arrayWithArray:_ipAddresses]];
-    [adReports setTimezone:_timeZone];
+    [adReports setAdUnit:[_clientInfo getAdUnitData]];
+    [adReports setDeviceId:_clientInfo.deviceID];
+    [adReports setIpAddressesArray:[NSMutableArray arrayWithArray:_clientInfo.ipAddresses]];
+    [adReports setTimezone:_clientInfo.timeZone];
     [adReports setDeviceTime:[self currentTime]];
-    [adReports setSdkVersion:SDK_VERSION];
+    [adReports setSdkVersion:CSN_SDK_VERSION];
     return adReports;
 }
 

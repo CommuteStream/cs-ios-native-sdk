@@ -26,7 +26,7 @@
     [heroMessage setComponentId:123];
     [heroMessage setKind: CSNPHeroKind_Image];
     [heroMessage setBlob:imageData];
-    CSNPNativeAd *message = [[CSNPNativeAd alloc] init];
+    CSNPAd *message = [[CSNPAd alloc] init];
     [message setHero:heroMessage];
     CSNAd *ad = [[CSNAd alloc] initWithMessage:message];
     CSNHeroView *view = [[CSNHeroView alloc] init];

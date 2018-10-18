@@ -6,7 +6,7 @@ target 'CSNative' do
   # Uncomment the next line if you're using Swift or would like to use dynamic frameworks
 
   # Pods for CSNative
-  pod 'Protobuf', '~> 3.5.0'
+  pod 'Protobuf', '~> 3.6.1'
 
   target 'CSNativeTests' do
     inherit! :search_paths

@@ -1,8 +1,11 @@
 @import AdSupport;
 #import "CSNSDKVersion.h"
 #import "CSNAdsController.h"
+#import "CSNAdUnitSettings.h"
+#import "CSNClientInfo.h"
 #import "CSNClient.h"
 #import "CSNHttpClient.h"
+#import "CSNAdRequestTask.h"
 #import "CSNMockClient.h"
 #import "CSNLogoView.h"
 #import "CSNLocationManager.h"
@@ -11,22 +14,27 @@
 #import "CSNAdReportsBuilder.h"
 #import "Csnmessages.pbobjc.h"
 
-#include <ifaddrs.h>
-#include <arpa/inet.h>
-
 
 
 @interface CSNAdsController ()
 @property id<CSNClient> client;
 @property CSNVisibilityMonitor *visMonitor;
-@property NSData *adUnit;
-@property CSNPDeviceID *deviceID;
-@property NSArray<NSData *> *ipAddresses;
+@property CSNAdUnitSettings *settings;
+@property NSTimer *marketsRetryTimer;
+@property CSNClientInfo *clientInfo;
+@property NSMutableArray *pendingRequests;
+@property CSNAdRequestTask *adRequestTask;
 @property NSMapTable* tapDelegates;
-@property NSString *timeZone;
 @property CSNAdReportsBuilder *reportsBuilder;
 @property NSTimer *reportsTimer;
 - (void) openModal:(CSNAd *)ad componentID:(uint64_t)componentID interactionKind:(int32_t)interactionKind;
+@end
+@interface CSNPendingAdRequests : NSObject
+@property NSArray<CSNAdRequest *> *adRequests;
+@property void (^completed)(NSArray<CSNOptionalAd *> *);
+@end
+
+@implementation CSNPendingAdRequests
 @end
 
 @interface CSNTapDelegate : NSObject <UIGestureRecognizerDelegate>
@@ -50,34 +58,44 @@
 CSNModalWindow *modalWindowView;
 
 - (instancetype) initWithAdUnit:(NSString *)adUnit {
-    NSUUID *adUnitUUID = [[NSUUID alloc] initWithUUIDString:adUnit];
-    uuid_t uuid;
-    [adUnitUUID getUUIDBytes:uuid];
-    NSData *adUnitData = [NSData dataWithBytes:uuid length:16];
-    return [self initWithClient:[[CSNHttpClient alloc] initWithHost:@"api.commutestream.com" requestTimeout:5 responseTimeout:5] adUnit:adUnitData];
+    NSUUID *uuid = [[NSUUID alloc] initWithUUIDString:adUnit];
+
+    return [self initWithClient:[[CSNHttpClient alloc] initWithHost:@"api.commutestream.com" requestTimeout:5 responseTimeout:5] adUnit:uuid];
 }
 
 - (instancetype) initMocked {
-    uuid_t uuid = {0, 0, 0, 0, 0, 0 , 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-    NSData *empty = [NSData dataWithBytes:uuid length:16];
-    return [self initWithClient:[[CSNMockClient alloc] init] adUnit:empty];
+    NSUUID *uuid = [[NSUUID alloc] initWithUUIDString:@"00000-000-000000-00000"];
+    CSNMockClient *mockClient = [[CSNMockClient alloc] init];
+    CSNAdUnitSettings *adUnitSettings = [[CSNAdUnitSettings alloc] init];
+    [adUnitSettings setEnabled:true];
+    [adUnitSettings setAgencies:[NSSet setWithObjects:@"commutestream", nil]];
+    [mockClient setMockedAdUnitSettings:adUnitSettings];
+    return [self initWithClient:mockClient adUnit:uuid];
 }
 
-- (instancetype) initWithClient:(id<CSNClient>)client adUnit:(NSData *)adUnit {
-    _adUnit = adUnit;
+- (void) loadSettings {
+    // get settings
+    CSNAdsController *adsController = self;
+    [_client getAdUnitSettings:_clientInfo.adUnit success:^(CSNAdUnitSettings *settings) {
+        [adsController setSettings:settings];
+        [adsController fetchPending];
+    } failure:^(NSError *error) {
+        NSLog(@"Error getting ad unit settings %@, retrying in 10s", error );
+        _marketsRetryTimer = [NSTimer timerWithTimeInterval:10.0 repeats:false block:^(NSTimer * _Nonnull timer) {
+        
+            [adsController loadSettings];
+        }];
+        [[NSRunLoop mainRunLoop] addTimer:_marketsRetryTimer forMode:NSDefaultRunLoopMode];
+    }];
+}
 
-    // get device id
-    _deviceID = [self getDeviceID];
-    
-    // get ip addresses
-    _ipAddresses = [self getIpAddresses];
-    
-    // get timezone
-    _timeZone = [[NSTimeZone localTimeZone] name];
-    
+- (instancetype) initWithClient:(id<CSNClient>)client adUnit:(NSUUID *)adUnit {
     _client = client;
+    _clientInfo = [[CSNClientInfo alloc] initWithAdUnit:adUnit];
+    _pendingRequests = [[NSMutableArray alloc] init];
+    [self loadSettings];
 
-    _reportsBuilder = [[CSNAdReportsBuilder alloc] initWithAdUnit:_adUnit deviceID:_deviceID ipAddresses:_ipAddresses timeZone:_timeZone];
+    _reportsBuilder = [[CSNAdReportsBuilder alloc] initWithClientInfo:_clientInfo];
     // send reports timer
     _reportsTimer = [NSTimer timerWithTimeInterval:15.0 target:self selector:@selector(sendReports) userInfo:nil repeats:YES];
     _visMonitor = [[CSNVisibilityMonitor alloc] initWithReportsBuilder:_reportsBuilder];
@@ -86,101 +104,41 @@ CSNModalWindow *modalWindowView;
     return self;
 }
 
-- (CSNPDeviceID *) getDeviceID {
-    ASIdentifierManager *adIdentManager = [ASIdentifierManager sharedManager];
-    NSUUID *vendorID = [adIdentManager advertisingIdentifier];
-    uuid_t vendorUUID;
-    [vendorID getUUIDBytes:vendorUUID];
-    NSData *deviceIDData = [[NSData alloc] initWithBytes:vendorUUID length:16];
-    CSNPDeviceID *deviceID = [[CSNPDeviceID alloc] init];
-    [deviceID setDeviceIdType:CSNPDeviceID_Type_Idfa];
-    [deviceID setDeviceId:deviceIDData];
-    [deviceID setLimitTracking:![adIdentManager isAdvertisingTrackingEnabled]];
-    return deviceID;
+- (bool) isReady {
+    return _settings != nil;
 }
 
 - (void) fetchAds:(NSArray<CSNAdRequest *> *)adRequests completed:(void (^)(NSArray<CSNOptionalAd *> *))completed {
-    CSNPAdRequests *adRequestsMessage = [self buildRequestsMessage:adRequests];
-    [_client getAds:adRequestsMessage success:^(CSNPAdResponses *adResponsesMessage) {
-        NSArray *ads = [self buildAds:adRequests response:adResponsesMessage];
-        completed(ads);
-    } failure:^(NSError *error) {
-        // on failure, log
-        NSLog(@"CSNAdsController fetch ads failed, cause %@", error);
-    }];
+    if([self isReady]) {
+        [self doFetchAds:adRequests completed:completed];
+    } else {
+        CSNPendingAdRequests *pendingRequest = [[CSNPendingAdRequests alloc] init];
+        pendingRequest.adRequests = adRequests;
+        pendingRequest.completed = completed;
+        [_pendingRequests addObject:pendingRequest];
+    }
 }
 
-- (CSNPAdRequests *) buildRequestsMessage:(NSArray<CSNAdRequest *> *)adRequests {
-    [[CSNLocationManager sharedLocationManager] getLocations];
-    NSMutableDictionary *uniqueAdRequests = [[NSMutableDictionary alloc] initWithCapacity:[adRequests count]];
-    CSNPAdRequests *adRequestsMsg = [[CSNPAdRequests alloc] init];
-    [adRequestsMsg setIpAddressesArray:[NSMutableArray arrayWithArray:_ipAddresses]];
-    [adRequestsMsg setAdUnit:_adUnit];
-    [adRequestsMsg setDeviceId:_deviceID];
-    [adRequestsMsg setTimezone:_timeZone];
-    [adRequestsMsg setSdkVersion:SDK_VERSION];
-    for(id adRequest in adRequests) {
-        NSData *requestSha = [adRequest sha256];
-        CSNPAdRequest *adRequestMsg = [uniqueAdRequests objectForKey:requestSha];
-        if(adRequestMsg) {
-            [adRequestMsg setNumOfAds:[adRequestMsg numOfAds] + 1];
-        } else {
-            adRequestMsg = [[CSNPAdRequest alloc] init];
-            [adRequestMsg setHashId:requestSha];
-            [adRequestMsg setNumOfAds:1];
-            for(id agency in [[adRequest agencies] array]) {
-                CSNPTransitAgency *transitAgency = [[CSNPTransitAgency alloc] init];
-                [transitAgency setAgencyId:[agency agencyID]];
-                [[adRequestMsg agenciesArray] addObject:transitAgency];
-            }
-            for(id route in [[adRequest routes] array]) {
-                CSNPTransitRoute *transitRoute = [[CSNPTransitRoute alloc] init];
-                [transitRoute setAgencyId:[route agencyID]];
-                [transitRoute setRouteId:[route routeID]];
-                [[adRequestMsg routesArray] addObject:transitRoute];
-            }
-            for(id stop in [[adRequest stops] array]) {
-                CSNPTransitStop *transitStop = [[CSNPTransitStop alloc] init];
-                [transitStop setAgencyId:[stop agencyID]];
-                [transitStop setRouteId:[stop routeID]];
-                [transitStop setStopId:[stop stopID]];
-                [[adRequestMsg stopsArray] addObject:transitStop];
-            }
-            [uniqueAdRequests setObject:adRequestMsg forKey:requestSha];
-            [[adRequestsMsg adRequestsArray] addObject:adRequestMsg];
+- (void) doFetchAds:(NSArray<CSNAdRequest *> *)adRequests
+          completed:(void (^)(NSArray<CSNOptionalAd *> *))completed
+{
+    _adRequestTask = [[CSNAdRequestTask alloc] initWithClient:_client
+                                                   clientInfo:_clientInfo
+                                                     settings:_settings
+                                                     requests:adRequests
+                                                    completed:completed];
+}
+
+- (void) fetchPending {
+    if([self isReady] && _pendingRequests) {
+        for(CSNPendingAdRequests *pendingRequest in _pendingRequests) {
+            [self doFetchAds:pendingRequest.adRequests completed:pendingRequest.completed];
         }
+        [_pendingRequests removeAllObjects];
     }
-    return adRequestsMsg;
 }
 
-- (NSArray<CSNOptionalAd *> *) buildAds:(NSArray<CSNAdRequest *> *)adRequests response:(CSNPAdResponses *)adResponses {
-    NSMutableDictionary *hashedIndices = [[NSMutableDictionary alloc] init];
-    NSMutableDictionary *hashedResponses = [[NSMutableDictionary alloc] init];
-    NSMutableArray<CSNOptionalAd *> *ads = [[NSMutableArray alloc] initWithCapacity:[adRequests count]];
-    for(id adResponse in [adResponses adResponsesArray]) {
-        [hashedResponses setObject:adResponse forKey:[adResponse hashId]];
-        [hashedIndices setObject:[NSNumber numberWithUnsignedInteger:0] forKey:[adResponse hashId]];
-    }
-    for(id adRequest in adRequests) {
-        NSData *hash = [adRequest sha256];
-        NSNumber *index = [hashedIndices objectForKey:hash];
-        NSUInteger indexval = [index unsignedIntegerValue];
-        CSNPAdResponse *response = [hashedResponses objectForKey:hash];
-        if(index && response && indexval < [response adsArray_Count]) {
-            
-            CSNPNativeAd *adMessage = [[response adsArray] objectAtIndex:indexval];
 
-            CSNAd *ad = [[CSNAd alloc] initWithMessage:adMessage];
-            CSNOptionalAd *optionalAd = [[CSNOptionalAd alloc] initWithAd:ad];
-            [ads addObject:optionalAd];
-            [hashedIndices setObject:[NSNumber numberWithUnsignedInteger:indexval+1] forKey:hash];
-        } else {
-            CSNOptionalAd *optionalAd = [[CSNOptionalAd alloc] initWithoutAd];
-            [ads addObject:optionalAd];
-        }
-    }
-    return ads;
-}
 
 - (void) buildView:(UIView *)view ad:(CSNAd *)ad parentTouch:(bool)parentTouch {
     if(view != nil && ad != nil) {
@@ -237,54 +195,15 @@ CSNModalWindow *modalWindowView;
     [_tapDelegates setObject:tapDelegate forKey:view];
 }
 
-- (NSArray<NSData *> *) getIpAddresses {
-    NSMutableArray *addrs = [[NSMutableArray alloc] init];
-    struct ifaddrs *ifa, *ifa_tmp;
-    
-    if (getifaddrs(&ifa) == -1) {
-        return addrs;
-    }
-    
-    ifa_tmp = ifa;
-    //char netaddr[INET6_ADDRSTRLEN];
-    while (ifa_tmp) {
-        if ((ifa_tmp->ifa_addr) && ((ifa_tmp->ifa_addr->sa_family == AF_INET) ||
-                                    (ifa_tmp->ifa_addr->sa_family == AF_INET6))) {
-            if (ifa_tmp->ifa_addr->sa_family == AF_INET) {
-                // create IPv4 string
-                struct sockaddr_in *in = (struct sockaddr_in*) ifa_tmp->ifa_addr;
-                //inet_ntop(AF_INET, &in->sin_addr, netaddr, INET6_ADDRSTRLEN);
-                if(in->sin_addr.s_addr != htonl(INADDR_LOOPBACK)) {
-                    //NSLog(@"Ipv4 added %@", [NSString stringWithUTF8String:netaddr]);
-                    NSData *addr = [NSData dataWithBytes:&in->sin_addr.s_addr length:4];
-                    //NSLog(@"Ipv4 addr in NSData %@", [addr description]);
-                    [addrs addObject:addr];
-                }
-            } else { // AF_INET6
-                // create IPv6 string
-                struct sockaddr_in6 *in6 = (struct sockaddr_in6*) ifa_tmp->ifa_addr;
-                //inet_ntop(AF_INET6, &in6->sin6_addr, netaddr, INET6_ADDRSTRLEN);
-                if(!IN6_IS_ADDR_LINKLOCAL(&in6->sin6_addr) && !IN6_IS_ADDR_LOOPBACK(&in6->sin6_addr)) {
-                    //NSLog(@"Ipv6 added %@", [NSString stringWithUTF8String:netaddr]);
-                    NSData *addr = [NSData dataWithBytes:in6->sin6_addr.s6_addr length:16];
-                    //NSLog(@"Ipv6 addr in NSData %@", [addr description]);
-                    [addrs addObject:addr];
-                }
-            }
-        }
-        ifa_tmp = ifa_tmp->ifa_next;
-    }
-    freeifaddrs(ifa);
-    return addrs;
-}
+
 
 - (void) sendReports {
     // update device id, ip addresses, and location of report before sending
     // will periodically cause the device and ip addresses to be refreshed (every 30s)
-    _deviceID = [self getDeviceID];
-    _ipAddresses = [self getIpAddresses];
-    [_reportsBuilder setDeviceID:_deviceID];
-    [_reportsBuilder setIpAddresses:_ipAddresses];
+    [_clientInfo updateDeviceID];
+    [_clientInfo updateIpAddresses];
+    [_reportsBuilder setDeviceID:_clientInfo.deviceID];
+    [_reportsBuilder setIpAddresses:_clientInfo.ipAddresses];
     [_reportsBuilder setLocations:[[CSNLocationManager sharedLocationManager] getLocations]];
     CSNPAdReports *reports = [_reportsBuilder buildReport];
     [_client sendAdReports:reports success:^{

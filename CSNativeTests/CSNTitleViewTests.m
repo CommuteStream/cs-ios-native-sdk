@@ -24,7 +24,7 @@
     CSNPHeadlineComponent *headlineMessage = [[CSNPHeadlineComponent alloc] init];
     [headlineMessage setComponentId:123];
     [headlineMessage setHeadline:@"test headline"];
-    CSNPNativeAd *message = [[CSNPNativeAd alloc] init];
+    CSNPAd *message = [[CSNPAd alloc] init];
     [message setHeadline:headlineMessage];
     CSNAd *ad = [[CSNAd alloc] initWithMessage:message];
     CSNHeadlineView *view = [[CSNHeadlineView alloc] init];

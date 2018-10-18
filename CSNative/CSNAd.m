@@ -113,10 +113,9 @@
 
 @implementation CSNAd
 
-- (instancetype) initWithMessage:(CSNPNativeAd *)message {
+- (instancetype) initWithMessage:(CSNPAd *)message {
     _adID = [message adId];
     _versionID = [message versionId];
-    _requestID = [message requestId];
     _view = [[CSNViewComponent alloc] initWithMessage:[message view]];
     _headline = [[CSNHeadlineComponent alloc] initWithMessage:[message headline]];
     _body = [[CSNBodyComponent alloc] initWithMessage:[message body]];

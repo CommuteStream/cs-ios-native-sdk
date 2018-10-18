@@ -29,6 +29,7 @@ CF_EXTERN_C_BEGIN
 
 @class CSNPActionComponent;
 @class CSNPAdImpression;
+@class CSNPAdReference;
 @class CSNPAdReport;
 @class CSNPAdRequest;
 @class CSNPAdResponse;
@@ -450,9 +451,77 @@ typedef GPB_ENUM(CSNPNativeAd_FieldNumber) {
   CSNPNativeAd_FieldNumber_Hero = 13,
 };
 
+/**
+ * Deprecated, See Ad type
+ **/
 @interface CSNPNativeAd : GPBMessage
 
 @property(nonatomic, readwrite) uint64_t requestId;
+
+@property(nonatomic, readwrite) uint64_t adId;
+
+@property(nonatomic, readwrite) uint64_t versionId;
+
+@property(nonatomic, readwrite, strong, null_resettable) CSNPColors *colors;
+/** Test to see if @c colors has been set. */
+@property(nonatomic, readwrite) BOOL hasColors;
+
+@property(nonatomic, readwrite, strong, null_resettable) NSMutableArray<CSNPActionComponent*> *actionsArray;
+/** The number of items in @c actionsArray without causing the array to be created. */
+@property(nonatomic, readonly) NSUInteger actionsArray_Count;
+
+@property(nonatomic, readwrite, strong, null_resettable) CSNPViewComponent *view;
+/** Test to see if @c view has been set. */
+@property(nonatomic, readwrite) BOOL hasView;
+
+@property(nonatomic, readwrite, strong, null_resettable) CSNPSecondaryActionComponent *secondaryActionScreen;
+/** Test to see if @c secondaryActionScreen has been set. */
+@property(nonatomic, readwrite) BOOL hasSecondaryActionScreen;
+
+@property(nonatomic, readwrite, strong, null_resettable) CSNPLogoComponent *logo;
+/** Test to see if @c logo has been set. */
+@property(nonatomic, readwrite) BOOL hasLogo;
+
+@property(nonatomic, readwrite, strong, null_resettable) CSNPHeadlineComponent *headline;
+/** Test to see if @c headline has been set. */
+@property(nonatomic, readwrite) BOOL hasHeadline;
+
+@property(nonatomic, readwrite, strong, null_resettable) CSNPBodyComponent *body;
+/** Test to see if @c body has been set. */
+@property(nonatomic, readwrite) BOOL hasBody;
+
+@property(nonatomic, readwrite, strong, null_resettable) CSNPAdvertiserComponent *advertiser;
+/** Test to see if @c advertiser has been set. */
+@property(nonatomic, readwrite) BOOL hasAdvertiser;
+
+@property(nonatomic, readwrite, strong, null_resettable) CSNPLocationComponent *location;
+/** Test to see if @c location has been set. */
+@property(nonatomic, readwrite) BOOL hasLocation;
+
+@property(nonatomic, readwrite, strong, null_resettable) CSNPHeroComponent *hero;
+/** Test to see if @c hero has been set. */
+@property(nonatomic, readwrite) BOOL hasHero;
+
+@end
+
+#pragma mark - CSNPAd
+
+typedef GPB_ENUM(CSNPAd_FieldNumber) {
+  CSNPAd_FieldNumber_AdId = 1,
+  CSNPAd_FieldNumber_VersionId = 2,
+  CSNPAd_FieldNumber_Colors = 3,
+  CSNPAd_FieldNumber_ActionsArray = 4,
+  CSNPAd_FieldNumber_View = 5,
+  CSNPAd_FieldNumber_SecondaryActionScreen = 6,
+  CSNPAd_FieldNumber_Logo = 7,
+  CSNPAd_FieldNumber_Headline = 8,
+  CSNPAd_FieldNumber_Body = 9,
+  CSNPAd_FieldNumber_Advertiser = 10,
+  CSNPAd_FieldNumber_Location = 11,
+  CSNPAd_FieldNumber_Hero = 12,
+};
+
+@interface CSNPAd : GPBMessage
 
 @property(nonatomic, readwrite) uint64_t adId;
 
@@ -548,6 +617,7 @@ typedef GPB_ENUM(CSNPAdRequests_FieldNumber) {
   CSNPAdRequests_FieldNumber_AdRequestsArray = 5,
   CSNPAdRequests_FieldNumber_SdkVersion = 6,
   CSNPAdRequests_FieldNumber_DeviceLocationsArray = 7,
+  CSNPAdRequests_FieldNumber_ProtocolVersion = 8,
 };
 
 /**
@@ -577,6 +647,29 @@ typedef GPB_ENUM(CSNPAdRequests_FieldNumber) {
 /** The number of items in @c deviceLocationsArray without causing the array to be created. */
 @property(nonatomic, readonly) NSUInteger deviceLocationsArray_Count;
 
+@property(nonatomic, readwrite) uint32_t protocolVersion;
+
+@end
+
+#pragma mark - CSNPAdReference
+
+typedef GPB_ENUM(CSNPAdReference_FieldNumber) {
+  CSNPAdReference_FieldNumber_RequestId = 1,
+  CSNPAdReference_FieldNumber_AdId = 2,
+  CSNPAdReference_FieldNumber_VersionId = 3,
+  CSNPAdReference_FieldNumber_URL = 4,
+};
+
+@interface CSNPAdReference : GPBMessage
+
+@property(nonatomic, readwrite) uint64_t requestId;
+
+@property(nonatomic, readwrite) uint64_t adId;
+
+@property(nonatomic, readwrite) uint64_t versionId;
+
+@property(nonatomic, readwrite, copy, null_resettable) NSString *URL;
+
 @end
 
 #pragma mark - CSNPAdResponse
@@ -584,6 +677,7 @@ typedef GPB_ENUM(CSNPAdRequests_FieldNumber) {
 typedef GPB_ENUM(CSNPAdResponse_FieldNumber) {
   CSNPAdResponse_FieldNumber_HashId = 1,
   CSNPAdResponse_FieldNumber_AdsArray = 2,
+  CSNPAdResponse_FieldNumber_AdReferencesArray = 3,
 };
 
 /**
@@ -596,6 +690,10 @@ typedef GPB_ENUM(CSNPAdResponse_FieldNumber) {
 @property(nonatomic, readwrite, strong, null_resettable) NSMutableArray<CSNPNativeAd*> *adsArray;
 /** The number of items in @c adsArray without causing the array to be created. */
 @property(nonatomic, readonly) NSUInteger adsArray_Count;
+
+@property(nonatomic, readwrite, strong, null_resettable) NSMutableArray<CSNPAdReference*> *adReferencesArray;
+/** The number of items in @c adReferencesArray without causing the array to be created. */
+@property(nonatomic, readonly) NSUInteger adReferencesArray_Count;
 
 @end
 
@@ -829,6 +927,23 @@ typedef GPB_ENUM(CSNPAdReports_FieldNumber) {
 @property(nonatomic, readwrite, strong, null_resettable) NSMutableArray<CSNPDeviceLocation*> *deviceLocationsArray;
 /** The number of items in @c deviceLocationsArray without causing the array to be created. */
 @property(nonatomic, readonly) NSUInteger deviceLocationsArray_Count;
+
+@end
+
+#pragma mark - CSNPAdUnitSettings
+
+typedef GPB_ENUM(CSNPAdUnitSettings_FieldNumber) {
+  CSNPAdUnitSettings_FieldNumber_Enabled = 1,
+  CSNPAdUnitSettings_FieldNumber_AgenciesArray = 2,
+};
+
+@interface CSNPAdUnitSettings : GPBMessage
+
+@property(nonatomic, readwrite) BOOL enabled;
+
+@property(nonatomic, readwrite, strong, null_resettable) NSMutableArray<NSString*> *agenciesArray;
+/** The number of items in @c agenciesArray without causing the array to be created. */
+@property(nonatomic, readonly) NSUInteger agenciesArray_Count;
 
 @end
 

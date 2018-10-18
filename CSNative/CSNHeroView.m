@@ -35,8 +35,6 @@
 {
     if (navigationAction.navigationType == WKNavigationTypeLinkActivated) {
         if (navigationAction.request.URL) {
-            NSLog(@"%@", navigationAction.request.URL.host);
-      
             if ([[UIApplication sharedApplication] canOpenURL:navigationAction.request.URL]) {
                 [[UIApplication sharedApplication] openURL:navigationAction.request.URL];
                 decisionHandler(WKNavigationActionPolicyCancel);

@@ -1,9 +1,10 @@
 @import Foundation;
 
 #import "Csnmessages.pbobjc.h"
+#import "CSNClientInfo.h"
 
 @interface CSNAdReportsBuilder : NSObject
-- (instancetype) initWithAdUnit:(NSData *)adUnit deviceID:(CSNPDeviceID *)deviceID ipAddresses:(NSArray<NSData *>*)ipAddresses timeZone:(NSString *)timeZone;
+- (instancetype) initWithClientInfo:(CSNClientInfo *)clientInfo;
 - (void) setDeviceID:(CSNPDeviceID *)deviceID;
 - (void) setIpAddresses:(NSArray<NSData *>*)ipAddresses;
 - (void) setLocations:(NSArray<CSNPDeviceLocation*>*)locations;
