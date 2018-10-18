@@ -156,7 +156,6 @@ const CLLocationDistance kDistanceFilter = 50.0; // distance in meters that must
     if(!location) {
         return;
     }
-    NSLog(@"Adding new location %@.", location);
     _lastLocation = location;
     _lastUpdate = [[NSDate alloc] init];
     [_locations addObject:location];

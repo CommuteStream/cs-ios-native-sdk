@@ -25,7 +25,7 @@
     CSNPLogoComponent *logoMessage = [[CSNPLogoComponent alloc] init];
     [logoMessage setComponentId:123];
     [logoMessage setImage:imageData];
-    CSNPNativeAd *message = [[CSNPNativeAd alloc] init];
+    CSNPAd *message = [[CSNPAd alloc] init];
     [message setLogo:logoMessage];
     CSNAd *ad = [[CSNAd alloc] initWithMessage:message];
     CSNLogoView *view = [[CSNLogoView alloc] init];

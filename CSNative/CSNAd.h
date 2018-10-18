@@ -77,7 +77,7 @@
 @end
 
 @interface CSNAd : NSObject
-@property (readonly) uint64_t requestID;
+@property uint64_t requestID;
 @property (readonly) uint64_t adID;
 @property (readonly) uint64_t versionID;
 @property (copy, readonly, nonnull) CSNViewComponent *view;
@@ -89,5 +89,5 @@
 @property (copy, readonly, nonnull) CSNHeroComponent *hero;
 @property (copy, readonly, nonnull) CSNSecondaryActionComponent *secondary;
 @property (copy, readonly, nonnull) NSArray<CSNActionComponent *> *actions;
-- (instancetype _Nonnull) initWithMessage:(CSNPNativeAd * _Nonnull)message;
+- (instancetype _Nonnull) initWithMessage:(CSNPAd * _Nonnull)message;
 @end

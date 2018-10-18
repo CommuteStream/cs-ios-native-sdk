@@ -1,15 +1,20 @@
 #import "CSNMockClient.h"
 #import "CSNTransit.h"
 #import "CSNAdRequest.h"
+#import "CSNAdUnitSettings.h"
 
 @interface CSNMockClient ()
+@property NSSet<NSString *> *markets;
 @property NSMutableDictionary *adResponses;
+@property NSMutableDictionary<NSString *, CSNAd *> *ads;
+@property CSNAdUnitSettings *settings;
 @end
 
 @implementation CSNMockClient
 
 - (instancetype) init {
     _adResponses = [[NSMutableDictionary alloc] init];
+    _ads = [[NSMutableDictionary alloc] init];
     NSString *imagePath = [[NSBundle bundleForClass:[CSNMockClient class]] pathForResource:@"cs" ofType:@"png"];
     NSData *imageData = [NSData dataWithContentsOfFile:imagePath];
     CSNTransitStop *transitStop0 = [[CSNTransitStop alloc] initWithIDs:@"commutestream" routeID:@"test" stopID:@"test"];
@@ -28,22 +33,32 @@
     CSNPLogoComponent *logo = [[CSNPLogoComponent alloc] init];
     [logo setComponentId:adID*adID+2];
     [logo setImage:logoData];
-    CSNPNativeAd *testAd = [[CSNPNativeAd alloc] init];
+    NSString *url = [NSString stringWithFormat:@"https://testad_url/ads/%lld/%d", adID, 0];
+    CSNPAdReference *adRef = [[CSNPAdReference alloc] init];
+    [adRef setAdId:adID];
+    [adRef setVersionId:0];
+    [adRef setURL:url];
+    CSNPAd *testAd = [[CSNPAd alloc] init];
     [testAd setAdId:adID];
-    [testAd setRequestId:0];
+    [testAd setVersionId:0];
     [testAd setLogo:logo];
     [testAd setHeadline:headline];
+    CSNAd *ad = [[CSNAd alloc] initWithMessage:testAd];
+    ad.requestID = 0;
+    [_ads setObject:ad forKey:url];
     CSNAdRequest *adRequest = [[CSNAdRequest alloc] init];
     [adRequest addStop:stop];
     NSData *sha = [adRequest sha256];
     CSNPAdResponse *adResponse = [[CSNPAdResponse alloc] init];
-    NSMutableArray *ads = [[NSMutableArray alloc] initWithArray:@[testAd]];
-    [adResponse setAdsArray:ads];
+    NSMutableArray *adRefs = [[NSMutableArray alloc] initWithArray:@[adRef]];
+    [adResponse setAdReferencesArray:adRefs];
     [adResponse setHashId:sha];
     [self setMockedResponse:adResponse];
 }
 
-- (void) getAds:(CSNPAdRequests *)adRequests success:(void (^)(CSNPAdResponses *))success failure:(void (^)(NSError *))failure
+- (void) getAds:(CSNPAdRequests *)adRequests
+        success:(void (^)(CSNPAdResponses *))success
+        failure:(void (^)(NSError *))failure
 {
     CSNPAdResponses *responses = [[CSNPAdResponses alloc] init];
     [responses setAdResponsesArray:[[NSMutableArray alloc] init]];
@@ -57,12 +72,38 @@
     success(responses);
 }
 
-- (void) setMockedResponse:(CSNPAdResponse *)adResponse {
+
+- (void) setMockedResponse:(CSNPAdResponse *)adResponse
+{
     [_adResponses setObject:adResponse forKey:[adResponse hashId]];
 }
 
-- (void) sendAdReports:(CSNPAdReports *)adReport success:(void (^)(void))success failure:(void (^)(NSError *))failure {
+- (void) getAd:(NSString *)url
+       success:(void (^)(CSNAd *))success
+       failure:(void (^)(NSError *))failure
+{
+    CSNAd *ad = [_ads objectForKey:url];
+    success(ad);
+}
+
+- (void) sendAdReports:(CSNPAdReports *)adReport
+               success:(void (^)(void))success
+               failure:(void (^)(NSError *))failure
+{
     success();
 }
+
+- (void)getAdUnitSettings:(NSUUID *)adUnit
+                  success:(void (^)(CSNAdUnitSettings *))success
+                  failure:(void (^)(NSError *))failure {
+    success(_settings);
+}
+
+- (void) setMockedAdUnitSettings:(CSNAdUnitSettings *)settings
+{
+    _settings = settings;
+}
+
+
 
 @end

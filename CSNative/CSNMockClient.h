@@ -5,4 +5,5 @@
 - (instancetype) init;
 - (void) getAds:(CSNPAdRequests *)adRequests success:(void (^)(CSNPAdResponses *))success failure:(void (^)(NSError *))failure;
 - (void) setMockedResponse:(CSNPAdResponse *)response;
+- (void) setMockedAdUnitSettings:(CSNAdUnitSettings *)settings;
 @end
