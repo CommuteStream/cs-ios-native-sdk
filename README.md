@@ -89,14 +89,6 @@ You can add components to your app either programmatically, or by using the Stor
 #### Programmatically
 Here is an example of placing components inside a table view cell:
 
-**Objective-C**
-```
-CSNLogoView *logo = [[CSNLogoView alloc] initWithFrame: CGRectMake(0, 0, 44, 44)];
-[cell addSubview:logo];
-
-CSNHeadlineView *headline = [[CSNHeadlineView alloc] initWithFrame: CGRectMake(55, 0, 200, 50)];
-[cell addSubview:headline];
-```
 **Swift**
 ```
 let logoView = CSNLogoView.init(frame: CGRect(x: 0, y: 0, width: 44, height: 44))
@@ -105,6 +97,16 @@ cell.contentView.addSubview(logoView)
 let headlineView = CSNHeadlineView.init(frame: CGRect(x: 55, y: 12, width: 200, height: 50))
 cell.contentView.addSubview(headlineView)
 ```
+
+**Objective-C**
+```
+CSNLogoView *logo = [[CSNLogoView alloc] initWithFrame: CGRectMake(0, 0, 44, 44)];
+[cell addSubview:logo];
+
+CSNHeadlineView *headline = [[CSNHeadlineView alloc] initWithFrame: CGRectMake(55, 0, 200, 50)];
+[cell addSubview:headline];
+```
+
 
 #### Using Storyboards
 
@@ -121,73 +123,96 @@ Once you have a UIKit component placed, select it, and view its properties in th
 
 <img width="250px" style="margin: 0 0 40px 8px; display: block;" src="https://s3.amazonaws.com/commutestream-cdn/native-ad-sdk-readme-assets/custom_class_example.png">
 
-For more tips and code snippets, visit our [Native Ads Best Practices](http://commutestream.com/native-ads-best-practices) page.
+For more tips and code snippets, visit our [Native Ads Best Practices](https://commutestream.com/nativesdkbestpractices) page.
 
-## Requesting Ads
+## Building An AdRequest
+>In previous versions of our SDK, the ``fetchAds`` would return a complete list of ads that matched the order of your ``AdRequest``. This functionality remains, however, we have optimized the SDK so that you may display ads as they are returned from the server. This new and preferred method is outlined below.
 ### CSNAdRequest
 Once you've placed the components where you want them, you'll need to request a list of native ads to populate them. For this you will create an individual **CSNAdRequest**, packaged with transit information that matches what's showing on the screen.
 
-There are three levels of transit data you can provide with your **CSNAdRequest**. Each level is more specific than the last and uses a special class:
+There are three levels of transit data you can provide with your **CSNAdRequest**. Each level is more specific than the last and uses a special class.
+
+**IMPORTANT:** Be sure to attach a ``completed`` block to each **CSNAdRequest** for handling each ad as it's returned from the server.
 
 #### CSNTransitAgency (least specific)
 
-**Objective-C**
-```
-CSNAdRequest *agencyAdRequest = [[CSNAdRequest alloc] init];
-CSNTransitAgency *agency = [[CSNTransitAgency alloc] initWithIDs:@"agency_id"];
 
-[agencyAdRequest addAgency:agency];
-```
 **Swift**
 ```
 let agencyAdRequest = CSNAdRequest.init()
 let agency = CSNTransitAgency.init(ids:"agency_id")
 
 agencyAdRequest.addAgency(agency)
+agencyAdRequest.completed = {(ad) in
+
+            //handle returned ad in this block
+        }
+        
+```
+**Objective-C**
+```
+CSNAdRequest *agencyAdRequest = [[CSNAdRequest alloc] init];
+CSNTransitAgency *agency = [[CSNTransitAgency alloc] initWithIDs:@"agency_id"];
+
+[agencyAdRequest addAgency:agency];
+agencyAdRequest.completed = ^(CSNOptionalAd *ad) {
+
+          //handle returned ad in this block
+          }
 ```
 
 #### CSNTransitRoute (more specific)
+**Swift**
+```
+let routeAdRequest = CSNAdRequest.init()
+let route = CSNTransitRoute.init(ids:"agency_id", routeID:"route_id")
 
+
+routeAdRequest.addRoute(route)
+routeAdRequest.completed = {(ad) in
+
+            //handle returned ad in this block
+        }
+```
 **Objective-C**
 ```
 CSNAdRequest *routeAdRequest = [[CSNAdRequest alloc] init];
 CSNTransitRoute *route = [[CSNTransitRoute alloc] initWithIDs:@"agency_id" routeID:@"route_id"];
 
 [routeAdRequest addRoute:route];
+routeAdRequest.completed = ^(CSNOptionalAd *ad) {
+
+          //handle returned ad in this block
+          });
 ```
 
-**Swift**
-```
-let routeAdRequest = CSNAdRequest.init()
-let route = CSNTransitRoute.init(ids:"agency_id", routeID:"route_id")
 
-routeAdRequest.addRoute(route)
-```
 
 #### CSNTransitStop (most specific)
-**Objective-C**
-```
-CSNAdRequest *stopAdRequest = [[CSNAdRequest alloc] init];
-CSNTransitStop *stop = [[CSNTransitStop alloc] initWithIDs:@"agency_id" routeID:@"route_id" stopID:@"stop_id"];
-
-[stopAdRequest addStop:stop];
-```
-
 **Swift**
 ```
 let stopAdRequest = CSNAdRequest.init()
 let stop = CSNTransitStop.init(ids:"agency_id", routeID: "route_id", stopID: "stop_id")
 
 stopAdRequest.addStop(stop)
+stopAdRequest.completed = {(ad) in
+
+            //handle returned ad in this block
+        }
+
 ```
-
-Each **CSNAdRequest** must be added to a mutable array, which will then be used to fetch ads using the **CSNAdsController** class.
-
 **Objective-C**
 ```
-NSMutableArray *adRequestsArray = [NSMutableArray alloc] init];
-[adRequestsArray addObject:adRequest];
+CSNAdRequest *stopAdRequest = [[CSNAdRequest alloc] init];
+CSNTransitStop *stop = [[CSNTransitStop alloc] initWithIDs:@"agency_id" routeID:@"route_id" stopID:@"stop_id"];
+
+[stopAdRequest addStop:stop];
+stopAdRequest.completed = ^(CSNOptionalAd *ad) {
+
+          //handle returned ad in this block
+          });
 ```
+Each **CSNAdRequest** must be added to a mutable array, which will then be used to fetch ads using the **CSNAdsController** class.
 
 **Swift**
 ```
@@ -195,13 +220,32 @@ var adRequests = [CSNAdRequest]()
 adRequests.append(adRequest)
 ```
 
+**Objective-C**
+```
+NSMutableArray *adRequestsArray = [NSMutableArray alloc] init];
+[adRequestsArray addObject:adRequest];
+```
+
+
+
 ### CSNAdsController
+
 In order to fetch ads with the array of **CSNAdRequest**s, you must call the ``fetchAds`` method on an instance of **CSNAdsController**. This will invoke a callback that returns an **ads** array.
 
 The **ads** array has the same object count and order as the adRequests array provided in the call. This makes it easy to map to the transit context you made the requests for.
 
 All indexes in the array have a **CSNOptionalAd**, and each one of these has an **ad** property that is either a **CSNAd** or a **nil** value.
 You will use this array to display ad content in the components you added to your app design.
+
+**Swift**
+```
+var adsController = CSNAdsController(adUnit: "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx");
+adsController.fetchAds(adRequests, completed: {(ads) in
+	self.stopAds = ads
+    self.routeStopsListTableView.reloadData()
+})
+
+```
 
 **Objective-C**
 ```
@@ -214,15 +258,7 @@ CSNAdsController *adsController = [[CSNAdsController alloc] initWithAdUnit: @"xx
 
 ```
 
-**Swift**
-```
-var adsController = CSNAdsController(adUnit: "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx");
-adsController.fetchAds(adRequests, completed: {(ads) in
-	self.stopAds = ads
-    self.routeStopsListTableView.reloadData()
-})
 
-```
 
 ## Building Ads
 Once you've placed your ad components and retreived ads using the ``fetchAds`` method, you can put it all together by filling the components with ad data using the ``buildView`` method of the **CSNAdsController** class.
